@@ -38,7 +38,25 @@ d.g2$Polinizador<-recode(d.g2$Polinizador, "?=28"= "Scaeva pyrastri",
                          "?=10"="Platycheirus albimanus",
                          "?=12"="Andrena limata",
                          "?=13"= "Halictus smaragdulus",
-                         
+                         "?=34" = "Lasioglossum leucopus",
+                         "?=17"="Eupeodes corollae",
+                         "?=20" = "Andrena propinqua",
+                         "?=18" = "Bombus soroeensis",
+                         "?=60" =
+                          "?=30"= "Eupeodes corollae",
+                           "?=24"= "Andrena nigroaenea",
+                           "?=29"= "Cheilosia velutina",
+                           "?=37" = "Bombus soroeensis",
+                         "?=35"="Apis mellifera",
+                         "?=36"="Apis mellifera",
+                         "?=41"="Andrena nigroaenea",
+                         "?=44"="Lasioglossum sp",
+                         "?=45"="Andrena nigroaenea",
+                         "?=49" =
+                          "?=52" =
+                           "?=54"= 
+                           
+                           
                         
 
 
