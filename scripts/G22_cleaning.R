@@ -95,7 +95,8 @@ unique(d.g4$Pollinator_genus)
 ###family names
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Apis"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphidae"] <- "Syrphidae"
-                         
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombylius"] <- "Bombyliidae"
+
                          
                            
                            
