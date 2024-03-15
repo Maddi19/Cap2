@@ -30,7 +30,7 @@ d.g2 <- d.g%>% mutate(Polinizador_curro = ifelse(is.na(Polinizador_curro),Polini
 head(d.g2)
 unique(d.g2$Polinizador)
 
-d.g2$Polinizador<-recode(d.g2$Polinizador, "?=28"= "Scaeva pyrastri",
+d.g2$Polinizador_curro<-recode(d.g2$Polinizador_curro, "?=28"= "Scaeva pyrastri",
                          "?=4" ="Eupeodes corollae",
                          "?=6"="Eupeodes corollae",
                          "?=7"="Calliphora vicina",
@@ -82,20 +82,64 @@ d.g2$Polinizador<-recode(d.g2$Polinizador, "?=28"= "Scaeva pyrastri",
                          
                            
 #remove some with no id
-d.g3<-d.g2[!(d.g2$Polinizador=="?=1"|d.g2$Polinizador=="?=3"|d.g2$Polinizador=="?=9"|d.g2$Polinizador=="11"|d.g2$Polinizador=="21"|
-               d.g2$Polinizador=="31"|d.g2$Polinizador=="?=32"),]
+d.g3<-d.g2[!(d.g2$Polinizador_curro=="?=1"|d.g2$Polinizador_curro=="?=3"|d.g2$Polinizador_curro=="?=9"|d.g2$Polinizador_curro=="11"|d.g2$Polinizador_curro=="21"|
+               d.g2$Polinizador_curro=="31"|d.g2$Polinizador_curro=="?=32"),]
 
                            
 ###create genus column
 library("stringr")
 d.g4<- d.g3%>%
-  mutate(Pollinator_genus= word(Polinizador, 1))
+  mutate(Pollinator_genus= word(Polinizador_curro, 1))
 unique(d.g4$Pollinator_genus)    
 
 ###family names
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Apis"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphidae"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombylius"] <- "Bombyliidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Zygaena"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Macroglossum"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombus"] <- "Apidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Episyrphus"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Ochlodes"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Erebia"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cupido"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pyrgus"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pieris"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pararge"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphus"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Sphaerophoria"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Merodon"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eupeodes"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eristalis"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Melangyna"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Antocharis"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Andrena"] <- "Andrenidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eucera"] <- "Apidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Osmia"] <- "Megachilidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lassiomata"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cheilosia"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Halictus"] <- "Halictidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Calliphora"] <- "Calliphoridae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cheilosia"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Platycheirus"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Coenonympha"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Nomada"] <- "Apidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Oedemera"] <- "Oedemeridae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lucilia"] <- "Calliphoridae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Psithyrus"] <- "Apidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Anthophora"] <- "Apidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Scaeva"] <- "Syrphidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lasioglossum"] <- "Halictidae"
+
+unique(d.g4$Pollinator_genus)
+unique(d.g4$Pollinator_family)
+unique(d.g4$Planta)
+unique(d.g4$Ronda)
+
+write.csv(d.g4, "data/clean/trans_gorbea_20_clean.csv")
+
+
+
 
                          
                            
