@@ -78,7 +78,9 @@ d.g2$Polinizador_curro<-recode(d.g2$Polinizador_curro, "?=28"= "Scaeva pyrastri"
                          "?=115"="Andrena ovatula",
                          "?=116"=" Syrphus sp.",
                          "?=118"="Bombus hortorum",
-                         "?=123"= "Halictus sp")
+                         "?=123"= "Halictus sp",
+                         "Pieris sp. Argazkia"="Pieris napi",
+                         )
                          
                            
 #remove some with no id
@@ -96,33 +98,33 @@ unique(d.g4$Pollinator_genus)
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Apis"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphidae"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombylius"] <- "Bombyliidae"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Zygaena"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Macroglossum"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Zygaena"] <- "Zygaenidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Macroglossum"] <- "Esfingidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombus"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Episyrphus"] <- "Syrphidae"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Ochlodes"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Erebia"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cupido"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pyrgus"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pieris"] <- "Lepidoptera"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pararge"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Ochlodes"] <- "Hesperiidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Erebia"] <- "Nymphalidae-Satyrinae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cupido"] <- "Lycaenidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pyrgus"] <- "Hesperiidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pieris"] <- "Pieridae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Pararge"] <- "Nymphalidae-Satyrinae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphus"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Sphaerophoria"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Merodon"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eupeodes"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eristalis"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Melangyna"] <- "Syrphidae"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Antocharis"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Antocharis"] <- "Pieridae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Andrena"] <- "Andrenidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Eucera"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Osmia"] <- "Megachilidae"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lassiomata"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lassiomata"] <- "Nymphalidae-Satyrinae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cheilosia"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Halictus"] <- "Halictidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Calliphora"] <- "Calliphoridae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Cheilosia"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Platycheirus"] <- "Syrphidae"
-d.g4$Pollinator_family[d.g4$Pollinator_genus=="Coenonympha"] <- "Lepidoptera"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Coenonympha"] <- "Nymphalidae-Satyrinae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Nomada"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Oedemera"] <- "Oedemeridae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Lucilia"] <- "Calliphoridae"
@@ -135,9 +137,12 @@ unique(d.g4$Pollinator_genus)
 unique(d.g4$Pollinator_family)
 unique(d.g4$Planta)
 unique(d.g4$Ronda)
+unique(d.g4$Polinizador_curro)
 
 write.csv(d.g4, "data/clean/trans_gorbea_20_clean.csv")
+clean_dg<-read.csv("data/clean/trans_gorbea_20_clean.csv")
 
+unique(clean_dg$Polinizador_curro)
 
 
 
