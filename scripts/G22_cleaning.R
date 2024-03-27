@@ -1,10 +1,9 @@
-
-rm(list = ls(all.names = TRUE)) #Limpiar objetos ocultos
-pacman::p_unload(pacman::p_loaded(), character.only = TRUE) #Limpiar paquetes ocultos
-pacman::p_load(dplyr, tidyverse, tidyr, readxl,readr, metafor) 
-
 ########CLEAN GORBEA 2022 DATA#########
 #######################################
+rm(list = ls(all.names = TRUE)) 
+pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
+pacman::p_load(dplyr, tidyverse, tidyr, readxl,readr, metafor) 
+
 
 d.g<-read.csv("data/Datos_transecto_2022.csv")
 head(d.g)
@@ -80,7 +79,9 @@ d.g2$Polinizador_curro<-recode(d.g2$Polinizador_curro, "?=28"= "Scaeva pyrastri"
                          "?=118"="Bombus hortorum",
                          "?=123"= "Halictus sp",
                          "Pieris sp. Argazkia"="Pieris napi",
-                         )
+                         "Pieris sp. Puntu beltzarekin"="Pieris brassicae",
+                         "Tximeleta marroi laranja bi begi handi"="Maniola jurtina",
+                         " mariposa peque\xf1a gris con puntos"="Pyrgus sp.")
                          
                            
 #remove some with no id
@@ -98,6 +99,7 @@ unique(d.g4$Pollinator_genus)
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Apis"] <- "Apidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Syrphidae"] <- "Syrphidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombylius"] <- "Bombyliidae"
+d.g4$Pollinator_family[d.g4$Pollinator_genus=="Maniola"] <- "Nymphalidae-Satyrinae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Zygaena"] <- "Zygaenidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Macroglossum"] <- "Esfingidae"
 d.g4$Pollinator_family[d.g4$Pollinator_genus=="Bombus"] <- "Apidae"
