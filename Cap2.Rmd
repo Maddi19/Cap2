@@ -1,0 +1,113 @@
+---
+title: "Cap2"
+author: "maddi"
+date: "`r Sys.Date()`"
+output: word_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Abstract
+
+## Introduction
+
+Biodiversity plays a vital role in maintaining the functionality of ecosystems. The results of previous experiments have demonstrated that an increase in species richness can lead to improvements in ecosystem functioning (e.g., increase in biomass due to higher plant species richness [@cardinale2004]). In particular, recent research has sought to elucidate the impact of diversity at different trophic levels on ecosystem functionality, with a particular focus on those related to pollination and plant reproductive success (REF BASCOMPTE JORDANO). It has been demonstrated that an increase in pollinator species diversity can enhance the reproductive success of plants (REF artamendi et al ).
+
+The majority of studies in this field have traditionally focused on biodiversity through the lens of species richness (REF). However, it is equally important to consider the structure of the community. It is insufficient to merely enumerate the number of species; rather, an understanding of the manner in which species are organized and interact within an ecosystem provides a more comprehensive account of its functionality and stability (magrach 2021). Community structure exerts a significant influence on the manner in which the constituent components of an ecosystem contribute to its overall functioning. This underscores the necessity for studies that integrate both species richness and community-level analyses in order to gain a more profound understanding of biodiversity and its role in ecosystem sustainability[@magrach2023].
+
+In particular, we have focused on a static view by pooling data, where if one species interacts with another at one time, it is assumed that this will always happen. This means that we have not investigated how these interactions may vary over time, where different variables may influence them. For instance, CaraDonna and Waser (2020) discovered that pollinator species typically classified as generalists in the overall network were, in reality, significantly more specialized when analyzed on a week-to-week basis. Now is the time to study the dynamics of community patterns over time. HABLAR MAS SOBRE EL TIEMPO, VARIACIONES EN UN MISMO AÑO, PRIMAVERA
+
+DIFERENCIAS ENTRE ESTRUCTURA COMUNIDAD Y A NIVEL DE ESPECIE. macroscala y microescala.
+
+Here, we present an empirical study linking pollinator visitation and plant reproductive success at the community level and species level. We use data collected within two different habitat types (Atlantic mountain grasslands and the understory of Mediterranean woodlands) across two consecutive years in the Mediterranean woodlands and three consecutive years in the mountain grasslands. Our aim is first to understand if macroscale community features (nestedness, functional complementarity) change over small scale time (weekly networks)) and big scale time lapses (seasonally aggregated networks). Second, we ask if microscale features of species (degree of generalization, closeness) vary also through the different time scales. Third, we focus on understanding if adding information on selected interaction network structure indices to previously used simple visitation metrics (e.g., number and diversity of pollinator species) explains better the differences observed in reproductive success.
+
+Specifically, our research aims to answer the following questions at two different levels (site or community level, and species level): (i) at the site level, (1) how dynamic are nestedness and functional complementarity through time in the two climatic zones? do they explain community level reproductive success? ; at the species level (2) does the degree of pollinator generalization change through time? and is it link to species level plant reproductive success? (3) Is plant or pollinator species closeness dynamic through time, and what is its relation to plant species reproductive success?
+
+## Methodology
+
+### Study sites
+
+We collected data in two different study areas and habitat types in Spain: within the vicinity of Doñana National Park in SW Spain and at Gorbea Natural Park, located in N Spain. Doñana features a Mediterranean climate, with warm, dry summers and cool, humid winters. Annual precipitation is 500 mm, and mean temperatures during the study period range from 12.5 to 22.5ºC (REF pizarro2021). Surveys were conducted within fragmented woodlands of stone pines (Pinus pinea) that host a rich understory of flowering shrubs and annual plants (Aparicio 2007). In turn, surveys in Gorbea were conducted within an area characterized by the influence of the Atlantic Ocean, with mild winters and summers and high annual precipitation values, \~ 1,300 mm. Here, mean temperatures during the study period range from 10 to 17.5 ∘ C (Pizarro et al. 2021). Vegetation in the area is composed of beech forests, in conjunction with abundant coniferous plantations. There is also a substantial presence of shrubland and meadows, together with dispersed outrocks, present mainly in the steepest areas of the mountain (Albizu et al. 2002).
+
+Surveys were conducted during two consecutive years (2020 and 2021) in Doñana and three consecutive years (2020, 2021 and 2022) in Gorbea. Within each area we selected five sites within similar elevations (ranging from 50 to 150 m a.s.l. in the case of Doñana and between 800 and 900 m.a.s.l in the case of Gorbea), as well as within similar habitat and soil types, reducing potential confounding factors. Similarity in plant composition between sites was 0.41 ± 0.04 in both areas and across both study years (plant mean Sørensen beta-diversity). The average distance between sites ranged from 3.2 to 24.2 in the case of Doñana and from 1.3 to 4.6 km in Gorbea. In Doñana, one of the sites had to substituted in 2021 due to impossibility of access in the second year of sampling and it was changed to a nearby very similar area.
+
+### Plant pollinator interactions
+
+Within each site, we established one 200-m x 1 m transect. Transects were visited every week (period), when weather conditions allowed, and surveyed three times during each visit, one in the early morning (9.30-10.30), one in the middle of the day (13.30-14.30) and one at the end of the day (16.30-17.30), in order to obtain a complete picture of the community of plants and pollinators present throughout the day. During the whole flowering season (from February to May in the case of Doñana and from March to July in the case of Gorbea), we were able to sample each of the sites between 6 and 9 times depending on the year. Sampling was interrupted for two weeks in 2020 due to the lockdowns derived from the COVID-19 pandemic. The objective was to sample all five sites for one full day each during the week, and then repeat the sampling again the following week in a randomized order, such that each week represented a period with a difference of 4 days in the sampling of each site. This was however not always possible due to lockdowns, restrictions and bad weather, and therefore in a small number of occasions, a period covers a maximum of 10 days difference between the sampling of the first site and that of the last. At each census, along each transect we identified all plant species and recorded all the floral visitors that landed on their flowers and touched the plant´s reproductive parts. Only floral visitors (from now on referred to as pollinators) that could not be identified in the field were captured, stored and identified in the laboratory by an expert entomologist (see acknowledgements). In addition, for each period, we recorded the number of flowers produced by each plant species present in the transect. All surveys were done under similar weather conditions, avoiding windy or rainy days. Total sampling time was XX (435 20-21rako) hours for both areas and years.
+
+### Plant reproductive success
+
+To obtain a measure of pollination function, we estimated the average number of fruits per flower (fruit set) in Doñana´s sites during 2021 and in Gorbea´s sites during 2021 and 2022. For this objective, we focused on the reproductive success for a subset of plant species in the community. Specifically, we focused on abundant species that are also highly self-incompatible. We recorded the reproductive success for different periods and sites. The selected subset includes six species of the Cistaceae family for Doñana: Cistus salviifolius, C. crispus, C. ladanifer, C. libanotis, Halimium halimifolium, and H. calcynum. We estimated the average number of fruits per flower within 1853 individual flowers throuhout the flowering season of 2021 in Doñana,
+
+### Data analyses
+
+#### Sampling completeness
+
+To evaluate the sampling completeness, we estimated the asymptotic number of species of plants, pollinators and interactions present[@chao2009; @chao2020], a non-parametric estimator of species richness for abundance data. This estimator includes non-detected species and allowed us to calculate the proportion detected with our original data. We used Chao 1 asymptotic species richness estimators [@chao2009] and estimated the richness of pollinators, plants and plant-pollinator links accumulated as sampling effort increased up to 100% sampling coverage using package iNEXT [@iNEXT] within the R environment (ref R). We then extracted the values covered by our sampling.
+
+#### Network interactions through time and space
+
+To evaluate differences in network structure between communities, we constructed plant-pollinator interaction networks for each study site (Gorbea and Doñana), sites, and periods or rounds of sampling. We thus obtained 173 interaction networks, representing the number of individuals of different pollinator species recorded visiting each different plant species. For each network, we extracted a series of relevant network metrics at the species and site levels.
+
+### Species-level network analysis
+
+At
+
+### Site-level network analysis
+
+### Statistical analysis
+
+## Results
+
+Within our sampling we recorded 3947 interactions involving 168 pollinator species and 71 plant species for Gorbea and 2617 interaction involving 151 pollinator species and 47 plant species for Doñana. These interactions involved x and x unique combinations of plants and flower visitors respectively.
+
+In Doñana, the most represented order of flower visitors was Hymenoptera, involved in 69.51 % of the interactions observed. Specifically, Apidae represented the most common family within the order, representing 48.34 % of the interactions and interactions involving Apis mellifera, the managed European honeybee, represented 41.77 % of all interactions. Following Hymenoptera, the next most common order was Diptera representing 15.28 % of the interactions, and specifically the family Syrphidae representing 10.39 %. In turn, Coleoptera represented 13.34% of the interactions and Lepidoptera 1.75%. In Gorbea, the most abundant group were Diptera which accounted for 63.13 % of the interactions, and specifically the family Syrphidae represented 52.57 %, followed by Hymenoptera, representing 29.85 %, and specifically the family Apidae representing 18.98 %, but in this case Apis mellifera represented 8.54 % of the interactions and different species in the Bombus genus 9.68 %. Coleoptera and Lepidoptera represented 3.7 % and 3.19 % of interactions.
+
+### Sampling completeness
+
+Our sampling completeness analyses revealed that our survey was able to capture 17-54% of pollinator species (average = 35%), 43-100% of plant species (average = 80%) and 9-32% of plant-pollinator links (average = 20% ; Fig. S3). Our values of sampling completeness were slightly smaller in the case of pollinators, probably as a consequence of the great diversity found in the Mediterranean region and within our study area in particular, a hotspot of insect diversity (Nieto et al. 2014).
+
+Gorbea22
+
+poll:
+
+species richness: 86 species observed. S.e=17.98, estimator=147, we captured 59% of species
+
+Shannon diversity 22.3 se=1.01
+
+estimator= 23.56
+
+Simpson diversity: 10.17 se=0.58
+
+estimator=10.24
+
+plants
+
+54 species observed, se=5.58, estimator=58.9, 92% of plants
+
+shannon 16.09 observed, se=0.64., estimator 16.47
+
+simpson 8.33 obs, se=0.37, estimator=8.37
+
+links
+
+319 link richness observed, se=40.7, estimator=612.2, 52% of links
+
+shannon 108.64, se=5.85, etsimator=138.84
+
+simpson 36.3, se=2.3, estimator=37.31
+
+```{r cars}
+summary(cars)
+```
+
+## Discussion
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+## References
