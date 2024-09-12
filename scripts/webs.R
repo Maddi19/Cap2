@@ -8,379 +8,198 @@ library(vegan)
 library(bipartite)
 source("./scripts/toolbox.R")
 
-d<-read.csv("./data/clean/trans_donana_20_clean.csv")
-d.21<-read.csv("./data/clean/trans_doñana_21_clean.csv")
-d.gorb<-read.csv("./data/clean/trans_gorbea_20_clean.csv")
-d.21.gorb<-read.csv("./data/clean/trans_G21_clean.csv")
-d.22.gorb<-read.csv("./data/clean/trans_gorbea_22_clean.csv")
-glimpse(d)
-glimpse(d.21)
-glimpse(d.gorb)
-glimpse(d.22.gorb)
-glimpse(d.21.gorb)
 
-unique(d$Pollinator_id)
-
-d.21$capturado <- str_replace(d.21$capturado, "idem ", "")
-
-d.21[d.21 == " "] <- NA
-pollinator_info <- d.21 %>%
-  filter(!is.na(Pollinator_id) & Pollinator_id != " ") %>%
-  select(Codigo, Pollinator_id, Pollinator_genus, Pollinator_family, Order)
-pollinator_info[pollinator_info == ""] <- NA
-
-info_complete <- pollinator_info %>%
-  filter(!is.na(Pollinator_id) & !is.na(Pollinator_genus) & !is.na(Pollinator_family) & !is.na(Order)) %>%
-  select(Codigo, Pollinator_id, Pollinator_genus, Pollinator_family, Order)
-
-# 3. Actualizar columnas en d.21 usando match
-d.21$Pollinator_id <- ifelse(
-  is.na(d.21$Pollinator_id),
-  info_complete$Pollinator_id[match(d.21$capturado, info_complete$Codigo)],
-  d.21$Pollinator_id
-)
-
-d.21$Pollinator_genus <- ifelse(
-  is.na(d.21$Pollinator_genus),
-  info_complete$Pollinator_genus[match(d.21$capturado, info_complete$Codigo)],
-  d.21$Pollinator_genus
-)
-
-d.21$Pollinator_family <- ifelse(
-  is.na(d.21$Pollinator_family),
-  info_complete$Pollinator_family[match(d.21$capturado, info_complete$Codigo)],
-  d.21$Pollinator_family
-)
-
-d.21$Order <- ifelse(
-  is.na(d.21$Order),
-  info_complete$Order[match(d.21$capturado, info_complete$Codigo)],
-  d.21$Order
-)
-
-d.21 <- d.21 %>%
-  mutate(
-    Pollinator_id = case_when(
-      (is.na(Pollinator_id) | Pollinator_id == "") & !is.na(Pollinator_genus) & Pollinator_genus != "" ~ paste(trimws(Pollinator_genus), "sp."),  # Si Pollinator_id está vacío y Pollinator_genus no está vacío
-      TRUE ~ Pollinator_id  # Mantener el valor original si Pollinator_id no está vacío
-    )
-  )
-
-d.21 <- d.21 %>%
-  mutate(
-    Pollinator_genus = if_else(capturado == "AT1-02", "Lasioglossum", Pollinator_genus),
-    Pollinator_family = if_else(capturado == "AT1-02", "Halictidae", Pollinator_family),
-    Pollinator_id = case_when(
-      Codigo == "AT1-02" | capturado == "AT1-02" ~ "Lasioglossum immunitum",
-      Codigo == "HT6-16" | capturado == "HT6-16" ~ "Andrena allaudi",
-      Codigo == "HT8-02" | capturado == "HT8-02" ~ "Lobonix aeneus",
-      Codigo == "PC1-01" | capturado == "PC1-01" ~ "Empis tesellata",
-      Codigo == "VET2-01" | capturado == "VET2-01" ~ "Lasioglossum immunitum",
-      Codigo == "VET4-01" | capturado == "VET4-01" ~ "Lasioglossum immunitum",
-      Codigo == "VEC4-04" | capturado == "VEC4-04" ~ "Lasioglossum immunitum",
-      Codigo == "VEC5-06" | capturado == "VEC5-06" ~ "Eucera elongatula",
-      Codigo == "VEC5-08" | capturado == "VEC5-08" ~ "Eucera elongatula",
-      Codigo == "VET9-01" | capturado == "VET9-01" ~ "Anthrenus verbasci",
-      Codigo == "VST2-03" | capturado == "VST2-03" ~ "Lasioglossum immunitum",
-      Codigo == "VST4-02" | capturado == "VST4-02" ~ "Lobonix aeneus",
-      Codigo == "VST4-04" | capturado == "VST4-04" ~ "Episyrphus balteatus",
-      Codigo == "VST5-02" | capturado == "VST5-02" ~ "Eupeodes corollae",
-      Codigo == "AT3-09" | capturado == "AT3-09" ~ "Eupeodes corollae",
-      Codigo == "PT2-01" | capturado == "PT2-01" ~ "Lobonix aeneus",
-      Codigo == "PT2-07" | capturado == "PT2-07" ~ "Rhyncomyia cuprea",
-      Codigo == "PT3-01" | capturado == "PT3-01" ~ "Lobonix aeneus",
-      Codigo == "PT7-09" | capturado == "PT7-09" ~ "Panurgus perezi",
-      Pollinator_id == "Empis " ~ "Empis sp",
-      TRUE ~ Pollinator_id  # Mantener el valor original si no coincide
-    ),
-    Pollinator_sps = if_else(capturado == "AT1-02", "immunitum", Pollinator_sps),
-    Order = if_else(str_starts(Pollinator_id, "Andrena") |
-                      str_starts(Pollinator_id, "Eucera") |
-                      str_starts(Pollinator_id, "Lasioglossum")|
-                      str_starts(Pollinator_id, "Panurgus" ),
-                    "Hymenoptera", 
-                    if_else(str_starts(Pollinator_id, "Empis") |
-                              str_starts(Pollinator_id, "Episyrphus") |
-                             str_starts(Pollinator_id,  "Eupeodes" )|
-                             str_starts(Pollinator_id, "Rhyncomyia"),
-                            "Diptera", 
-                    if_else(str_starts(Pollinator_id, "Lobonix") |
-                              str_starts(Pollinator_id, "Anthrenus"), 
-                                    "Coleoptera",        
-                            Order)
-  )))
-
-
-
-unique(d.21$Pollinator_id)
-d.21<- d.21 %>%
-  filter(!is.na(Pollinator_id))
-
-unique(d.gorb$Pollinator_id)
-unique(d.21.gorb$Polinizador_curro)
-unique(d.22.gorb$Pollinator_id)
-
-
-d.22.gorb<-d.22.gorb%>%
-  rename(Periodo=Ronda,
-         Pollinator_id=Polinizador_curro,
-         Transecto = Transecto..1.2.3.,
-         Fecha2=Fecha)%>%
-  mutate(Year=first(year(Fecha2))) %>% 
-  ungroup%>%
-  mutate(Site="Gorbea")
-d.22.gorb$Bosque<-as.character(d.22.gorb$Bosque)
-
-d.21.gorb<-d.21.gorb%>%
-  rename(Pollinator_id=Polinizador_curro)%>%
-  mutate(Year=first(year(Fecha2))) %>% 
-  ungroup%>%
-  mutate(Site="Gorbea")
-d.21.gorb$Bosque<-as.character(d.21.gorb$Bosque)
-
-d.gorb<-d.gorb%>%
-  mutate(Year=first(year(Fecha2))) %>% 
-  ungroup%>%
-  mutate(Site="Gorbea")
-d.gorb$Bosque<-as.character(d.gorb$Bosque)
-
-d.21<-d.21%>%
-  mutate(Year=first(year(Fecha2))) %>% 
-  ungroup%>%
-  mutate(Site="Doñana")
-
-d<-d%>%
-  mutate(Year=first(year(Fecha2))) %>% 
-  ungroup%>%
-  mutate(Site="Doñana")
-  
-###group all data and select columns
-list_dataframes <- list(d, d.21, d.gorb, d.21.gorb, d.22.gorb)
-
-all_df<-map_df(list_dataframes, ~select(., any_of(c("X", "Site","Year", "Fecha2", "Hora","Bosque",
-                                            "Periodo","Transecto","Planta","Pollinator_id", "Order",
-                                            "Pollinator_genus","Pollinator_family"))))
-
-
-all_df$Bosque <- recode(all_df$Bosque,"Pinar Villamanrique Este (Chaparral)"= "Villamanrique Chaparral",
-                        "Pinar Villamanrique Sur"="Villamanrique Sur")
-
-unique(all_df$Pollinator_id)
-all_df$Pollinator_id <- recode(all_df$Pollinator_id,"Xylocopa  cantabrita"= "Xylocopa cantabrita",
-                        "Bombylius  torquatus"="Bombylius torquatus",
-                        "Eucera  elongatula"="Eucera elongatula",
-                        "Andrena  cinerea"="Andrena cinerea",
-                        "Apis melifera"="Apis mellifera",
-                        "Andrena  flavipes"="Andrena flavipes",
-                        "Andrena  chrysosceles"="Andrena chrysosceles",
-                        "Nomada agrestis"="Nomada agrestis",
-                        "Empis  sp"="Empis sp",
-                        "Osmia  bicornis"="Osmia bicornis",
-                        "Calliphora  sp"="Calliphora sp",
-                        "Empis  tesellata"="Empis tesellata",
-                        "Chasmatopterus  illigeri"="Chasmatopterus illigeri",
-                        "Parageron  sp"="Parageron sp",
-                        "Merodon  sp"="Merodon sp",
-                        "Nomada  sp"="Nomada sp",
-                        " Syrphus sp."= "Syrphus sp.",
-                        "Eristalis "="Eristalis sp",
-                        "Eristalis sp"="Eristalis sp.",
-                        "Empis "="Empis sp",
-                        "Lasioglossum  prasinum"="Lasioglossum prasinum",
-                        "avispa"="Vespidae",
-                        "Usia  sp"="Usia sp",
-                        "Dasypoda  iberica"="Dasypoda iberica",
-                        "Panurgus  calcaratus"="Panurgus calcaratus",
-                        "Tropinota  squalida"="Tropinota squalida",
-                        "Syrphidae 2"="Syrphidae",
-                        "Syrphidae 3"="Syrphidae",
-                        "Bombylidae 2"="Bombylidae",
-                        "Anthophora  retusa"="Anthophora retusa",
-                        "Nomada  agrestis"="Nomada agrestis",
-                        "Lasioglossum"="Lasioglossum sp",
-                        "Lasioglossum "="Lasioglossum sp",
-                        "Osmia  submicans"="Osmia submicans",
-                        "Machimus  sp"="Machimus sp",
-                        "Panurgus  dentipes"="Panurgus dentipes",
-                        "Episyrphus "="Episyrphus sp",
-                        "Dasypoda "="Dasypoda sp",
-                        "Syrphidae NA"="Syrphidae",
-                        "Formicidae NA"="Formicidae",
-                        "Lycaenidae NA"="Lycaenidae",
-                        "mosca peque\x96a"="Diptera",
-                        "Syrphidae 1"="Syrphidae",
-                        "Anthophora"="Anthophora sp",
-                        "Dilophus  sp"="Dilophus sp",
-                        "Eucera"="Eucera sp",
-                        "Platycheirus  albimanus"="Platycheirus albimanus",
-                        "polilla marron mediana"="Lepidoptera",
-                        "Cerambycidae NA"="Cerambycidae",
-                        "Pyrgus sp"="Pyrgus sp.",
-                        "Bombus sp"="Bombus sp.",
-                        "Bombylius sp"="Bombylius sp.",
-                        "Eupeodes sp"="Eupeodes sp.",
-                        "Eucera "="Eucera sp.")
-
-
-
-all_df <- all_df %>%
-  filter(Planta != "")
-
-write.csv(all_df, "data/all_data.csv")
-
+##cargar all data
 all_df<-read.csv("./data/all_data.csv")
-
-all_df <- all_df %>%
-  mutate(Order = case_when(
-    Pollinator_family %in% c("Apidae", "Megachilidae", "avispa", "abeja", "Andrenidae", "Halictidae", "Avispa", "Melittidae", 
-                   "Abeja", "Formicidae", "Anthopora", "Colletidae", "Vespidae", "Argidae", 
-                   "Pompiilidae") ~ "Hymenoptera",
-    Pollinator_family %in% c("Esfingidae", "Lepidoptera", "Zygaenidae", "Nymphalidae-Satyrinae", "Hesperiidae", 
-                   "Lycaenidae", "Pieridae") ~ "Lepidoptera",
-    Pollinator_family %in% c("Pyrrhocoridae", "Miridae") ~ "Hemiptera",
-    Pollinator_family %in% c("Orthoptera") ~ "Orthoptera",
-    Pollinator_family%in% c("Diptera", "Tabanidae", "mosca", "Calliphoridae", "Conopidae", "Asilidae", 
-                   "Stratiomyidae", "Tachinidae", "Muscidae", "Bombyliidae", "Bombylidae", 
-                   "Empididae", "Bibionidae", "Mosca", "Syrphidae") ~ "Diptera",
-    Pollinator_family %in% c("Oedemeridae", "Coleoptera", "Cerambycidae", "Cerambicidae", "Cetonidae", 
-                   "Chrysomelidae", "Buprestidae", "Tenebrionidae", "Melyridae", 
-                   "Scarabaeidae") ~ "Coleoptera",
-    Pollinator_genus %in% c("Cerambycidae","Curculionoidea")~ "Coleoptera",
-    Pollinator_genus %in% c("Anthocharis")~ "Lepidoptera",
-    Pollinator_id %in% c("Syrphus sp.")~ "Diptera",
-    TRUE ~ Order  # Para casos que no coincidan con ninguna familia listada
-  ))
-
-unknown_fams <- all_df %>% 
-  filter(is.na(Pollinator_family)| Pollinator_family=="")
-unique(unknown_fams$Pollinator_id)
-
-all_df <- all_df %>%
-  mutate(Order = if_else(str_starts(Pollinator_id, "Andrena") |
-                           str_starts(Pollinator_id, "Eucera") |
-                           str_starts(Pollinator_id, "Lasioglossum")|
-                           str_starts(Pollinator_id, "Panurgus")|
-                           str_starts(Pollinator_id, "Dasypoda") |
-                           str_starts(Pollinator_id, "Anthophora") |
-                           str_starts(Pollinator_id, "Hoplitis") |
-                           str_starts(Pollinator_id, "Ceratina")|
-                           str_starts(Pollinator_id, "Colletes"),
-                         "Hymenoptera", 
-                         if_else(str_starts(Pollinator_id, "Empis") |
-                                   str_starts(Pollinator_id, "Episyrphus") |
-                                   str_starts(Pollinator_id,  "Eupeodes" )|
-                                   str_starts(Pollinator_id, "Platycheirus")|
-                                   str_starts(Pollinator_id, "Lomatia")|
-                                   str_starts(Pollinator_id, "Rhyncomyia")|
-                                   str_starts(Pollinator_id, "Eristalis") |
-                                   str_starts(Pollinator_id, "Usia")|
-                                   str_starts(Pollinator_id, "Bombylius")|
-                                   str_starts(Pollinator_id, "Platynochaetus")|
-                                   str_starts(Pollinator_id, "Eristalinus") |
-                                   str_starts(Pollinator_id, "Sphaerophoria"), 
-                                 "Diptera", 
-                                 if_else(str_starts(Pollinator_id, "Lobonix") |
-                                           str_starts(Pollinator_id, "Anthrenus")|
-                                           str_starts(Pollinator_id,"Chasmatopterus")|
-                                           str_starts(Pollinator_id,"Exosoma")|
-                                           str_starts(Pollinator_id,"Cerocoma")|
-                                           str_starts(Pollinator_id,"Oxythyrea") , 
-                                         "Coleoptera",        
-                                         Order))))
-
-all_df <- all_df %>%
-  mutate(Pollinator_family = if_else(
-    str_starts(Pollinator_id, "Andrena") | str_starts(Pollinator_id, "Panurgus"), "Andrenidae",
-    if_else(
-      str_starts(Pollinator_id, "Eristalis") | str_starts(Pollinator_id, "Platycheirus") |
-        str_starts(Pollinator_id, "Episyrphus") | str_starts(Pollinator_id, "Eupeodes") |
-        str_starts(Pollinator_id, "Platynochaetus") | str_starts(Pollinator_id, "Eristalinus") |
-        str_starts(Pollinator_id, "Sphaerophoria") | str_starts(Pollinator_id, "Syrphus"), 
-      "Syrphidae",
-      if_else(
-        str_starts(Pollinator_id, "Lasioglossum"), "Halictidae",
-        if_else(
-          str_starts(Pollinator_id, "Lomatia") | str_starts(Pollinator_id, "Usia") |
-            str_starts(Pollinator_id, "Bombylius"), "Bombyliidae",
-          if_else(
-            str_starts(Pollinator_id, "Eucera") | str_starts(Pollinator_id, "Ceratina") |
-              str_starts(Pollinator_id, "Anthophora"), "Apidae",
-            if_else(
-              str_starts(Pollinator_id, "Dasypoda"), "Melittidae",
-              if_else(
-                str_starts(Pollinator_id, "Hoplitis"), "Megachilidae",
-                if_else(
-                  str_starts(Pollinator_id, "Colletes"), "Colletidae",
-                  if_else(
-                    str_starts(Pollinator_id, "Anthocharis"), "Pieridae",
-                    Pollinator_family
-                  ))))))))))
-
 
 gor<-all_df%>%
   filter(Site=="Gorbea")
 unique(gor$Pollinator_id)
-#168
+
 doñ<-all_df%>%
   filter(Site=="Doñana")
-unique(doñ$Pollinator_id)
-#151
-unique(all_df$Pollinator_family)
-total_visits <- nrow(gor)
+unique_pl<- doñ %>%
+  distinct(Pollinator_id) %>%  
+  arrange(Pollinator_id)
+ 
 
-# Calcular el número de visitas por cada orden y su porcentaje
-visits_by_order <- gor %>%
-  group_by(Order) %>%
-  summarise(Count = n()) %>%
-  mutate(Percentage = (Count / total_visits) * 100)
-
-total_visits.d <- nrow(doñ)
-visits_by_order.d <- doñ %>%
-  group_by(Order) %>%
-  summarise(Count = n()) %>%
-  mutate(Percentage = (Count / total_visits.d) * 100)
-
-apidae <- gor %>%
-  group_by(Pollinator_family)%>%
-  summarise(Count=n())%>%
-  mutate(perc.ap =(Count / total_visits) * 100) 
-
-apidae.d <- doñ %>%
-  group_by(Pollinator_family)%>%
-  summarise(Count=n())%>%
-  mutate(perc.ap =(Count / total_visits.d) * 100) 
-
-apis<- gor %>%
-  group_by(Pollinator_id)%>%
-  summarise(Count=n())%>%
-  mutate(perc.ap =(Count / total_visits) * 100) 
-apis.d<- doñ %>%
-  group_by(Pollinator_id)%>%
-  summarise(Count=n())%>%
-  mutate(perc.ap =(Count / total_visits.d) * 100) 
-
-bombus<- gor %>%
-  filter(str_starts(Pollinator_id, "Bombus")) %>%  # Aplica str_starts a la columna Pollinator_id
-  group_by(Pollinator_id) %>%
-  summarise(Count = n()) %>%
-  mutate(perc.ap = (Count / total_visits) * 100)%>%
-  summarise(sum=sum(perc.ap))
-
-bombus.d <- doñ %>%
-  filter(str_starts(Pollinator_id, "Bombus")) %>%  # Aplica str_starts a la columna Pollinator_id
-  group_by(Pollinator_id) %>%
-  summarise(Count = n()) %>%
-  mutate(perc.ap = (Count / total_visits.d) * 100)
-
-
-##cargar all data
-all_df<-read.csv("./data/all_data.csv")
+unique(gor$Pollinator_id)
 gor$Planta <- as.factor(gor$Planta)
 gor$Pollinator_id <- as.factor(gor$Pollinator_id)
-web=matrix(table(gor$Planta,gor$Pollinator_id),nrow=length(levels(gor$Planta)),ncol=length(levels(gor$Pollinator_id)))
-doñ$Planta <- as.factor(doñ$Planta)
-doñ$Pollinator_id <- as.factor(doñ$Pollinator_id)
-web1=matrix(table(doñ$Planta,doñ$Pollinator_id),nrow=length(levels(doñ$Planta)),ncol=length(levels(doñ$Pollinator_id)))
+
+webs <- frame2webs(gor, varnames = c("Planta", "Pollinator_id", "Year"))
+
+# Esto te da una lista con una matriz de interacciones por año
+web_2020 <- webs[[1]]
+web_2021 <- webs[[2]]
+web_2022 <- webs[[3]]
+
+# Unir todas las plantas y polinizadores de los tres años
+all_plants <- unique(c(rownames(web_2020), rownames(web_2021), rownames(web_2022)))
+all_pollinators <- unique(c(colnames(web_2020), colnames(web_2021), colnames(web_2022)))
+
+# Crear nuevas matrices que tengan todas las plantas y polinizadores
+# Rellenamos con 0 las interacciones faltantes para los años que no las tengan
+
+web_2020_fixed <- matrix(0, nrow = length(all_plants), ncol = length(all_pollinators),
+                         dimnames = list(all_plants, all_pollinators))
+web_2020_fixed[rownames(web_2020), colnames(web_2020)] <- web_2020
+
+web_2021_fixed <- matrix(0, nrow = length(all_plants), ncol = length(all_pollinators),
+                         dimnames = list(all_plants, all_pollinators))
+web_2021_fixed[rownames(web_2021), colnames(web_2021)] <- web_2021
+
+web_2022_fixed <- matrix(0, nrow = length(all_plants), ncol = length(all_pollinators),
+                         dimnames = list(all_plants, all_pollinators))
+web_2022_fixed[rownames(web_2022), colnames(web_2022)] <- web_2022
+# Ahora podemos hacer la comparación sin problemas de dimensiones
+common_interactions <- (web_2020_fixed > 0) & (web_2021_fixed > 0) & (web_2022_fixed > 0)
+
+# Mostrar las interacciones comunes
+common_interactions
+
+# Interacciones únicas para cada año
+unique_2020 <- (web_2020_fixed > 0) & !(web_2021_fixed > 0) & !(web_2022_fixed > 0)
+unique_2021 <- (web_2021_fixed > 0) & !(web_2020_fixed > 0) & !(web_2022_fixed > 0)
+unique_2022 <- (web_2022_fixed > 0) & !(web_2020_fixed > 0) & !(web_2021_fixed > 0)
+
+# También puedes encontrar interacciones compartidas entre dos años, por ejemplo:
+common_2020_2021 <- (web_2020_fixed > 0) & (web_2021_fixed > 0) & !(web_2022_fixed > 0)
+common_2020_2022 <- (web_2020_fixed > 0) & (web_2022_fixed > 0) & !(web_2021_fixed > 0)
+common_2021_2022 <- (web_2021_fixed > 0) & (web_2022_fixed > 0) & !(web_2020_fixed > 0)
+
+# Total de interacciones por año
+total_2020 <- sum(web_2020_fixed > 0)
+total_2021 <- sum(web_2021_fixed > 0)
+total_2022 <- sum(web_2022_fixed > 0)
+
+# Total de interacciones comunes en los tres años
+total_common <- sum(common_interactions)
+
+# Total de interacciones únicas por año
+total_unique_2020 <- sum(unique_2020)
+total_unique_2021 <- sum(unique_2021)
+total_unique_2022 <- sum(unique_2022)
+
+# Porcentaje de interacciones comunes respecto al total de cada año
+percentage_common_2020 <- (total_common / total_2020) * 100
+percentage_common_2021 <- (total_common / total_2021) * 100
+percentage_common_2022 <- (total_common / total_2022) * 100
+
+# Porcentaje de interacciones únicas para cada año
+percentage_unique_2020 <- (total_unique_2020 / total_2020) * 100
+percentage_unique_2021 <- (total_unique_2021 / total_2021) * 100
+percentage_unique_2022 <- (total_unique_2022 / total_2022) * 100
+
+# Mostrar los resultados
+percentage_common_2020
+percentage_common_2021
+percentage_common_2022
+
+percentage_unique_2020
+percentage_unique_2021
+percentage_unique_2022
+
+total_interactions_2020 <- sum(web_2020_fixed)
+total_interactions_2021 <- sum(web_2021_fixed)
+total_interactions_2022 <- sum(web_2022_fixed)
+
+# Mostrar los resultados
+total_interactions_2020
+total_interactions_2021
+total_interactions_2022
+
+
+
+webs <- frame2webs(doñ, varnames = c("Planta", "Pollinator_id", "Year"))
+
+# Esto te da una lista con una matriz de interacciones por año
+web_2020 <- webs[[1]]
+web_2021 <- webs[[2]]
+
+
+# Unir todas las plantas y polinizadores de los tres años
+all_plants <- unique(c(rownames(web_2020), rownames(web_2021)))
+all_pollinators <- unique(c(colnames(web_2020), colnames(web_2021)))
+
+# Crear nuevas matrices que tengan todas las plantas y polinizadores
+# Rellenamos con 0 las interacciones faltantes para los años que no las tengan
+
+web_2020_fixed <- matrix(0, nrow = length(all_plants), ncol = length(all_pollinators),
+                         dimnames = list(all_plants, all_pollinators))
+web_2020_fixed[rownames(web_2020), colnames(web_2020)] <- web_2020
+
+web_2021_fixed <- matrix(0, nrow = length(all_plants), ncol = length(all_pollinators),
+                         dimnames = list(all_plants, all_pollinators))
+web_2021_fixed[rownames(web_2021), colnames(web_2021)] <- web_2021
+
+# Ahora podemos hacer la comparación sin problemas de dimensiones
+common_interactions <- (web_2020_fixed > 0) & (web_2021_fixed > 0)
+
+# Mostrar las interacciones comunes
+common_interactions
+
+# Interacciones únicas para cada año
+unique_2020 <- (web_2020_fixed > 0) & !(web_2021_fixed > 0)
+unique_2021 <- (web_2021_fixed > 0) & !(web_2020_fixed > 0) 
+
+edit(unique_2020)
+
+unique_2020_numeric <- as.numeric(unique_2020)
+unique_2020_matrix <- matrix(unique_2020_numeric, nrow = nrow(unique_2020), 
+                             ncol = ncol(unique_2020), 
+                             dimnames = dimnames(unique_2020))
+edit(unique_2020_matrix)
+# También puedes encontrar interacciones compartidas entre dos años, por ejemplo:
+common_2020_2021 <- (web_2020_fixed > 0) & (web_2021_fixed > 0)
+
+# Total de interacciones por año
+total_2020 <- sum(web_2020_fixed > 0)
+total_2021 <- sum(web_2021_fixed > 0)
+
+# Total de interacciones comunes en los tres años
+total_common <- sum(common_interactions)
+
+# Total de interacciones únicas por año
+total_unique_2020 <- sum(unique_2020_matrix)
+total_unique_2021 <- sum(unique_2021)
+
+# Porcentaje de interacciones comunes respecto al total de cada año
+percentage_common_2020 <- (total_common / total_2020) * 100
+percentage_common_2021 <- (total_common / total_2021) * 100
+
+# Porcentaje de interacciones únicas para cada año
+percentage_unique_2020 <- (total_unique_2020 / total_2020) * 100
+percentage_unique_2021 <- (total_unique_2021 / total_2021) * 100
+
+# Mostrar los resultados
+percentage_common_2020
+percentage_common_2021
+
+percentage_unique_2020
+percentage_unique_2021
+
+total_interactions_2020 <- sum(web_2020_fixed)
+total_interactions_2021 <- sum(web_2021_fixed)
+
+# Mostrar los resultados
+total_interactions_2020
+total_interactions_2021
+
+gor.20<-all_df%>%
+  filter(Site=="Gorbea" & Year =="2020")
+gor.20$Planta <- as.factor(gor.20$Planta)
+gor.20$Pollinator_id <- as.factor(gor.20$Pollinator_id)
+
+web=matrix(table(gor.20$Planta,gor.20$Pollinator_id),nrow=length(levels(gor.20$Planta)),ncol=length(levels(gor.20$Pollinator_id)))
+
+
+doñ.20<-all_df%>%
+  filter(Site=="Doñana" & Year =="2020")
+doñ.20$Planta <- as.factor(doñ.20$Planta)
+doñ.20$Pollinator_id <- as.factor(doñ.20$Pollinator_id)
+
+web1=matrix(table(doñ.20$Planta,doñ.20$Pollinator_id),nrow=length(levels(doñ.20$Planta)),ncol=length(levels(doñ.20$Pollinator_id)))
 
 
 (V=sum(web)) #Frecuencia de la interacción, en este caso número total de visitas
@@ -388,6 +207,7 @@ web1=matrix(table(doñ$Planta,doñ$Pollinator_id),nrow=length(levels(doñ$Planta
 
 (V=sum(web1)) 
 (I=sum(web1!=0))
+
 
 ##########WEBS############
 ########################

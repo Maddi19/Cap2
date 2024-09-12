@@ -20,7 +20,15 @@ glimpse(d.22.gorb)
 glimpse(d.21.gorb)
 
 unique(d$Pollinator_id)
+unique_sorted <- d %>%
+  distinct(Pollinator_id) %>%  
+  arrange(Pollinator_id)
 
+d$Pollinator_id <- recode(d$Pollinator_id ,"Nomada  sp"= "Nomada sp",
+                        "Panurgus  calcaratus"="Panurgus calcaratus",
+                        "Xylocopa  cantabrita"="Xylocopa cantabrita")
+
+write.csv(d,"data/doñana_2020_nwclean.csv")
 d.21$capturado <- str_replace(d.21$capturado, "idem ", "")
 
 d.21[d.21 == " "] <- NA
@@ -114,8 +122,10 @@ unique(d.21$Pollinator_id)
 d.21<- d.21 %>%
   filter(!is.na(Pollinator_id))
 
-unique(d.gorb$Pollinator_id)
-unique(d.21.gorb$Polinizador_curro)
+write.csv(d.21,"data/doñana_2021_nwclean.csv")
+
+d.22.gorb <- d.22.gorb %>%
+  filter(!is.na(Planta) & Planta != "")
 
 d.22.gorb<-d.22.gorb%>%
   rename(Periodo=Ronda,
@@ -129,6 +139,41 @@ d.22.gorb$Bosque<-as.character(d.22.gorb$Bosque)
 d.22.gorb$Codigo_frasco<-as.character(d.22.gorb$Codigo_frasco)
 d.22.gorb <- d.22.gorb %>%
   mutate(Pollinator_id = if_else(!is.na(Codigo_frasco) & Pollinator_id == "", Codigo_frasco, Pollinator_id))
+d.22.gorb <- d.22.gorb%>%
+  mutate(Pollinator_id = str_replace(Pollinator_id, "^\\?=", ""))
+d.22.gorb$Pollinator_id  <- recode(d.22.gorb$Pollinator_id ,
+                        "1"= "Anthomyia sp",
+                        "3"= "Anthomyia sp",
+                        "9"= "Anthomyia sp",
+                        "11"= "Calliphora vicina",
+                        "16"= "Eupeodes luniger",
+                        "21"= "Empis sp",
+                        "31"= "Dasyrhamphis ater",
+                        "32"= "Empis sp",
+                        "38"= "Meliscaeva sp",
+                        "50"= "Sphex sp",
+                        "65"= "Tipula sp",
+                        "69"= "Diptera",
+                        "70"= "Melanomya sp",
+                        "74"= "Systoechus sp",
+                        "83"= "Melanomya sp",
+                        "92"= "Diptera",
+                        "111"= "Diptera",
+                        "124"= "Diptera",
+                        " Syrphus sp."= "Syrphus sp.",
+                        "Bombus sp" ="Bombus sp.",
+                        "Bombus terrestris reina" ="Bombus terrestris")
+
+unique_sorted <- d.22.gorb %>%
+  distinct(Pollinator_id) %>%  
+  arrange(Pollinator_id)
+d.22.gorb <- d.22.gorb %>%
+  mutate(Pollinator_id = if_else(Planta == "Scilla verna" & (is.na(Pollinator_id) | Pollinator_id == ""), 
+                                 "Lepidoptera", 
+                                 Pollinator_id))
+
+
+write.csv(d.22.gorb,"data/gorbea_2022_nwclean.csv")
 
 d.21.gorb<-d.21.gorb%>%
   rename(Pollinator_id=Polinizador_curro)%>%
@@ -136,22 +181,31 @@ d.21.gorb<-d.21.gorb%>%
   ungroup%>%
   mutate(Site="Gorbea")
 d.21.gorb$Bosque<-as.character(d.21.gorb$Bosque)
+unique_sorted <- d.21.gorb %>%
+  distinct(Pollinator_id) %>%  
+  arrange(Pollinator_id)
+write.csv(d.21.gorb,"data/gorbea_2021_nwclean.csv")
+
+unique(d.gorb$Pollinator_id)
 
 d.gorb<-d.gorb%>%
   mutate(Year=first(year(Fecha2))) %>% 
   ungroup%>%
   mutate(Site="Gorbea")
 d.gorb$Bosque<-as.character(d.gorb$Bosque)
+write.csv(d.gorb,"data/gorbea_2020_nwclean.csv")
 
 d.21<-d.21%>%
   mutate(Year=first(year(Fecha2))) %>% 
   ungroup%>%
   mutate(Site="Doñana")
+write.csv(d.21,"data/doñana_2021_nwclean.csv")
 
 d<-d%>%
   mutate(Year=first(year(Fecha2))) %>% 
   ungroup%>%
   mutate(Site="Doñana")
+write.csv(d,"data/doñana_2020_nwclean.csv")
 
 ###group all data and select columns
 list_dataframes <- list(d, d.21, d.gorb, d.21.gorb, d.22.gorb)
@@ -258,7 +312,8 @@ all_df <- all_df %>%
                            str_starts(Pollinator_id, "Anthophora") |
                            str_starts(Pollinator_id, "Hoplitis") |
                            str_starts(Pollinator_id, "Ceratina")|
-                           str_starts(Pollinator_id, "Colletes"),
+                           str_starts(Pollinator_id, "Colletes")|
+                           str_starts(Pollinator_id, "Sphex"),
                          "Hymenoptera", 
                          if_else(str_starts(Pollinator_id, "Empis") |
                                    str_starts(Pollinator_id, "Episyrphus") |
@@ -271,7 +326,15 @@ all_df <- all_df %>%
                                    str_starts(Pollinator_id, "Bombylius")|
                                    str_starts(Pollinator_id, "Platynochaetus")|
                                    str_starts(Pollinator_id, "Eristalinus") |
-                                   str_starts(Pollinator_id, "Sphaerophoria"), 
+                                   str_starts(Pollinator_id, "Sphaerophoria")|
+                                  str_starts(Pollinator_id, "Anthomyia") |
+                                  str_starts(Pollinator_id, "Calliphora") |
+                                  str_starts(Pollinator_id, "Dasyrhamphis") |
+                                    str_starts(Pollinator_id, "Meliscaeva")|
+                                    str_starts(Pollinator_id, "Melanomya") |
+                                    str_starts(Pollinator_id, "Systoechus")|
+                                    str_starts(Pollinator_id, "Diptera")|
+                                   str_starts(Pollinator_id, "Tipula"), 
                                  "Diptera", 
                                  if_else(str_starts(Pollinator_id, "Lobonix") |
                                            str_starts(Pollinator_id, "Anthrenus")|
@@ -279,14 +342,17 @@ all_df <- all_df %>%
                                            str_starts(Pollinator_id,"Exosoma")|
                                            str_starts(Pollinator_id,"Cerocoma")|
                                            str_starts(Pollinator_id,"Oxythyrea") , 
-                                         "Coleoptera",        
-                                         Order))))
+                                         "Coleoptera",  
+                                  if_else(str_starts(Pollinator_id, "Lepidoptera"),
+                                          "Lepidoptera",
+                                         Order)))))
 
 all_df <- all_df %>%
   mutate(Pollinator_family = if_else(
     str_starts(Pollinator_id, "Andrena") | str_starts(Pollinator_id, "Panurgus"), "Andrenidae",
     if_else(
       str_starts(Pollinator_id, "Eristalis") | str_starts(Pollinator_id, "Platycheirus") |
+        str_starts(Pollinator_id, "Meliscaeva") |
         str_starts(Pollinator_id, "Episyrphus") | str_starts(Pollinator_id, "Eupeodes") |
         str_starts(Pollinator_id, "Platynochaetus") | str_starts(Pollinator_id, "Eristalinus") |
         str_starts(Pollinator_id, "Sphaerophoria") | str_starts(Pollinator_id, "Syrphus"), 
@@ -295,7 +361,7 @@ all_df <- all_df %>%
         str_starts(Pollinator_id, "Lasioglossum"), "Halictidae",
         if_else(
           str_starts(Pollinator_id, "Lomatia") | str_starts(Pollinator_id, "Usia") |
-            str_starts(Pollinator_id, "Bombylius"), "Bombyliidae",
+            str_starts(Pollinator_id, "Bombylius") | str_starts(Pollinator_id, "Systoechus"), "Bombyliidae",
           if_else(
             str_starts(Pollinator_id, "Eucera") | str_starts(Pollinator_id, "Ceratina") |
               str_starts(Pollinator_id, "Anthophora"), "Apidae",
@@ -312,6 +378,9 @@ all_df <- all_df %>%
 
 unknown_order <- all_df %>% 
   filter(is.na(Order)| Order=="")
+
+unknown_fam <- all_df %>% 
+  filter(is.na(Pollinator_family)| Pollinator_family=="")
 unique(unknown_fams$Pollinator_id)
 
 unique(all_df$Pollinator_id)
@@ -322,6 +391,9 @@ all_df <- all_df %>%
     Pollinator_id       # Mantener el valor original de Pollinator_id si no cumple las condiciones
   ))
 
+all_df <- all_df %>%
+  filter(!(Pollinator_id == "" | str_detect(Pollinator_id, "^\\d+$")))
+
 gor<-all_df%>%
   filter(Site=="Gorbea")
 unique(gor$Pollinator_id)
@@ -331,20 +403,11 @@ doñ<-all_df%>%
 unique(doñ$Pollinator_id)
 #151
 unique(all_df$Pollinator_family)
+
 total_visits <- nrow(gor)
-gor <- gor %>%
-  mutate(Order = if_else(
-    # Detecta si Pollinator_id es completamente numérico o empieza con "?=" seguido de un número
-    str_detect(Pollinator_id, "^\\d+$") | str_detect(Pollinator_id, "^\\?=\\d+$"),  
-    "Diptera",  # Si coincide, asigna "Diptera"
-    Order  # Si no coincide, mantiene el valor original de Order
-  ))
 unknown_order <- gor %>% 
   filter(is.na(Order)| Order=="")
-###son dos visitas de mariposa pequeña gris
 
-gor <- gor %>%
-  mutate(Order = if_else(is.na(Order), "Lepidoptera", Order))
 
 all_df <- bind_rows(doñ, gor)
 write.csv(all_df, "data/all_data.csv")

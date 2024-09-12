@@ -62,43 +62,19 @@ At
 
 ## Results
 
-Within our sampling we recorded 3947 interactions involving 168 pollinator species and 71 plant species for Gorbea and 2617 interaction involving 151 pollinator species and 47 plant species for Doñana. These interactions involved x and x unique combinations of plants and flower visitors respectively.
+Across both our study areas and years, our sampling spanned XXX h of observation. During this time, we recorded a total of 61 and 90 plant species in Doñana and Gorbea, respectively. Out of these, 83.93 % of the plant species found in the different sites in Doñana, and 78.89 % of the plant species present in Gorbea received at least one visit from floral visitors. Within our sampling we recorded 3939 interactions (1690, 956 and 1293 for 2020, 2021 and 2022) involving 158 pollinator species and 71 plant species for Gorbea and 2617 interactions involving 151 pollinator species and 47 plant species for Doñana. These interactions involved 283, 208 and 305 unique combinations of plants and flower visitors for Gorbea in 2020, 2021 and 2022 and xand x for Doñana in 2020 and 2021 (representing x and x).
 
-In Doñana, the most represented order of flower visitors was Hymenoptera, involved in 69.51 % of the interactions observed. Specifically, Apidae represented the most common family within the order, representing 48.34 % of the interactions and interactions involving Apis mellifera, the managed European honeybee, represented 41.77 % of all interactions. Following Hymenoptera, the next most common order was Diptera representing 15.28 % of the interactions, and specifically the family Syrphidae representing 10.39 %. In turn, Coleoptera represented 13.34% of the interactions and Lepidoptera 1.75%. In Gorbea, the most abundant group were Diptera which accounted for 63.13 % of the interactions, and specifically the family Syrphidae represented 52.57 %, followed by Hymenoptera, representing 29.85 %, and specifically the family Apidae representing 18.98 %, but in this case Apis mellifera represented 8.54 % of the interactions and different species in the Bombus genus 9.68 %. Coleoptera and Lepidoptera represented 3.7 % and 3.19 % of interactions.
+In Doñana, the most represented order of flower visitors was Hymenoptera, involved in 69.51 % of the interactions observed. Specifically, Apidae represented the most common family within the order, representing 48.34 % of the interactions and interactions involving Apis mellifera, the managed European honeybee, represented 41.77 % of all interactions. Following Hymenoptera, the next most common order was Diptera representing 15.28 % of the interactions, and specifically the family Syrphidae representing 10.39 %. In turn, Coleoptera represented 13.34% of the interactions and Lepidoptera 1.75%. In Gorbea, the most abundant group were Diptera which accounted for 63.03 % of the interactions, and specifically the family Syrphidae represented 52.75 %, followed by Hymenoptera, representing 29.93 %, and specifically the family Apidae representing 19.01 %, but in this case Apis mellifera represented 8.55 % of the interactions and different species in the Bombus genus 9.7 %. Coleoptera and Lepidoptera represented 3.7 % and 3.17 % of interactions.
+
+VIOLIN PLOT ABUNDANCE TAXONOMIC GROUP PER PERIOD FOR EACH SITE AND YEAR
 
 ### Sampling completeness
 
-Our sampling completeness analyses revealed that our survey was able to capture 17-54% of pollinator species (average = 35%), 43-100% of plant species (average = 80%) and 9-32% of plant-pollinator links (average = 20% ; Fig. S3). Our values of sampling completeness were slightly smaller in the case of pollinators, probably as a consequence of the great diversity found in the Mediterranean region and within our study area in particular, a hotspot of insect diversity (Nieto et al. 2014).
+Our sampling completeness analyses revealed that our survey was able to capture high sampling coverage for both plant and pollinator communities in both study years. We detected 81% and 77% of pollinator species in 2020 and 2021, respectively, in the case of Doñana, and 66%, 54%, and 50% in the case of Gorbea in 2020, 2021, and 2022 (Fig 2 and Supplementary Fig. X). Regarding plant species, we detected 95% and 88% for 2020 and 2021, respectively, in Doñana, and 92%, 94%, and 92% for 2020, 2021, and 2022 in Gorbea. In the case of plant-pollinator links, sampling completeness is lower in both study areas (60% and 60% for 2020 and 2021 in the case of Doñana and 44%, 51% and 53% in the case of Gorbea) for the three sampling years.
 
-Gorbea22
+Nevertheless, these values are subject to alteration when alternative amplitudes or scales are taken into account during the calculation of sampling completeness values. For example, if sampling completeness is calculated at the level of each particular period (sampling week), we obtain highly variable coverage values ranging from 47.03% to 75.82% in the case of pollinators in Doñana and from 21.52 to 91.98% in the case of Gorbea in 2020 (Supplementary Fig. X). Similarly, in the case of plant species, sampling completeness is more variable when period is considered as sampling breadth, with between 65.48 to 98.47% of plant species being identified in the case of Doñana and between 36.32% and 95.36% in the case of Gorbea in 2020. In the case of links, these values ranged from 7.25% to 64.73% in the case of Doñana and between 36.86 and 81.3 % in Gorbea. If the five sampling sites are considered the sampling breadth, the results indicate that between 37% and 84.58% of pollinator species were detected in Doñana in 2020, while in Gorbea's different sites, the values ranged between 42.43% and 65.51%. The proportion of plant species detected in Doñana ranged from 74.37% to 94.17%, while in Gorbea it ranged from 57.7% to 96%. In the case of links, the corresponding values were 41.64% to 65.23% in Doñana and 22.99% to 42.98% in Gorbea.
 
-poll:
-
-species richness: 86 species observed. S.e=17.98, estimator=147, we captured 59% of species
-
-Shannon diversity 22.3 se=1.01
-
-estimator= 23.56
-
-Simpson diversity: 10.17 se=0.58
-
-estimator=10.24
-
-plants
-
-54 species observed, se=5.58, estimator=58.9, 92% of plants
-
-shannon 16.09 observed, se=0.64., estimator 16.47
-
-simpson 8.33 obs, se=0.37, estimator=8.37
-
-links
-
-319 link richness observed, se=40.7, estimator=612.2, 52% of links
-
-shannon 108.64, se=5.85, etsimator=138.84
-
-simpson 36.3, se=2.3, estimator=37.31
+An inspection of interactions that are common across both study years for both study sites, shows that 32.66% and 57.51% of the interactions observed in Doñana in 2020 and 2021 are unique to that year, i.e., they are not observed the other year. In turn, in Gorbea these proportions stand at 48.83% and 34.45% respectively for 2020 and 2021. In turn, pollinator species that are uniquely found in one of the study years represent 27.19% and 55.26% of all pollinator species in 2020 and 2021 respectively in the case of Doñana, and 35.62% and 27.4% in the case of Gorbea. For plant species, values of species uniquely found one of the study years stand at 33.33% and 28.57% in 2020 and 2021 for Doñana and 26.92% and 17.31% for Gorbea.
 
 ```{r cars}
 summary(cars)
