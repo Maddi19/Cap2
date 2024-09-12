@@ -68,49 +68,52 @@ common_2020_2021 <- (web_2020_fixed > 0) & (web_2021_fixed > 0) & !(web_2022_fix
 common_2020_2022 <- (web_2020_fixed > 0) & (web_2022_fixed > 0) & !(web_2021_fixed > 0)
 common_2021_2022 <- (web_2021_fixed > 0) & (web_2022_fixed > 0) & !(web_2020_fixed > 0)
 
-# Total de interacciones por año
-total_2020 <- sum(web_2020_fixed > 0)
-total_2021 <- sum(web_2021_fixed > 0)
-total_2022 <- sum(web_2022_fixed > 0)
+common_interactions <- (web_2020_fixed > 0) & (web_2021_fixed > 0) |
+  (web_2020_fixed > 0) & (web_2022_fixed > 0) |
+  (web_2021_fixed > 0) & (web_2022_fixed > 0)
+
+
+combined_interactions <- web_2020_fixed > 0 | web_2021_fixed > 0 | web_2022_fixed > 0 
+# Calcular la riqueza total de visitas únicas
+total_unique_visits <- sum(combined_interactions)
 
 # Total de interacciones comunes en los tres años
 total_common <- sum(common_interactions)
 
+# Calcular el porcentaje de interacciones comunes respecto al total de interacciones distintas
+percentage_common <- (total_common / total_unique_visits) * 100
+
+# Mostrar el resultado
+percentage_common
+
 # Total de interacciones únicas por año
-total_unique_2020 <- sum(unique_2020)
-total_unique_2021 <- sum(unique_2021)
-total_unique_2022 <- sum(unique_2022)
+unique_visits_2020 <- sum(unique_2020)
+unique_visits_2021 <- sum(unique_2021)
+unique_visits_2022 <- sum(unique_2022)
 
-# Porcentaje de interacciones comunes respecto al total de cada año
-percentage_common_2020 <- (total_common / total_2020) * 100
-percentage_common_2021 <- (total_common / total_2021) * 100
-percentage_common_2022 <- (total_common / total_2022) * 100
+# Calcular el porcentaje de visitas únicas en cada año respecto al total de visitas únicas
+percentage_unique_2020 <- (unique_visits_2020 / total_unique_visits) * 100
+percentage_unique_2021 <- (unique_visits_2021 / total_unique_visits) * 100
+percentage_unique_2022 <- (unique_visits_2022 / total_unique_visits) * 100
 
-# Porcentaje de interacciones únicas para cada año
-percentage_unique_2020 <- (total_unique_2020 / total_2020) * 100
-percentage_unique_2021 <- (total_unique_2021 / total_2021) * 100
-percentage_unique_2022 <- (total_unique_2022 / total_2022) * 100
-
-# Mostrar los resultados
-percentage_common_2020
-percentage_common_2021
-percentage_common_2022
-
+# Mostrar resultados
 percentage_unique_2020
 percentage_unique_2021
 percentage_unique_2022
 
+
+##interacciones totales registradas
 total_interactions_2020 <- sum(web_2020_fixed)
 total_interactions_2021 <- sum(web_2021_fixed)
 total_interactions_2022 <- sum(web_2022_fixed)
 
-# Mostrar los resultados
-total_interactions_2020
-total_interactions_2021
-total_interactions_2022
+# Total riqueza de interacciones por año
+total_2020 <- sum(web_2020_fixed > 0)
+total_2021 <- sum(web_2021_fixed > 0)
+total_2022 <- sum(web_2022_fixed > 0)
 
 
-
+###doñana
 webs <- frame2webs(doñ, varnames = c("Planta", "Pollinator_id", "Year"))
 
 # Esto te da una lista con una matriz de interacciones por año
@@ -136,49 +139,37 @@ web_2021_fixed[rownames(web_2021), colnames(web_2021)] <- web_2021
 # Ahora podemos hacer la comparación sin problemas de dimensiones
 common_interactions <- (web_2020_fixed > 0) & (web_2021_fixed > 0)
 
-# Mostrar las interacciones comunes
-common_interactions
+# Total de interacciones comunes en los tres años
+total_common <- sum(common_interactions)
 
 # Interacciones únicas para cada año
 unique_2020 <- (web_2020_fixed > 0) & !(web_2021_fixed > 0)
 unique_2021 <- (web_2021_fixed > 0) & !(web_2020_fixed > 0) 
 
-edit(unique_2020)
-
-unique_2020_numeric <- as.numeric(unique_2020)
-unique_2020_matrix <- matrix(unique_2020_numeric, nrow = nrow(unique_2020), 
-                             ncol = ncol(unique_2020), 
-                             dimnames = dimnames(unique_2020))
-edit(unique_2020_matrix)
-# También puedes encontrar interacciones compartidas entre dos años, por ejemplo:
-common_2020_2021 <- (web_2020_fixed > 0) & (web_2021_fixed > 0)
-
-# Total de interacciones por año
+# Total de interacciones distintas por año
 total_2020 <- sum(web_2020_fixed > 0)
 total_2021 <- sum(web_2021_fixed > 0)
 
-# Total de interacciones comunes en los tres años
-total_common <- sum(common_interactions)
+combined_interactions <- web_2020_fixed > 0 | web_2021_fixed > 0 
+# Calcular la riqueza total de visitas únicas
+total_unique_visits <- sum(combined_interactions)
+
+
 
 # Total de interacciones únicas por año
-total_unique_2020 <- sum(unique_2020_matrix)
-total_unique_2021 <- sum(unique_2021)
+unique_visits_2020 <- sum(unique_2020)
+unique_visits_2021 <- sum(unique_2021)
 
-# Porcentaje de interacciones comunes respecto al total de cada año
-percentage_common_2020 <- (total_common / total_2020) * 100
-percentage_common_2021 <- (total_common / total_2021) * 100
+# Calcular el porcentaje de visitas únicas en cada año respecto al total de visitas únicas
+percentage_unique_2020 <- (unique_visits_2020 / total_unique_visits) * 100
+percentage_unique_2021 <- (unique_visits_2021 / total_unique_visits) * 100
 
-# Porcentaje de interacciones únicas para cada año
-percentage_unique_2020 <- (total_unique_2020 / total_2020) * 100
-percentage_unique_2021 <- (total_unique_2021 / total_2021) * 100
-
-# Mostrar los resultados
-percentage_common_2020
-percentage_common_2021
-
+# Mostrar resultados
 percentage_unique_2020
 percentage_unique_2021
 
+percentage_common <- (total_common / total_unique_visits) * 100
+##interacciones totales registradas
 total_interactions_2020 <- sum(web_2020_fixed)
 total_interactions_2021 <- sum(web_2021_fixed)
 
@@ -196,10 +187,11 @@ web=matrix(table(gor.20$Planta,gor.20$Pollinator_id),nrow=length(levels(gor.20$P
 
 doñ.20<-all_df%>%
   filter(Site=="Doñana" & Year =="2020")
-doñ.20$Planta <- as.factor(doñ.20$Planta)
-doñ.20$Pollinator_id <- as.factor(doñ.20$Pollinator_id)
+doñ$Planta <- as.factor(doñ$Planta)
+doñ$Pollinator_id <- as.factor(doñ$Pollinator_id)
 
 web1=matrix(table(doñ.20$Planta,doñ.20$Pollinator_id),nrow=length(levels(doñ.20$Planta)),ncol=length(levels(doñ.20$Pollinator_id)))
+web1=matrix(table(doñ$Planta,doñ$Pollinator_id),nrow=length(levels(doñ$Planta)),ncol=length(levels(doñ$Pollinator_id)))
 
 
 (V=sum(web)) #Frecuencia de la interacción, en este caso número total de visitas
