@@ -7,9 +7,7 @@ pacman::p_load(tidyverse,dplyr,iNEXT,wesandersom,ggplot2)
 
 ####DONANA###
 #use data for 2020 and 2021 separately for both sites
-d<-read.csv("./data/clean/trans_donana_20_clean.csv")
-head(d.tot)
-
+d<-read.csv("./data/doñana_2020_nwclean.csv")
 #calculate sampling completeness
 
 #######CALCULATE SAMPLING COMPLETENESS FOR POLLINATORS, PLANTS AND LINKS 
@@ -99,9 +97,9 @@ poll.sites.d20
 
 est<-rar$AsyEst
 
-samp_comp_poll_site<-round(mean(est$Observed[1]/est$Estimator[1], est$Observed[4]/est$Estimator[4],
+samp_comp_poll_site<-round(mean(c(est$Observed[1]/est$Estimator[1], est$Observed[4]/est$Estimator[4],
                                 est$Observed[7]/est$Estimator[7],est$Observed[10]/est$Estimator[10],
-                                est$Observed[13]/est$Estimator[13]),2)
+                                est$Observed[13]/est$Estimator[13])),2)
 
 #PLANTS
 d.pl<-table(d$Bosque, d$Planta)
@@ -117,9 +115,9 @@ plant.sites.d20
 #calculate sampling completeness as observed/estimated species richness
 est2<-rar2$AsyEst
 
-samp_comp_pl_site<-round(mean(est2$Observed[1]/est2$Estimator[1], est2$Observed[4]/est2$Estimator[4],
+samp_comp_pl_site<-round(mean(c(est2$Observed[1]/est2$Estimator[1], est2$Observed[4]/est2$Estimator[4],
                               est2$Observed[7]/est2$Estimator[7],est2$Observed[10]/est2$Estimator[10],
-                              est2$Observed[13]/est2$Estimator[13]),2)
+                              est2$Observed[13]/est2$Estimator[13])),2)
 
 
 
@@ -140,9 +138,9 @@ link.sites.d20
 #calculate sampling completeness as observed/estimated species richness
 est3<-rar3$AsyEst
 
-samp_comp_link_site<-round(mean(est3$Observed[1]/est3$Estimator[1], est3$Observed[4]/est3$Estimator[4],
+samp_comp_link_site<-round(mean(c(est3$Observed[1]/est3$Estimator[1], est3$Observed[4]/est3$Estimator[4],
                                 est3$Observed[7]/est3$Estimator[7],est3$Observed[10]/est3$Estimator[10],
-                                est3$Observed[13]/est3$Estimator[13]),2)
+                                est3$Observed[13]/est3$Estimator[13])),2)
 
 
 
@@ -169,9 +167,9 @@ poll.period.d20
 
 est_period<-rar$AsyEst
 
-samp_comp_poll_period<-round(mean(est_period$Observed[1]/est_period$Estimator[1], est_period$Observed[4]/est_period$Estimator[4],
+samp_comp_poll_period<-round(mean(c(est_period$Observed[1]/est_period$Estimator[1], est_period$Observed[4]/est_period$Estimator[4],
                                   est_period$Observed[7]/est_period$Estimator[7],est_period$Observed[10]/est_period$Estimator[10],
-                                  est_period$Observed[13]/est_period$Estimator[13], est_period$Observed[16]/est_period$Estimator[16]),2)
+                                  est_period$Observed[13]/est_period$Estimator[13], est_period$Observed[16]/est_period$Estimator[16])),2)
 
 #PLANTS
 d.pl<-table(d$Periodo, d$Planta)
@@ -187,9 +185,9 @@ plant.period.d20
 #calculate sampling completeness as observed/estimated species richness
 est2_period<-rar2$AsyEst
 
-samp_comp_pl_period<-round(mean(est2_period$Observed[1]/est2_period$Estimator[1], est2_period$Observed[4]/est2_period$Estimator[4],
+samp_comp_pl_period<-round(mean(c(est2_period$Observed[1]/est2_period$Estimator[1], est2_period$Observed[4]/est2_period$Estimator[4],
                                 est2_period$Observed[7]/est2_period$Estimator[7],est2_period$Observed[10]/est2_period$Estimator[10],
-                                est2_period$Observed[13]/est2_period$Estimator[13], est2_period$Observed[16]/est2_period$Estimator[16]),2)
+                                est2_period$Observed[13]/est2_period$Estimator[13], est2_period$Observed[16]/est2_period$Estimator[16])),2)
 
 
 
@@ -210,13 +208,9 @@ link.period.d20
 #calculate sampling completeness as observed/estimated species richness
 est3_period<-rar3$AsyEst
 
-samp_comp_link_period<-round(mean(est3_period$Observed[1]/est3_period$Estimator[1], est3_period$Observed[4]/est3_period$Estimator[4],
+samp_comp_link_period<-round(mean(c(est3_period$Observed[1]/est3_period$Estimator[1], est3_period$Observed[4]/est3_period$Estimator[4],
                                   est3_period$Observed[7]/est3_period$Estimator[7],est3_period$Observed[10]/est3_period$Estimator[10],
-                                  est3_period$Observed[13]/est3_period$Estimator[13], est3_period$Observed[16]/est3_period$Estimator[16]),2)
-
-
-
-
+                                  est3_period$Observed[13]/est3_period$Estimator[13], est3_period$Observed[16]/est3_period$Estimator[16])),2)
 
 
 
@@ -225,7 +219,8 @@ samp_comp_link_period<-round(mean(est3_period$Observed[1]/est3_period$Estimator[
 ##############################################################
 ################ OVERALL SAMPLING COMPLETENESS ####################
 ##############################################################
-d.21<-read.csv("./data/clean/trans_doñana_21_clean.csv")
+d.21<-read.csv("./data/doñana_2021_nwclean.csv")
+
 unique(d.21$Periodo)
 #POLLINATORS
 head(d.21)
@@ -305,9 +300,9 @@ poll.sites.d21
 
 est.21<-rar$AsyEst
 
-samp_comp_poll_site.21<-round(mean(est.21$Observed[1]/est.21$Estimator[1], est.21$Observed[4]/est.21$Estimator[4],
+samp_comp_poll_site.21<-round(mean(c(est.21$Observed[1]/est.21$Estimator[1], est.21$Observed[4]/est.21$Estimator[4],
                                    est.21$Observed[7]/est.21$Estimator[7],est.21$Observed[10]/est.21$Estimator[10],
-                                   est.21$Observed[13]/est.21$Estimator[13]),2)
+                                   est.21$Observed[13]/est.21$Estimator[13])),2)
 
 #PLANTS
 d.pl<-table(d.21$Bosque, d.21$Planta)
@@ -323,9 +318,9 @@ plant.sites.d21
 #calculate sampling completeness as observed/estimated species richness
 est2.21<-rar2$AsyEst
 
-samp_comp_pl_site.21<-round(mean(est2.21$Observed[1]/est2.21$Estimator[1], est2.21$Observed[4]/est2.21$Estimator[4],
+samp_comp_pl_site.21<-round(mean(c(est2.21$Observed[1]/est2.21$Estimator[1], est2.21$Observed[4]/est2.21$Estimator[4],
                                  est2.21$Observed[7]/est2.21$Estimator[7],est2.21$Observed[10]/est2.21$Estimator[10],
-                                 est2.21$Observed[13]/est2.21$Estimator[13]),2)
+                                 est2.21$Observed[13]/est2.21$Estimator[13])),2)
 
 
 
@@ -347,9 +342,9 @@ link.sites.d21
 #calculate sampling completeness as observed/estimated species richness
 est3.21<-rar3$AsyEst
 
-samp_comp_link_site.21<-round(mean(est3.21$Observed[1]/est3.21$Estimator[1], est3.21$Observed[4]/est3.21$Estimator[4],
+samp_comp_link_site.21<-round(mean(c(est3.21$Observed[1]/est3.21$Estimator[1], est3.21$Observed[4]/est3.21$Estimator[4],
                                    est3.21$Observed[7]/est3.21$Estimator[7],est3.21$Observed[10]/est3.21$Estimator[10],
-                                   est3.21$Observed[13]/est3.21$Estimator[13]),2)
+                                   est3.21$Observed[13]/est3.21$Estimator[13])),2)
 
 
 
@@ -378,11 +373,11 @@ poll.period.d21
 
 est_period.21<-rar$AsyEst
 
-samp_comp_poll_period.21<-round(mean(est_period.21$Observed[1]/est_period.21$Estimator[1], est_period.21$Observed[4]/est_period.21$Estimator[4],
+samp_comp_poll_period.21<-round(mean(c(est_period.21$Observed[1]/est_period.21$Estimator[1], est_period.21$Observed[4]/est_period.21$Estimator[4],
                                   est_period.21$Observed[7]/est_period.21$Estimator[7],est_period.21$Observed[10]/est_period.21$Estimator[10],
                                   est_period.21$Observed[13]/est_period.21$Estimator[13], est_period.21$Observed[16]/est_period.21$Estimator[16],
                                   est_period.21$Observed[19]/est_period.21$Estimator[19], est_period.21$Observed[22]/est_period.21$Estimator[22],
-                                  est_period.21$Observed[25]/est_period.21$Estimator[25]),2)
+                                  est_period.21$Observed[25]/est_period.21$Estimator[25])),2)
 
 #PLANTS
 d.pl<-table(d.21$Periodo, d.21$Planta)
@@ -398,11 +393,11 @@ plant.period.d21
 #calculate sampling completeness as observed/estimated species richness
 est2_period.21<-rar2$AsyEst
 
-samp_comp_pl_period.21<-round(mean(est2_period.21$Observed[1]/est2_period.21$Estimator[1], est2_period.21$Observed[4]/est2_period.21$Estimator[4],
+samp_comp_pl_period.21<-round(mean(c(est2_period.21$Observed[1]/est2_period.21$Estimator[1], est2_period.21$Observed[4]/est2_period.21$Estimator[4],
                                    est2_period.21$Observed[7]/est2_period.21$Estimator[7],est2_period.21$Observed[10]/est2_period.21$Estimator[10],
                                    est2_period.21$Observed[13]/est2_period.21$Estimator[13], est2_period.21$Observed[16]/est2_period.21$Estimator[16],
                                    est2_period.21$Observed[19]/est2_period.21$Estimator[19], est2_period.21$Observed[22]/est2_period.21$Estimator[22],
-                                   est2_period.21$Observed[25]/est2_period.21$Estimator[25]),2)
+                                   est2_period.21$Observed[25]/est2_period.21$Estimator[25])),2)
 
 
 
@@ -424,11 +419,11 @@ link.period.d21
 #calculate sampling completeness as observed/estimated species richness
 est3_period.21<-rar3$AsyEst
 
-samp_comp_link_period.21<-round(mean(est3_period.21$Observed[1]/est3_period.21$Estimator[1], est3_period.21$Observed[4]/est3_period.21$Estimator[4],
+samp_comp_link_period.21<-round(mean(c(est3_period.21$Observed[1]/est3_period.21$Estimator[1], est3_period.21$Observed[4]/est3_period.21$Estimator[4],
                                      est3_period.21$Observed[7]/est3_period.21$Estimator[7],est3_period.21$Observed[10]/est3_period.21$Estimator[10],
                                      est3_period.21$Observed[13]/est3_period.21$Estimator[13], est3_period.21$Observed[16]/est3_period.21$Estimator[16],
                                      est3_period.21$Observed[19]/est3_period.21$Estimator[19], est3_period.21$Observed[22]/est3_period.21$Estimator[22],
-                                     est3_period.21$Observed[25]/est3_period.21$Estimator[25]),2)
+                                     est3_period.21$Observed[25]/est3_period.21$Estimator[25])),2)
 
 
 
@@ -517,7 +512,7 @@ dat
 ########################### GORBEA DATA #########################
 
 #######CALCULATE SAMPLING COMPLETENESS FOR POLLINATORS, PLANTS AND LINKS 
-d.gorb<-read.csv("./data/clean/trans_gorbea_20_clean.csv")
+d.gorb<-read.csv("./data/gorbea_2020_nwclean.csv")
 unique(d.gorb$Periodo)
 ##############################################################
 ################ OVERALL SAMPLING COMPLETENESS ####################
@@ -602,9 +597,9 @@ poll.sites.gorb20
 
 est.gorb<-rar.gorb$AsyEst
 
-samp_comp_poll_site_gorb<-round(mean(est.gorb$Observed[1]/est.gorb$Estimator[1], est.gorb$Observed[4]/est.gorb$Estimator[4],
+samp_comp_poll_site_gorb.20<-round(mean(c(est.gorb$Observed[1]/est.gorb$Estimator[1], est.gorb$Observed[4]/est.gorb$Estimator[4],
                                      est.gorb$Observed[7]/est.gorb$Estimator[7],est.gorb$Observed[10]/est.gorb$Estimator[10],
-                                     est.gorb$Observed[13]/est.gorb$Estimator[13]),2)
+                                     est.gorb$Observed[13]/est.gorb$Estimator[13])),2)
 
 #PLANTS
 d.pl.gorb<-table(d.gorb$Bosque, d.gorb$Planta)
@@ -620,9 +615,9 @@ plant.sites.gorb20
 #calculate sampling completeness as observed/estimated species richness
 est.gorb2<-rar.gorb2$AsyEst
 
-samp_comp_pl_site_gorb<-round(mean(est.gorb2$Observed[1]/est.gorb2$Estimator[1], est.gorb2$Observed[4]/est.gorb2$Estimator[4],
+samp_comp_pl_site_gorb<-round(mean(c(est.gorb2$Observed[1]/est.gorb2$Estimator[1], est.gorb2$Observed[4]/est.gorb2$Estimator[4],
                                    est.gorb2$Observed[7]/est.gorb2$Estimator[7],est.gorb2$Observed[10]/est.gorb2$Estimator[10],
-                                   est.gorb2$Observed[13]/est.gorb2$Estimator[13]),2)
+                                   est.gorb2$Observed[13]/est.gorb2$Estimator[13])),2)
 #LINKS
 
 d.gorb$link<-paste(d.gorb$Planta, d.gorb$Pollinator_id)
@@ -642,9 +637,9 @@ link.sites.gorb20
 #calculate sampling completeness as observed/estimated species richness
 est.gorb3<-rar.gorb3$AsyEst
 
-samp_comp_link_site_gorb<-round(mean(est.gorb3$Observed[1]/est.gorb3$Estimator[1], est.gorb3$Observed[4]/est.gorb3$Estimator[4],
+samp_comp_link_site_gorb<-round(mean(c(est.gorb3$Observed[1]/est.gorb3$Estimator[1], est.gorb3$Observed[4]/est.gorb3$Estimator[4],
                                      est.gorb3$Observed[7]/est.gorb3$Estimator[7],est.gorb3$Observed[10]/est.gorb3$Estimator[10],
-                                     est.gorb3$Observed[13]/est.gorb3$Estimator[13]),2)
+                                     est.gorb3$Observed[13]/est.gorb3$Estimator[13])),2)
 
 
 
@@ -672,10 +667,10 @@ poll.period.gorb20
 
 est_period.gorb<-rar.gorb$AsyEst
 
-samp_comp_poll_period_gorb<-round(mean(est_period.gorb$Observed[1]/est_period.gorb$Estimator[1], est_period.gorb$Observed[4]/est_period.gorb$Estimator[4],
+samp_comp_poll_period_gorb<-round(mean(c(est_period.gorb$Observed[1]/est_period.gorb$Estimator[1], est_period.gorb$Observed[4]/est_period.gorb$Estimator[4],
                                        est_period.gorb$Observed[7]/est_period.gorb$Estimator[7],est_period.gorb$Observed[10]/est_period.gorb$Estimator[10],
                                        est_period.gorb$Observed[13]/est_period.gorb$Estimator[13], est_period.gorb$Observed[16]/est_period.gorb$Estimator[16],
-                                       est_period.gorb$Observed[19]/est_period.gorb$Estimator[19], est_period.gorb$Observed[22]/est_period.gorb$Estimator[22]),2)
+                                       est_period.gorb$Observed[19]/est_period.gorb$Estimator[19], est_period.gorb$Observed[22]/est_period.gorb$Estimator[22])),2)
 
 #PLANTS
 d.pl.gorb<-table(d.gorb$Periodo, d.gorb$Planta)
@@ -691,10 +686,10 @@ plant.period.gorb20
 #calculate sampling completeness as observed/estimated species richness
 est2_period.gorb<-rar.gorb2$AsyEst
 
-samp_comp_pl_period_gorb<-round(mean(est2_period.gorb$Observed[1]/est2_period.gorb$Estimator[1], est2_period.gorb$Observed[4]/est2_period.gorb$Estimator[4],
+samp_comp_pl_period_gorb<-round(mean(c(est2_period.gorb$Observed[1]/est2_period.gorb$Estimator[1], est2_period.gorb$Observed[4]/est2_period.gorb$Estimator[4],
                                      est2_period.gorb$Observed[7]/est2_period.gorb$Estimator[7],est2_period.gorb$Observed[10]/est2_period.gorb$Estimator[10],
                                      est2_period.gorb$Observed[13]/est2_period.gorb$Estimator[13], est2_period.gorb$Observed[16]/est2_period.gorb$Estimator[16],
-                                     est2_period.gorb$Observed[19]/est2_period.gorb$Estimator[19], est2_period.gorb$Observed[22]/est2_period.gorb$Estimator[22]),2)
+                                     est2_period.gorb$Observed[19]/est2_period.gorb$Estimator[19], est2_period.gorb$Observed[22]/est2_period.gorb$Estimator[22])),2)
 
 
 
@@ -716,14 +711,14 @@ link.period.gorb20
 #calculate sampling completeness as observed/estimated species richness
 est3_period_gorb<-rar.gorb3$AsyEst
 
-samp_comp_link_period_gorb<-round(mean(est3_period_gorb$Observed[1]/est3_period_gorb$Estimator[1], est3_period_gorb$Observed[4]/est3_period_gorb$Estimator[4],
+samp_comp_link_period_gorb<-round(mean(c(est3_period_gorb$Observed[1]/est3_period_gorb$Estimator[1], est3_period_gorb$Observed[4]/est3_period_gorb$Estimator[4],
                                        est3_period_gorb$Observed[7]/est3_period_gorb$Estimator[7],est3_period_gorb$Observed[10]/est3_period_gorb$Estimator[10],
                                        est3_period_gorb$Observed[13]/est3_period_gorb$Estimator[13], est3_period_gorb$Observed[16]/est3_period_gorb$Estimator[16],
-                                       est3_period_gorb$Observed[19]/est3_period_gorb$Estimator[19], est3_period_gorb$Observed[22]/est3_period_gorb$Estimator[22]),2)
+                                       est3_period_gorb$Observed[19]/est3_period_gorb$Estimator[19], est3_period_gorb$Observed[22]/est3_period_gorb$Estimator[22])),2)
 
 
 #####GORBEA 2021
-d.21.gorb<-read.csv("./data/clean/trans_G21_clean.csv")
+d.21.gorb<-read.csv("./data/gorbea_2021_nwclean.csv")
 
 ########################### GORBEA DATA #########################
 
@@ -736,7 +731,7 @@ d.21.gorb<-read.csv("./data/clean/trans_G21_clean.csv")
 #POLLINATORS
 head(d.21.gorb)
 d.21.gorb$full<-rep(1, nrow(d.21.gorb))
-d.21.gorb.t<-table(d.21.gorb$full, d.21.gorb$Polinizador_curro)
+d.21.gorb.t<-table(d.21.gorb$full, d.21.gorb$Pollinator_id)
 d.21.gorb.t2<-as.data.frame.array(d.21.gorb.t)
 
 d.21.gorb.t3 <- t(d.21.gorb.t2[,1:ncol(d.21.gorb.t2)]) 
@@ -771,7 +766,7 @@ samp_comp_pl_gorb.21<-round(rar.21.gorb2$AsyEst$Observed[1]/rar.21.gorb2$AsyEst$
 
 #LINKS
 
-d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Polinizador_curro)
+d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Pollinator_id)
 d.l.21.gorb<-table(d.21.gorb$full, d.21.gorb$link)
 d.l.21.gorb2<-as.data.frame.array(d.l.21.gorb)
 d.l.21.gorb3 <- t(d.l.21.gorb2[,1:ncol(d.l.21.gorb2)])
@@ -793,7 +788,7 @@ samp_comp_link_gorb.21<-round(rar.21.gorb3$AsyEst$Observed[1]/rar.21.gorb3$AsyEs
 
 #POLLINATORS
 
-d.21.gorb.t<-table(d.21.gorb$Bosque, d.21.gorb$Polinizador_curro)
+d.21.gorb.t<-table(d.21.gorb$Bosque, d.21.gorb$Pollinator_id)
 d.21.gorb.t2<-as.data.frame.array(d.21.gorb.t)
 
 d.21.gorb.t3 <- t(d.21.gorb.t2[,1:ncol(d.21.gorb.t2)]) 
@@ -811,9 +806,9 @@ poll.sites.gorb21
 
 est.21.gorb<-rar.21.gorb$AsyEst
 
-samp_comp_poll_site_gorb<-round(mean(est.21.gorb$Observed[1]/est.21.gorb$Estimator[1], est.21.gorb$Observed[4]/est.21.gorb$Estimator[4],
+samp_comp_poll_site_gorb.21<-round(mean(c(est.21.gorb$Observed[1]/est.21.gorb$Estimator[1], est.21.gorb$Observed[4]/est.21.gorb$Estimator[4],
                                      est.21.gorb$Observed[7]/est.21.gorb$Estimator[7],est.21.gorb$Observed[10]/est.21.gorb$Estimator[10],
-                                     est.21.gorb$Observed[13]/est.21.gorb$Estimator[13]),2)
+                                     est.21.gorb$Observed[13]/est.21.gorb$Estimator[13])),2)
 
 #PLANTS
 d.pl.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$Planta)
@@ -829,15 +824,15 @@ plant.sites.gorb21
 #calculate sampling completeness as observed/estimated species richness
 est.21.gorb2<-rar.21.gorb2$AsyEst
 
-samp_comp_pl_site_gorb<-round(mean(est.21.gorb2$Observed[1]/est.21.gorb2$Estimator[1], est.21.gorb2$Observed[4]/est.21.gorb2$Estimator[4],
+samp_comp_pl_site_gorb21<-round(mean(c(est.21.gorb2$Observed[1]/est.21.gorb2$Estimator[1], est.21.gorb2$Observed[4]/est.21.gorb2$Estimator[4],
                                    est.21.gorb2$Observed[7]/est.21.gorb2$Estimator[7],est.21.gorb2$Observed[10]/est.21.gorb2$Estimator[10],
-                                   est.21.gorb2$Observed[13]/est.21.gorb2$Estimator[13]),2)
+                                   est.21.gorb2$Observed[13]/est.21.gorb2$Estimator[13])),2)
 
 
 
 #LINKS
 
-d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Polinizador_curro)
+d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Pollinator_id)
 d.l.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$link)
 d.l.21.gorb2<-as.data.frame.array(d.l.21.gorb)
 d.l.21.gorb3 <- t(d.l.21.gorb2[,1:ncol(d.l.21.gorb2)])
@@ -854,9 +849,9 @@ link.sites.gorb21
 #calculate sampling completeness as observed/estimated species richness
 est.21.gorb3<-rar.21.gorb3$AsyEst
 
-samp_comp_link_site_gorb<-round(mean(est.21.gorb3$Observed[1]/est.21.gorb3$Estimator[1], est.21.gorb3$Observed[4]/est.21.gorb3$Estimator[4],
+samp_comp_link_site_gorb21<-round(mean(c(est.21.gorb3$Observed[1]/est.21.gorb3$Estimator[1], est.21.gorb3$Observed[4]/est.21.gorb3$Estimator[4],
                                      est.21.gorb3$Observed[7]/est.21.gorb3$Estimator[7],est.21.gorb3$Observed[10]/est.21.gorb3$Estimator[10],
-                                     est.21.gorb3$Observed[13]/est.21.gorb3$Estimator[13]),2)
+                                     est.21.gorb3$Observed[13]/est.21.gorb3$Estimator[13])),2)
 
 
 
@@ -867,7 +862,7 @@ samp_comp_link_site_gorb<-round(mean(est.21.gorb3$Observed[1]/est.21.gorb3$Estim
 
 #POLLINATORS
 
-d.t.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Polinizador_curro)
+d.t.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Pollinator_id)
 d.t.21.gorb2<-as.data.frame.array(d.t.21.gorb)
 
 d.t.21.gorb3 <- t(d.t.21.gorb2[,1:ncol(d.t.21.gorb2)]) 
@@ -885,10 +880,10 @@ poll.period.gorb21
 
 est_period.21.gorb<-rar.21.gorb$AsyEst
 
-samp_comp_poll_period_gorb<-round(mean(est_period.21.gorb$Observed[1]/est_period.21.gorb$Estimator[1], est_period.21.gorb$Observed[4]/est_period.21.gorb$Estimator[4],
+samp_comp_poll_period_gorb.21<-round(mean(c(est_period.21.gorb$Observed[1]/est_period.21.gorb$Estimator[1], est_period.21.gorb$Observed[4]/est_period.21.gorb$Estimator[4],
                                        est_period.21.gorb$Observed[7]/est_period.21.gorb$Estimator[7],est_period.21.gorb$Observed[10]/est_period.21.gorb$Estimator[10],
                                        est_period.21.gorb$Observed[13]/est_period.21.gorb$Estimator[13], est_period.21.gorb$Observed[16]/est_period.21.gorb$Estimator[16],
-                                       est_period.21.gorb$Observed[19]/est_period.21.gorb$Estimator[19]),2)
+                                       est_period.21.gorb$Observed[19]/est_period.21.gorb$Estimator[19])),2)
 
 #PLANTS
 d.pl.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Planta)
@@ -904,16 +899,16 @@ plant.period.gorb21
 #calculate sampling completeness as observed/estimated species richness
 est2_period.21.gorb<-rar.21.gorb2$AsyEst
 
-samp_comp_pl_period_gorb<-round(mean(est2_period.21.gorb$Observed[1]/est2_period.21.gorb$Estimator[1], est2_period.21.gorb$Observed[4]/est2_period.21.gorb$Estimator[4],
+samp_comp_pl_period_gorb.21<-round(mean(c(est2_period.21.gorb$Observed[1]/est2_period.21.gorb$Estimator[1], est2_period.21.gorb$Observed[4]/est2_period.21.gorb$Estimator[4],
                                      est2_period.21.gorb$Observed[7]/est2_period.21.gorb$Estimator[7],est2_period.21.gorb$Observed[10]/est2_period.21.gorb$Estimator[10],
                                      est2_period.21.gorb$Observed[13]/est2_period.21.gorb$Estimator[13], est2_period.21.gorb$Observed[16]/est2_period.21.gorb$Estimator[16],
-                                     est2_period.21.gorb$Observed[19]/est2_period.21.gorb$Estimator[19]),2)
+                                     est2_period.21.gorb$Observed[19]/est2_period.21.gorb$Estimator[19])),2)
 
 
 
 #LINKS
 
-d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Polinizador_curro)
+d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Pollinator_id)
 d.l.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$link)
 d.l.21.gorb2<-as.data.frame.array(d.l.21.gorb)
 d.l.21.gorb3 <- t(d.l.21.gorb2[,1:ncol(d.l.21.gorb2)])
@@ -929,14 +924,14 @@ link.period.gorb21
 #calculate sampling completeness as observed/estimated species richness
 est3_period_21_gorb<-rar.21.gorb3$AsyEst
 
-samp_comp_link_period_21_gorb<-round(mean(est3_period_21_gorb$Observed[1]/est3_period_21_gorb$Estimator[1], est3_period_21_gorb$Observed[4]/est3_period_21_gorb$Estimator[4],
+samp_comp_link_period_21_gorb<-round(mean(c(est3_period_21_gorb$Observed[1]/est3_period_21_gorb$Estimator[1], est3_period_21_gorb$Observed[4]/est3_period_21_gorb$Estimator[4],
                                           est3_period_21_gorb$Observed[7]/est3_period_21_gorb$Estimator[7],est3_period_21_gorb$Observed[10]/est3_period_21_gorb$Estimator[10],
                                           est3_period_21_gorb$Observed[13]/est3_period_21_gorb$Estimator[13], est3_period_21_gorb$Observed[16]/est3_period_21_gorb$Estimator[16],
-                                          est3_period_21_gorb$Observed[19]/est3_period_21_gorb$Estimator[19]),2)
+                                          est3_period_21_gorb$Observed[19]/est3_period_21_gorb$Estimator[19])),2)
 
 
 #####GORBEA 2022
-d.22.gorb<-read.csv("./data/clean/trans_gorbea_22_clean.csv")
+d.22.gorb<-read.csv("./data/gorbea_2022_nwclean.csv")
 
 ########################### GORBEA DATA #########################
 
@@ -949,7 +944,7 @@ d.22.gorb<-read.csv("./data/clean/trans_gorbea_22_clean.csv")
 #POLLINATORS
 head(d.22.gorb)
 d.22.gorb$full<-rep(1, nrow(d.22.gorb))
-d.22.gorb.t<-table(d.22.gorb$full, d.22.gorb$Polinizador_curro)
+d.22.gorb.t<-table(d.22.gorb$full, d.22.gorb$Pollinator_id)
 d.22.gorb.t2<-as.data.frame.array(d.22.gorb.t)
 
 d.22.gorb.t3 <- t(d.22.gorb.t2[,1:ncol(d.22.gorb.t2)]) 
@@ -984,7 +979,7 @@ samp_comp_pl_gorb.22<-round(rar.22.gorb2$AsyEst$Observed[1]/rar.22.gorb2$AsyEst$
 
 #LINKS
 
-d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Polinizador_curro)
+d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
 d.l.22.gorb<-table(d.22.gorb$full, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
 d.l.22.gorb3 <- t(d.l.22.gorb2[,1:ncol(d.l.22.gorb2)])
@@ -1006,7 +1001,7 @@ samp_comp_link_gorb.22<-round(rar.22.gorb3$AsyEst$Observed[1]/rar.22.gorb3$AsyEs
 
 #POLLINATORS
 
-d.22.gorb.t<-table(d.22.gorb$Bosque, d.22.gorb$Polinizador_curro)
+d.22.gorb.t<-table(d.22.gorb$Bosque, d.22.gorb$Pollinator_id)
 d.22.gorb.t2<-as.data.frame.array(d.22.gorb.t)
 
 d.22.gorb.t3 <- t(d.22.gorb.t2[,1:ncol(d.22.gorb.t2)]) 
@@ -1015,7 +1010,7 @@ d.22.gorb.t4<-as.data.frame(d.22.gorb.t3)
 d.22.gorb.t5<-as.list(d.22.gorb.t4)
 
 
-rar.22.gorb <- iNEXT(d.22.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
+rar.22.gorb<- iNEXT(d.22.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.sites.gorb22<-ggiNEXT(rar.22.gorb, color.var="Assemblage", se=FALSE) 
 poll.sites.gorb22
 
@@ -1024,9 +1019,9 @@ poll.sites.gorb22
 
 est.22.gorb<-rar.22.gorb$AsyEst
 
-samp_comp_poll_site_gorb22<-round(mean(est.22.gorb$Observed[1]/est.22.gorb$Estimator[1], est.22.gorb$Observed[4]/est.22.gorb$Estimator[4],
+samp_comp_poll_site_gorb22<-round(mean(c(est.22.gorb$Observed[1]/est.22.gorb$Estimator[1], est.22.gorb$Observed[4]/est.22.gorb$Estimator[4],
                                      est.22.gorb$Observed[7]/est.22.gorb$Estimator[7],est.22.gorb$Observed[10]/est.22.gorb$Estimator[10],
-                                     est.22.gorb$Observed[13]/est.22.gorb$Estimator[13]),2)
+                                     est.22.gorb$Observed[13]/est.22.gorb$Estimator[13])),2)
 
 #PLANTS
 d.pl.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$Planta)
@@ -1042,15 +1037,15 @@ plant.sites.gorb22
 #calculate sampling completeness as observed/estimated species richness
 est.22.gorb2<-rar.22.gorb2$AsyEst
 
-samp_comp_pl_site_gorb22<-round(mean(est.22.gorb2$Observed[1]/est.22.gorb2$Estimator[1], est.22.gorb2$Observed[4]/est.22.gorb2$Estimator[4],
+samp_comp_pl_site_gorb22<-round(mean(c(est.22.gorb2$Observed[1]/est.22.gorb2$Estimator[1], est.22.gorb2$Observed[4]/est.22.gorb2$Estimator[4],
                                    est.22.gorb2$Observed[7]/est.22.gorb2$Estimator[7],est.22.gorb2$Observed[10]/est.22.gorb2$Estimator[10],
-                                   est.22.gorb2$Observed[13]/est.22.gorb2$Estimator[13]),2)
+                                   est.22.gorb2$Observed[13]/est.22.gorb2$Estimator[13])),2)
 
 
 
 #LINKS
 
-d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Polinizador_curro)
+d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
 d.l.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
 d.l.22.gorb3 <- t(d.l.22.gorb2[,1:ncol(d.l.22.gorb2)])
@@ -1067,9 +1062,9 @@ link.sites.gorb22
 #calculate sampling completeness as observed/estimated species richness
 est.22.gorb3<-rar.22.gorb3$AsyEst
 
-samp_comp_link_site_gorb22<-round(mean(est.22.gorb3$Observed[1]/est.22.gorb3$Estimator[1], est.22.gorb3$Observed[4]/est.22.gorb3$Estimator[4],
+samp_comp_link_site_gorb22<-round(mean(c(est.22.gorb3$Observed[1]/est.22.gorb3$Estimator[1], est.22.gorb3$Observed[4]/est.22.gorb3$Estimator[4],
                                      est.22.gorb3$Observed[7]/est.22.gorb3$Estimator[7],est.22.gorb3$Observed[10]/est.22.gorb3$Estimator[10],
-                                     est.22.gorb3$Observed[13]/est.22.gorb3$Estimator[13]),2)
+                                     est.22.gorb3$Observed[13]/est.22.gorb3$Estimator[13])),2)
 
 
 
@@ -1080,7 +1075,7 @@ samp_comp_link_site_gorb22<-round(mean(est.22.gorb3$Observed[1]/est.22.gorb3$Est
 
 #POLLINATORS
 
-d.t.22.gorb<-table(d.22.gorb$Ronda, d.22.gorb$Polinizador_curro)
+d.t.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$Pollinator_id)
 d.t.22.gorb2<-as.data.frame.array(d.t.22.gorb)
 
 d.t.22.gorb3 <- t(d.t.22.gorb2[,1:ncol(d.t.22.gorb2)]) 
@@ -1098,13 +1093,13 @@ poll.period.gorb22
 
 est_period.22.gorb<-rar.22.gorb$AsyEst
 
-samp_comp_poll_period_gorb22<-round(mean(est_period.22.gorb$Observed[1]/est_period.22.gorb$Estimator[1], est_period.22.gorb$Observed[4]/est_period.22.gorb$Estimator[4],
+samp_comp_poll_period_gorb22<-round(mean(c(est_period.22.gorb$Observed[1]/est_period.22.gorb$Estimator[1], est_period.22.gorb$Observed[4]/est_period.22.gorb$Estimator[4],
                                        est_period.22.gorb$Observed[7]/est_period.22.gorb$Estimator[7],est_period.22.gorb$Observed[10]/est_period.22.gorb$Estimator[10],
                                        est_period.22.gorb$Observed[13]/est_period.22.gorb$Estimator[13], est_period.22.gorb$Observed[16]/est_period.22.gorb$Estimator[16],
-                                       est_period.22.gorb$Observed[19]/est_period.22.gorb$Estimator[19]),2)
+                                       est_period.22.gorb$Observed[19]/est_period.22.gorb$Estimator[19])),2)
 
 #PLANTS
-d.pl.22.gorb<-table(d.22.gorb$Ronda, d.22.gorb$Planta)
+d.pl.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$Planta)
 d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
 d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
 d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
@@ -1117,17 +1112,17 @@ plant.period.gorb22
 #calculate sampling completeness as observed/estimated species richness
 est2_period.22.gorb<-rar.22.gorb2$AsyEst
 
-samp_comp_pl_period_gorb22<-round(mean(est2_period.22.gorb$Observed[1]/est2_period.22.gorb$Estimator[1], est2_period.22.gorb$Observed[4]/est2_period.22.gorb$Estimator[4],
+samp_comp_pl_period_gorb22<-round(mean(c(est2_period.22.gorb$Observed[1]/est2_period.22.gorb$Estimator[1], est2_period.22.gorb$Observed[4]/est2_period.22.gorb$Estimator[4],
                                      est2_period.22.gorb$Observed[7]/est2_period.22.gorb$Estimator[7],est2_period.22.gorb$Observed[10]/est2_period.22.gorb$Estimator[10],
                                      est2_period.22.gorb$Observed[13]/est2_period.22.gorb$Estimator[13], est2_period.22.gorb$Observed[16]/est2_period.22.gorb$Estimator[16],
-                                     est2_period.22.gorb$Observed[19]/est2_period.22.gorb$Estimator[19]),2)
+                                     est2_period.22.gorb$Observed[19]/est2_period.22.gorb$Estimator[19])),2)
 
 
 
 #LINKS
 
-d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Polinizador_curro)
-d.l.22.gorb<-table(d.22.gorb$Ronda, d.22.gorb$link)
+d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
+d.l.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
 d.l.22.gorb3 <- t(d.l.22.gorb2[,1:ncol(d.l.22.gorb2)])
 d.l.22.gorb4<-as.data.frame(d.l.22.gorb3)
@@ -1142,10 +1137,10 @@ link.period.gorb22
 #calculate sampling completeness as observed/estimated species richness
 est3_period_22_gorb<-rar.22.gorb3$AsyEst
 
-samp_comp_link_period_22_gorb<-round(mean(est3_period_22_gorb$Observed[1]/est3_period_22_gorb$Estimator[1], est3_period_22_gorb$Observed[4]/est3_period_22_gorb$Estimator[4],
+samp_comp_link_period_22_gorb<-round(mean(c(est3_period_22_gorb$Observed[1]/est3_period_22_gorb$Estimator[1], est3_period_22_gorb$Observed[4]/est3_period_22_gorb$Estimator[4],
                                           est3_period_22_gorb$Observed[7]/est3_period_22_gorb$Estimator[7],est3_period_22_gorb$Observed[10]/est3_period_22_gorb$Estimator[10],
                                           est3_period_22_gorb$Observed[13]/est3_period_22_gorb$Estimator[13], est3_period_22_gorb$Observed[16]/est3_period_22_gorb$Estimator[16],
-                                          est3_period_22_gorb$Observed[19]/est3_period_22_gorb$Estimator[19]),2)
+                                          est3_period_22_gorb$Observed[19]/est3_period_22_gorb$Estimator[19])),2)
 
 
 
@@ -1280,14 +1275,44 @@ colnames(dat.total)[3]<-"Plants"
 colnames(dat.total)[4]<-"Links"
 
 dat.total2 <- cbind(dat.total[c(1,5:6)], stack(dat.total[2:4]))
-
+write.csv(dat.total2, "data/sampl.compl.csv")
 install.packages("wesanderson")
 library(wesanderson)
+install.packages("gghalves")
+library(gghalves)
+install.packages("ggdist")
+library(ggdist)
 
 Fig_complete<-ggplot(dat.total2, aes(x=sampling_type, y=values, fill=factor(V6)))+
-  geom_boxplot() + facet_wrap(~site*ind) + scale_fill_manual(values=wes_palette(n=3, name="GrandBudapest1")) +
+  geom_boxplot() +facet_wrap(~site*ind) + scale_fill_manual(values=wes_palette(n=3, name="GrandBudapest1")) +
   ylab("Sampling completeness") + labs(fill="Year")+
   xlab("Network aggregation") + theme_bw() + ylim(0.2, 1)
+
+Fig_complete.pruebas <- ggplot(dat.total2, aes(x = sampling_type, y = values, fill = factor(V6))) +
+  ggdist::stat_halfeye(
+    adjust = .5,
+    width = .6,
+    .width = 0,
+    justification = -.3,
+    point_colour = NA
+  ) +
+  geom_boxplot(
+    width = .25,
+    outlier.shape = NA
+  ) +
+  geom_jitter(
+    aes(color = factor(V6)),
+    size = 1.5,
+    alpha = .2,
+    position = position_jitter(seed = 1, width = .1)
+  ) +
+  facet_wrap(~site * ind) +
+  scale_fill_manual(values = wes_palette(n = 3, name = "GrandBudapest1")) +
+  ylab("Sampling completeness") +
+  labs(fill = "Year") +
+  xlab("Network aggregation") +
+  theme_bw() +
+  ylim(0.2, 1)
 
 ggsave("Figs/sampling.png",Fig_complete, width = 9, height = 4)
 
@@ -1310,17 +1335,20 @@ dat.total4<-cbind(dat.total3[,1:3], paste(dat.total3[,4], dat.total3[,7], sep="�
 colnames(dat.total4)<-c("Aggregation level", "Year", "Study area", "Pollinators",
                         "Plants", "Links")
 
-save(Fig_complete,dat.total3, dat.total4, file = "RData/Sampl_compl_ECOLOGY.RData")
+save(Fig_complete,dat.total3, dat.total4, file = "Rdata/Sampl_compl_ECOLOGY.RData")
+
+library(patchwork)
+library(gridExtra)
+library(cowplot)
+
+png("Tables/tablaS1.png", width=600, height=700,res=100)
+plot.new()
+grid.table(dat.total4, rows=NULL)
+dev.off()
 
 
-glimpse(d.22.gorb)
-glimpse(d.21.gorb)
+tabla_grob <- tableGrob(dat.total4, rows=NULL)
+final_plot <- plot_grid(Fig_complete, tabla_grob, nrow = 2, rel_heights = c(1.2, 0.7))
+final_plot
 
-d.22.gorb<-d.22.gorb%>%
-  rename(Periodo=Ronda,
-         Pollinator_id=Polinizador_curro)
-
-
-
-
-
+ggsave("Figs/tables.png",final_plot, width = 9, height = 12)

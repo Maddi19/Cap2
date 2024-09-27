@@ -373,8 +373,16 @@ all_df <- all_df %>%
                   str_starts(Pollinator_id, "Colletes"), "Colletidae",
                   if_else(
                     str_starts(Pollinator_id, "Anthocharis"), "Pieridae",
+                    if_else(str_starts(Pollinator_family, "mosca"), "Diptera",
+                    if_else(str_starts(Pollinator_family, "avispa"), "Vespidae",
+                    if_else(str_starts(Pollinator_family, "abeja"), "Hymenoptera",        
                     Pollinator_family
-                  ))))))))))
+                  )))))))))))))
+
+all_df <- all_df %>%
+  mutate(Pollinator_family = if_else(
+    is.na(Pollinator_family)|Pollinator_family=="", Order, 
+    Pollinator_family))
 
 unknown_order <- all_df %>% 
   filter(is.na(Order)| Order=="")

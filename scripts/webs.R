@@ -11,7 +11,7 @@ source("./scripts/toolbox.R")
 
 ##cargar all data
 all_df<-read.csv("./data/all_data.csv")
-
+all_df$Periodo <- as.numeric(all_df$Periodo)
 gor<-all_df%>%
   filter(Site=="Gorbea")
 unique(gor$Pollinator_id)
@@ -21,8 +21,43 @@ doñ<-all_df%>%
 unique_pl<- doñ %>%
   distinct(Pollinator_id) %>%  
   arrange(Pollinator_id)
- 
 
+
+##################VIOLIN PLOT#############
+install.packages("hrbrthemes")
+library(hrbrthemes)
+library(ggsci)
+unique(all_df$Pollinator_family)
+
+crear_violin_plot <- function(dataset, title) {
+  dataset_grouped <- dataset %>%
+    group_by(Order, Periodo, Year) %>%
+    summarise(count = n(), .groups = 'drop') %>%
+    ungroup() 
+  # Asegúrate de que el valor de 'Suma_Observaciones' sea usado para ajustar el ancho del violín
+  ggplot(dataset_grouped, aes(x = Periodo, y = Order, fill = Order)) +
+    geom_violin(aes(weight = count), scale = "count", trim = FALSE) +  # Usa el peso para ajustar el área del violín
+    scale_fill_npg() +                                  # Colores de NPG para el Order
+    theme_ipsum() +                                     # Tema minimalista
+    labs(title = title, x = "Periodo (semana del año)", y = "Order") +  # Etiquetas de los ejes
+    theme(legend.position = "right") +                   # Posición de la leyenda a la derecha
+    facet_wrap(~ Year, scales = "free_x") +               # Crear un panel para cada año
+    scale_x_continuous(breaks = 1:9, limits = c(1, 9))   # Configurar el rango y los ticks del eje x
+}
+
+# Crear una lista de datasets y títulos
+datasets <- list(gor = gor, doñ = doñ)
+titles <- c("Cantidad de Observaciones por Orden en cada Periodo (Gorbea)",
+            "Cantidad de Observaciones por Orden en cada Periodo (Doñana)")
+
+# Aplicar la función a cada dataset usando purrr::map2
+plots <- map2(datasets, titles, crear_violin_plot)
+
+# Mostrar los gráficos
+print(plots[[1]])  # Gorbea
+print(plots[[2]])  # Doñana
+
+######INFO WEBS
 unique(gor$Pollinator_id)
 gor$Planta <- as.factor(gor$Planta)
 gor$Pollinator_id <- as.factor(gor$Pollinator_id)
@@ -112,6 +147,51 @@ total_2020 <- sum(web_2020_fixed > 0)
 total_2021 <- sum(web_2021_fixed > 0)
 total_2022 <- sum(web_2022_fixed > 0)
 
+# Plantas únicas en cada año
+unique_plants_2020 <- (rowSums(web_2020_fixed > 0) > 0) & (rowSums(web_2021_fixed > 0) == 0) & (rowSums(web_2022_fixed > 0) == 0)
+unique_plants_2021 <- (rowSums(web_2020_fixed > 0) == 0) & (rowSums(web_2021_fixed > 0) > 0) & (rowSums(web_2022_fixed > 0) == 0)
+unique_plants_2022 <- (rowSums(web_2020_fixed > 0) == 0) & (rowSums(web_2021_fixed > 0) == 0) & (rowSums(web_2022_fixed > 0) > 0)
+
+# Contar cuántas plantas son únicas en cada año
+num_unique_plants_2020 <- sum(unique_plants_2020)
+num_unique_plants_2021 <- sum(unique_plants_2021)
+num_unique_plants_2022 <- sum(unique_plants_2022)
+
+unique_pollinators_2020 <- (colSums(web_2020_fixed > 0) > 0) & (colSums(web_2021_fixed > 0) == 0) & (colSums(web_2022_fixed > 0) == 0)
+unique_pollinators_2021 <- (colSums(web_2020_fixed > 0) == 0) & (colSums(web_2021_fixed > 0) > 0) & (colSums(web_2022_fixed > 0) == 0)
+unique_pollinators_2022 <- (colSums(web_2020_fixed > 0) == 0) & (colSums(web_2021_fixed > 0) == 0) & (colSums(web_2022_fixed > 0) > 0)
+
+# Contar cuántos polinizadores son únicos en cada año
+num_unique_pollinators_2020 <- sum(unique_pollinators_2020)
+num_unique_pollinators_2021 <- sum(unique_pollinators_2021)
+num_unique_pollinators_2022 <- sum(unique_pollinators_2022)
+
+# Número total de especies de plantas (filas)
+total_plants <- sum(rowSums(web_2020_fixed > 0 | web_2021_fixed > 0 | web_2022_fixed > 0) > 0)
+
+# Número total de especies de polinizadores (columnas)
+total_pollinators <- sum(colSums(web_2020_fixed > 0 | web_2021_fixed > 0 | web_2022_fixed > 0) > 0)
+
+
+# Porcentaje de plantas únicas en cada año
+percentage_unique_plants_2020 <- (num_unique_plants_2020 / total_plants) * 100
+percentage_unique_plants_2021 <- (num_unique_plants_2021 / total_plants) * 100
+percentage_unique_plants_2022 <- (num_unique_plants_2022 / total_plants) * 100
+
+# Porcentaje de polinizadores únicos en cada año
+percentage_unique_pollinators_2020 <- (num_unique_pollinators_2020 / total_pollinators) * 100
+percentage_unique_pollinators_2021 <- (num_unique_pollinators_2021 / total_pollinators) * 100
+percentage_unique_pollinators_2022 <- (num_unique_pollinators_2022 / total_pollinators) * 100
+
+# Número de polinizadores distintos en 2020 (polinizadores que interactuaron al menos una vez)
+distinct_pollinators_2020 <- sum(colSums(web_2020_fixed > 0) > 0)
+distinct_pollinators_2021 <- sum(colSums(web_2021_fixed > 0) > 0)
+distinct_pollinators_2022 <- sum(colSums(web_2022_fixed > 0) > 0)
+
+# Número de plantas distintas en 2020 (plantas que interactuaron al menos una vez)
+distinct_plants_2020 <- sum(rowSums(web_2020_fixed > 0) > 0)
+distinct_plants_2021 <- sum(rowSums(web_2021_fixed > 0) > 0)
+distinct_plants_2022 <- sum(rowSums(web_2022_fixed > 0) > 0)
 
 ###doñana
 webs <- frame2webs(doñ, varnames = c("Planta", "Pollinator_id", "Year"))
@@ -155,7 +235,6 @@ combined_interactions <- web_2020_fixed > 0 | web_2021_fixed > 0
 total_unique_visits <- sum(combined_interactions)
 
 
-
 # Total de interacciones únicas por año
 unique_visits_2020 <- sum(unique_2020)
 unique_visits_2021 <- sum(unique_2021)
@@ -173,9 +252,43 @@ percentage_common <- (total_common / total_unique_visits) * 100
 total_interactions_2020 <- sum(web_2020_fixed)
 total_interactions_2021 <- sum(web_2021_fixed)
 
-# Mostrar los resultados
-total_interactions_2020
-total_interactions_2021
+# Número total de especies de plantas (filas)
+total_plants <- sum(rowSums(web_2020_fixed > 0 | web_2021_fixed  > 0) > 0)
+
+# Número total de especies de polinizadores (columnas)
+total_pollinators <- sum(colSums(web_2020_fixed > 0 | web_2021_fixed > 0) > 0)
+
+# Plantas únicas en cada año
+unique_plants_2020 <- (rowSums(web_2020_fixed > 0) > 0) & (rowSums(web_2021_fixed > 0) == 0) 
+unique_plants_2021 <- (rowSums(web_2020_fixed > 0) == 0) & (rowSums(web_2021_fixed > 0) > 0) 
+
+# Contar cuántas plantas son únicas en cada año
+num_unique_plants_2020 <- sum(unique_plants_2020)
+num_unique_plants_2021 <- sum(unique_plants_2021)
+
+unique_pollinators_2020 <- (colSums(web_2020_fixed > 0) > 0) & (colSums(web_2021_fixed > 0) == 0)
+unique_pollinators_2021 <- (colSums(web_2020_fixed > 0) == 0) & (colSums(web_2021_fixed > 0) > 0) 
+
+# Contar cuántos polinizadores son únicos en cada año
+num_unique_pollinators_2020 <- sum(unique_pollinators_2020)
+num_unique_pollinators_2021 <- sum(unique_pollinators_2021)
+
+#Porcentaje de plantas únicas en cada año
+percentage_unique_plants_2020 <- (num_unique_plants_2020 / total_plants) * 100
+percentage_unique_plants_2021 <- (num_unique_plants_2021 / total_plants) * 100
+
+# Porcentaje de polinizadores únicos en cada año
+percentage_unique_pollinators_2020 <- (num_unique_pollinators_2020 / total_pollinators) * 100
+percentage_unique_pollinators_2021 <- (num_unique_pollinators_2021 / total_pollinators) * 100
+
+# Número de polinizadores distintos en 2020 (polinizadores que interactuaron al menos una vez)
+distinct_pollinators_2020 <- sum(colSums(web_2020_fixed > 0) > 0)
+distinct_pollinators_2021 <- sum(colSums(web_2021_fixed > 0) > 0)
+
+# Número de plantas distintas en 2020 (plantas que interactuaron al menos una vez)
+distinct_plants_2020 <- sum(rowSums(web_2020_fixed > 0) > 0)
+distinct_plants_2021 <- sum(rowSums(web_2021_fixed > 0) > 0)
+
 
 gor.20<-all_df%>%
   filter(Site=="Gorbea" & Year =="2020")
