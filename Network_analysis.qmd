@@ -70,32 +70,70 @@ m5_lme <- lme(
 )
 check_collinearity(m5_lme)
 
+model_glmmTMB <- glmmTMB(
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + Periodo + (1 | Bosque) + (1 | Year),
+  family = beta_family(),
+  data = sitems.fs.d
+)
 
-# List of model formulas
-formulas <- list(
-  m6 = mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol,  # Sin Periodo
-  m7 = mean.fs ~ poll.sp + plant.sp + Anidamiento + total.visits  
+model_lme <- lme(
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol,
+  random = list( ~ 1 | Bosque, ~ 1 | Year),
+  correlation = corAR1(form = ~ Periodo | Bosque),
+  data = sitems.fs.d
+)
+
+model_lme <- lme(
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol,
+  random = list( ~ 1 | Bosque, ~ 1 | Year),
+  correlation = corAR1(form = ~ Periodo ),
+  data = sitems.fs.d
 )
 
 
-# Ajustar los modelos con lme()
-models.d <- map(formulas, ~lme(.x,
-    random = list( ~ 1 | Bosque, ~ 1 | Year), 
-    correlation = corAR1(form = ~ Periodo | Bosque),  
-    method = "ML",
-    data = sitems.fs.d
-  ))
+model_comparison <- data.frame(
+  Model = c("glmmTMB", "lme"),
+  AIC = c(AIC(model_glmmTMB), AIC(model_lme)),
+  BIC = c(BIC(model_glmmTMB), BIC(model_lme))
+)
 
-models.g <- map(formulas, ~lme(.x,
-    random = list( ~ 1 | Bosque, ~ 1 | Year), 
-    correlation = corAR1(form = ~ Periodo | Bosque),  
-    method = "ML",
-    data = sitems.fs.g
-  ))
+# Mostrar comparación de AIC y BIC
+print(model_comparison)
 
+par(mfrow = c(2, 2))
+plot(resid(model_glmmTMB) ~ fitted(model_glmmTMB),
+     main = "Residuos glmmTMB",
+     xlab = "Valores ajustados",
+     ylab = "Residuos")
+abline(h = 0, col = "red")
+# Histograma de residuos
+hist(resid(model_glmmTMB), main = "Histograma de residuos glmmTMB", xlab = "Residuos")
 
+# Análisis de residuos para el modelo lme
+plot(resid(model_lme) ~ fitted(model_lme),
+     main = "Residuos lme",
+     xlab = "Valores ajustados",
+     ylab = "Residuos")
+abline(h = 0, col = "red")
 
+# Histograma de residuos
+hist(resid(model_lme), main = "Histograma de residuos lme", xlab = "Residuos")
 models.full <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs))
+
+
+###GLMMTMB MODELOA ASKOZE HOBEA CON BETA FAMILY
+
+# List of model formulas
+formulas <- list(
+  m6 = mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + Periodo + (1|Bosque) + (1|Year),
+  m7 = mean.fs ~ poll.sp + plant.sp + Anidamiento + total.visits + Periodo + (1|Bosque) + (1|Year)
+
+)
+
+models.d <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.d))
+
+models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.g))
+
 
 aic_results <- map(models.g, AIC)
 print(aic_results)
@@ -121,19 +159,23 @@ library(kableExtra)
 
 
 resultados_d <- map_dfr(models.d, ~ {
-  s <- summary(.x)$tTable  # Extraer la tabla de coeficientes con summary()
-  coef_df <- as_tibble(s, rownames = "term") %>%
-   mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
-}, .id = "modelo_d") %>%
-  select(Region, model = modelo_d, term, Estimate = Value, `Std.Error`, `t-value`, `p-value`)
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+}, .id = "modelo_d")
 
-# Extraer estimates, std.error, t.value, y p.value para todos los modelos en models.g
+# Extraer estimates, std.error y z value para modelos de Gorbea (modelos 2 y 3)
 resultados_g <- map_dfr(models.g, ~ {
-  s <- summary(.x)$tTable  # Extraer la tabla de coeficientes con summary()
-  coef_df <- as_tibble(s, rownames = "term")  %>%
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
     mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
-}, .id = "modelo_g")%>%
-    select(Region, model=modelo_g, term, Estimate = Value, `Std.Error`, `t-value`, `p-value`)
+}, .id = "modelo_g")
+
+resultados_d <- resultados_d %>%
+  select( Region,model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+
+resultados_g <- resultados_g %>%
+  select(Region, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
 
 
 
@@ -161,12 +203,7 @@ tabla_kable
 
 
 check_and_plot.g <- function(formula) {
-  model <- lme(formula,
-    random = list( ~ 1 | Bosque, ~ 1 | Year), 
-    correlation = corAR1(form = ~ Periodo | Bosque),  
-    method = "ML",
-    data = sitems.fs.g
-  )
+  model <- glmmTMB(formula, data = sitems.fs.g, family = "beta_family")
   performance:: check_model(model)               
   effects <- allEffects(model)     
   plot.effects <- plot(effects)                   
@@ -175,13 +212,8 @@ check_and_plot.g <- function(formula) {
 }
 
 check_and_plot.d <- function(formula) {
- model <- lme(formula,
-    random = list( ~ 1 | Bosque, ~ 1 | Year), 
-    correlation = corAR1(form = ~ Periodo | Bosque),  
-    method = "ML",
-    data = sitems.fs.d
-  )
-  performance:: check_model(model)               
+model <- glmmTMB(formula, data = sitems.fs.d, family = "beta_family")
+performance:: check_model(model)               
   effects <- allEffects(model)     
   plot.effects <- plot(effects)                   
   summary(model)  
