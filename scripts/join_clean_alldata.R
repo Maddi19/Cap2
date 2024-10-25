@@ -301,7 +301,6 @@ all_df <- all_df %>%
 
 unknown_order <- all_df %>% 
   filter(is.na(Order)| Order=="")
-unique(unknown_fams$Pollinator_id)
 
 all_df <- all_df %>%
   mutate(Order = if_else(str_starts(Pollinator_id, "Andrena") |
@@ -386,10 +385,12 @@ all_df <- all_df %>%
 
 unknown_order <- all_df %>% 
   filter(is.na(Order)| Order=="")
+unique(unknown_order$Pollinator_id)
 
 unknown_fam <- all_df %>% 
   filter(is.na(Pollinator_family)| Pollinator_family=="")
-unique(unknown_fams$Pollinator_id)
+
+unique(unknown_fam$Pollinator_id)
 
 unique(all_df$Pollinator_id)
 all_df <- all_df %>%
@@ -405,7 +406,7 @@ all_df <- all_df %>%
 gor<-all_df%>%
   filter(Site=="Gorbea")
 unique(gor$Pollinator_id)
-#168
+#158
 doñ<-all_df%>%
   filter(Site=="Doñana")
 unique(doñ$Pollinator_id)
@@ -413,13 +414,37 @@ unique(doñ$Pollinator_id)
 unique(all_df$Pollinator_family)
 
 total_visits <- nrow(gor)
-unknown_order <- gor %>% 
+unknown_order <- doñ %>% 
   filter(is.na(Order)| Order=="")
 
 
 all_df <- bind_rows(doñ, gor)
-write.csv(all_df, "data/all_data.csv")
-all_df<-read.csv("./data/all_data.csv")
+
+plants.all <- all_df%>%
+  distinct(Planta) %>%    
+  arrange(Planta)        
+print(plants.all)
+
+#clean plants
+all_df$Planta <- dplyr::recode(all_df$Planta, "Helleborus viridis" = "Helleborus viridis subsp. occidentalis",
+                                           "Hypocrepis comosa" = "Hippocrepis comosa",
+                                           "Linnaria propinqua" = "Linaria propinqua",
+                                           "Oxalis per caprae" = "Oxalis pes-caprae",
+                                           "Pedicularis sylvatica" = "Pedicularis sylvatica subsp. sylvatica",
+                                           "Potentiila erecta" = "Potentilla erecta",
+                                           "Teucrium pyrenaicum" = "Teucrium pyrenaicum L. subsp. pyrenaicum",
+                                           "Thymus praecox subsp. Polytrichus" = " Thymus praecox subsp. polytrichus",
+                                           " Thymus praecox subsp. polytrichus" = "Thymus praecox subsp. polytrichus"
+)
+
+all_df <- all_df%>%
+  select(-X)
+
+write.csv(all_df, "data/useful/all_data.csv")
+
+unique
+
+all_df<-read.csv("./data/useful/all_data.csv")
 
 
 # Calcular el número de visitas por cada orden y su porcentaje

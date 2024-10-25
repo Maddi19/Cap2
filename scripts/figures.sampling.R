@@ -28,6 +28,7 @@ poll.period.d21
 plant.period.d21
 link.period.d21
 
+
 ##gorbea 2020
 poll.gorb.20
 plant.gorb.20
@@ -67,107 +68,374 @@ poll.period.gorb22
 plant.period.gorb22
 link.period.gorb22
 
+p1 <- poll.gorb.20 + formato
+
 library(cowplot)
-title <- ggdraw() + 
+title <- ggdraw() +
   draw_label(
     "Sampling completeness for pollinator and plant species and plant-pollinator links in Gorbea",
-    fontface = 'bold', x = 0, hjust = 0)+
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
   theme(plot.margin = margin(0, 0, 0, 7))
 
-formato<-theme_set(theme_bw()+theme(legend.position = element_blank(), 
-                                    axis.title=element_blank(),
-                                    axis.text = element_blank()))
 
-fig<- plot_grid(poll.gorb.20+formato, poll.gorb21+formato, poll.gorb22+formato,
-                labels=c("2020","2021","2022"),
-                nrow=1,ncol=3,hjust=-4.5, vjust=0.45,label_size=12)+
-  draw_label("Pollinator sp. richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
+fig <- plot_grid(
+  poll.gorb.20 + formato,
+  poll.gorb21 + formato,
+  poll.gorb22 + formato,
+  labels = c("2020", "2021", "2022"),
+  nrow = 1,
+  ncol = 3,
+  hjust = -4.5,
+  vjust = 0.45,
+  label_size = 12
+) +
+  draw_label(
+    "Pollinator sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
 
-fig2<- plot_grid(plant.gorb.20+ formato, plant.gorb21+formato, plant.gorb22+formato,
-                 nrow=1, ncol=3)+
-  draw_label("Plant sp. richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
+fig2 <- plot_grid(
+  plant.gorb.20 + formato,
+  plant.gorb21 + formato,
+  plant.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Plant sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
 
 
-fig3<- plot_grid(link.gorb.20+ formato, link.gorb21+formato, link.gorb22+formato,
-                 nrow=1, ncol=3)+
-  draw_label("Link richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
+fig3 <- plot_grid(
+  link.gorb.20 + formato,
+  link.gorb21 + formato,
+  link.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Link richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
 
-fig.t<-plot_grid(fig,fig2,fig3, ncol=1)
+fig.t <- plot_grid(fig, fig2, fig3, ncol = 1)
 
-fig.t<-plot_grid(title,fig.t,ncol = 1,
-  # rel_heights values control vertical title margins
-  rel_heights = c(0.15, 1))+ #perhaps reduce this for a bit more space
-  draw_label("number of observations", x=0.5, y= 0, vjust=0.4, angle= 0)+
-  theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")) 
-  
-ggsave("Figs/sampl.comp/samplfull.png",fig.t, width = 7, height = 6)
+fig.t <- plot_grid(title, fig.t, ncol = 1, # rel_heights values control vertical title margins
+                   rel_heights = c(0.15, 1)) + #perhaps reduce this for a bit more space
+  draw_label(
+    "number of observations",
+    x = 0.5,
+    y = 0,
+    vjust = 0.4,
+    angle = 0
+  ) +
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
-
-fig.site<- plot_grid(poll.sites.gorb20+formato, poll.sites.gorb21+formato, poll.sites.gorb22+formato,
-                labels=c("2020","2021","2022"),
-                nrow=1,ncol=3,hjust=-4.5, vjust=0.45,label_size=12)+
-  draw_label("Pollinator sp. richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
-
-fig2.site<- plot_grid(plant.sites.gorb20+formato, plant.sites.gorb21+formato, plant.sites.gorb22+formato,
-                      nrow=1, ncol=3)+
-  draw_label("Plant sp. richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
+ggsave("Figs/sampl.comp/samplfull.png",
+       fig.t,
+       width = 7,
+       height = 6)
 
 
-fig3.site<- plot_grid(link.sites.gorb20+formato, link.sites.gorb21+formato, link.sites.gorb22+formato,
-                 nrow=1, ncol=3)+
-  draw_label("Link richness", x=0, y=0.5, vjust= 0.1, angle=90, size=10)
 
-legend<-cowplot::get_plot_component(poll.sites.gorb20, 'guide-box')
-legend.s<- ggdraw(legend)
-fig.t.site<-plot_grid(fig.site,fig2.site, fig3.site,ncol=1)
+fig.site <- plot_grid(
+  poll.sites.gorb20 + formato,
+  poll.sites.gorb21 + formato,
+  poll.sites.gorb22 + formato,
+  labels = c("2020", "2021", "2022"),
+  nrow = 1,
+  ncol = 3,
+  hjust = -4.5,
+  vjust = 0.45,
+  label_size = 12
+) +
+  draw_label(
+    "Pollinator sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
 
-title.s<- ggdraw() + 
+fig2.site <- plot_grid(
+  plant.sites.gorb20 + formato,
+  plant.sites.gorb21 + formato,
+  plant.sites.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Plant sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
+
+
+fig3.site <- plot_grid(
+  link.sites.gorb20 + formato,
+  link.sites.gorb21 + formato,
+  link.sites.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Link richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90,
+    size = 10
+  )
+
+legend <- cowplot::get_plot_component(poll.sites.gorb20, 'guide-box')
+legend.s <- ggdraw(legend)
+fig.t.site <- plot_grid(fig.site, fig2.site, fig3.site, ncol = 1)
+
+title.s <- ggdraw() +
   draw_label(
     "Sampling completeness for pollinator and plant species and plant-pollinator links in different sites of Gorbea",
-    fontface = 'bold', x = 0, hjust = 0)+
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
   theme(plot.margin = margin(0, 0, 0, 7))
 
 
 
-fig.t.site<-plot_grid(title.s,fig.t.site,ncol = 1,
-                 # rel_heights values control vertical title margins
-                 rel_heights = c(0.15, 1), legend="bottom")+ #perhaps reduce this for a bit more space
-  draw_label("number of observations", x=0.5, y= 0, vjust=0.4, angle= 0)+
-  draw_plot(legend, x = .85, width = .2)+
-  theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")) 
+fig.t.site <- plot_grid(
+  title.s,
+  fig.t.site,
+  ncol = 1,
+  # rel_heights values control vertical title margins
+  rel_heights = c(0.15, 1),
+  legend = "bottom"
+) + #perhaps reduce this for a bit more space
+  draw_label(
+    "number of observations",
+    x = 0.5,
+    y = 0,
+    vjust = 0.4,
+    angle = 0
+  ) +
+  draw_plot(legend, x = .85, width = .2) +
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
-ggsave("Figs/sampl.comp/sampl.site.png",fig.t.site, width = 7, height = 6)
+ggsave("Figs/sampl.comp/sampl.site.png",
+       fig.t.site,
+       width = 7,
+       height = 6)
 
 
-fig.period<- plot_grid(poll.period.gorb20+formato, poll.period.gorb21+formato, poll.period.gorb22+formato,
-                     labels=c("2020","2021","2022"),
-                     nrow=1,ncol=3,hjust=-4.5, vjust=0.45,label_size=12)+
-  draw_label("Pollinator sp. richness", x=0, y=0.5, vjust= 0.1, angle=90)
+fig.period <- plot_grid(
+  poll.period.gorb20 + formato,
+  poll.period.gorb21 + formato,
+  poll.period.gorb22 + formato,
+  labels = c("2020", "2021", "2022"),
+  nrow = 1,
+  ncol = 3,
+  hjust = -4.5,
+  vjust = 0.45,
+  label_size = 12
+) +
+  draw_label(
+    "Pollinator sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90
+  )
 
 
-fig2.period<- plot_grid(plant.period.gorb20+formato, plant.period.gorb21+formato, plant.period.gorb22+formato,
-                      nrow=1, ncol=3)+
-  draw_label("Plant sp. richness", x=0, y=0.5, vjust= 0.1, angle=90)
+fig2.period <- plot_grid(
+  plant.period.gorb20 + formato,
+  plant.period.gorb21 + formato,
+  plant.period.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Plant sp. richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90
+  )
 
-fig3.period<- plot_grid(link.period.gorb20+formato, link.period.gorb21+formato, link.period.gorb22+formato,
-                        nrow=1, ncol=3)+
-  draw_label("Link richness", x=0, y=0.5, vjust= 0.1, angle=90)
+fig3.period <- plot_grid(
+  link.period.gorb20 + formato,
+  link.period.gorb21 + formato,
+  link.period.gorb22 + formato,
+  nrow = 1,
+  ncol = 3
+) +
+  draw_label(
+    "Link richness",
+    x = 0,
+    y = 0.5,
+    vjust = 0.1,
+    angle = 90
+  )
 
-legend<-cowplot::get_plot_component(poll.period.gorb20, 'guide-box')
-legend.s<- ggdraw(legend)
-fig.t.p<-plot_grid(fig.period,fig2.period, fig3.period,ncol=1)
+legend <- cowplot::get_plot_component(poll.period.gorb20, 'guide-box')
+legend.s <- ggdraw(legend)
+fig.t.p <- plot_grid(fig.period, fig2.period, fig3.period, ncol = 1)
 
-title.p<- ggdraw() + 
+title.p <- ggdraw() +
   draw_label(
     "Sampling completeness for pollinator and plant species and plant-pollinator links through time in Gorbea",
-    fontface = 'bold', x = 0, hjust = 0)+
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
   theme(plot.margin = margin(0, 0, 0, 7))
 
 
-fig.t.period<-plot_grid(title.p,fig.t.p,ncol = 1,
-                      # rel_heights values control vertical title margins
-                      rel_heights = c(0.15, 1))+ #perhaps reduce this for a bit more space
-  draw_label("number of observations", x=0.5, y= 0, vjust=0.4, angle= 0)+
-  draw_plot(legend, x = .85, width = .2)+
-  theme(plot.margin = unit(c(0.5,0.5,0.5,0.5), "cm")) 
+fig.t.period <- plot_grid(title.p,
+                          fig.t.p,
+                          ncol = 1,
+                          # rel_heights values control vertical title margins
+                          rel_heights = c(0.15, 1)) + #perhaps reduce this for a bit more space
+  draw_label(
+    "number of observations",
+    x = 0.5,
+    y = 0,
+    vjust = 0.4,
+    angle = 0
+  ) +
+  draw_plot(legend, x = .85, width = .2) +
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
+##purrr
+#doñana
+load("plots_doñana.RData")
+create_fig <- function(plots, title) {
+  plot_grid(
+    plotlist = plots,  # Combina los gráficos sin etiquetas
+    nrow = 1,
+    ncol = 2
+  ) +
+    draw_label(
+      title,  # Este es el título que aparecerá a la izquierda
+      x = 0,
+      y = 0.5,
+      vjust = 0.1,
+      angle = 90,
+      size = 10
+    )
+}
+
+# Crear los gráficos de riqueza de especies
+fig.poll.d <- create_fig(list(poll.d20, poll.d21), "Pollinator sp. richness")
+fig.plant.d <- create_fig(list(plant.d20, plant.d21), "Plant sp. richness")
+fig.link.d <- create_fig(list(link.d20, link.d21), "Link richness")
+
+# Crear los títulos de los años
+year_titles <- ggdraw() +
+  draw_label("2020", x = 0.25, y = 7.7) + 
+  draw_label("2021", x = 0.75, y = 7.7) + 
+  theme(plot.margin = margin(0, 0, 0, 0))
+
+fig.t.d <- plot_grid(fig.poll.d, fig.plant.d, fig.link.d, ncol = 1)
+# Título de la figura final
+title.p <- ggdraw() +
+  draw_label(
+    "Sampling completeness",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(plot.margin = margin(0, 0, 0, 7))
+
+# Combinar todo en un solo gráfico con título del eje X
+final_fig <- plot_grid(
+  title.p, 
+  fig.t.d, 
+  year_titles,
+  ncol = 1, 
+  rel_heights = c(0.15, 1)
+) + 
+  draw_label("number of observations", x = 0.5, y = 0.05, vjust = 0.4, angle = 0) +
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+
+# Guardar el gráfico final
+ggsave("Figs/sampl.comp/samplfull.png", fig.t, width = 7, height = 6)
+
+save(final_fig,
+     file = "scripts/plots_full_doñ.RData")
+
+##gorbea
+create_fig <- function(plots, title) {
+  plot_grid(
+    plotlist = plots,  # Combina los gráficos sin etiquetas
+    nrow = 1,
+    ncol = 3
+  ) +
+    draw_label(
+      title,  # Este es el título que aparecerá a la izquierda
+      x = 0,
+      y = 0.5,
+      vjust = 0.1,
+      angle = 90,
+      size = 10
+    )
+}
+
+# Crear los gráficos de riqueza de especies
+fig.poll <- create_fig(list(poll.gorb20, poll.gorb21, poll.gorb22), "Pollinator sp. richness")
+fig.plant <- create_fig(list(plant.gorb20, plant.gorb21, plant.gorb22), "Plant sp. richness")
+fig.link <- create_fig(list(link.gorb20, link.gorb21, link.gorb22), "Link richness")
+
+# Crear los títulos de los años
+year_titles <- ggdraw() +
+  draw_label("2020", x = 0.25, y = 7.7) + 
+  draw_label("2021", x = 0.6, y = 7.7) + 
+  draw_label("2022", x = 0.9, y = 7.7) +
+  theme(plot.margin = margin(0, 0, 0, 0))
+
+fig.t.p <- plot_grid(fig.poll, fig.plant, fig.link, ncol = 1)
+# Título de la figura final
+title.p <- ggdraw() +
+  draw_label(
+    "Sampling completeness",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(plot.margin = margin(0, 0, 0, 7))
+
+# Combinar todo en un solo gráfico con título del eje X
+final_fig <- plot_grid(
+  title.p, 
+  fig.t.p, 
+  year_titles,
+  ncol = 1, 
+  rel_heights = c(0.15, 1)
+) + 
+  draw_label("number of observations", x = 0.5, y = 0, vjust = 0.4, angle = 0) +
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+
+# Guardar el gráfico final
+ggsave("Figs/sampl.comp/samplfull.png", fig.t, width = 7, height = 6)
+
+save(final_fig,
+     file = "scripts/plots_gorb.RData")
