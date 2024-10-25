@@ -1,13 +1,14 @@
 
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,dplyr,iNEXT,wesandersom,ggplot2)
+pacman::p_load(tidyverse,dplyr,iNEXT,wesanderson,ggplot2)
 
 
 
 ####DONANA###
 #use data for 2020 and 2021 separately for both sites
-d<-read.csv("./data/doñana_2020_nwclean.csv")
+library(here)
+d<-read.csv(here("data", "doñana_2020_nwclean.csv"))
 #calculate sampling completeness
 
 #######CALCULATE SAMPLING COMPLETENESS FOR POLLINATORS, PLANTS AND LINKS 
@@ -30,9 +31,13 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.d20<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
+poll.d20<-poll.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 poll.d20
-
-
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_poll<-round(rar$AsyEst$Observed[1]/rar$AsyEst$Estimator[1],2)
 
@@ -46,6 +51,12 @@ d.pl5<-as.list(d.pl4)
 
 rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
 plant.d20<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
+plant.d20<-plant.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 plant.d20
 
 #calculate sampling completeness as observed/estimated species richness
@@ -65,6 +76,12 @@ d.l5<-as.list(d.l4)
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 7100)
 rar3
 link.d20<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
+link.d20<-link.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 link.d20
 
 #calculate sampling completeness as observed/estimated species richness
@@ -90,7 +107,31 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.sites.d20<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.sites.d20
+poll.sites.d20<-poll.sites.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
+##extract legend
+poll.sites.d20_legend<-poll.sites.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "bottom",
+    axis.title = element_blank() 
+  ))
+
+#function to extract legend from plot 
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend.sites.d20 <- get_only_legend(poll.sites.d20_legend)  
+
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -110,7 +151,13 @@ d.pl5<-as.list(d.pl4)
 
 rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 200)
 plant.sites.d20<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
-plant.sites.d20
+plant.sites.d20<-plant.sites.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
 
 #calculate sampling completeness as observed/estimated species richness
 est2<-rar2$AsyEst
@@ -133,7 +180,13 @@ d.l5<-as.list(d.l4)
 
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 3000)
 link.sites.d20<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
-link.sites.d20
+link.sites.d20<-link.sites.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
 
 #calculate sampling completeness as observed/estimated species richness
 est3<-rar3$AsyEst
@@ -160,7 +213,12 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.period.d20<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.period.d20
+poll.period.d20<-poll.period.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -180,7 +238,13 @@ d.pl5<-as.list(d.pl4)
 
 rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
 plant.period.d20<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
-plant.period.d20
+plant.period.d20<-plant.period.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
 
 #calculate sampling completeness as observed/estimated species richness
 est2_period<-rar2$AsyEst
@@ -203,7 +267,30 @@ d.l5<-as.list(d.l4)
 
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 3000)
 link.period.d20<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
-link.period.d20
+link.period.d20<-link.period.d20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+##extract legend
+link.period.d21_legend<-link.period.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "bottom",
+    axis.title = element_blank() 
+  ))
+
+#function to extract legend from plot 
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend.period.d21 <- get_only_legend(link.period.d21_legend)  
+
 
 #calculate sampling completeness as observed/estimated species richness
 est3_period<-rar3$AsyEst
@@ -219,7 +306,7 @@ samp_comp_link_period<-round(mean(c(est3_period$Observed[1]/est3_period$Estimato
 ##############################################################
 ################ OVERALL SAMPLING COMPLETENESS ####################
 ##############################################################
-d.21<-read.csv("./data/doñana_2021_nwclean.csv")
+d.21<-read.csv(here("data", "doñana_2021_nwclean.csv"))
 
 unique(d.21$Periodo)
 #POLLINATORS
@@ -236,31 +323,37 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.d21<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
+poll.d21<-poll.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 poll.d21
-
 
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_poll.21<-round(rar$AsyEst$Observed[1]/rar$AsyEst$Estimator[1],2)
 
 
 #PLANTS
-d.pl<-table(d.21$full, d.21$Planta)
-d.pl2<-as.data.frame.array(d.pl)
-d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
-d.pl4<-as.data.frame(d.pl3)
-d.pl5<-as.list(d.pl4)
+#d.pl<-table(d.21$full, d.21$Planta)
+#d.pl2<-as.data.frame.array(d.pl)
+#d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
+#d.pl4<-as.data.frame(d.pl3)
+#d.pl5<-as.list(d.pl4)
 
-rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
-plant.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
-plant.d21
+#rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
+#plant.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
+#plant.d21
 
 #calculate sampling completeness as observed/estimated species richness
-samp_comp_pl.21<-round(rar2$AsyEst$Observed[1]/rar2$AsyEst$Estimator[1],2)
+#samp_comp_pl.21<-round(rar2$AsyEst$Observed[1]/rar2$AsyEst$Estimator[1],2)
 
 
 #LINKS
-
+d.21<-read.csv(here("data", "doñana_2021_nwclean.csv"))
 d.21$link<-paste(d.21$Planta, d.21$Pollinator_id)
+d.21$full<-rep(1, nrow(d.21))
 d.l<-table(d.21$full, d.21$link)
 d.l2<-as.data.frame.array(d.l)
 d.l3 <- t(d.l2[,1:ncol(d.l2)])
@@ -271,6 +364,12 @@ d.l5<-as.list(d.l4)
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 7100)
 rar3
 link.d21<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
+link.d21<-link.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 link.d21
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_link.21<-round(rar3$AsyEst$Observed[1]/rar3$AsyEst$Estimator[1],2)
@@ -293,8 +392,12 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.sites.d21<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.sites.d21
-
+poll.sites.d21<-poll.sites.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 
 #calculate sampling completeness as observed/estimated species richness
 
@@ -305,22 +408,22 @@ samp_comp_poll_site.21<-round(mean(c(est.21$Observed[1]/est.21$Estimator[1], est
                                    est.21$Observed[13]/est.21$Estimator[13])),2)
 
 #PLANTS
-d.pl<-table(d.21$Bosque, d.21$Planta)
-d.pl2<-as.data.frame.array(d.pl)
-d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
-d.pl4<-as.data.frame(d.pl3)
-d.pl5<-as.list(d.pl4)
+#d.pl<-table(d.21$Bosque, d.21$Planta)
+#d.pl2<-as.data.frame.array(d.pl)
+#d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
+#d.pl4<-as.data.frame(d.pl3)
+#d.pl5<-as.list(d.pl4)
 
-rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 200)
-plant.sites.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
-plant.sites.d21
+#rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 200)
+#plant.sites.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
+#plant.sites.d21
 
 #calculate sampling completeness as observed/estimated species richness
-est2.21<-rar2$AsyEst
+#est2.21<-rar2$AsyEst
 
-samp_comp_pl_site.21<-round(mean(c(est2.21$Observed[1]/est2.21$Estimator[1], est2.21$Observed[4]/est2.21$Estimator[4],
-                                 est2.21$Observed[7]/est2.21$Estimator[7],est2.21$Observed[10]/est2.21$Estimator[10],
-                                 est2.21$Observed[13]/est2.21$Estimator[13])),2)
+#samp_comp_pl_site.21<-round(mean(c(est2.21$Observed[1]/est2.21$Estimator[1], est2.21$Observed[4]/est2.21$Estimator[4],
+#                                 est2.21$Observed[7]/est2.21$Estimator[7],est2.21$Observed[10]/est2.21$Estimator[10],
+ #                                est2.21$Observed[13]/est2.21$Estimator[13])),2)
 
 
 
@@ -336,7 +439,13 @@ d.l5<-as.list(d.l4)
 
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 3000)
 link.sites.d21<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
-link.sites.d21
+link.sites.d21<-link.sites.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -366,7 +475,12 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.period.d21<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.period.d21
+poll.period.d21<-poll.period.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -380,24 +494,24 @@ samp_comp_poll_period.21<-round(mean(c(est_period.21$Observed[1]/est_period.21$E
                                   est_period.21$Observed[25]/est_period.21$Estimator[25])),2)
 
 #PLANTS
-d.pl<-table(d.21$Periodo, d.21$Planta)
-d.pl2<-as.data.frame.array(d.pl)
-d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
-d.pl4<-as.data.frame(d.pl3)
-d.pl5<-as.list(d.pl4)
+#d.pl<-table(d.21$Periodo, d.21$Planta)
+#d.pl2<-as.data.frame.array(d.pl)
+#d.pl3 <- t(d.pl2[,1:ncol(d.pl2)])
+#d.pl4<-as.data.frame(d.pl3)
+#d.pl5<-as.list(d.pl4)
 
-rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
-plant.period.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
-plant.period.d21
+#rar2 <- iNEXT(d.pl5, q=0, datatype="abundance", endpoint = 2000)
+#plant.period.d21<-ggiNEXT(rar2, color.var="Assemblage", se=FALSE) 
+#plant.period.d21
 
 #calculate sampling completeness as observed/estimated species richness
-est2_period.21<-rar2$AsyEst
+#est2_period.21<-rar2$AsyEst
 
-samp_comp_pl_period.21<-round(mean(c(est2_period.21$Observed[1]/est2_period.21$Estimator[1], est2_period.21$Observed[4]/est2_period.21$Estimator[4],
-                                   est2_period.21$Observed[7]/est2_period.21$Estimator[7],est2_period.21$Observed[10]/est2_period.21$Estimator[10],
-                                   est2_period.21$Observed[13]/est2_period.21$Estimator[13], est2_period.21$Observed[16]/est2_period.21$Estimator[16],
-                                   est2_period.21$Observed[19]/est2_period.21$Estimator[19], est2_period.21$Observed[22]/est2_period.21$Estimator[22],
-                                   est2_period.21$Observed[25]/est2_period.21$Estimator[25])),2)
+#samp_comp_pl_period.21<-round(mean(c(est2_period.21$Observed[1]/est2_period.21$Estimator[1], est2_period.21$Observed[4]/est2_period.21$Estimator[4],
+ #                                  est2_period.21$Observed[7]/est2_period.21$Estimator[7],est2_period.21$Observed[10]/est2_period.21$Estimator[10],
+  #                                 est2_period.21$Observed[13]/est2_period.21$Estimator[13], est2_period.21$Observed[16]/est2_period.21$Estimator[16],
+   #                                est2_period.21$Observed[19]/est2_period.21$Estimator[19], est2_period.21$Observed[22]/est2_period.21$Estimator[22],
+    #                               est2_period.21$Observed[25]/est2_period.21$Estimator[25])),2)
 
 
 
@@ -413,7 +527,13 @@ d.l5<-as.list(d.l4)
 
 rar3 <- iNEXT(d.l5, q=0, datatype="abundance", endpoint = 3000)
 link.period.d21<-ggiNEXT(rar3, color.var="Assemblage", se=FALSE) 
-link.period.d21
+link.period.d21<-link.period.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -424,6 +544,101 @@ samp_comp_link_period.21<-round(mean(c(est3_period.21$Observed[1]/est3_period.21
                                      est3_period.21$Observed[13]/est3_period.21$Estimator[13], est3_period.21$Observed[16]/est3_period.21$Estimator[16],
                                      est3_period.21$Observed[19]/est3_period.21$Estimator[19], est3_period.21$Observed[22]/est3_period.21$Estimator[22],
                                      est3_period.21$Observed[25]/est3_period.21$Estimator[25])),2)
+
+#PLANTS de floral resources
+d.21 <- read.csv("./data/floral_resources_donana_21.csv")
+d.21$full <- rep(1, nrow(d.21))
+d.pl <- table(d.21$full, d.21$Especie.planta)
+d.pl2 <- as.data.frame.array(d.pl)
+d.pl3 <- t(d.pl2[, 1:ncol(d.pl2)])
+d.pl4 <- as.data.frame(d.pl3)
+d.pl5 <- as.list(d.pl4)
+
+rar2 <- iNEXT(d.pl5,
+              q = 0,
+              datatype = "abundance",
+              endpoint = 2000)
+plant.d21 <- ggiNEXT(rar2, color.var = "Assemblage", se = FALSE)
+plant.d21<-plant.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+plant.d21
+
+#calculate sampling completeness as observed/estimated species richness
+samp_comp_pl.21 <- round(rar2$AsyEst$Observed[1] / rar2$AsyEst$Estimator[1], 2)
+
+##per site
+d.pl <- table(d.21$Bosque, d.21$Especie.planta)
+d.pl2 <- as.data.frame.array(d.pl)
+d.pl3 <- t(d.pl2[, 1:ncol(d.pl2)])
+d.pl4 <- as.data.frame(d.pl3)
+d.pl5 <- as.list(d.pl4)
+
+rar2 <- iNEXT(d.pl5,
+              q = 0,
+              datatype = "abundance",
+              endpoint = 200)
+plant.sites.d21 <- ggiNEXT(rar2, color.var = "Assemblage", se = FALSE)
+plant.sites.d21<-plant.sites.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+est2.21 <- rar2$AsyEst
+
+samp_comp_pl_site.21 <- round(mean(
+  c(
+    est2.21$Observed[1] / est2.21$Estimator[1],
+    est2.21$Observed[4] / est2.21$Estimator[4],
+    est2.21$Observed[7] / est2.21$Estimator[7],
+    est2.21$Observed[10] / est2.21$Estimator[10],
+    est2.21$Observed[13] / est2.21$Estimator[13]
+  )
+), 2)
+
+##per period
+d.21 <- d.21 %>%
+  rename(Periodo = Ronda)
+d.pl <- table(d.21$Periodo, d.21$Especie.planta)
+d.pl2 <- as.data.frame.array(d.pl)
+d.pl3 <- t(d.pl2[, 1:ncol(d.pl2)])
+d.pl4 <- as.data.frame(d.pl3)
+d.pl5 <- as.list(d.pl4)
+
+rar2 <- iNEXT(d.pl5,
+              q = 0,
+              datatype = "abundance",
+              endpoint = 2000)
+plant.period.d21 <- ggiNEXT(rar2, color.var = "Assemblage", se = FALSE)
+plant.period.d21<-plant.period.d21 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+est2_period.21 <- rar2$AsyEst
+
+samp_comp_pl_period.21 <- round(mean(
+  c(
+    est2_period.21$Observed[1] / est2_period.21$Estimator[1],
+    est2_period.21$Observed[4] / est2_period.21$Estimator[4],
+    est2_period.21$Observed[7] / est2_period.21$Estimator[7],
+    est2_period.21$Observed[10] / est2_period.21$Estimator[10],
+    est2_period.21$Observed[13] / est2_period.21$Estimator[13],
+    est2_period.21$Observed[16] / est2_period.21$Estimator[16],
+    est2_period.21$Observed[19] / est2_period.21$Estimator[19],
+    est2_period.21$Observed[22] / est2_period.21$Estimator[22],
+    est2_period.21$Observed[25] / est2_period.21$Estimator[25]
+  )
+), 2)
 
 
 
@@ -506,13 +721,17 @@ dat[13:27, 6]<-"2021"
 dat[1:12, 6]<-"2020"
 dat
 
-
+save(poll.d20, plant.d20, link.d20, poll.d21, plant.d21, link.d21,
+     poll.sites.d20, plant.sites.d20, link.sites.d20, poll.sites.d21, plant.sites.d21, link.sites.d21,
+     poll.period.d20, plant.period.d20, link.period.d20, poll.period.d21, plant.period.d21, link.period.d21,
+     file = "scripts/plots_full.doñana.RData")
 
 #####GORBEA
 ########################### GORBEA DATA #########################
 
 #######CALCULATE SAMPLING COMPLETENESS FOR POLLINATORS, PLANTS AND LINKS 
-d.gorb<-read.csv("./data/gorbea_2020_nwclean.csv")
+d.gorb<-read.csv(here("data", "gorbea_2020_nwclean.csv"))
+
 unique(d.gorb$Periodo)
 ##############################################################
 ################ OVERALL SAMPLING COMPLETENESS ####################
@@ -531,27 +750,32 @@ d.gorb.t5<-as.list(d.gorb.t4)
 
 
 rar.gorb <- iNEXT(d.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
-poll.gorb.20<-ggiNEXT(rar.gorb, color.var="Assemblage", se=FALSE) 
-poll.gorb.20
-
+poll.gorb20<-ggiNEXT(rar.gorb, color.var="Assemblage", se=FALSE) 
+poll.gorb20<-poll.gorb20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank() 
+  ))
+poll.gorb20
 
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_poll_gorb<-round(rar.gorb$AsyEst$Observed[1]/rar.gorb$AsyEst$Estimator[1],2)
 
 
 #PLANTS
-d.pl.gorb<-table(d.gorb$full, d.gorb$Planta)
-d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
-d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
-d.pl.gorb4<-as.data.frame(d.pl.gorb3)
-d.pl.gorb5<-as.list(d.pl.gorb4)
+#d.pl.gorb<-table(d.gorb$full, d.gorb$Planta)
+#d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+#d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+#d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+#d.pl.gorb5<-as.list(d.pl.gorb4)
 
-rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.gorb.20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
-plant.gorb.20
+#rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+
 
 #calculate sampling completeness as observed/estimated species richness
-samp_comp_pl_gorb<-round(rar.gorb2$AsyEst$Observed[1]/rar.gorb2$AsyEst$Estimator[1],2)
+#samp_comp_pl_gorb<-round(rar.gorb2$AsyEst$Observed[1]/rar.gorb2$AsyEst$Estimator[1],2)
 
 
 #LINKS
@@ -565,8 +789,13 @@ d.l.gorb5<-as.list(d.l.gorb4)
 
 
 rar.gorb3 <- iNEXT(d.l.gorb5, q=0, datatype="abundance", endpoint = 3000)
-link.gorb.20<-ggiNEXT(rar.gorb3, color.var="Assemblage", se=FALSE) 
-link.gorb.20
+link.gorb20<-ggiNEXT(rar.gorb3, color.var="Assemblage", se=FALSE) 
+link.gorb20<-link.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -578,7 +807,6 @@ samp_comp_link_gorb<-round(rar.gorb3$AsyEst$Observed[1]/rar.gorb3$AsyEst$Estimat
 ##################################################################
 
 #POLLINATORS
-
 d.gorb.t<-table(d.gorb$Bosque, d.gorb$Pollinator_id)
 d.gorb.t2<-as.data.frame.array(d.gorb.t)
 
@@ -590,7 +818,12 @@ d.gorb.t5<-as.list(d.gorb.t4)
 
 rar.gorb <- iNEXT(d.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.sites.gorb20<-ggiNEXT(rar.gorb, color.var="Assemblage", se=FALSE) 
-poll.sites.gorb20
+poll.sites.gorb20<-poll.sites.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -602,24 +835,24 @@ samp_comp_poll_site_gorb.20<-round(mean(c(est.gorb$Observed[1]/est.gorb$Estimato
                                      est.gorb$Observed[13]/est.gorb$Estimator[13])),2)
 
 #PLANTS
-d.pl.gorb<-table(d.gorb$Bosque, d.gorb$Planta)
-d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
-d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
-d.pl.gorb4<-as.data.frame(d.pl.gorb3)
-d.pl.gorb5<-as.list(d.pl.gorb4)
+#d.pl.gorb<-table(d.gorb$Bosque, d.gorb$Planta)
+#d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+#d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+#d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+#d.pl.gorb5<-as.list(d.pl.gorb4)
 
-rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.sites.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
-plant.sites.gorb20
+#rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.sites.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.sites.gorb20
 
 #calculate sampling completeness as observed/estimated species richness
-est.gorb2<-rar.gorb2$AsyEst
+#est.gorb2<-rar.gorb2$AsyEst
 
-samp_comp_pl_site_gorb<-round(mean(c(est.gorb2$Observed[1]/est.gorb2$Estimator[1], est.gorb2$Observed[4]/est.gorb2$Estimator[4],
-                                   est.gorb2$Observed[7]/est.gorb2$Estimator[7],est.gorb2$Observed[10]/est.gorb2$Estimator[10],
-                                   est.gorb2$Observed[13]/est.gorb2$Estimator[13])),2)
+#samp_comp_pl_site_gorb<-round(mean(c(est.gorb2$Observed[1]/est.gorb2$Estimator[1], est.gorb2$Observed[4]/est.gorb2$Estimator[4],
+#                                   est.gorb2$Observed[7]/est.gorb2$Estimator[7],est.gorb2$Observed[10]/est.gorb2$Estimator[10],
+ #                                  est.gorb2$Observed[13]/est.gorb2$Estimator[13])),2)
+
 #LINKS
-
 d.gorb$link<-paste(d.gorb$Planta, d.gorb$Pollinator_id)
 d.l.gorb<-table(d.gorb$Bosque, d.gorb$link)
 d.l.gorb2<-as.data.frame.array(d.l.gorb)
@@ -630,9 +863,12 @@ d.l.gorb5<-as.list(d.l.gorb4)
 
 rar.gorb3 <- iNEXT(d.l.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.sites.gorb20<-ggiNEXT(rar.gorb3, color.var="Assemblage", se=FALSE) 
-link.sites.gorb20
-
-#calculate sampling completeness as observed/estimated species richness
+link.sites.gorb20<-link.sites.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 #calculate sampling completeness as observed/estimated species richness
 est.gorb3<-rar.gorb3$AsyEst
@@ -660,7 +896,12 @@ d.t.gorb5<-as.list(d.t.gorb4)
 
 rar.gorb <- iNEXT(d.t.gorb5, q=0, datatype="abundance", endpoint = 3000)
 poll.period.gorb20<-ggiNEXT(rar.gorb, color.var="Assemblage", se=FALSE) 
-poll.period.gorb20
+poll.period.gorb20<-poll.period.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -673,28 +914,27 @@ samp_comp_poll_period_gorb<-round(mean(c(est_period.gorb$Observed[1]/est_period.
                                        est_period.gorb$Observed[19]/est_period.gorb$Estimator[19], est_period.gorb$Observed[22]/est_period.gorb$Estimator[22])),2)
 
 #PLANTS
-d.pl.gorb<-table(d.gorb$Periodo, d.gorb$Planta)
-d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
-d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
-d.pl.gorb4<-as.data.frame(d.pl.gorb3)
-d.pl.gorb5<-as.list(d.pl.gorb4)
+#d.pl.gorb<-table(d.gorb$Periodo, d.gorb$Planta)
+#d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+#d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+#d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+#d.pl.gorb5<-as.list(d.pl.gorb4)
 
-rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.period.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
-plant.period.gorb20
+#rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.period.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.period.gorb20
 
 #calculate sampling completeness as observed/estimated species richness
-est2_period.gorb<-rar.gorb2$AsyEst
+#est2_period.gorb<-rar.gorb2$AsyEst
 
-samp_comp_pl_period_gorb<-round(mean(c(est2_period.gorb$Observed[1]/est2_period.gorb$Estimator[1], est2_period.gorb$Observed[4]/est2_period.gorb$Estimator[4],
-                                     est2_period.gorb$Observed[7]/est2_period.gorb$Estimator[7],est2_period.gorb$Observed[10]/est2_period.gorb$Estimator[10],
-                                     est2_period.gorb$Observed[13]/est2_period.gorb$Estimator[13], est2_period.gorb$Observed[16]/est2_period.gorb$Estimator[16],
-                                     est2_period.gorb$Observed[19]/est2_period.gorb$Estimator[19], est2_period.gorb$Observed[22]/est2_period.gorb$Estimator[22])),2)
+#samp_comp_pl_period_gorb<-round(mean(c(est2_period.gorb$Observed[1]/est2_period.gorb$Estimator[1], est2_period.gorb$Observed[4]/est2_period.gorb$Estimator[4],
+#                                     est2_period.gorb$Observed[7]/est2_period.gorb$Estimator[7],est2_period.gorb$Observed[10]/est2_period.gorb$Estimator[10],
+#                                     est2_period.gorb$Observed[13]/est2_period.gorb$Estimator[13], est2_period.gorb$Observed[16]/est2_period.gorb$Estimator[16],
+#                                     est2_period.gorb$Observed[19]/est2_period.gorb$Estimator[19], est2_period.gorb$Observed[22]/est2_period.gorb$Estimator[22])),2)
 
 
 
 #LINKS
-
 d.gorb$link<-paste(d.gorb$Planta, d.gorb$Pollinator_id)
 d.l.gorb<-table(d.gorb$Periodo, d.gorb$link)
 d.l.gorb2<-as.data.frame.array(d.l.gorb)
@@ -705,7 +945,12 @@ d.l.gorb5<-as.list(d.l.gorb4)
 
 rar.gorb3 <- iNEXT(d.l.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.period.gorb20<-ggiNEXT(rar.gorb3, color.var="Assemblage", se=FALSE) 
-link.period.gorb20
+link.period.gorb20<-link.period.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -715,10 +960,104 @@ samp_comp_link_period_gorb<-round(mean(c(est3_period_gorb$Observed[1]/est3_perio
                                        est3_period_gorb$Observed[7]/est3_period_gorb$Estimator[7],est3_period_gorb$Observed[10]/est3_period_gorb$Estimator[10],
                                        est3_period_gorb$Observed[13]/est3_period_gorb$Estimator[13], est3_period_gorb$Observed[16]/est3_period_gorb$Estimator[16],
                                        est3_period_gorb$Observed[19]/est3_period_gorb$Estimator[19], est3_period_gorb$Observed[22]/est3_period_gorb$Estimator[22])),2)
+##PLANTAS CON FLORAL RESOURCES
+d.gorb$full<-rep(1, nrow(d.gorb))
 
+d.pl.gorb<-table(d.gorb$full, d.gorb$Especie.planta)
+d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+d.pl.gorb5<-as.list(d.pl.gorb4)
+
+rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.gorb.20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+plant.gorb.20<-plant.gorb.20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+samp_comp_pl_gorb<-round(rar.gorb2$AsyEst$Observed[1]/rar.gorb2$AsyEst$Estimator[1],2)
+
+##sites
+d.pl.gorb<-table(d.gorb$Bosque, d.gorb$Especie.planta)
+d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+d.pl.gorb5<-as.list(d.pl.gorb4)
+
+rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.sites.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+plant.sites.gorb20<-plant.sites.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+#calculate sampling completeness as observed/estimated species richness
+est.gorb2<-rar.gorb2$AsyEst
+
+samp_comp_pl_site_gorb<-round(mean(c(est.gorb2$Observed[1]/est.gorb2$Estimator[1], est.gorb2$Observed[4]/est.gorb2$Estimator[4],
+                                     est.gorb2$Observed[7]/est.gorb2$Estimator[7],est.gorb2$Observed[10]/est.gorb2$Estimator[10],
+                                     est.gorb2$Observed[13]/est.gorb2$Estimator[13])),2)
+
+###periodo
+#crear vriable periodo
+require(lubridate)
+#especificar que es  una fecha
+d.gorb$Fecha<-dmy(d.gorb$Fecha)
+
+d.gorb <- d.gorb %>% arrange(Fecha) %>%
+  group_by(Bosque) %>%
+  mutate(Periodo = match(Fecha, unique(Fecha)))
+
+
+d.pl.gorb<-table(d.gorb$Periodo, d.gorb$Especie.planta)
+d.pl.gorb2<-as.data.frame.array(d.pl.gorb)
+d.pl.gorb3 <- t(d.pl.gorb2[,1:ncol(d.pl.gorb2)])
+d.pl.gorb4<-as.data.frame(d.pl.gorb3)
+d.pl.gorb5<-as.list(d.pl.gorb4)
+
+rar.gorb2 <- iNEXT(d.pl.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.period.gorb20<-ggiNEXT(rar.gorb2, color.var="Assemblage", se=FALSE) 
+plant.period.gorb20<-plant.period.gorb20+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+##extract legend
+plant.period.g20_legend<-plant.period.gorb20 + theme_set(
+  theme_bw() + theme(
+    legend.position = "bottom",
+    axis.title = element_blank() 
+  ))
+
+#function to extract legend from plot 
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend.period.g <- get_only_legend(plant.period.g20_legend)  
+
+
+#calculate sampling completeness as observed/estimated species richness
+est2_period.gorb<-rar.gorb2$AsyEst
+
+samp_comp_pl_period_gorb<-round(mean(c(est2_period.gorb$Observed[1]/est2_period.gorb$Estimator[1], est2_period.gorb$Observed[4]/est2_period.gorb$Estimator[4],
+                                       est2_period.gorb$Observed[7]/est2_period.gorb$Estimator[7],est2_period.gorb$Observed[10]/est2_period.gorb$Estimator[10],
+                                       est2_period.gorb$Observed[13]/est2_period.gorb$Estimator[13], est2_period.gorb$Observed[16]/est2_period.gorb$Estimator[16],
+                                       est2_period.gorb$Observed[19]/est2_period.gorb$Estimator[19], est2_period.gorb$Observed[22]/est2_period.gorb$Estimator[22])),2)
 
 #####GORBEA 2021
-d.21.gorb<-read.csv("./data/gorbea_2021_nwclean.csv")
+d.21.gorb<-read.csv(here("data", "gorbea_2021_nwclean.csv"))
 
 ########################### GORBEA DATA #########################
 
@@ -742,7 +1081,12 @@ d.21.gorb.t5<-as.list(d.21.gorb.t4)
 
 rar.21.gorb <- iNEXT(d.21.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.gorb21<-ggiNEXT(rar.21.gorb, color.var="Assemblage", se=FALSE) 
-poll.gorb21
+poll.gorb21<-poll.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -750,18 +1094,18 @@ samp_comp_poll_gorb.21<-round(rar.21.gorb$AsyEst$Observed[1]/rar.21.gorb$AsyEst$
 
 
 #PLANTS
-d.pl.21.gorb<-table(d.21.gorb$full, d.21.gorb$Planta)
-d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
-d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
-d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
-d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+#d.pl.21.gorb<-table(d.21.gorb$full, d.21.gorb$Planta)
+#d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+#d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+#d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+#d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
 
-rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
-plant.gorb21
+#rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.gorb21
 
 #calculate sampling completeness as observed/estimated species richness
-samp_comp_pl_gorb.21<-round(rar.21.gorb2$AsyEst$Observed[1]/rar.21.gorb2$AsyEst$Estimator[1],2)
+#samp_comp_pl_gorb.21<-round(rar.21.gorb2$AsyEst$Observed[1]/rar.21.gorb2$AsyEst$Estimator[1],2)
 
 
 #LINKS
@@ -776,7 +1120,12 @@ d.l.21.gorb5<-as.list(d.l.21.gorb4)
 
 rar.21.gorb3 <- iNEXT(d.l.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.gorb21<-ggiNEXT(rar.21.gorb3, color.var="Assemblage", se=FALSE) 
-link.gorb21
+link.gorb21<-link.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_link_gorb.21<-round(rar.21.gorb3$AsyEst$Observed[1]/rar.21.gorb3$AsyEst$Estimator[1],2)
@@ -787,7 +1136,6 @@ samp_comp_link_gorb.21<-round(rar.21.gorb3$AsyEst$Observed[1]/rar.21.gorb3$AsyEs
 ##################################################################
 
 #POLLINATORS
-
 d.21.gorb.t<-table(d.21.gorb$Bosque, d.21.gorb$Pollinator_id)
 d.21.gorb.t2<-as.data.frame.array(d.21.gorb.t)
 
@@ -799,7 +1147,12 @@ d.21.gorb.t5<-as.list(d.21.gorb.t4)
 
 rar.21.gorb <- iNEXT(d.21.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.sites.gorb21<-ggiNEXT(rar.21.gorb, color.var="Assemblage", se=FALSE) 
-poll.sites.gorb21
+poll.sites.gorb21<-poll.sites.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -811,27 +1164,26 @@ samp_comp_poll_site_gorb.21<-round(mean(c(est.21.gorb$Observed[1]/est.21.gorb$Es
                                      est.21.gorb$Observed[13]/est.21.gorb$Estimator[13])),2)
 
 #PLANTS
-d.pl.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$Planta)
-d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
-d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
-d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
-d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+#d.pl.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$Planta)
+#d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+#d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+#d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+#d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
 
-rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.sites.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
-plant.sites.gorb21
+#rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.sites.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.sites.gorb21
 
 #calculate sampling completeness as observed/estimated species richness
-est.21.gorb2<-rar.21.gorb2$AsyEst
+#est.21.gorb2<-rar.21.gorb2$AsyEst
 
-samp_comp_pl_site_gorb21<-round(mean(c(est.21.gorb2$Observed[1]/est.21.gorb2$Estimator[1], est.21.gorb2$Observed[4]/est.21.gorb2$Estimator[4],
-                                   est.21.gorb2$Observed[7]/est.21.gorb2$Estimator[7],est.21.gorb2$Observed[10]/est.21.gorb2$Estimator[10],
-                                   est.21.gorb2$Observed[13]/est.21.gorb2$Estimator[13])),2)
+#samp_comp_pl_site_gorb21<-round(mean(c(est.21.gorb2$Observed[1]/est.21.gorb2$Estimator[1], est.21.gorb2$Observed[4]/est.21.gorb2$Estimator[4],
+#                                   est.21.gorb2$Observed[7]/est.21.gorb2$Estimator[7],est.21.gorb2$Observed[10]/est.21.gorb2$Estimator[10],
+#                                   est.21.gorb2$Observed[13]/est.21.gorb2$Estimator[13])),2)
 
 
 
 #LINKS
-
 d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Pollinator_id)
 d.l.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$link)
 d.l.21.gorb2<-as.data.frame.array(d.l.21.gorb)
@@ -842,7 +1194,12 @@ d.l.21.gorb5<-as.list(d.l.21.gorb4)
 
 rar.21.gorb3 <- iNEXT(d.l.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.sites.gorb21<-ggiNEXT(rar.21.gorb3, color.var="Assemblage", se=FALSE) 
-link.sites.gorb21
+link.sites.gorb21<-link.sites.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 #calculate sampling completeness as observed/estimated species richness
 
@@ -873,7 +1230,13 @@ d.t.21.gorb5<-as.list(d.t.21.gorb4)
 
 rar.21.gorb <- iNEXT(d.t.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
 poll.period.gorb21<-ggiNEXT(rar.21.gorb, color.var="Assemblage", se=FALSE) 
-poll.period.gorb21
+poll.period.gorb21<-poll.period.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -886,28 +1249,27 @@ samp_comp_poll_period_gorb.21<-round(mean(c(est_period.21.gorb$Observed[1]/est_p
                                        est_period.21.gorb$Observed[19]/est_period.21.gorb$Estimator[19])),2)
 
 #PLANTS
-d.pl.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Planta)
-d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
-d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
-d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
-d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+#d.pl.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Planta)
+#d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+#d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+#d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+#d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
 
-rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.period.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
-plant.period.gorb21
+#rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.period.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.period.gorb21
 
 #calculate sampling completeness as observed/estimated species richness
-est2_period.21.gorb<-rar.21.gorb2$AsyEst
+#est2_period.21.gorb<-rar.21.gorb2$AsyEst
 
-samp_comp_pl_period_gorb.21<-round(mean(c(est2_period.21.gorb$Observed[1]/est2_period.21.gorb$Estimator[1], est2_period.21.gorb$Observed[4]/est2_period.21.gorb$Estimator[4],
-                                     est2_period.21.gorb$Observed[7]/est2_period.21.gorb$Estimator[7],est2_period.21.gorb$Observed[10]/est2_period.21.gorb$Estimator[10],
-                                     est2_period.21.gorb$Observed[13]/est2_period.21.gorb$Estimator[13], est2_period.21.gorb$Observed[16]/est2_period.21.gorb$Estimator[16],
-                                     est2_period.21.gorb$Observed[19]/est2_period.21.gorb$Estimator[19])),2)
+#samp_comp_pl_period_gorb.21<-round(mean(c(est2_period.21.gorb$Observed[1]/est2_period.21.gorb$Estimator[1], est2_period.21.gorb$Observed[4]/est2_period.21.gorb$Estimator[4],
+#                                     est2_period.21.gorb$Observed[7]/est2_period.21.gorb$Estimator[7],est2_period.21.gorb$Observed[10]/est2_period.21.gorb$Estimator[10],
+#                                     est2_period.21.gorb$Observed[13]/est2_period.21.gorb$Estimator[13], est2_period.21.gorb$Observed[16]/est2_period.21.gorb$Estimator[16],
+#                                    est2_period.21.gorb$Observed[19]/est2_period.21.gorb$Estimator[19])),2)
 
 
 
 #LINKS
-
 d.21.gorb$link<-paste(d.21.gorb$Planta, d.21.gorb$Pollinator_id)
 d.l.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$link)
 d.l.21.gorb2<-as.data.frame.array(d.l.21.gorb)
@@ -918,7 +1280,12 @@ d.l.21.gorb5<-as.list(d.l.21.gorb4)
 
 rar.21.gorb3 <- iNEXT(d.l.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.period.gorb21<-ggiNEXT(rar.21.gorb3, color.var="Assemblage", se=FALSE) 
-link.period.gorb21
+link.period.gorb21<-link.period.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -928,15 +1295,94 @@ samp_comp_link_period_21_gorb<-round(mean(c(est3_period_21_gorb$Observed[1]/est3
                                           est3_period_21_gorb$Observed[7]/est3_period_21_gorb$Estimator[7],est3_period_21_gorb$Observed[10]/est3_period_21_gorb$Estimator[10],
                                           est3_period_21_gorb$Observed[13]/est3_period_21_gorb$Estimator[13], est3_period_21_gorb$Observed[16]/est3_period_21_gorb$Estimator[16],
                                           est3_period_21_gorb$Observed[19]/est3_period_21_gorb$Estimator[19])),2)
+##PLANTAS CON FLORAL RESOURCES
+d.21.gorb <- read.csv("./data/floral_resources_gorbea_21.csv")
+
+d.21.gorb$full<-rep(1, nrow(d.21.gorb))
+
+d.pl.21.gorb<-table(d.21.gorb$full, d.21.gorb$Especie.planta)
+d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+
+rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+plant.gorb21<-plant.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+
+#calculate sampling completeness as observed/estimated species richness
+samp_comp_pl_gorb.21<-round(rar.21.gorb2$AsyEst$Observed[1]/rar.21.gorb2$AsyEst$Estimator[1],2)
+
+#site
+d.pl.21.gorb<-table(d.21.gorb$Bosque, d.21.gorb$Especie.planta)
+d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+
+rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.sites.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+plant.sites.gorb21<-plant.sites.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+est.21.gorb2<-rar.21.gorb2$AsyEst
+
+samp_comp_pl_site_gorb21<-round(mean(c(est.21.gorb2$Observed[1]/est.21.gorb2$Estimator[1], est.21.gorb2$Observed[4]/est.21.gorb2$Estimator[4],
+                                       est.21.gorb2$Observed[7]/est.21.gorb2$Estimator[7],est.21.gorb2$Observed[10]/est.21.gorb2$Estimator[10],
+                                       est.21.gorb2$Observed[13]/est.21.gorb2$Estimator[13])),2)
+
+##periodo
+#crear vriable periodo
+require(lubridate)
+#especificar que es  una fecha
+d.21.gorb$Fecha<-dmy(d.21.gorb$Fecha)
+
+d.21.gorb <- d.21.gorb %>% arrange(Fecha) %>%
+  group_by(Bosque) %>%
+  mutate(Periodo = match(Fecha, unique(Fecha)))
+
+d.pl.21.gorb<-table(d.21.gorb$Periodo, d.21.gorb$Especie.planta)
+d.pl.21.gorb2<-as.data.frame.array(d.pl.21.gorb)
+d.pl.21.gorb3 <- t(d.pl.21.gorb2[,1:ncol(d.pl.21.gorb2)])
+d.pl.21.gorb4<-as.data.frame(d.pl.21.gorb3)
+d.pl.21.gorb5<-as.list(d.pl.21.gorb4)
+
+rar.21.gorb2 <- iNEXT(d.pl.21.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.period.gorb21<-ggiNEXT(rar.21.gorb2, color.var="Assemblage", se=FALSE) 
+plant.period.gorb21<-plant.period.gorb21+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+est2_period.21.gorb<-rar.21.gorb2$AsyEst
+
+samp_comp_pl_period_gorb.21<-round(mean(c(est2_period.21.gorb$Observed[1]/est2_period.21.gorb$Estimator[1], est2_period.21.gorb$Observed[4]/est2_period.21.gorb$Estimator[4],
+                                          est2_period.21.gorb$Observed[7]/est2_period.21.gorb$Estimator[7],est2_period.21.gorb$Observed[10]/est2_period.21.gorb$Estimator[10],
+                                          est2_period.21.gorb$Observed[13]/est2_period.21.gorb$Estimator[13], est2_period.21.gorb$Observed[16]/est2_period.21.gorb$Estimator[16],
+                                          est2_period.21.gorb$Observed[19]/est2_period.21.gorb$Estimator[19])),2)
 
 
 #####GORBEA 2022
-d.22.gorb<-read.csv("./data/gorbea_2022_nwclean.csv")
+d.22.gorb<-read.csv(here("data", "gorbea_2022_nwclean.csv"))
+d.22.gorb <- d.22.gorb %>%
+  filter(!(Pollinator_id == "" | str_detect(Pollinator_id, "^\\d+$")))
+unique(d.22.gorb$Pollinator_id)
 
-########################### GORBEA DATA #########################
-
-#######CALCULATE SAMPLING COMPLETENESS FOR POLLINATORS, PLANTS AND LINKS 
-
+#
 ##############################################################
 ################ OVERALL SAMPLING COMPLETENESS ####################
 ##############################################################
@@ -955,7 +1401,12 @@ d.22.gorb.t5<-as.list(d.22.gorb.t4)
 
 rar.22.gorb <- iNEXT(d.22.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.gorb22<-ggiNEXT(rar.22.gorb, color.var="Assemblage", se=FALSE) 
-poll.gorb22
+poll.gorb22<-poll.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -963,22 +1414,21 @@ samp_comp_poll_gorb.22<-round(rar.22.gorb$AsyEst$Observed[1]/rar.22.gorb$AsyEst$
 
 
 #PLANTS
-d.pl.22.gorb<-table(d.22.gorb$full, d.22.gorb$Planta)
-d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
-d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
-d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
-d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+#d.pl.22.gorb<-table(d.22.gorb$full, d.22.gorb$Planta)
+#d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+#d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+#d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+#d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
 
-rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
-plant.gorb22
+#rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.gorb22
 
 #calculate sampling completeness as observed/estimated species richness
-samp_comp_pl_gorb.22<-round(rar.22.gorb2$AsyEst$Observed[1]/rar.22.gorb2$AsyEst$Estimator[1],2)
+#samp_comp_pl_gorb.22<-round(rar.22.gorb2$AsyEst$Observed[1]/rar.22.gorb2$AsyEst$Estimator[1],2)
 
 
 #LINKS
-
 d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
 d.l.22.gorb<-table(d.22.gorb$full, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
@@ -989,7 +1439,13 @@ d.l.22.gorb5<-as.list(d.l.22.gorb4)
 
 rar.22.gorb3 <- iNEXT(d.l.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.gorb22<-ggiNEXT(rar.22.gorb3, color.var="Assemblage", se=FALSE) 
-link.gorb22
+link.gorb22<-link.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
 
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_link_gorb.22<-round(rar.22.gorb3$AsyEst$Observed[1]/rar.22.gorb3$AsyEst$Estimator[1],2)
@@ -1012,7 +1468,13 @@ d.22.gorb.t5<-as.list(d.22.gorb.t4)
 
 rar.22.gorb<- iNEXT(d.22.gorb.t5, q=0, datatype="abundance", endpoint = 3000)
 poll.sites.gorb22<-ggiNEXT(rar.22.gorb, color.var="Assemblage", se=FALSE) 
-poll.sites.gorb22
+poll.sites.gorb22<-poll.sites.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -1024,27 +1486,26 @@ samp_comp_poll_site_gorb22<-round(mean(c(est.22.gorb$Observed[1]/est.22.gorb$Est
                                      est.22.gorb$Observed[13]/est.22.gorb$Estimator[13])),2)
 
 #PLANTS
-d.pl.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$Planta)
-d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
-d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
-d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
-d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+#d.pl.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$Planta)
+#d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+#d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+#d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+#d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
 
-rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.sites.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
-plant.sites.gorb22
+#rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.sites.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.sites.gorb22
 
 #calculate sampling completeness as observed/estimated species richness
-est.22.gorb2<-rar.22.gorb2$AsyEst
+#est.22.gorb2<-rar.22.gorb2$AsyEst
 
-samp_comp_pl_site_gorb22<-round(mean(c(est.22.gorb2$Observed[1]/est.22.gorb2$Estimator[1], est.22.gorb2$Observed[4]/est.22.gorb2$Estimator[4],
-                                   est.22.gorb2$Observed[7]/est.22.gorb2$Estimator[7],est.22.gorb2$Observed[10]/est.22.gorb2$Estimator[10],
-                                   est.22.gorb2$Observed[13]/est.22.gorb2$Estimator[13])),2)
+#samp_comp_pl_site_gorb22<-round(mean(c(est.22.gorb2$Observed[1]/est.22.gorb2$Estimator[1], est.22.gorb2$Observed[4]/est.22.gorb2$Estimator[4],
+#                                   est.22.gorb2$Observed[7]/est.22.gorb2$Estimator[7],est.22.gorb2$Observed[10]/est.22.gorb2$Estimator[10],
+#                                   est.22.gorb2$Observed[13]/est.22.gorb2$Estimator[13])),2)
 
 
 
 #LINKS
-
 d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
 d.l.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
@@ -1055,7 +1516,12 @@ d.l.22.gorb5<-as.list(d.l.22.gorb4)
 
 rar.22.gorb3 <- iNEXT(d.l.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.sites.gorb22<-ggiNEXT(rar.22.gorb3, color.var="Assemblage", se=FALSE) 
-link.sites.gorb22
+link.sites.gorb22<-link.sites.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 #calculate sampling completeness as observed/estimated species richness
 
@@ -1086,7 +1552,12 @@ d.t.22.gorb5<-as.list(d.t.22.gorb4)
 
 rar.22.gorb <- iNEXT(d.t.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
 poll.period.gorb22<-ggiNEXT(rar.22.gorb, color.var="Assemblage", se=FALSE) 
-poll.period.gorb22
+poll.period.gorb22<-poll.period.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -1099,28 +1570,27 @@ samp_comp_poll_period_gorb22<-round(mean(c(est_period.22.gorb$Observed[1]/est_pe
                                        est_period.22.gorb$Observed[19]/est_period.22.gorb$Estimator[19])),2)
 
 #PLANTS
-d.pl.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$Planta)
-d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
-d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
-d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
-d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+#d.pl.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$Planta)
+#d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+#d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+#d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+#d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
 
-rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
-plant.period.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
-plant.period.gorb22
+#rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+#plant.period.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+#plant.period.gorb22
 
 #calculate sampling completeness as observed/estimated species richness
-est2_period.22.gorb<-rar.22.gorb2$AsyEst
+#est2_period.22.gorb<-rar.22.gorb2$AsyEst
 
-samp_comp_pl_period_gorb22<-round(mean(c(est2_period.22.gorb$Observed[1]/est2_period.22.gorb$Estimator[1], est2_period.22.gorb$Observed[4]/est2_period.22.gorb$Estimator[4],
-                                     est2_period.22.gorb$Observed[7]/est2_period.22.gorb$Estimator[7],est2_period.22.gorb$Observed[10]/est2_period.22.gorb$Estimator[10],
-                                     est2_period.22.gorb$Observed[13]/est2_period.22.gorb$Estimator[13], est2_period.22.gorb$Observed[16]/est2_period.22.gorb$Estimator[16],
-                                     est2_period.22.gorb$Observed[19]/est2_period.22.gorb$Estimator[19])),2)
+#samp_comp_pl_period_gorb22<-round(mean(c(est2_period.22.gorb$Observed[1]/est2_period.22.gorb$Estimator[1], est2_period.22.gorb$Observed[4]/est2_period.22.gorb$Estimator[4],
+#                                     est2_period.22.gorb$Observed[7]/est2_period.22.gorb$Estimator[7],est2_period.22.gorb$Observed[10]/est2_period.22.gorb$Estimator[10],
+#                                     est2_period.22.gorb$Observed[13]/est2_period.22.gorb$Estimator[13], est2_period.22.gorb$Observed[16]/est2_period.22.gorb$Estimator[16],
+#                                     est2_period.22.gorb$Observed[19]/est2_period.22.gorb$Estimator[19])),2)
 
 
 
 #LINKS
-
 d.22.gorb$link<-paste(d.22.gorb$Planta, d.22.gorb$Pollinator_id)
 d.l.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$link)
 d.l.22.gorb2<-as.data.frame.array(d.l.22.gorb)
@@ -1131,7 +1601,12 @@ d.l.22.gorb5<-as.list(d.l.22.gorb4)
 
 rar.22.gorb3 <- iNEXT(d.l.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
 link.period.gorb22<-ggiNEXT(rar.22.gorb3, color.var="Assemblage", se=FALSE) 
-link.period.gorb22
+link.period.gorb22<-link.period.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -1142,6 +1617,110 @@ samp_comp_link_period_22_gorb<-round(mean(c(est3_period_22_gorb$Observed[1]/est3
                                           est3_period_22_gorb$Observed[13]/est3_period_22_gorb$Estimator[13], est3_period_22_gorb$Observed[16]/est3_period_22_gorb$Estimator[16],
                                           est3_period_22_gorb$Observed[19]/est3_period_22_gorb$Estimator[19])),2)
 
+##plantas de floral resources
+d.22.gorb <- read.csv(
+  "./data/rec_floralesG22.csv",
+  header = TRUE,
+  sep = ";",
+  fileEncoding = "Latin1"
+)
+
+d.22.gorb$full<-rep(1, nrow(d.22.gorb))
+d.pl.22.gorb<-table(d.22.gorb$full, d.22.gorb$Especie.planta)
+d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+
+rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+plant.gorb22<-plant.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+#calculate sampling completeness as observed/estimated species richness
+samp_comp_pl_gorb.22<-round(rar.22.gorb2$AsyEst$Observed[1]/rar.22.gorb2$AsyEst$Estimator[1],2)
+
+##sites
+d.pl.22.gorb<-table(d.22.gorb$Bosque, d.22.gorb$Especie.planta)
+d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+
+rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.sites.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+plant.sites.gorb22<-plant.sites.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+##extract legend
+plant.sites.g22_legend<-plant.sites.gorb22 + theme_set(
+  theme_bw() + theme(
+    legend.position = "bottom",
+    axis.title = element_blank() 
+  ))
+
+#function to extract legend from plot 
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend.sites.g <- get_only_legend(plant.sites.g22_legend)  
+
+
+
+#calculate sampling completeness as observed/estimated species richness
+est.22.gorb2<-rar.22.gorb2$AsyEst
+
+samp_comp_pl_site_gorb22<-round(mean(c(est.22.gorb2$Observed[1]/est.22.gorb2$Estimator[1], est.22.gorb2$Observed[4]/est.22.gorb2$Estimator[4],
+                                       est.22.gorb2$Observed[7]/est.22.gorb2$Estimator[7],est.22.gorb2$Observed[10]/est.22.gorb2$Estimator[10],
+                                       est.22.gorb2$Observed[13]/est.22.gorb2$Estimator[13])),2)
+
+##periodo
+#crear vriable periodo
+require(lubridate)
+#especificar que es  una fecha
+d.22.gorb$Fecha<-dmy(d.22.gorb$Fecha)
+unique(d.22.gorb$Fecha)
+d.22.gorb <- d.22.gorb %>% arrange(Fecha) %>%
+  group_by(Bosque) %>%
+  mutate(Periodo = match(Fecha, unique(Fecha)))
+unique(d.22.gorb$Periodo)
+
+d.pl.22.gorb<-table(d.22.gorb$Periodo, d.22.gorb$Especie.planta)
+d.pl.22.gorb2<-as.data.frame.array(d.pl.22.gorb)
+d.pl.22.gorb3 <- t(d.pl.22.gorb2[,1:ncol(d.pl.22.gorb2)])
+d.pl.22.gorb4<-as.data.frame(d.pl.22.gorb3)
+d.pl.22.gorb5<-as.list(d.pl.22.gorb4)
+
+rar.22.gorb2 <- iNEXT(d.pl.22.gorb5, q=0, datatype="abundance", endpoint = 3000)
+plant.period.gorb22<-ggiNEXT(rar.22.gorb2, color.var="Assemblage", se=FALSE) 
+plant.period.gorb22<-plant.period.gorb22+ theme_set(
+  theme_bw() + theme(
+    legend.position = "none",
+    legend.text = element_blank(),
+    axis.title = element_blank()
+  ))
+
+
+#calculate sampling completeness as observed/estimated species richness
+est2_period.22.gorb<-rar.22.gorb2$AsyEst
+
+samp_comp_pl_period_gorb22<-round(mean(c(est2_period.22.gorb$Observed[1]/est2_period.22.gorb$Estimator[1], est2_period.22.gorb$Observed[4]/est2_period.22.gorb$Estimator[4],
+                                         est2_period.22.gorb$Observed[7]/est2_period.22.gorb$Estimator[7],est2_period.22.gorb$Observed[10]/est2_period.22.gorb$Estimator[10],
+                                         est2_period.22.gorb$Observed[13]/est2_period.22.gorb$Estimator[13], est2_period.22.gorb$Observed[16]/est2_period.22.gorb$Estimator[16],
+                                         est2_period.22.gorb$Observed[19]/est2_period.22.gorb$Estimator[19])),2)
 
 
 
@@ -1335,7 +1914,7 @@ dat.total4<-cbind(dat.total3[,1:3], paste(dat.total3[,4], dat.total3[,7], sep="�
 colnames(dat.total4)<-c("Aggregation level", "Year", "Study area", "Pollinators",
                         "Plants", "Links")
 
-save(Fig_complete,dat.total3, dat.total4, file = "Rdata/Sampl_compl_ECOLOGY.RData")
+save(Fig_complete,dat.total3, dat.total4,t, file = "scripts/Sampl_compl_ECOLOGY.RData")
 
 library(patchwork)
 library(gridExtra)
@@ -1346,9 +1925,14 @@ plot.new()
 grid.table(dat.total4, rows=NULL)
 dev.off()
 
-
+t<-grid.table(dat.total4, rows=NULL)
 tabla_grob <- tableGrob(dat.total4, rows=NULL)
 final_plot <- plot_grid(Fig_complete, tabla_grob, nrow = 2, rel_heights = c(1.2, 0.7))
 final_plot
 
 ggsave("Figs/tables.png",final_plot, width = 9, height = 12)
+
+save(poll.gorb20, plant.gorb.20, link.gorb20, poll.gorb21, plant.gorb21, link.gorb21, poll.gorb22, plant.gorb22, link.gorb22,
+     poll.sites.gorb20, plant.sites.gorb20, link.sites.gorb20, poll.sites.gorb21, plant.sites.gorb21, link.sites.d21, poll.sites.gorb22, plant.sites.gorb22, link.sites.gorb22,
+     poll.period.gorb20, plant.period.gorb20, link.period.gorb20, poll.period.gorb21, plant.period.gorb21, link.period.gorb21, poll.period.gorb22, plant.period.gorb22, link.period.gorb22,
+     file = "plots_full.gorbea.RData")
