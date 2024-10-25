@@ -1,0 +1,320 @@
+---
+title: "Network analysis"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Community level reproductive success
+
+escalamos variables con rescale. Eliminamos filas de sitios donde no hay informacion de mean reproductive success para analisis de exito reproductivo.
+
+```{r loading}
+#| warning: false
+#| message: false
+
+pacman::p_load(tidyverse,here, patchwork, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB)
+
+library(here)
+sitems<-read.csv(here("data","useful", "sitems_meanfs.csv"))
+sitems$Year<-as.factor(sitems$Year)
+sitems$Periodo<-as.factor(sitems$Periodo)
+
+glimpse(sitems)
+sitems_rescaled <- sitems %>%
+  mutate(Anidamiento = scale(Anidamiento),
+         comp.fun.pol = scale(comp.fun.pol),
+         comp.fun.pl = scale(comp.fun.pl), 
+         robustness.pol = scale(robustness.pol), 
+         robustness.pl = scale(robustness.pl), 
+         total.visits = scale(total.visits),
+         poll.sp = scale(poll.sp),
+         plant.sp = scale(plant.sp),
+         asymmetry = scale(asymmetry),
+         connectance = scale(connectance))
+
+sitems.fs <- sitems_rescaled %>%
+  filter(!is.na(mean.fs)& !is.nan(mean.fs))
+sitems.fs <- sitems.fs %>%
+  mutate(mean.fs = if_else(mean.fs == 1, 0.9999, mean.fs))
+
+
+
+```
+
+```{r repro}
+#| warning: false
+#| message: false
+
+sitems.fs$Periodo <- as.numeric(sitems.fs$Periodo)
+sitems.fs.d<-sitems.fs%>%
+  filter(sitems.fs$Site_id=="Doñana")
+sitems.fs.g<-sitems.fs%>%
+  filter(sitems.fs$Site_id=="Gorbea")
+
+install.packages("nlme")
+library(nlme)
+m5_lme <- lme(
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits,  # Sin Periodo
+  random = list( ~ 1 | Bosque, ~ 1 | Year),
+  correlation = corAR1(form = ~ Periodo | Bosque),  # Correlación AR(1) por Bosque
+  method = "ML",
+  data = sitems.fs.g
+)
+check_collinearity(m5_lme)
+
+
+# List of model formulas
+formulas <- list(
+  m6 = mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol,  # Sin Periodo
+  m7 = mean.fs ~ poll.sp + plant.sp + Anidamiento + total.visits  
+)
+
+
+# Ajustar los modelos con lme()
+models.d <- map(formulas, ~lme(.x,
+    random = list( ~ 1 | Bosque, ~ 1 | Year), 
+    correlation = corAR1(form = ~ Periodo | Bosque),  
+    method = "ML",
+    data = sitems.fs.d
+  ))
+
+models.g <- map(formulas, ~lme(.x,
+    random = list( ~ 1 | Bosque, ~ 1 | Year), 
+    correlation = corAR1(form = ~ Periodo | Bosque),  
+    method = "ML",
+    data = sitems.fs.g
+  ))
+
+
+
+models.full <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs))
+
+aic_results <- map(models.g, AIC)
+print(aic_results)
+
+aic_results.full <- map(models.full, AIC)
+print(aic_results.full)
+
+```
+
+Mejor modelo para anidamiento + comp funcional y para anidamiento + total visits con todos los datos juntos. Sites como random.
+
+con map todos los plots de los modelos anteriores.
+
+**Tabla modelos estructura funcion**
+
+```{r tables}
+#| warning: false
+#| message: false
+library(gridExtra)
+library(grid)
+install.packages("kableExtra")
+library(kableExtra)
+
+
+resultados_d <- map_dfr(models.d, ~ {
+  s <- summary(.x)$tTable  # Extraer la tabla de coeficientes con summary()
+  coef_df <- as_tibble(s, rownames = "term") %>%
+   mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+}, .id = "modelo_d") %>%
+  select(Region, model = modelo_d, term, Estimate = Value, `Std.Error`, `t-value`, `p-value`)
+
+# Extraer estimates, std.error, t.value, y p.value para todos los modelos en models.g
+resultados_g <- map_dfr(models.g, ~ {
+  s <- summary(.x)$tTable  # Extraer la tabla de coeficientes con summary()
+  coef_df <- as_tibble(s, rownames = "term")  %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
+}, .id = "modelo_g")%>%
+    select(Region, model=modelo_g, term, Estimate = Value, `Std.Error`, `t-value`, `p-value`)
+
+
+
+# Combinar los resultados en una sola tabla
+tabla_final <- bind_rows(resultados_d, resultados_g)
+
+tabla_final_df <- as.data.frame(tabla_final)
+
+# Crear una tabla con desplazamiento horizontal
+tabla_kable <- tabla_final_df %>%
+  kable("html") %>%
+  kable_styling("striped", full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#0073e6") %>% # Estilo del encabezado
+  column_spec(1:5, border_left = TRUE) # Estilo de columnas
+
+# Mostrar la tabla
+tabla_kable
+```
+
+**Gorbea**
+
+```{r anidamiento.plot}
+#| warning: false
+#| message: false
+
+
+check_and_plot.g <- function(formula) {
+  model <- lme(formula,
+    random = list( ~ 1 | Bosque, ~ 1 | Year), 
+    correlation = corAR1(form = ~ Periodo | Bosque),  
+    method = "ML",
+    data = sitems.fs.g
+  )
+  performance:: check_model(model)               
+  effects <- allEffects(model)     
+  plot.effects <- plot(effects)                   
+  summary(model)  
+  return(plot.effects)
+}
+
+check_and_plot.d <- function(formula) {
+ model <- lme(formula,
+    random = list( ~ 1 | Bosque, ~ 1 | Year), 
+    correlation = corAR1(form = ~ Periodo | Bosque),  
+    method = "ML",
+    data = sitems.fs.d
+  )
+  performance:: check_model(model)               
+  effects <- allEffects(model)     
+  plot.effects <- plot(effects)                   
+  summary(model)  
+  return(plot.effects)
+}
+
+plots.g <- map(formulas, check_and_plot.g)
+
+
+
+```
+
+**Doñana,** con los tres modelos:
+
+```{r doñana.fs}
+#| warning: false
+#| message: false
+plots.d <- map(formulas, check_and_plot.d)
+```
+
+### Indices de estructura de la red
+
+```{r plots}
+
+library(ggplot2)
+library(ggsci)
+library(ggpubr)
+library(purrr)
+
+# Filtrar los datasets
+sitems.g <- sitems_rescaled %>% filter(Site_id == "Gorbea")
+sitems.d <- sitems_rescaled %>% filter(Site_id == "Doñana")
+
+# Crear lista de datasets con nombres completos
+datasets <- list(Gorbea = sitems.g, Doñana = sitems.d)
+models <- list(
+  anidamiento = Anidamiento ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque),
+  comp_pol = comp.fun.pol ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque),
+  comp_pl = comp.fun.pl ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque) 
+)
+
+# Función para ajustar modelos y generar predicciones
+predict_and_summarise <- function(data, formula) {
+  model <- glmmTMB(formula, data = data, family = "gaussian")
+  data$predicted <- predict(model, type = "response", re.form = NA)
+  
+  mean_predictions <- data %>%
+    group_by(Year, Periodo) %>%
+    summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
+  
+  return(list(data = data, mean_predictions = mean_predictions))
+}
+
+# Función para crear gráficos
+create_plot <- function(data, mean_predictions, y_variable, plot_title) {
+  ggplot(data, aes_string(x = "Periodo", y = y_variable)) +
+    geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
+    geom_line(aes(y = predicted), color = "#3C5488FF", alpha = 0.75, size = 0.7) +
+    geom_point(data = mean_predictions, aes_string(y = "mean_predicted"),
+               color = "#3C5488FF", size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
+    geom_line(data = mean_predictions, aes_string(y = "mean_predicted", group = "Year"),
+              color = "#3C5488FF", size = 0.7, alpha = 0.75) +
+    facet_wrap(~ Year) +
+    scale_color_npg() +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    labs(x = "Periodo", y = ifelse(y_variable == "Anidamiento", "Anidamiento", 
+                                     ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", " Poll. Functional Complementarity")), 
+         color = "Year") +
+    ggtitle(plot_title)
+}
+
+# Aplicar modelos y generar gráficos para cada combinación
+results <- map(models, ~ map(datasets, predict_and_summarise, formula = .x))
+
+
+plots <- map2(results, names(results), function(res, model_name) {
+  map2(res, names(res), function(data_res, site_name) {
+    y_variable <- ifelse(model_name == "anidamiento", "Anidamiento",
+                  ifelse(model_name == "comp_pl", "comp.fun.pl", "comp.fun.pol"))
+    create_plot(data_res$data, data_res$mean_predictions, y_variable, paste(site_name, model_name))
+  })
+})
+
+# Mostrar gráficos
+plots <- walk(plots, ~ walk(.x, print))
+save(plots,file = "Rdata/indices.RData")
+
+```
+
+```{r bosque}
+predict_bosque <- function(data, formula) {
+  model <- glmmTMB(formula, data = data, family = "gaussian")
+  data$predicted <- predict(model, type = "response", re.form = NA)
+  
+  mean_predictions <- data %>%
+    group_by(Year, Periodo, Bosque) %>%
+    summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
+  
+  return(list(data = data, mean_predictions = mean_predictions))
+}
+sortu_plot <- function(data, mean_predictions, y_variable, plot_title) {
+ggplot(data, aes_string(x = "Periodo", y = y_variable)) +
+    geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
+    geom_point(data = mean_predictions, aes_string(y = "mean_predicted", color = "as.factor(Year)"),
+               size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
+    geom_line(data = mean_predictions, aes_string(y = "mean_predicted", group = "Year", color = "as.factor(Year)"),
+              size = 0.7, alpha = 0.75) +
+    facet_wrap(~ Bosque) +  # Facetar por Bosque
+    scale_color_npg() +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    labs(x = "Periodo", y = ifelse(y_variable == "Anidamiento", "Anidamiento", 
+                                   ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", "Functional Complementarity")), 
+         color = "Year") +
+    ggtitle(plot_title)
+}
+
+# Aplicar modelos y generar gráficos para cada combinación
+results <- map(models, ~ map(datasets, predict_bosque, formula = .x))
+
+# Generar gráficos usando la información de `results`
+plots <- map2(results, names(results), function(res, model_name) {
+  map2(res, names(res), function(data_res, site_name) {
+    y_variable <- ifelse(model_name == "anidamiento", "Anidamiento",
+                  ifelse(model_name == "comp_pl", "comp.fun.pl", "comp.fun.pol"))
+    sortu_plot(data_res$data, data_res$mean_predictions, y_variable, paste(site_name))
+  })
+})
+
+# Mostrar gráficos
+plots<-walk(plots, ~ walk(.x, print))
+save(plots,file = "Rdata/indices_bosque.RData")
+```
