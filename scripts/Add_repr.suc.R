@@ -14,7 +14,7 @@ sitems2 <- read.csv("data/SITE_plant_species_level_metrics.csv")
 
 #calculate total number of visits per plant sps
 ##cargar all data
-all_df <- read.csv("./data/all_data.csv")
+all_df <- read.csv("./data/useful/all_data.csv")
 
 pl.vis <- all_df %>%
   dplyr::group_by(Site, Year, Bosque, Periodo, Planta) %>%
@@ -33,6 +33,13 @@ all_df_with_visits$j <-
     all_df_with_visits$Planta,
     sep = "_"
   )
+
+plants <- sitems2%>%
+  distinct(Especies) %>%    
+  arrange(Especies)        
+print(plants)
+
+
 
 ###add to plant species network data
 sitems2$match <-
@@ -64,6 +71,7 @@ d21.fs$Periodo <- d21.fs$ronda
 d21.meanfs <- d21.fs %>%
   group_by(Periodo, Bosque, Year, Site) %>%
   dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE))
+
 
 
 g21.rs <- read.csv("./data/rep.suc/frutos_G21.csv", sep = ";")
@@ -126,10 +134,16 @@ g21.fs <- g21.fs %>%
     )
   )
 
+
+g21.fs$Planta <- dplyr::recode(g21.fs$Planta, "Vicia Pyrenaica" = "Vicia pyrenaica")
+  
+ 
 g21.meanfs <- g21.fs %>%
   filter(!Trat == "Embolsada") %>%
   group_by(Periodo, Bosque, Year, Site) %>%
   dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE))
+
+
 
 
 
@@ -179,6 +193,7 @@ g22.fs <- g22.fs %>%
     )
   )
 
+
                                 
 g22.meanfs <- g22.fs %>%
   filter(Embolsada == "no") %>%
@@ -186,10 +201,14 @@ g22.meanfs <- g22.fs %>%
   dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE))
 
 
+
+
 g22.meanfs$Bosque <- as.character(g22.meanfs$Bosque)
 g21.meanfs$Bosque <- as.character(g21.meanfs$Bosque)
 g21.meanfs$Periodo <- as.character(g21.meanfs$Periodo)
 d21.meanfs$Periodo <- as.character(d21.meanfs$Periodo)
+
+
 
 fruit_set <- rbind (d21.meanfs, g21.meanfs, g22.meanfs)
 unique(fruit_set$Bosque)
@@ -203,6 +222,9 @@ fruit_set$match <-
         sep = "_")  
 
 ##fruit set per plant sp
+sitems2 <- read.csv("data/sitems2_totvisits.csv")
+
+
 d21.pl.fs <- d21.fs %>%
   group_by(Periodo, Bosque, Year, Site, SP) %>%
   dplyr::summarise(pl.mean.fs = mean(fruit_set, na.rm = TRUE))
@@ -240,18 +262,27 @@ pl.fruit_set$match <-
         pl.fruit_set$Year,
         pl.fruit_set$Bosque,
         pl.fruit_set$Periodo,
+        pl.fruit_set$Planta,
         sep = "_")  
 
+unique(pl.fruit_set$Planta)
+unique(sitems2$Planta)
+
 sitems2$Bosque <- as.character(sitems2$Bosque)
+sitems2 <- sitems2 %>%
+  rename(Planta = Especies)
+
 sitems2$match <-
   paste(sitems2$Site_id,
         sitems2$Year,
         sitems2$Bosque,
         sitems2$Periodo,
+        sitems2$Planta,
         sep = "_")
 
 sitems2$pl.mean.fs<-pl.fruit_set$pl.mean.fs[match(sitems2$match, pl.fruit_set$match)]
-write.csv(sitems2, "data/sitems2_totvisits.fs.csv")
+
+write.csv(sitems2, "data/useful/sitems2_totvisits.fs.csv")
 
 ####COMMUNITY NETWORK ANALYSIS
 sitems$Bosque <- as.character(sitems$Bosque)
@@ -277,13 +308,5 @@ tot.visits$match <-
 
 sitems$total.visits<-tot.visits$tot.vis[match(sitems$match, tot.visits$match)]
 
-write.csv(sitems, "data/sitems_meanfs.csv")
+write.csv(sitems, "data/useful/sitems_meanfs.csv")
 
-#scale all variables to be able to compare effect sizes 
-sitems$Anidamiento <- scale(sitems$Anidamiento , center = T, scale = T)
-sitems$comp.fun.pol <- scale(sitems$comp.fun.pol  , center = T, scale = T)
-sitems$comp.fun.pl <- scale(sitems$comp.fun.pl  , center = T, scale = T)
-sitems$poll.sp <- scale(sitems$poll.sp  , center = T, scale = T)
-sitems$plant.sp <- scale(sitems$plant.sp  , center = T, scale = T)
-sitems$total.visits <- scale(sitems$total.visits  , center = T, scale = T)
-sitems$total.visits <- scale(sitems$total.visits  , center = T, scale = T)

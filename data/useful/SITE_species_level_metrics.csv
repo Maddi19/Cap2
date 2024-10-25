@@ -1,0 +1,1467 @@
+"Site_id","Year","Bosque","Periodo","Especies","norm_degree","weight_closeness","d"
+"Doñana",2020,"Pinar Puebla",1,"Apis mellifera",0.25,0.0218068535825545,0
+"Doñana",2020,"Pinar Puebla",1,"Callophrys rubi",0.5,1.02492211838006,0.173890468902509
+"Doñana",2020,"Pinar Puebla",1,"Chalicodoma sicula",0.25,0,0.851664333294638
+"Doñana",2020,"Pinar Puebla",1,"Syrphidae",0.25,0.0218068535825545,0
+"Doñana",2020,"Pinar Puebla",1,"Zerynthia rumina",0.25,0.0109034267912773,0
+"Doñana",2020,"Pinar Puebla",1,"Tropinota squalida",0.25,0.0109034267912773,0
+"Doñana",2020,"Pinar Puebla",1,"Glaucopsyche alexis",0.25,0,0.851664333294638
+"Doñana",2020,"Pinar Puebla",1,"Anthophora sp",0.5,0.043613707165109,0.141726392225123
+"Doñana",2020,"Pinar Puebla",1,"Xylocopa cantabrita",0.25,0.0327102803738318,0
+"Doñana",2020,"Pinar Hinojos",1,"Apis mellifera",0.5,0.0461215932914046,0
+"Doñana",2020,"Pinar Hinojos",1,"Platycheirus  sp",0.5,0.0259433962264151,0
+"Doñana",2020,"Pinar Hinojos",1,"Syrphidae",0.5,0.0259433962264151,0
+"Doñana",2020,"Pinar Hinojos",1,"Diptera",1,0.111756168359942,0
+"Doñana",2020,"Pinar Hinojos",1,"Platycheirus albimanus",0.5,0.0264150943396226,0.805040978106214
+"Doñana",2020,"Pinar Hinojos",1,"Episyrphus balteatus",0.5,0.0622641509433962,0
+"Doñana",2020,"Pinar Hinojos",1,"Dilophus sp",0.5,0.15166908563135,0.0833508146212496
+"Doñana",2020,"Pinar Hinojos",1,"Lepidoptera",0.5,0.0461215932914046,0
+"Doñana",2020,"Villamanrique Chaparral",1,"Apis mellifera",0.333333333333333,0.0213903743315508,0
+"Doñana",2020,"Villamanrique Chaparral",1,"Xylocopa cantabrita",0.333333333333333,0.0245655080213904,0.543598023741692
+"Doñana",2020,"Villamanrique Chaparral",1,"Pieris rapae",0.666666666666667,0.0839248672616895,0.216103076679934
+"Doñana",2020,"Villamanrique Chaparral",1,"Anthophora sp",0.333333333333333,0.0213903743315508,0
+"Doñana",2020,"Villamanrique Chaparral",1,"Diptera",0.333333333333333,0.0213903743315508,0
+"Doñana",2020,"Villamanrique Chaparral",1,"Anthophora retusa",0.333333333333333,0.0148320048431036,0.803438367767177
+"Doñana",2020,"Villamanrique Chaparral",1,"Zerynthia rumina",0.666666666666667,0.0423011438574614,0.00101329937324138
+"Doñana",2020,"Villamanrique Chaparral",1,"Tropinota squalida",0.666666666666667,0.0275823247959471,0.59364424535402
+"Doñana",2020,"Villamanrique Chaparral",1,"Syrphidae",0.333333333333333,0.0213903743315508,0
+"Doñana",2020,"Pinar Puebla",2,"Apis mellifera",0.2,0.0306040268456376,0.48162704825076
+"Doñana",2020,"Pinar Puebla",2,"Zerynthia rumina",0.2,0,1
+"Doñana",2020,"Pinar Puebla",2,"Xylocopa cantabrita",0.6,0.256782551222736,0.196399476245743
+"Doñana",2020,"Pinar Puebla",2,"Episyrphus balteatus",0.4,0.028483702107069,0.54885480411882
+"Doñana",2020,"Pinar Puebla",2,"Eucera sp",0.2,0.0154054054054054,0.404063530193486
+"Doñana",2020,"Pinar Puebla",2,"Andrena Trachandrena sp",0.2,0.0281192189105858,0
+"Doñana",2020,"Pinar Puebla",2,"Anthophora sp",0.2,0.0147493261455526,0
+"Doñana",2020,"Pinar Puebla",2,"Lasioglossum sp",0.6,0.0845749613601236,0.0633487744508737
+"Doñana",2020,"Pinar Puebla",2,"Syrphidae",0.2,0.0147493261455526,0
+"Doñana",2020,"Pinar Hinojos",2,"Dilophus sp",0.333333333333333,0,1
+"Doñana",2020,"Pinar Hinojos",2,"Platycheirus  sp",0.333333333333333,0.571428571428571,0
+"Doñana",2020,"Pinar Hinojos",2,"Episyrphus balteatus",0.333333333333333,0.380952380952381,0
+"Doñana",2020,"Pinar Hinojos",2,"mosca gris puntos negros",0.333333333333333,0.19047619047619,0
+"Doñana",2020,"Pinar Hinojos",2,"Tropinota squalida",0.333333333333333,0.19047619047619,0
+"Doñana",2020,"Pinar Hinojos",2,"Apis mellifera",0.333333333333333,0,1
+"Doñana",2020,"Villamanrique Chaparral",2,"Myathropa  florea",1,0.129429892141757,0.0621747283165739
+"Doñana",2020,"Villamanrique Chaparral",2,"Apis mellifera",0.5,0.0338983050847458,0
+"Doñana",2020,"Villamanrique Chaparral",2,"Coenonympha pamphilus",0.5,0.0338983050847458,0
+"Doñana",2020,"Villamanrique Chaparral",2,"Eucera  caspica",0.5,0.0338983050847458,0
+"Doñana",2020,"Villamanrique Chaparral",2,"Eucera sp",0.5,0.0414678295211453,0.551512351564849
+"Doñana",2020,"Villamanrique Chaparral",2,"Osmia bicornis",0.5,0.0790960451977401,0.710935173682112
+"Doñana",2020,"Villamanrique Chaparral",2,"Callophrys rubi",0.5,0.0338983050847458,0
+"Doñana",2020,"Villamanrique Chaparral",2,"Episyrphus balteatus",0.5,0.0813559322033898,0.0739575216347145
+"Doñana",2020,"Villamanrique Sur",2,"Apis mellifera",0.5,0.96969696969697,0.427208658007725
+"Doñana",2020,"Villamanrique Sur",2,"Callophrys rubi",0.5,0.121212121212121,0
+"Doñana",2020,"Villamanrique Sur",2,"Lasioglossum  albocinctum",0.5,0,0.541843090008674
+"Doñana",2020,"Villamanrique Sur",2,"Tropinota squalida",0.5,0.121212121212121,0
+"Doñana",2020,"Villamanrique Sur",2,"Zerynthia rumina",0.5,0,0.768074227794258
+"Doñana",2020,"Villamanrique Sur",2,"Eucera sp",0.5,0.121212121212121,0
+"Doñana",2020,"Pinar Aznalcazar",2,"Apis mellifera",1,0.8,0
+"Doñana",2020,"Pinar Aznalcazar",2,"Zerynthia rumina",0.5,0.3,0
+"Doñana",2020,"Pinar Aznalcazar",2,"Osmia submicans",0.5,0.05,0
+"Doñana",2020,"Pinar Aznalcazar",2,"Xylocopa cantabrita",0.5,0.05,0
+"Doñana",2020,"Pinar Aznalcazar",2,"Empis sp",0.5,0.05,0
+"Doñana",2020,"Pinar Puebla",3,"Apis mellifera",0.125,0.0213817436429072,0.27830238657094
+"Doñana",2020,"Pinar Puebla",3,"Xylocopa cantabrita",0.75,0.0991786665036024,0.22396798851463
+"Doñana",2020,"Pinar Puebla",3,"Syrphidae",0.125,0.0208293086926501,0.089319005212188
+"Doñana",2020,"Pinar Puebla",3,"Episyrphus balteatus",0.125,0.0214983713355049,0
+"Doñana",2020,"Pinar Puebla",3,"Bombylidae",0.25,0.0348622237873052,0.16861105556352
+"Doñana",2020,"Pinar Puebla",3,"Calliphora sp",0.125,0.0213817436429072,0.27830238657094
+"Doñana",2020,"Pinar Puebla",3,"Eucera sp",0.75,0.0606234782372708,0.0750999619442684
+"Doñana",2020,"Pinar Puebla",3,"Bombylius torquatus",0.25,0.0349308840015589,0.0989089135623809
+"Doñana",2020,"Pinar Puebla",3,"Vespidae",0.125,0.0208293086926501,0.089319005212188
+"Doñana",2020,"Pinar Puebla",3,"Lasioglossum sp",0.125,0.0213999869797797,0.63915119328547
+"Doñana",2020,"Pinar Puebla",3,"Callophrys rubi",0.125,0.0214983713355049,0
+"Doñana",2020,"Pinar Puebla",3,"Anthophora sp",0.125,0.0716612377850163,0.415080424999263
+"Doñana",2020,"Pinar Puebla",3,"Tropinota squalida",0.125,0.0214983713355049,0
+"Doñana",2020,"Pinar Puebla",3,"Xylocopa violacea",0.75,0.0755395908019474,0.274387497911463
+"Doñana",2020,"Pinar Puebla",3,"Psilothrix viridicoerulea",0.125,0.0213999869797797,0.63915119328547
+"Doñana",2020,"Pinar Hinojos",3,"Psilothrix viridicoerulea",0.25,0.5,0.0124919795624356
+"Doñana",2020,"Pinar Hinojos",3,"Heliotaurus ruficollis",0.25,0.166666666666667,0
+"Doñana",2020,"Pinar Hinojos",3,"Andrena flavipes",0.25,0.0833333333333333,0
+"Doñana",2020,"Pinar Hinojos",3,"Episyrphus balteatus",0.25,0.0833333333333333,0
+"Doñana",2020,"Pinar Hinojos",3,"Andrena cinerea",0.25,0.0833333333333333,0
+"Doñana",2020,"Pinar Hinojos",3,"Lasioglossum sp",0.25,0.0833333333333333,0
+"Doñana",2020,"Pinar Hinojos",3,"Eucera elongatula",0.25,0,1
+"Doñana",2020,"Pinar Hinojos",3,"Platycheirus  sp",0.75,0.166666666666667,0.223352622167444
+"Doñana",2020,"Villamanrique Sur",3,"Psilothrix viridicoerulea",0.333333333333333,0.0360655737704918,0
+"Doñana",2020,"Villamanrique Sur",3,"Episyrphus balteatus",0.333333333333333,0.144262295081967,0.120047525438963
+"Doñana",2020,"Villamanrique Sur",3,"Pieris sp",0.333333333333333,0.0655737704918033,0
+"Doñana",2020,"Villamanrique Sur",3,"Empis sp",0.333333333333333,0.0360655737704918,0
+"Doñana",2020,"Villamanrique Sur",3,"Apis mellifera",0.333333333333333,0.0360655737704918,0
+"Doñana",2020,"Villamanrique Sur",3,"Andrena Hoplandrena sp",1,0.13357619914997,0.0478167441069265
+"Doñana",2020,"Villamanrique Sur",3,"Dasypoda iberica",0.333333333333333,0.0655737704918033,0
+"Doñana",2020,"Villamanrique Sur",3,"Usia sp",0.333333333333333,0.0360655737704918,0.493577516823278
+"Doñana",2020,"Villamanrique Sur",3,"Heliotaurus ruficollis",0.666666666666667,0.169720347155256,0.00821696358220527
+"Doñana",2020,"Villamanrique Sur",3,"Empis tesellata",0.333333333333333,0.0360655737704918,0.493577516823278
+"Doñana",2020,"Villamanrique Chaparral",3,"Panurgus calcaratus",0.833333333333333,0.182957002429619,0.470970592872652
+"Doñana",2020,"Villamanrique Chaparral",3,"Syrphidae",0.666666666666667,0.125676383312969,0.248044808633675
+"Doñana",2020,"Villamanrique Chaparral",3,"Apis mellifera",0.166666666666667,0.0238832375055285,0.103024703129698
+"Doñana",2020,"Villamanrique Chaparral",3,"Psilothrix viridicoerulea",0.166666666666667,0.0228317742191216,0.0150499439386057
+"Doñana",2020,"Villamanrique Chaparral",3,"Bombylidae",0.333333333333333,0.0734947148811576,0.429073085591853
+"Doñana",2020,"Villamanrique Chaparral",3,"Chasmatopterus illigeri",0.333333333333333,0.037086638508293,0.43513988290837
+"Doñana",2020,"Villamanrique Chaparral",3,"Myathropa  florea",0.333333333333333,0.136256111023498,0.478885008690054
+"Doñana",2020,"Villamanrique Chaparral",3,"Cacyreus marshalli",0.5,0.163946869070209,0.588203773648652
+"Doñana",2020,"Villamanrique Chaparral",3,"Dischistus biroi",0.166666666666667,0.0235019241341396,0.289163895193672
+"Doñana",2020,"Pinar Aznalcazar",3,"Episyrphus balteatus",0.5,0.0371057513914657,0.631328881609717
+"Doñana",2020,"Pinar Aznalcazar",3,"Psilothrix viridicoerulea",0.166666666666667,0.0371057513914657,0
+"Doñana",2020,"Pinar Aznalcazar",3,"Lasioglossum sp",0.166666666666667,0.057345252150447,0.36084880671453
+"Doñana",2020,"Pinar Aznalcazar",3,"Apis mellifera",0.5,0.0797560403471733,0.194892068392995
+"Doñana",2020,"Pinar Aznalcazar",3,"Platycheirus  sp",0.166666666666667,0.112825618052099,0.497934118250854
+"Doñana",2020,"Pinar Aznalcazar",3,"Coenonympha pamphilus",0.166666666666667,0.057345252150447,0.36084880671453
+"Doñana",2020,"Pinar Aznalcazar",3,"Parageron sp",0.166666666666667,0.057345252150447,0.36084880671453
+"Doñana",2020,"Pinar Aznalcazar",3,"Empis tesellata",0.5,0.097805762868969,0.482343743491788
+"Doñana",2020,"Pinar Puebla",4,"Psilothrix viridicoerulea",0.5,0.333333333333333,0.338358104107972
+"Doñana",2020,"Pinar Puebla",4,"Apis mellifera",0.25,0.25,0.317393805514015
+"Doñana",2020,"Pinar Puebla",4,"Pieris rapae",0.25,0.25,0.317393805514015
+"Doñana",2020,"Pinar Puebla",4,"Tropinota squalida",0.25,0,1
+"Doñana",2020,"Pinar Puebla",4,"Xylocopa cantabrita",0.25,0.2,0.569323441926607
+"Doñana",2020,"Pinar Puebla",4,"Bombus terrestris",0.25,0,1
+"Doñana",2020,"Pinar Hinojos",4,"Andrena cinerea",0.5,0.663265306122449,0.364168102583003
+"Doñana",2020,"Pinar Hinojos",4,"Episyrphus balteatus",0.5,0.214285714285714,0.492849761465173
+"Doñana",2020,"Pinar Hinojos",4,"Psilothrix viridicoerulea",0.25,0.0535714285714286,0
+"Doñana",2020,"Pinar Hinojos",4,"Attagenus  trifasciatus",0.25,0.214285714285714,0.195921047173982
+"Doñana",2020,"Pinar Hinojos",4,"Dischistus biroi",0.25,0.0535714285714286,0
+"Doñana",2020,"Pinar Hinojos",4,"Merodon sp",1,0.0974025974025974,0.605289167176294
+"Doñana",2020,"Villamanrique Sur",4,"Platycheirus  sp",0.4,0.116,0.157858022701084
+"Doñana",2020,"Villamanrique Sur",4,"Xylocopa cantabrita",0.2,0.0386666666666667,0.737350464962807
+"Doñana",2020,"Villamanrique Sur",4,"Lasioglossum sp",0.2,0.0644444444444445,0
+"Doñana",2020,"Villamanrique Sur",4,"Heliotaurus ruficollis",0.2,0.158181818181818,0
+"Doñana",2020,"Villamanrique Sur",4,"Psilothrix viridicoerulea",0.4,0.0644444444444445,0.428940498910924
+"Doñana",2020,"Villamanrique Sur",4,"Apis mellifera",0.2,0,1
+"Doñana",2020,"Villamanrique Sur",4,"Tropinota squalida",0.2,0.0644444444444445,0
+"Doñana",2020,"Villamanrique Sur",4,"Lasioglossum immunitum",0.2,0.193333333333333,0.0570950117240427
+"Doñana",2020,"Villamanrique Sur",4,"Episyrphus balteatus",0.2,0.0644444444444445,0
+"Doñana",2020,"Villamanrique Sur",4,"Dischistus biroi",0.4,0.0725,0.143792812891978
+"Doñana",2020,"Villamanrique Chaparral",4,"Psilothrix viridicoerulea",0.166666666666667,0.0245571078784387,0.22447612992302
+"Doñana",2020,"Villamanrique Chaparral",4,"Dischistus biroi",0.333333333333333,0.0588260663302713,0.592495489401753
+"Doñana",2020,"Villamanrique Chaparral",4,"Machimus sp",0.333333333333333,0.0436876100998238,0.268348384212451
+"Doñana",2020,"Villamanrique Chaparral",4,"Apis mellifera",0.166666666666667,0.0242708944999021,0
+"Doñana",2020,"Villamanrique Chaparral",4,"abeja peque�a",0.166666666666667,0.0242708944999021,0
+"Doñana",2020,"Villamanrique Chaparral",4,"Panurgus calcaratus",0.333333333333333,0.0354156929947552,0.207030459594636
+"Doñana",2020,"Villamanrique Chaparral",4,"Panurgus dentipes",0.166666666666667,0.0256458466513744,0.367587522843284
+"Doñana",2020,"Villamanrique Chaparral",4,"Nomada sp",0.166666666666667,0,0.755349457881774
+"Doñana",2020,"Villamanrique Chaparral",4,"Bombylidae",0.166666666666667,0.0245571078784387,0.22447612992302
+"Doñana",2020,"Villamanrique Chaparral",4,"Bombylella atra",0.333333333333333,0.0340083192393838,0.344821083669782
+"Doñana",2020,"Villamanrique Chaparral",4,"Coenonympha pamphilus",0.166666666666667,0.046071742214416,0.623434280245241
+"Doñana",2020,"Villamanrique Chaparral",4,"Pyronia bathseba",0.166666666666667,0.0245571078784387,0.22447612992302
+"Doñana",2020,"Villamanrique Chaparral",4,"Panurgus sp",0.333333333333333,0,0.942635267627857
+"Doñana",2020,"Villamanrique Chaparral",4,"Eucera elongatula",0.166666666666667,0.0255828347431401,0.61223806496151
+"Doñana",2020,"Villamanrique Chaparral",4,"Xylocopa cantabrita",0.166666666666667,0.0242708944999021,0
+"Doñana",2020,"Pinar Aznalcazar",4,"Psilothrix viridicoerulea",0.25,0.208333333333333,0
+"Doñana",2020,"Pinar Aznalcazar",4,"Pieris rapae",0.25,0.208333333333333,0
+"Doñana",2020,"Pinar Aznalcazar",4,"Cacyreus marshalli",0.25,0,0.461195203304334
+"Doñana",2020,"Pinar Aznalcazar",4,"Episyrphus balteatus",0.25,0,0.613147192765458
+"Doñana",2020,"Pinar Aznalcazar",4,"Thymelicus acteon",0.25,0,0.613147192765458
+"Doñana",2020,"Pinar Aznalcazar",4,"Coenonympha pamphilus",0.25,0.208333333333333,0
+"Doñana",2020,"Pinar Aznalcazar",4,"Andrena cinerea",0.25,0.208333333333333,0
+"Doñana",2020,"Pinar Aznalcazar",4,"Eristalis  similis",0.25,0,0.101755598296073
+"Doñana",2020,"Pinar Aznalcazar",4,"Xylocopa cantabrita",0.5,0,0.383117711290649
+"Doñana",2020,"Pinar Aznalcazar",4,"Carcharodus alceae",0.25,0.416666666666667,0.353984985057691
+"Doñana",2020,"Pinar Aznalcazar",4,"Ceratina sp",0.25,0,0.613147192765458
+"Doñana",2020,"Pinar Puebla",5,"Apis mellifera",0.6,0.153452685421995,0.382901217420647
+"Doñana",2020,"Pinar Puebla",5,"Xylocopa cantabrita",0.2,0.0470588235294118,0
+"Doñana",2020,"Pinar Puebla",5,"Panurgus calcaratus",0.2,0.034944670937682,0.710935173682112
+"Doñana",2020,"Pinar Puebla",5,"Syrphidae",0.2,0.0470588235294118,0
+"Doñana",2020,"Pinar Puebla",5,"Euchloe belemia",0.2,0.14405762304922,0.494562593701328
+"Doñana",2020,"Pinar Puebla",5,"Bombus terrestris",0.2,0.0542986425339367,0.0836861800173475
+"Doñana",2020,"Pinar Puebla",5,"Bombylius torquatus",0.6,0.0630252100840336,0.549621540998217
+"Doñana",2020,"Villamanrique Sur",5,"Apis mellifera",0.6,0.291666666666667,0.31390247964399
+"Doñana",2020,"Villamanrique Sur",5,"Platycheirus  sp",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Sur",5,"Panurgus sp",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Sur",5,"Psilothrix viridicoerulea",0.4,0,1
+"Doñana",2020,"Villamanrique Sur",5,"Bombus terrestris",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Sur",5,"Dasypoda dusmeti",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Sur",5,"Xylocopa cantabrita",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Sur",5,"Syrphidae",0.2,0.145833333333333,0
+"Doñana",2020,"Villamanrique Chaparral",5,"Apis mellifera",0.714285714285714,0.16351542027817,0.227498647166919
+"Doñana",2020,"Villamanrique Chaparral",5,"Machimus sp",0.285714285714286,0.0845510829459465,0.050769574598981
+"Doñana",2020,"Villamanrique Chaparral",5,"Bombus terrestris",0.142857142857143,0.0431058303398729,0
+"Doñana",2020,"Villamanrique Chaparral",5,"Dischistus biroi",0.428571428571429,0.0846675712347354,0.196561632232823
+"Doñana",2020,"Villamanrique Chaparral",5,"Panurgus sp",0.285714285714286,0.0713619649172194,0.419432283876598
+"Doñana",2020,"Villamanrique Chaparral",5,"Episyrphus balteatus",0.142857142857143,0.0947154566471289,0.676109462229179
+"Doñana",2020,"Villamanrique Chaparral",5,"Flavipanurgus venustus",0.142857142857143,0,0.755349457881774
+"Doñana",2020,"Villamanrique Chaparral",5,"Bombylella atra",0.285714285714286,0.0830653914681849,0.352218924458358
+"Doñana",2020,"Villamanrique Chaparral",5,"Psilothrix viridicoerulea",0.142857142857143,0,0.755349457881774
+"Doñana",2020,"Pinar Aznalcazar",5,"Psilothrix viridicoerulea",0.2,0.666666666666667,0
+"Doñana",2020,"Pinar Aznalcazar",5,"Coenonympha pamphilus",0.2,0,1
+"Doñana",2020,"Pinar Aznalcazar",5,"Ceratina sp",0.4,1.33333333333333,0.547411228938166
+"Doñana",2020,"Pinar Aznalcazar",5,"Andrena chrysosceles",0.2,0,1
+"Doñana",2020,"Pinar Aznalcazar",5,"Xylocopa cantabrita",0.2,0,1
+"Doñana",2020,"Pinar Hinojos",6,"Bombus terrestris",0.333333333333333,0,1
+"Doñana",2020,"Pinar Hinojos",6,"Heliotaurus ruficollis",0.333333333333333,0.5,0
+"Doñana",2020,"Pinar Hinojos",6,"Andrena cinerea",0.333333333333333,0,0.369070246428543
+"Doñana",2020,"Pinar Hinojos",6,"Anthaxia sp",0.333333333333333,0.5,0
+"Doñana",2020,"Pinar Hinojos",6,"Xylocopa cantabrita",0.333333333333333,0.5,0
+"Doñana",2020,"Pinar Hinojos",6,"Nomada sp",0.333333333333333,0,0.369070246428543
+"Doñana",2020,"Pinar Puebla",6,"Xylocopa cantabrita",0.333333333333333,1,0
+"Doñana",2020,"Pinar Puebla",6,"Panurgus calcaratus",0.666666666666667,0,1
+"Doñana",2020,"Pinar Puebla",6,"Apis mellifera",0.333333333333333,1,0
+"Doñana",2020,"Villamanrique Sur",6,"Lasioglossum immunitum",0.25,0.108843537414966,0
+"Doñana",2020,"Villamanrique Sur",6,"Exosoma lusitanicum",0.25,0.108843537414966,0
+"Doñana",2020,"Villamanrique Sur",6,"Heliotaurus ruficollis",0.5,0.126984126984127,4.00428312976865e-17
+"Doñana",2020,"Villamanrique Sur",6,"Episyrphus balteatus",0.25,0.108843537414966,0
+"Doñana",2020,"Villamanrique Sur",6,"Pieris rapae",0.25,0,1
+"Doñana",2020,"Villamanrique Sur",6,"Panurgus dentipes",0.25,0.253968253968254,0.150977500432694
+"Doñana",2020,"Villamanrique Sur",6,"Apis mellifera",0.5,0.108843537414966,0.25
+"Doñana",2020,"Villamanrique Sur",6,"Anthopora bimaculata",0.25,0.0692640692640693,0.666666666666667
+"Doñana",2020,"Villamanrique Chaparral",6,"Lasioglossum prasinum",0.166666666666667,0,0.613147192765458
+"Doñana",2020,"Villamanrique Chaparral",6,"Dischistus biroi",0.166666666666667,0.25,0
+"Doñana",2020,"Villamanrique Chaparral",6,"Ceratina sp",0.333333333333333,0.25,0.27894294565113
+"Doñana",2020,"Villamanrique Chaparral",6,"Apis mellifera",0.166666666666667,0,0.613147192765458
+"Doñana",2020,"Villamanrique Chaparral",6,"Hoplitis  adunca",0.5,1,0.532029999423075
+"Doñana",2020,"Villamanrique Chaparral",6,"Xylocopa violacea",0.166666666666667,0,1
+"Doñana",2020,"Pinar Aznalcazar",6,"Panurgus sp",0.666666666666667,NA,NA
+"Doñana",2020,"Pinar Aznalcazar",6,"Xylocopa cantabrita",0.333333333333333,NA,NA
+"Doñana",2021,"Pinar Aznalcazar",1,"Apis mellifera",1,0.106060606060606,0.732827072845931
+"Doñana",2021,"Pinar Aznalcazar",1,"Lasioglossum sp",0.333333333333333,0.212121212121212,0.425260407022458
+"Doñana",2021,"Pinar Aznalcazar",1,"Lasioglossum immunitum",0.333333333333333,0.424242424242424,0.607569784750114
+"Doñana",2021,"Pinar Aznalcazar",1,"Tropinota squalida",0.333333333333333,0.106060606060606,0.287886959190039
+"Doñana",2021,"Pinar Aznalcazar",1,"Psilothrix viridicoerulea",0.333333333333333,0.106060606060606,0.287886959190039
+"Doñana",2021,"Pinar Aznalcazar",1,"Eristalis tenax",0.333333333333333,0.106060606060606,0.287886959190039
+"Doñana",2021,"Pinar Aznalcazar",1,"Myathropa florea",0.333333333333333,0.106060606060606,0.287886959190039
+"Doñana",2021,"Pinar Hinojos",1,"Platycheirus sp",0.333333333333333,0,1
+"Doñana",2021,"Pinar Hinojos",1,"Xylocopa cantabrita",0.333333333333333,0.12280701754386,0
+"Doñana",2021,"Pinar Hinojos",1,"Apis mellifera",0.333333333333333,0,1
+"Doñana",2021,"Pinar Hinojos",1,"Episyrphus balteatus",0.333333333333333,0.0614035087719298,0
+"Doñana",2021,"Pinar Hinojos",1,"Ceratina sp",0.333333333333333,0.245614035087719,0
+"Doñana",2021,"Pinar Hinojos",1,"Oxythyrea funesta",0.333333333333333,0.184210526315789,0
+"Doñana",2021,"Pinar Hinojos",1,"Eristalis similis",0.333333333333333,0.0614035087719298,0
+"Doñana",2021,"Pinar Hinojos",1,"Andrena sp",0.333333333333333,0.307017543859649,0.0362013067879797
+"Doñana",2021,"Pinar Hinojos",1,"Anthophora retusa",0.333333333333333,0.184210526315789,0
+"Doñana",2021,"Pinar Hinojos",2,"Anthophora hispania",0.2,0,1
+"Doñana",2021,"Pinar Hinojos",2,"Lasioglossum morio",0.2,0.0657894736842105,0
+"Doñana",2021,"Pinar Hinojos",2,"Platycheirus sp",0.2,0,0.764591086633362
+"Doñana",2021,"Pinar Hinojos",2,"Eristalis similis",0.2,0,0.764591086633362
+"Doñana",2021,"Pinar Hinojos",2,"Episyrphus balteatus",0.2,0,1
+"Doñana",2021,"Pinar Hinojos",2,"Bombus terrestris",0.4,0.197368421052632,0.111526618364002
+"Doñana",2021,"Pinar Hinojos",2,"Andrena sp",0.2,0.131578947368421,0
+"Doñana",2021,"Pinar Hinojos",2,"Apis mellifera",0.2,0.394736842105263,0.0613553334731819
+"Doñana",2021,"Pinar Hinojos",2,"Anthophora sp",0.2,0.460526315789474,0.0814172916787216
+"Doñana",2021,"Pinar Hinojos",4,"Empis tesellata",0.666666666666667,0.0909090909090909,0.72105705434887
+"Doñana",2021,"Pinar Hinojos",4,"Sphaerophoria scripta",0.333333333333333,0.142857142857143,0
+"Doñana",2021,"Pinar Hinojos",4,"Meliscaeva auricollis",0.333333333333333,0.142857142857143,0
+"Doñana",2021,"Pinar Hinojos",4,"Episyrphus balteatus",0.666666666666667,0.166666666666667,0
+"Doñana",2021,"Pinar Hinojos",4,"Platycheirus sp",0.333333333333333,0.142857142857143,0
+"Doñana",2021,"Pinar Hinojos",4,"Eupeodes sp.",0.333333333333333,0.142857142857143,0
+"Doñana",2021,"Pinar Hinojos",4,"Andrena rhyssonota",0.333333333333333,0.142857142857143,0
+"Doñana",2021,"Pinar Hinojos",5,"Platycheirus sp",0.166666666666667,0.145833333333333,0
+"Doñana",2021,"Pinar Hinojos",5,"Episyrphus balteatus",0.166666666666667,0,1
+"Doñana",2021,"Pinar Hinojos",5,"Eupeodes sp.",0.166666666666667,0,0.333333333333333
+"Doñana",2021,"Pinar Hinojos",5,"Psilothrix viridicoerulea",0.166666666666667,0.145833333333333,0
+"Doñana",2021,"Pinar Hinojos",5,"Bombus terrestris",0.333333333333333,0.145833333333333,0.4
+"Doñana",2021,"Pinar Hinojos",5,"Andrena alluaudi",0.166666666666667,0.145833333333333,0
+"Doñana",2021,"Pinar Hinojos",5,"Brachycoleus triangularis",0.166666666666667,0.145833333333333,0
+"Doñana",2021,"Pinar Hinojos",5,"Eucera clypeata",0.166666666666667,0,1
+"Doñana",2021,"Pinar Hinojos",5,"Andrena sp",0.166666666666667,0,0.333333333333333
+"Doñana",2021,"Pinar Hinojos",5,"Xylocopa cantabrita",0.166666666666667,0.291666666666667,0.2
+"Doñana",2021,"Pinar Hinojos",5,"Lasioglossum immunitum",0.166666666666667,0.145833333333333,0
+"Doñana",2021,"Pinar Hinojos",5,"Lycaena phlaeas",0.333333333333333,0,0.666666666666667
+"Doñana",2021,"Pinar Hinojos",6,"Episyrphus balteatus",0.142857142857143,0,1
+"Doñana",2021,"Pinar Hinojos",6,"Bombus terrestris",0.428571428571429,0.128947368421053,0.532705291670546
+"Doñana",2021,"Pinar Hinojos",6,"Heliotaurus ruficollis",0.142857142857143,0.0830508474576271,0.221848749616356
+"Doñana",2021,"Pinar Hinojos",6,"Andrena alluaudi",0.142857142857143,0.0538461538461538,0
+"Doñana",2021,"Pinar Hinojos",6,"Lasioglossum immunitum",0.142857142857143,0,0.698970004336019
+"Doñana",2021,"Pinar Hinojos",6,"Panurgus calcaratus",0.428571428571429,0,0.889829203941863
+"Doñana",2021,"Pinar Hinojos",6,"Andrena hispania",0.142857142857143,0.0830508474576271,0.221848749616356
+"Doñana",2021,"Pinar Hinojos",6,"Panurgus banksianus",0.142857142857143,0.0830508474576271,0.221848749616356
+"Doñana",2021,"Pinar Hinojos",6,"Andrena rhyssonota",0.142857142857143,0.0830508474576271,0.221848749616356
+"Doñana",2021,"Pinar Hinojos",6,"Sphaerophoria scripta",0.142857142857143,0.0538461538461538,0
+"Doñana",2021,"Pinar Hinojos",6,"Andrena allaudi",0.142857142857143,0.0538461538461538,0
+"Doñana",2021,"Pinar Hinojos",6,"Anthophora atroalba",0.142857142857143,0.0830508474576271,0.221848749616356
+"Doñana",2021,"Pinar Hinojos",7,"Lasioglossum immunitum",0.4,0.0952380952380952,0.422644116218907
+"Doñana",2021,"Pinar Hinojos",7,"Andrena alluaudi",0.4,0.07223113964687,0.0742743875783083
+"Doñana",2021,"Pinar Hinojos",7,"Lasioglossum interruptum",0.6,0.118681318681319,0.219938926718426
+"Doñana",2021,"Pinar Hinojos",7,"Heliotaurus ruficollis",0.4,0.0952380952380952,0.207509902737093
+"Doñana",2021,"Pinar Hinojos",7,"Lasioglossum morio",0.2,0.081374321880651,0.429210730697404
+"Doñana",2021,"Pinar Hinojos",7,"Exosoma lusitanicum",0.4,0.0510204081632653,0.253511456588532
+"Doñana",2021,"Pinar Hinojos",7,"Stenopterus ater",0.2,0.0432172869147659,0.474700929925613
+"Doñana",2021,"Pinar Hinojos",7,"Sphaerophoria scripta",0.2,0.0432172869147659,0.474700929925613
+"Doñana",2021,"Pinar Hinojos",7,"Lasioglossum sp",0.2,0.0408163265306122,0
+"Doñana",2021,"Pinar Hinojos",8,"Platycheirus sp",0.25,0.0311332503113325,0.275473224837746
+"Doñana",2021,"Pinar Hinojos",8,"Lobonix aeneus",0.25,0.0311332503113325,0.275473224837746
+"Doñana",2021,"Pinar Hinojos",8,"Andrena alluaudi",0.25,0.0311332503113325,0.275473224837746
+"Doñana",2021,"Pinar Hinojos",8,"Lasioglossum immunitum",0.25,0.0555349870418364,0.0932054877015139
+"Doñana",2021,"Pinar Hinojos",8,"Lasioglossum mediterraneum",0.25,0.0684931506849315,0.503338758686821
+"Doñana",2021,"Pinar Hinojos",8,"Exosoma lusitanicum",0.75,0.0933997509339975,0.173714325097591
+"Doñana",2021,"Pinar Hinojos",8,"Heliotaurus ruficollis",0.25,0.0321061643835616,0
+"Doñana",2021,"Pinar Hinojos",8,"Ceratina cucurbitina",0.25,0.148284140658099,0.427720256534285
+"Doñana",2021,"Pinar Hinojos",8,"Empis sp",0.25,0,1
+"Doñana",2021,"Pinar Hinojos",8,"Lomatia lateralis",0.25,0.0987881981032666,0.171764323194922
+"Doñana",2021,"Pinar Hinojos",8,"Sphaerophoria scripta",0.25,0.0311332503113325,0.275473224837746
+"Doñana",2021,"Pinar Hinojos",9,"Andrena alluaudi",0.5,0,1
+"Doñana",2021,"Pinar Hinojos",9,"Chasmatopterus illigeri",0.5,1.33333333333333,0.547411228938166
+"Doñana",2021,"Pinar Hinojos",9,"Lasioglossum immunitum",0.25,0.666666666666667,0
+"Doñana",2021,"Pinar Puebla",1,"Apis mellifera",0.166666666666667,0.0238095238095238,0
+"Doñana",2021,"Pinar Puebla",1,"Eristalis tenax",0.166666666666667,0.0476190476190476,0
+"Doñana",2021,"Pinar Puebla",1,"Eristalis similis",0.333333333333333,0.5,0.121206715763776
+"Doñana",2021,"Pinar Puebla",1,"Lasioglossum immunitum",0.166666666666667,0,1
+"Doñana",2021,"Pinar Puebla",1,"Eucera decolorata",0.166666666666667,0.0714285714285714,0
+"Doñana",2021,"Pinar Puebla",1,"Tropinota squalida",0.166666666666667,0.0476190476190476,0
+"Doñana",2021,"Pinar Puebla",1,"Episyrphus balteatus",0.166666666666667,0.0952380952380952,0
+"Doñana",2021,"Pinar Puebla",1,"Lasioglossum sp",0.333333333333333,0.121065375302663,0.0555303530867652
+"Doñana",2021,"Pinar Puebla",1,"Polyommatus icarus",0.333333333333333,0.0350140056022409,0.278935270542496
+"Doñana",2021,"Pinar Puebla",1,"Andrena rhyssonota",0.166666666666667,0.0476190476190476,0
+"Doñana",2021,"Pinar Puebla",1,"Empis tesellata",0.166666666666667,0.0476190476190476,0
+"Doñana",2021,"Pinar Puebla",1,"Chalicodoma sicula",0.166666666666667,0,1
+"Doñana",2021,"Pinar Puebla",1,"Andrena hispania",0.333333333333333,0.0714285714285714,0.161658109509315
+"Doñana",2021,"Villamanrique Chaparral",1,"Apis mellifera",0.75,0.0139011752811829,0.54458940705284
+"Doñana",2021,"Villamanrique Chaparral",1,"Psilothrix viridicoerulea",0.25,0.0108182533438238,0.706752563089378
+"Doñana",2021,"Villamanrique Chaparral",1,"Lasioglossum immunitum",0.25,0.00811778163167411,0.706752563089378
+"Doñana",2021,"Villamanrique Chaparral",1,"Tropinota squalida",0.25,0.0108182533438238,0.706752563089378
+"Doñana",2021,"Villamanrique Chaparral",1,"Lasioglossum malachurum",0.25,0.00929152148664344,0
+"Doñana",2021,"Villamanrique Chaparral",1,"Zerynthia rumina",0.5,0.0139011752811829,0.656367954848924
+"Doñana",2021,"Villamanrique Chaparral",1,"Lycaena phlaeas",0.25,0.0114532628784132,0.828183977424462
+"Doñana",2021,"Villamanrique Chaparral",1,"Empis sp",0.25,0.00696864111498258,0
+"Doñana",2021,"Villamanrique Chaparral",3,"Apis mellifera",0.2,0.0777777777777778,0.0802831302454606
+"Doñana",2021,"Villamanrique Chaparral",3,"Andrena granulosa",0.4,0,0.753507094308768
+"Doñana",2021,"Villamanrique Chaparral",3,"Psilothrix viridicoerulea",0.2,0,1
+"Doñana",2021,"Villamanrique Chaparral",3,"Lasioglossum immunitum",0.2,0.0777777777777778,0.0802831302454606
+"Doñana",2021,"Villamanrique Chaparral",3,"Empis sp",0.2,0.0777777777777778,0.0802831302454606
+"Doñana",2021,"Villamanrique Chaparral",3,"Lasioglossum sp",0.4,0,0.225234788221931
+"Doñana",2021,"Villamanrique Chaparral",3,"Ceratina nigrolabiata",0.2,0.155555555555556,0.287074081423894
+"Doñana",2021,"Villamanrique Chaparral",3,"Osmia bicornis",0.2,0.0777777777777778,0.0802831302454606
+"Doñana",2021,"Villamanrique Chaparral",3,"Tropinota squalida",0.2,0,0
+"Doñana",2021,"Villamanrique Chaparral",3,"Eucera collaris",0.4,0.544444444444444,0.607279344423132
+"Doñana",2021,"Villamanrique Chaparral",3,"Empis tesellata",0.2,0.155555555555556,0.287074081423894
+"Doñana",2021,"Villamanrique Chaparral",4,"Apis mellifera",0.6,0.0823045267489712,0.382663353784868
+"Doñana",2021,"Villamanrique Chaparral",4,"Exosoma lusitanicum",0.2,0,1
+"Doñana",2021,"Villamanrique Chaparral",4,"Panurgus calcaratus",0.2,0.164609053497942,0
+"Doñana",2021,"Villamanrique Chaparral",4,"Lasioglossum immunitum",0.2,0.0411522633744856,0
+"Doñana",2021,"Villamanrique Chaparral",4,"Eristalis sp.",0.2,0.0411522633744856,0
+"Doñana",2021,"Villamanrique Chaparral",4,"Empis sp",0.2,0.246913580246914,0.0110329864809362
+"Doñana",2021,"Villamanrique Chaparral",4,"Lasioglossum sp",0.2,0.288065843621399,0.0275916094078661
+"Doñana",2021,"Villamanrique Chaparral",4,"Psilothrix viridicoerulea",0.2,0.0411522633744856,0
+"Doñana",2021,"Villamanrique Chaparral",4,"Eupeodes sp.",0.4,0.0411522633744856,0.366840218325605
+"Doñana",2021,"Villamanrique Chaparral",4,"Ceratina chalybea",0.2,0.123456790123457,0
+"Doñana",2021,"Villamanrique Chaparral",4,"Tropinota squalida",0.2,0.0411522633744856,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Exosoma lusitanicum",0.2,0.0253164556962025,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Panurgus calcaratus",0.2,0.0253164556962025,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Eucera elongatula",0.6,0.0359760159893404,0.554358767856697
+"Doñana",2021,"Villamanrique Chaparral",5,"Tropinota squalida",0.2,0.0911392405063291,0.0428874020112763
+"Doñana",2021,"Villamanrique Chaparral",5,"Apis mellifera",0.2,0.0379746835443038,0.626885699978363
+"Doñana",2021,"Villamanrique Chaparral",5,"Eristalis tenax",0.2,0.0707114797031864,0.00829564147338507
+"Doñana",2021,"Villamanrique Chaparral",5,"Dasypoda albimana",0.2,0.0253164556962025,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Andrena sp",0.2,0.0488245931283906,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Empis sp",0.6,0.10253164556962,0.158903510747851
+"Doñana",2021,"Villamanrique Chaparral",5,"Andrena nigroaenea",0.2,0.0253164556962025,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Eumenes sp",0.2,0.189873417721519,0.146593953148211
+"Doñana",2021,"Villamanrique Chaparral",5,"Cerocoma schaefferi",0.2,0.0253164556962025,0
+"Doñana",2021,"Villamanrique Chaparral",5,"Episyrphus sp",0.4,0.128164556962025,0.168471315352772
+"Doñana",2021,"Villamanrique Chaparral",5,"Merodon sp",0.4,0.0745684695051784,0
+"Doñana",2021,"Villamanrique Chaparral",6,"Platycheirus sp",0.2,0.0206532180595581,0.012957022999862
+"Doñana",2021,"Villamanrique Chaparral",6,"Dasypoda cingulata",0.2,0.032898931422305,0.82610047060392
+"Doñana",2021,"Villamanrique Chaparral",6,"Psilothrix viridicoerulea",0.4,0.052283762978169,0.228054477745765
+"Doñana",2021,"Villamanrique Chaparral",6,"Lasioglossum malachurum",0.4,0.0486412238412023,0.148722194725937
+"Doñana",2021,"Villamanrique Chaparral",6,"Dasypoda crassicornis",0.4,0.0201729106628242,0
+"Doñana",2021,"Villamanrique Chaparral",6,"Exosoma lusitanicum",0.2,0.0309798270893372,0.0830890244408326
+"Doñana",2021,"Villamanrique Chaparral",6,"Apis mellifera",0.6,0.0381290179561073,0
+"Doñana",2021,"Villamanrique Chaparral",6,"Panurgus cephalotes",0.2,0.013553674351585,0.324226343074812
+"Doñana",2021,"Villamanrique Chaparral",6,"Eucera elongatula",0.2,0,0.907561355099214
+"Doñana",2021,"Villamanrique Chaparral",6,"Dasypoda albimana",0.2,0.0123919308357349,0
+"Doñana",2021,"Villamanrique Chaparral",6,"Andrena labiata",0.2,0.0265541375051462,0.0653633165894437
+"Doñana",2021,"Villamanrique Chaparral",6,"Bombylella atra",0.4,0.0299115571897049,0.139162835060778
+"Doñana",2021,"Villamanrique Chaparral",6,"Eucera clypeata",0.2,0.0121887844285917,0.481090928664769
+"Doñana",2021,"Villamanrique Chaparral",6,"Lasioglossum mediterraneum",0.4,0.0228774107736644,0.0673286453047265
+"Doñana",2021,"Villamanrique Chaparral",6,"Ceratina mocsaryi",0.2,0,0.654060619109846
+"Doñana",2021,"Villamanrique Chaparral",6,"Anthophora bimaculata",0.2,0.0123919308357349,0
+"Doñana",2021,"Villamanrique Chaparral",6,"Dasypoda dusmeti",0.2,0,0.725849526883206
+"Doñana",2021,"Villamanrique Chaparral",6,"Tropinota squalida",0.2,0,0.879242901028329
+"Doñana",2021,"Villamanrique Chaparral",6,"Hoplitis papaveris",0.2,0.0240954210694845,0.39991422540597
+"Doñana",2021,"Villamanrique Chaparral",6,"Lasioglossum immunitum",0.2,0.013553674351585,0.324226343074812
+"Doñana",2021,"Villamanrique Chaparral",6,"Panurgus calcaratus",0.2,0.0451789145052834,0.593517691991592
+"Doñana",2021,"Villamanrique Chaparral",7,"Lasioglossum immunitum",0.2,0.0314397224631396,0.0398497604738319
+"Doñana",2021,"Villamanrique Chaparral",7,"Chasmatopterus villosulus",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Apis mellifera",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Oxythyrea funesta",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Lasioglossum sp",0.4,0.0423220922899464,0.168177729220613
+"Doñana",2021,"Villamanrique Chaparral",7,"Dasypoda cingulata",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Panurgus calcaratus",0.4,0.0181092801387684,0.207561467159321
+"Doñana",2021,"Villamanrique Chaparral",7,"Eucera elongatula",0.2,0,0.88595628301486
+"Doñana",2021,"Villamanrique Chaparral",7,"Panurgus perezi",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Exosoma lusitanicum",0.2,0.0300961445800995,0.0340535823384034
+"Doñana",2021,"Villamanrique Chaparral",7,"Bombylella atra",0.2,0,0.741411434854716
+"Doñana",2021,"Villamanrique Chaparral",7,"Dasypoda sp",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Andrena granulosa",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Andrena flavipes",0.4,0.0133156471608591,0.588151860909314
+"Doñana",2021,"Villamanrique Chaparral",7,"Dasypoda dusmeti",0.2,0.0067270728598694,0.541976620381794
+"Doñana",2021,"Villamanrique Chaparral",7,"Usia sp",0.2,0.0264755557584334,0.0148884873218499
+"Doñana",2021,"Villamanrique Chaparral",7,"Ceratina dentiventris",0.2,0.0162269535293624,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Andrena hispania",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Dasypoda albimana",0.4,0.00986344234137714,0.402520489053107
+"Doñana",2021,"Villamanrique Chaparral",7,"Eucera clypeata",0.2,0.00918320493852354,0.647639852180729
+"Doñana",2021,"Villamanrique Chaparral",7,"Andrena sp",0.2,0.00918320493852354,0.647639852180729
+"Doñana",2021,"Villamanrique Chaparral",7,"Lycaena phlaeas",0.2,0.00986344234137714,0
+"Doñana",2021,"Villamanrique Chaparral",7,"Tropinota squalida",0.4,0.0181092801387684,0.207561467159321
+"Doñana",2021,"Villamanrique Chaparral",8,"Tropinota squalida",0.2,0.0305149396058487,0.0926570742609114
+"Doñana",2021,"Villamanrique Chaparral",8,"Apis mellifera",0.2,0.0592348827642945,0.487803120486807
+"Doñana",2021,"Villamanrique Chaparral",8,"Panurgus calcaratus",0.4,0.0734265734265734,0.297220536396056
+"Doñana",2021,"Villamanrique Chaparral",8,"Anthophora bimaculata",0.2,0.0223776223776224,0.254275467727115
+"Doñana",2021,"Villamanrique Chaparral",8,"Panurgus sp",0.2,0.0186480186480186,0
+"Doñana",2021,"Villamanrique Chaparral",8,"Lasioglossum sextrigatum",0.2,0,0.791985402323491
+"Doñana",2021,"Villamanrique Chaparral",8,"Panurgus banksianus",0.2,0.0447552447552448,0.226709222937134
+"Doñana",2021,"Villamanrique Chaparral",8,"Lasioglossum sp",0.2,0.0186480186480186,0
+"Doñana",2021,"Villamanrique Chaparral",8,"Lasioglossum interruptum",0.2,0,0.791985402323491
+"Doñana",2021,"Villamanrique Chaparral",8,"Thyreus ramosus",0.4,0.0537062937062937,0.119612545557634
+"Doñana",2021,"Villamanrique Chaparral",8,"Lasioglossum mediterraneum",0.2,0.0223776223776224,0.254275467727115
+"Doñana",2021,"Villamanrique Chaparral",8,"Panurgus cephalotes",0.2,0.0184769359081286,0.308990463831712
+"Doñana",2021,"Villamanrique Chaparral",8,"Bombylius sp.",0.6,0.0719280719280719,0.638305243736147
+"Doñana",2021,"Villamanrique Chaparral",8,"Dasypoda albimana",0.2,0.0184769359081286,0.308990463831712
+"Doñana",2021,"Villamanrique Chaparral",8,"Andrena flavipes",0.2,0.0300594927460599,0.446653891192177
+"Doñana",2021,"Villamanrique Chaparral",8,"Dasypoda dusmeti",0.2,0.0186480186480186,0
+"Doñana",2021,"Villamanrique Chaparral",8,"Nomiapis bispinosa",0.2,0.0493624023035788,0.273545821032824
+"Doñana",2021,"Villamanrique Chaparral",9,"Apis mellifera",0.25,0.121212121212121,0
+"Doñana",2021,"Villamanrique Chaparral",9,"Anthrenus verbasci",0.25,0.121212121212121,0
+"Doñana",2021,"Villamanrique Chaparral",9,"Panurgus perezi",0.25,0,1
+"Doñana",2021,"Villamanrique Chaparral",9,"Hoplitis sp",0.25,0,1
+"Doñana",2021,"Villamanrique Chaparral",9,"Anthophora femorata",0.25,0.121212121212121,0
+"Doñana",2021,"Villamanrique Chaparral",9,"Hoplitis papaveris",0.25,0.96969696969697,0.653017380112342
+"Doñana",2021,"Villamanrique Chaparral",9,"Dasypoda visnaga",0.25,0,1
+"Doñana",2021,"Villamanrique Sur",1,"Tropinota squalida",1,0.28125,0.183261282390686
+"Doñana",2021,"Villamanrique Sur",1,"Lasioglossum immunitum",0.5,0.03515625,0
+"Doñana",2021,"Villamanrique Sur",1,"Lasioglossum sp",0.5,0.03515625,0
+"Doñana",2021,"Villamanrique Sur",1,"Eristalis tenax",0.5,0.0703125,0
+"Doñana",2021,"Villamanrique Sur",1,"Episyrphus balteatus",0.5,0.03515625,0
+"Doñana",2021,"Villamanrique Sur",1,"Apis mellifera",0.5,0.17578125,0.0650449131675731
+"Doñana",2021,"Villamanrique Sur",1,"Psilothrix viridicoerulea",0.5,0.03515625,0
+"Doñana",2021,"Villamanrique Sur",1,"Meliscaeva auricollis",0.5,0.2109375,0.0777775110981863
+"Doñana",2021,"Villamanrique Sur",1,"Lasioglossum morio",0.5,0.24609375,0.0870583046133126
+"Doñana",2021,"Villamanrique Sur",2,"Episyrphus balteatus",0.5,0.0138888888888889,0
+"Doñana",2021,"Villamanrique Sur",2,"Apis mellifera",1,0.458333333333333,0.10570845428806
+"Doñana",2021,"Villamanrique Sur",2,"Eristalis sp",0.5,0.0694444444444444,0.058490100582986
+"Doñana",2021,"Villamanrique Sur",2,"Eucera sp",0.5,0.0416666666666667,0.0259969475833814
+"Doñana",2021,"Villamanrique Sur",2,"Psilothrix viridicoerulea",0.5,0.111111111111111,0.0697267003786989
+"Doñana",2021,"Villamanrique Sur",2,"Empis tesellata",0.5,0.0277777777777778,0
+"Doñana",2021,"Villamanrique Sur",2,"Tropinota squalida",0.5,0.0138888888888889,0
+"Doñana",2021,"Villamanrique Sur",2,"Lasioglossum immunitum",0.5,0.0277777777777778,0
+"Doñana",2021,"Villamanrique Sur",2,"Lasioglossum morio",0.5,0.0694444444444444,0.058490100582986
+"Doñana",2021,"Villamanrique Sur",2,"Eristalis sp.",0.5,0.0138888888888889,0
+"Doñana",2021,"Villamanrique Sur",2,"Lasioglossum sp",0.5,0.111111111111111,0.0697267003786989
+"Doñana",2021,"Villamanrique Sur",2,"Andrena sp",0.5,0.0555555555555556,0.0481225444734323
+"Doñana",2021,"Villamanrique Sur",2,"Eristalis similis",0.5,0.0694444444444444,0.058490100582986
+"Doñana",2021,"Pinar Aznalcazar",2,"Episyrphus balteatus",0.333333333333333,0.0617283950617284,0.0183624865900879
+"Doñana",2021,"Pinar Aznalcazar",2,"Apis mellifera",0.333333333333333,0.0617283950617284,0.0183624865900879
+"Doñana",2021,"Pinar Aznalcazar",2,"Eristalis tenax",1,0.0617283950617284,0.783726359133889
+"Doñana",2021,"Pinar Aznalcazar",2,"Lasioglossum immunitum",0.333333333333333,0.0617283950617284,0.0183624865900879
+"Doñana",2021,"Pinar Aznalcazar",2,"Andrena sp",0.333333333333333,0.123456790123457,0.246856607231665
+"Doñana",2021,"Pinar Aznalcazar",2,"Lasioglossum morio",0.333333333333333,0.123456790123457,0.246856607231665
+"Doñana",2021,"Pinar Aznalcazar",2,"Lasioglossum sp",0.333333333333333,0.185185185185185,0.330770072929331
+"Doñana",2021,"Pinar Aznalcazar",2,"Andrena hispania",0.333333333333333,0.123456790123457,0.246856607231665
+"Doñana",2021,"Pinar Aznalcazar",2,"Empis tesellata",0.333333333333333,0.0617283950617284,0.0183624865900879
+"Doñana",2021,"Pinar Aznalcazar",2,"Empis sp",0.333333333333333,0.246913580246914,0.3726593630688
+"Doñana",2021,"Pinar Aznalcazar",3,"Episyrphus balteatus",1,0.0821730821730822,0.404983017814491
+"Doñana",2021,"Pinar Aznalcazar",3,"Apis mellifera",0.333333333333333,0.0286953620286954,0.244315527301565
+"Doñana",2021,"Pinar Aznalcazar",3,"Psilothrix viridicoerulea",0.333333333333333,0.110232183402915,0.330529261547202
+"Doñana",2021,"Pinar Aznalcazar",3,"Eristalis tenax",0.333333333333333,0.0903903903903904,0.275216191955681
+"Doñana",2021,"Pinar Aznalcazar",3,"Lasioglossum immunitum",0.333333333333333,0.0196500848674762,0
+"Doñana",2021,"Pinar Aznalcazar",3,"Bombus terrestris",0.333333333333333,0.0361561561561562,0.17045631513229
+"Doñana",2021,"Pinar Aznalcazar",3,"Nomada sp",0.333333333333333,0.0196500848674762,0
+"Doñana",2021,"Pinar Aznalcazar",3,"Lasioglossum sp",0.333333333333333,0.0502168835502169,0.189716147980083
+"Doñana",2021,"Pinar Aznalcazar",3,"Pieris brassicae",0.333333333333333,0.0172172172172172,0.0712287620450551
+"Doñana",2021,"Pinar Aznalcazar",3,"Lasioglossum morio",0.333333333333333,0.0172172172172172,0.0712287620450551
+"Doñana",2021,"Pinar Aznalcazar",3,"Xylocopa cantabrita",0.333333333333333,0.0196500848674762,0
+"Doñana",2021,"Pinar Aznalcazar",3,"Eupeodes corollae",0.333333333333333,0.0502168835502169,0.189716147980083
+"Doñana",2021,"Pinar Aznalcazar",3,"Platynochaetus setosus",0.333333333333333,0.0182606849273516,0.8
+"Doñana",2021,"Pinar Aznalcazar",4,"Lobonix aeneus",0.8,0.132061628760088,0.252143490978695
+"Doñana",2021,"Pinar Aznalcazar",4,"Exosoma lusitanicum",0.2,0.0559179869524697,0
+"Doñana",2021,"Pinar Aznalcazar",4,"Bombylius sp.",0.4,0.101752402487281,0.0351093918222525
+"Doñana",2021,"Pinar Aznalcazar",4,"Apis mellifera",0.2,0.0492610837438424,0.221848749616356
+"Doñana",2021,"Pinar Aznalcazar",4,"Xylocopa cantabrita",0.2,0,1
+"Doñana",2021,"Pinar Aznalcazar",4,"Lasioglossum immunitum",0.2,0.0899550224887556,0.213823903691868
+"Doñana",2021,"Pinar Aznalcazar",4,"Eucera elongatula",0.2,0.0580083789880761,0.522878745280338
+"Doñana",2021,"Pinar Aznalcazar",4,"Empis tesellata",0.2,0.112852664576803,0.304458227424203
+"Doñana",2021,"Pinar Aznalcazar",4,"Eucera clypeata",0.2,0.0580083789880761,0.522878745280338
+"Doñana",2021,"Pinar Aznalcazar",5,"Platycheirus sp",0.142857142857143,0.0989749027925062,0.311218264823608
+"Doñana",2021,"Pinar Aznalcazar",5,"Eupeodes sp.",0.428571428571429,0.0758807588075881,0.582753689640939
+"Doñana",2021,"Pinar Aznalcazar",5,"Apis mellifera",0.285714285714286,0.131332082551595,0.253435837282538
+"Doñana",2021,"Pinar Aznalcazar",5,"Exosoma lusitanicum",0.142857142857143,0.0517368810051737,0.0642150259807986
+"Doñana",2021,"Pinar Aznalcazar",5,"Empis sp",0.142857142857143,0,1
+"Doñana",2021,"Pinar Aznalcazar",5,"Lasioglossum sp",0.142857142857143,0.083283759666865,0.377563470352785
+"Doñana",2021,"Pinar Aznalcazar",5,"Pieris brassicae",0.142857142857143,0.0573888091822095,0
+"Doñana",2021,"Pinar Aznalcazar",5,"Bombylella atra",0.142857142857143,0.0573888091822095,0
+"Doñana",2021,"Pinar Aznalcazar",5,"Dasypoda cingulata",0.142857142857143,0,0.471679166426281
+"Doñana",2021,"Pinar Aznalcazar",5,"Andrena granulosa",0.285714285714286,0,0.554881260846844
+"Doñana",2021,"Pinar Aznalcazar",5,"Dasypoda iberica",0.142857142857143,0.0517368810051737,0.0642150259807986
+"Doñana",2021,"Pinar Aznalcazar",5,"Panurgus calcaratus",0.142857142857143,0,0.666666666666667
+"Doñana",2021,"Pinar Aznalcazar",5,"Xylocopa cantabrita",0.142857142857143,0.037940379403794,0.0642150259807986
+"Doñana",2021,"Pinar Aznalcazar",5,"Brachycoleus triangularis",0.142857142857143,0,0.471679166426281
+"Doñana",2021,"Pinar Aznalcazar",5,"Ceratina cyanea",0.142857142857143,0.0573888091822095,0
+"Doñana",2021,"Pinar Aznalcazar",5,"Tropinota squalida",0.285714285714286,0.0569105691056911,0.0331726027645887
+"Doñana",2021,"Pinar Aznalcazar",6,"Apis mellifera",0.2,0.0522448979591837,0.669633269154553
+"Doñana",2021,"Pinar Aznalcazar",6,"Eupeodes sp.",0.2,0.0334903192046049,0
+"Doñana",2021,"Pinar Aznalcazar",6,"Lasioglossum immunitum",0.2,0.0334903192046049,0
+"Doñana",2021,"Pinar Aznalcazar",6,"Chasmatopterus villosulus",0.4,0.098310291858679,0.29060592305086
+"Doñana",2021,"Pinar Aznalcazar",6,"Andrena alluaudi",0.2,0.0207321023647554,0.764591086633362
+"Doñana",2021,"Pinar Aznalcazar",6,"Eucera elongatula",0.2,0.0334903192046049,0
+"Doñana",2021,"Pinar Aznalcazar",6,"Lasioglossum morio",0.4,0.054421768707483,0.385668380437625
+"Doñana",2021,"Pinar Aznalcazar",6,"Andrena sp",0.2,0.0791589363017935,0.149628220287184
+"Doñana",2021,"Pinar Aznalcazar",6,"Panurgus calcaratus",0.4,0.036281179138322,0.231960780494855
+"Doñana",2021,"Pinar Aznalcazar",6,"Dasypoda cingulata",0.4,0.0621963070942663,0
+"Doñana",2021,"Pinar Aznalcazar",6,"Andrena hispania",0.2,0.0435374149659864,0.536078439010289
+"Doñana",2021,"Pinar Aznalcazar",7,"Dasypoda cingulata",0.166666666666667,0,1
+"Doñana",2021,"Pinar Aznalcazar",7,"Andrena alluaudi",0.166666666666667,0.0602605863192182,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Panurgus calcaratus",0.166666666666667,0.0438258809594315,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Lasioglossum immunitum",0.166666666666667,0.113431691894999,0.036721388987026
+"Doñana",2021,"Pinar Aznalcazar",7,"Platycheirus sp",0.166666666666667,0.0602605863192182,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Episyrphus balteatus",0.333333333333333,0.139550831476084,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Lasioglossum morio",0.166666666666667,0.0241042345276873,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Andrena flavipes",0.166666666666667,0.0964169381107492,0.0146265869982639
+"Doñana",2021,"Pinar Aznalcazar",7,"Apis mellifera",0.166666666666667,0.0241042345276873,0
+"Doñana",2021,"Pinar Aznalcazar",7,"Dasypoda albimana",0.166666666666667,0.0461124486616627,0.862294613345001
+"Doñana",2021,"Pinar Aznalcazar",7,"Xylocopa cantabrita",0.333333333333333,0,1
+"Doñana",2021,"Pinar Aznalcazar",7,"Andrena hispania",0.333333333333333,0.0602605863192182,0.154161000154495
+"Doñana",2021,"Pinar Aznalcazar",8,"Lasioglossum morio",0.25,0.194117647058824,0.0816429025577351
+"Doñana",2021,"Pinar Aznalcazar",8,"Panurgus sp",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Panurgus banksianus",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Panurgus calcaratus",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Dasypoda cingulata",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Lasioglossum malachurum",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Bombus terrestris",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Andrena hispania",0.25,0.194117647058824,0.0816429025577351
+"Doñana",2021,"Pinar Aznalcazar",8,"Dasypoda albimana",0.25,0.129411764705882,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Lycaena phlaeas",0.25,0.0647058823529412,0
+"Doñana",2021,"Pinar Aznalcazar",8,"Andrena flavipes",0.25,0,0.676109462229179
+"Doñana",2021,"Pinar Aznalcazar",8,"Apis mellifera",0.25,0,0.676109462229179
+"Doñana",2021,"Pinar Aznalcazar",8,"Lasioglossum sp",0.25,0,1
+"Doñana",2021,"Pinar Aznalcazar",8,"Usia sp",0.25,0,1
+"Doñana",2021,"Pinar Aznalcazar",8,"Protosmia capitata",0.25,0.129411764705882,0
+"Doñana",2021,"Pinar Puebla",2,"Bombus terrestris",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Lobonix aeneus",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Psilothrix viridicoerulea",1,0.141901152946868,0.0857040875748052
+"Doñana",2021,"Pinar Puebla",2,"Eristalis tenax",0.333333333333333,0.0457558819706226,0.0662163867413929
+"Doñana",2021,"Pinar Puebla",2,"Apis mellifera",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Lasioglossum sp",0.166666666666667,0.0509554140127389,0.038711796998792
+"Doñana",2021,"Pinar Puebla",2,"Episyrphus balteatus",0.166666666666667,0.027679484155068,0.486703593883948
+"Doñana",2021,"Pinar Puebla",2,"Myothropa florea",0.333333333333333,0.0739133477986981,0.0853027066371484
+"Doñana",2021,"Pinar Puebla",2,"Andrena rhyssonota",0.166666666666667,0.0280957169995051,0.379392843664144
+"Doñana",2021,"Pinar Puebla",2,"Empis tesellata",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Eupeodes sp.",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Rhyncomyia cuprea",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Eristalis sp.",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Xylocopa cantabrita",0.166666666666667,0.0280957169995051,0.379392843664144
+"Doñana",2021,"Pinar Puebla",2,"Andrena flavipes",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Merodon sp",0.166666666666667,0.0287440796994937,0
+"Doñana",2021,"Pinar Puebla",2,"Eucera sp",0.166666666666667,0.0489527994882207,0.506922544039969
+"Doñana",2021,"Pinar Puebla",2,"Myopa picta",0.166666666666667,0.0280957169995051,0.778935270542496
+"Doñana",2021,"Pinar Puebla",3,"Lobonix aeneus",0.2,0.0529577464788732,0
+"Doñana",2021,"Pinar Puebla",3,"Episyrphus balteatus",0.2,0.030089628681178,0.594316128917787
+"Doñana",2021,"Pinar Puebla",3,"Eupeodes sp.",0.8,0.101841820151679,0.323525886559569
+"Doñana",2021,"Pinar Puebla",3,"Eristalis tenax",0.2,0.0529577464788732,0
+"Doñana",2021,"Pinar Puebla",3,"Lasioglossum morio",0.2,0.128123580190822,0.108525806623319
+"Doñana",2021,"Pinar Puebla",3,"Xylocopa cantabrita",0.2,0.0529577464788732,0
+"Doñana",2021,"Pinar Puebla",3,"Apis mellifera",0.2,0.0945674044265594,0.0157628455926886
+"Doñana",2021,"Pinar Puebla",3,"Platynochaetus setosus",0.4,0.0575627679118187,0.350274153727603
+"Doñana",2021,"Pinar Puebla",3,"Andrena rhyssonota",0.2,0.0529577464788732,0
+"Doñana",2021,"Pinar Puebla",3,"Exosoma lusitanicum",0.2,0.0529577464788732,0
+"Doñana",2021,"Pinar Puebla",3,"Andrena flavipes",0.2,0.0945674044265594,0.0157628455926886
+"Doñana",2021,"Pinar Puebla",3,"Empis tesellata",0.2,0.0722151088348271,0.840651732193873
+"Doñana",2021,"Pinar Puebla",4,"Brachycoleus triangularis",0.166666666666667,0.0475642500958957,0.105060663078031
+"Doñana",2021,"Pinar Puebla",4,"Anthophora dispar",0.166666666666667,0.0545408245943005,0.80145882712137
+"Doñana",2021,"Pinar Puebla",4,"Dasypoda morotei",0.333333333333333,0.0237979797979798,0.853425397488655
+"Doñana",2021,"Pinar Puebla",4,"Xylocopa cantabrita",0.166666666666667,0,1
+"Doñana",2021,"Pinar Puebla",4,"Panurgus calcaratus",0.166666666666667,0.0237979797979798,0.323007507471154
+"Doñana",2021,"Pinar Puebla",4,"Episyrphus balteatus",0.666666666666667,0.100484080779647,0.230585931652517
+"Doñana",2021,"Pinar Puebla",4,"Apis mellifera",0.166666666666667,0.0237979797979798,0.323007507471154
+"Doñana",2021,"Pinar Puebla",4,"Chasmatopterus villosulus",0.166666666666667,0.042033523340559,0.614777634473401
+"Doñana",2021,"Pinar Puebla",4,"Andrena rhyssonota",0.333333333333333,0.0491863171849393,0.350843443846338
+"Doñana",2021,"Pinar Puebla",4,"Lasioglossum immunitum",0.166666666666667,0.0225004536381782,0
+"Doñana",2021,"Pinar Puebla",4,"Bombylius medius",0.166666666666667,0.0225004536381782,0
+"Doñana",2021,"Pinar Puebla",4,"Eupeodes sp.",0.5,0.0729626360694322,0.13626664361832
+"Doñana",2021,"Pinar Puebla",4,"Dasypoda crassicornis",0.166666666666667,0.0241808431478203,0.473197445438339
+"Doñana",2021,"Pinar Puebla",5,"Episyrphus balteatus",0.142857142857143,0.0372359470103831,0.45952369114536
+"Doñana",2021,"Pinar Puebla",5,"Eupeodes sp.",0.571428571428571,0.101068999028183,0.191948717302225
+"Doñana",2021,"Pinar Puebla",5,"Chasmatopterus villosulus",0.142857142857143,0.0380952380952381,0
+"Doñana",2021,"Pinar Puebla",5,"Panurgus calcaratus",0.142857142857143,0,1
+"Doñana",2021,"Pinar Puebla",5,"Xylocopa cantabrita",0.142857142857143,0.0370133105559115,0.45952369114536
+"Doñana",2021,"Pinar Puebla",5,"Dasypoda cingulata",0.142857142857143,0.0372359470103831,0.45952369114536
+"Doñana",2021,"Pinar Puebla",5,"Panurgus perezi",0.142857142857143,0.0389951256092988,0.372526436924697
+"Doñana",2021,"Pinar Puebla",5,"Nomada merceti",0.428571428571429,0.118478013214855,0.346985698612512
+"Doñana",2021,"Pinar Puebla",5,"Bombus terrestris",0.142857142857143,0.0603948896631823,0.103196682109282
+"Doñana",2021,"Pinar Puebla",5,"Exosoma lusitanicum",0.285714285714286,0.0372359470103831,0.833952353784062
+"Doñana",2021,"Pinar Puebla",6,"Bombus terrestris",0.5,0.134453781512605,0.102972781551661
+"Doñana",2021,"Pinar Puebla",6,"Panurgus perezi",0.25,0,0.6187518102594
+"Doñana",2021,"Pinar Puebla",6,"Hoplitis papaveris",0.25,0,0.392555386676547
+"Doñana",2021,"Pinar Puebla",6,"Panurgus calcaratus",0.25,0,0.163171163046611
+"Doñana",2021,"Pinar Puebla",6,"Panurgus cephalotes",0.25,0.0784313725490196,0
+"Doñana",2021,"Pinar Puebla",6,"Apis mellifera",0.25,0,0.163171163046611
+"Doñana",2021,"Pinar Puebla",6,"Andrena rhyssonota",0.75,0.427807486631016,0.445359122367048
+"Doñana",2021,"Pinar Puebla",6,"Chasmatopterus villosulus",0.25,0.0855614973262032,0.352314537622003
+"Doñana",2021,"Pinar Puebla",6,"Pangonius variegatus",0.5,0.180225281602002,0.158869976462551
+"Doñana",2021,"Pinar Puebla",7,"Apis mellifera",0.25,0.115384615384615,0
+"Doñana",2021,"Pinar Puebla",7,"Panurgus calcaratus",0.25,0,1
+"Doñana",2021,"Pinar Puebla",7,"Bombylius sp.",0.25,0,0.710935173682112
+"Doñana",2021,"Pinar Puebla",7,"Panurgus perezi",0.5,0.830769230769231,0.329866797582014
+"Doñana",2021,"Pinar Puebla",7,"Andrena nigroaenea",0.5,0.512820512820513,0.121219121087877
+"Doñana",2021,"Pinar Puebla",7,"Xylocopa cantabrita",0.25,0,0.710935173682112
+"Gorbea",2020,"2",1,"Bombus pascuorum",0.333333333333333,0.954545454545454,0.291091576782658
+"Gorbea",2020,"2",1,"Lasioglossum tricinctum",0.666666666666667,0.0353535353535354,0.513947696669558
+"Gorbea",2020,"2",1,"Lasioglossum sp",0.333333333333333,0.0353535353535354,0
+"Gorbea",2020,"2",1,"Lasioglossum calceatum",0.333333333333333,0,1
+"Gorbea",2020,"2",1,"Cheilosia sp",0.333333333333333,0.0353535353535354,0
+"Gorbea",2020,"2",1,"Pieris sp",0.333333333333333,0.0353535353535354,0
+"Gorbea",2020,"2",1,"Apis mellifera",0.333333333333333,0.0353535353535354,0
+"Gorbea",2020,"2",1,"Bombus terrestris",0.333333333333333,0.0353535353535354,0
+"Gorbea",2020,"1",1,"Lasioglossum morio",0.6,0.11494785631518,0.309471660556568
+"Gorbea",2020,"1",1,"Cheilosia sp",0.4,0.060377358490566,0.191900553764687
+"Gorbea",2020,"1",1,"Eupeodes corollae",0.2,0.0307692307692308,0
+"Gorbea",2020,"1",1,"Apis mellifera",0.2,0,1
+"Gorbea",2020,"1",1,"Bombus pascuorum",0.2,0,1
+"Gorbea",2020,"1",1,"Syrphidae",0.2,0.0400808080808081,0.79198540232349
+"Gorbea",2020,"1",2,"Eupeodes corollae",0.142857142857143,0.0956937799043062,0.333333333333333
+"Gorbea",2020,"1",2,"Lasioglossum sp",0.142857142857143,0,1
+"Gorbea",2020,"1",2,"Syrphidae",0.142857142857143,0,1
+"Gorbea",2020,"1",2,"Cheilosia nigripes",0.142857142857143,0,1
+"Gorbea",2020,"1",2,"Andrena minutuloides",0.285714285714286,0.263157894736842,0.585490497225309
+"Gorbea",2020,"1",2,"Bombus pascuorum",0.285714285714286,0.0956937799043062,0.683007499855769
+"Gorbea",2020,"1",2,"Sphaerophoria scripta",0.142857142857143,0.0956937799043062,0.333333333333333
+"Gorbea",2020,"1",2,"Apis mellifera",0.285714285714286,0.210526315789474,0.208961151827773
+"Gorbea",2020,"5",2,"Andrena rhyssonota",0.25,0,1
+"Gorbea",2020,"5",2,"Sphaerophoria scripta",0.25,0,0.850756063472588
+"Gorbea",2020,"5",2,"Lasioglossum punctatissimum",0.25,0,0.850756063472588
+"Gorbea",2020,"5",2,"Cerambycidae",0.5,0.0361879666227492,0.640458343578618
+"Gorbea",2020,"5",2,"Bombus pascuorum",0.25,0.0241642228739003,0.763453957144043
+"Gorbea",2020,"5",2,"Formicidae",0.25,0.0145454545454545,0
+"Gorbea",2020,"5",2,"Bombus sp.",0.25,0.0241642228739003,0.763453957144043
+"Gorbea",2020,"4",2,"Sphaerophoria scripta",0.2,0.024914509037616,0
+"Gorbea",2020,"4",2,"Eristalis tenax",0.4,0.0435721461230085,0.577020076353311
+"Gorbea",2020,"4",2,"Andrena minutula",0.2,0.0228856310191281,0.395469022438916
+"Gorbea",2020,"4",2,"Lasioglossum sp",0.2,0.0228856310191281,0.395469022438916
+"Gorbea",2020,"4",2,"Bombus ruderatus",0.2,0.0228856310191281,0.395469022438916
+"Gorbea",2020,"4",2,"Bombus sylvestris",0.2,0.0228856310191281,0.395469022438916
+"Gorbea",2020,"4",2,"Apis mellifera",0.4,0.0572297145655234,0.3691520410362
+"Gorbea",2020,"4",2,"Cerambycidae",0.2,0.0284682010010796,0.658696902757007
+"Gorbea",2020,"4",2,"Bombus terrestris",0.2,0.0284682010010796,0.658696902757007
+"Gorbea",2020,"4",2,"Bombus sp.",0.8,0.0617827950690913,0.236077231627964
+"Gorbea",2020,"1",3,"Sphaerophoria scripta",0.111111111111111,0,1
+"Gorbea",2020,"1",3,"Eupeodes corollae",0.111111111111111,0.0167029385820908,0.547890167337902
+"Gorbea",2020,"1",3,"Andrena flavipes",0.222222222222222,0.0484355073490577,0.247446282617704
+"Gorbea",2020,"1",3,"Andrena agilissima",0.111111111111111,0,1
+"Gorbea",2020,"1",3,"Platycheirus albimanus",0.111111111111111,0.0153142419593087,0.10057098880306
+"Gorbea",2020,"1",3,"Lasioglossum calceatum",0.111111111111111,0.0167029385820908,0.547890167337902
+"Gorbea",2020,"1",3,"Melanostoma scalare",0.111111111111111,0.0161990002685901,0.744750075828838
+"Gorbea",2020,"1",3,"Lasioglossum sp",0.111111111111111,0.0167029385820908,0.547890167337902
+"Gorbea",2020,"1",3,"Bombus pascuorum",0.111111111111111,0.0161990002685901,0.744750075828838
+"Gorbea",2020,"1",3,"Apis mellifera",0.666666666666667,0.0751472623242614,0.344000878845064
+"Gorbea",2020,"2",3,"Cheilosia nigripes",0.166666666666667,0.128883774453395,0.494231296602928
+"Gorbea",2020,"2",3,"Nomada sp",0.166666666666667,0.0405063291139241,0
+"Gorbea",2020,"2",3,"Eupeodes luniger",0.333333333333333,0.105668684645019,0.112530162511622
+"Gorbea",2020,"2",3,"Lasioglossum punctatissimum",0.166666666666667,0.0405063291139241,0
+"Gorbea",2020,"2",3,"Sphaerophoria scripta",0.166666666666667,0,1
+"Gorbea",2020,"2",3,"Apis mellifera",0.166666666666667,0.0400612046181666,0.744041975190184
+"Gorbea",2020,"2",3,"Eupeodes corollae",0.166666666666667,0.0375831919613728,0.594316128917787
+"Gorbea",2020,"2",3,"Pieris sp",0.833333333333333,0.117599020008167,0.166843656582786
+"Gorbea",2020,"1",4,"Sphaerophoria scripta",0.285714285714286,0.0469839343875523,0.115365366898877
+"Gorbea",2020,"1",4,"Eupeodes corollae",0.142857142857143,0.0282065248301418,0.264019575597192
+"Gorbea",2020,"1",4,"Eristalis tenax",0.142857142857143,0.0282065248301418,0.264019575597192
+"Gorbea",2020,"1",4,"Cheilosia nigripes",0.142857142857143,0,0.325610965883009
+"Gorbea",2020,"1",4,"Andrena rhyssonota",0.142857142857143,0,0.945166881354991
+"Gorbea",2020,"1",4,"Melanostoma scalare",0.142857142857143,0,1
+"Gorbea",2020,"1",4,"Episyrphus balteatus",0.142857142857143,0.0263905456423626,0.0376300458447386
+"Gorbea",2020,"1",4,"Lasioglossum calceatum",0.142857142857143,0.0263905456423626,0.0376300458447386
+"Gorbea",2020,"1",4,"Bombus lapidarius",0.142857142857143,0.0263905456423626,0.0376300458447386
+"Gorbea",2020,"1",4,"Andrena sp",0.142857142857143,0.0282065248301418,0.264019575597192
+"Gorbea",2020,"1",4,"Cheilosia sp",0.142857142857143,0.0282065248301418,0.264019575597192
+"Gorbea",2020,"1",4,"Pieris sp",0.285714285714286,0.046913889826558,0
+"Gorbea",2020,"1",4,"Bombus pascuorum",0.142857142857143,0.048603168491739,0.236001449151225
+"Gorbea",2020,"1",4,"Apis mellifera",0.285714285714286,0.0282065248301418,0.624953275072118
+"Gorbea",2020,"1",4,"Bombylius sp.",0.571428571428571,0.245406146991155,0.443677986407975
+"Gorbea",2020,"2",4,"Andrena minutula",0.2,0.0429357798165138,0.410315103301532
+"Gorbea",2020,"2",4,"Platycheirus sp",0.2,0.0429357798165138,0.410315103301532
+"Gorbea",2020,"2",4,"Arge ochropus",0.2,0.0429357798165138,0.410315103301532
+"Gorbea",2020,"2",4,"Aproceros sp",0.2,0.0429357798165138,0.410315103301532
+"Gorbea",2020,"2",4,"Eupeodes latifasciatus",0.2,0.0429357798165138,0.410315103301532
+"Gorbea",2020,"2",4,"Episyrphus balteatus",0.4,0.0527323943661972,0.010698915763548
+"Gorbea",2020,"2",4,"Cheilosia sp",0.2,0.033015873015873,0
+"Gorbea",2020,"2",4,"Eupeodes corollae",0.2,0.0845528455284553,0.0991656268839928
+"Gorbea",2020,"2",4,"Sphaerophoria scripta",0.2,0,1
+"Gorbea",2020,"2",4,"Eupeodes sp.",0.8,0.132895960832313,0.206633815569671
+"Gorbea",2020,"3",4,"Melanostoma scalare",0.333333333333333,0.0761904761904762,0.696277693338274
+"Gorbea",2020,"3",4,"Lasioglossum calceatum",0.166666666666667,0.0761904761904762,0.333333333333333
+"Gorbea",2020,"3",4,"Osmia sp",0.166666666666667,0.163265306122449,0.355332320059283
+"Gorbea",2020,"3",4,"Andrena minutuloides",0.166666666666667,0.0714285714285714,0.471679166426281
+"Gorbea",2020,"3",4,"Seladonia confusa",0.166666666666667,0.0761904761904762,0
+"Gorbea",2020,"3",4,"Lasioglossum morio",0.166666666666667,0,1
+"Gorbea",2020,"3",4,"Sphaerophoria scripta",0.166666666666667,0.0761904761904762,0
+"Gorbea",2020,"3",4,"Formicidae",0.666666666666667,0.228571428571429,0.160252036308862
+"Gorbea",2020,"4",4,"Lasioglossum calceatum",0.142857142857143,0.0797720797720798,0
+"Gorbea",2020,"4",4,"Andrena minutuloides",0.142857142857143,0,1
+"Gorbea",2020,"4",4,"Formicidae",0.142857142857143,0.0797720797720798,0.55788589130226
+"Gorbea",2020,"4",4,"Melanostoma scalare",0.142857142857143,0.195804195804196,0.111754267102404
+"Gorbea",2020,"4",4,"Sphaerophoria scripta",0.142857142857143,0,1
+"Gorbea",2020,"4",4,"Apis mellifera",0.285714285714286,0.143589743589744,0.234639363011378
+"Gorbea",2020,"4",4,"Muscidae NA",0.142857142857143,0,1
+"Gorbea",2020,"4",4,"Bombus terrestris",0.428571428571429,0.358974358974359,0.316179432530792
+"Gorbea",2020,"5",4,"Andrena sp",0.5,0.0405679513184584,0.00808123125424571
+"Gorbea",2020,"5",4,"Cheilosia nigripes",0.25,0.0362976406533575,0.565031544008562
+"Gorbea",2020,"5",4,"Halictus rubicundus",0.25,0,1
+"Gorbea",2020,"5",4,"Didea sp",0.25,0,1
+"Gorbea",2020,"5",4,"Eupeodes luniger",0.25,0.0246305418719212,0.443358623720311
+"Gorbea",2020,"5",4,"Merodon sp",0.25,0.028735632183908,0
+"Gorbea",2020,"5",4,"Eupeodes sp.",0.25,0.028735632183908,0
+"Gorbea",2020,"5",4,"Bombus pascuorum",0.5,0.0405679513184584,0.00808123125424571
+"Gorbea",2020,"5",4,"Sphaerophoria scripta",0.25,0.0246305418719212,0.443358623720311
+"Gorbea",2020,"5",4,"Pyrgus sp.",0.25,0.028735632183908,0
+"Gorbea",2020,"5",4,"Colias croceus",0.25,0.028735632183908,0
+"Gorbea",2020,"5",4,"Bombus sp.",0.25,0.0992685475444096,0.488638721050141
+"Gorbea",2020,"1",5,"Melanostoma sp",0.0714285714285714,0,1
+"Gorbea",2020,"1",5,"Melanostoma scalare",0.0714285714285714,0.00330279496770301,0.734990331370054
+"Gorbea",2020,"1",5,"Eupeodes corollae",0.0714285714285714,0.0032785753076353,0.392470303501578
+"Gorbea",2020,"1",5,"Lasioglossum sp",0.0714285714285714,0,0.969599658592838
+"Gorbea",2020,"1",5,"Andrena livens",0.0714285714285714,0.00328013400737307,0.162313965235776
+"Gorbea",2020,"1",5,"Platycheirus albimanus",0.0714285714285714,0.00328013400737307,0.162313965235776
+"Gorbea",2020,"1",5,"Seladonia confusa",0.142857142857143,0.00808822238516593,0.101204587956932
+"Gorbea",2020,"1",5,"Eristalis tenax",0.142857142857143,0.0107369221030725,0.0226872974701968
+"Gorbea",2020,"1",5,"Eucera nigrescens",0.0714285714285714,0.00326192294215629,0
+"Gorbea",2020,"1",5,"Andrena sp",0.0714285714285714,0,0.559828468180696
+"Gorbea",2020,"1",5,"Bombus pascuorum",0.0714285714285714,0.00546416639001532,0.483018477370761
+"Gorbea",2020,"1",5,"Sphaerophoria scripta",0.0714285714285714,0.00339396617279087,0.867495165685027
+"Gorbea",2020,"1",5,"Cerambycidae",0.0714285714285714,0.00296385056767785,0.734990331370054
+"Gorbea",2020,"1",5,"Muscidae NA",0.0714285714285714,0.0032785753076353,0.392470303501578
+"Gorbea",2020,"1",5,"Andrena agilissima",0.0714285714285714,0.00296385056767785,0.734990331370054
+"Gorbea",2020,"1",5,"Eristalis similis",0.214285714285714,0.00693851623539501,0.234186275812212
+"Gorbea",2020,"1",5,"Episyrphus balteatus",0.0714285714285714,0.00328013400737307,0.162313965235776
+"Gorbea",2020,"1",5,"Hoplitis benoisti",0.0714285714285714,0.00328013400737307,0.162313965235776
+"Gorbea",2020,"1",5,"Didea intermedia",0.0714285714285714,0.00332512545654019,0.789984806446498
+"Gorbea",2020,"1",5,"Nymphalis sp",0.0714285714285714,0.00328013400737307,0.162313965235776
+"Gorbea",2020,"1",5,"Macroglossum stellatarum",0.0714285714285714,0.00296385056767785,0.734990331370054
+"Gorbea",2020,"1",5,"Osmia andrenoides",0.142857142857143,0.00897371555048741,0.137468229557797
+"Gorbea",2020,"1",5,"Lycaenidae",0.142857142857143,0.00769237121036636,0.33034196849774
+"Gorbea",2020,"1",5,"Oedemera nobilis",0.785714285714286,0.0159132961206855,0.306603531341
+"Gorbea",2020,"2",5,"Melanostoma scalare",0.111111111111111,0.0314349112426036,0.4
+"Gorbea",2020,"2",5,"Lasioglossum calceatum",0.111111111111111,0.029585798816568,0.0385290155884792
+"Gorbea",2020,"2",5,"Aproceros sp",0.666666666666667,0.240545407769488,0.391716113356502
+"Gorbea",2020,"2",5,"Meliscaeva sp",0.111111111111111,0,1
+"Gorbea",2020,"2",5,"Sphaerophoria scripta",0.555555555555556,0.271407837445573,0.360814378432283
+"Gorbea",2020,"4",5,"Episyrphus sp",0.285714285714286,0.0942890817529198,0.0290062691832878
+"Gorbea",2020,"4",5,"Andrena minutuloides",0.428571428571429,0.139608672659968,0.121181255790902
+"Gorbea",2020,"4",5,"Eupeodes corollae",0.142857142857143,0.0222626998583283,0
+"Gorbea",2020,"4",5,"Sphaerophoria scripta",0.142857142857143,0.0223662472995298,0.190551412426773
+"Gorbea",2020,"4",5,"Pieris sp",0.142857142857143,0.0234162796362289,0.50743174441734
+"Gorbea",2020,"4",5,"Seladonia confusa",1,0.244785919307459,0.0450354402838882
+"Gorbea",2020,"5",5,"Eupeodes corollae",0.6,0.0732111026228673,0.0480446811428
+"Gorbea",2020,"5",5,"Episyrphus balteatus",0.2,0,1
+"Gorbea",2020,"5",5,"Platycheirus albimanus",0.2,0.018666406960135,0.816830749086366
+"Gorbea",2020,"5",5,"Andrena minutula",0.2,0.0520361990950226,0
+"Gorbea",2020,"5",5,"Dilophus sp",0.2,0.0204991087344029,0
+"Gorbea",2020,"5",5,"Sphaerophoria scripta",0.4,0.038655462184874,0.146647541860789
+"Gorbea",2020,"5",5,"Tachinidae NA",0.2,0.0644257703081232,0
+"Gorbea",2020,"5",5,"Episyrphus sp",0.2,0.0204991087344029,0
+"Gorbea",2020,"5",5,"Bombus pascuorum",0.2,0.0204991087344029,0
+"Gorbea",2020,"5",5,"Melanostoma scalare",0.2,0.0204991087344029,0
+"Gorbea",2020,"5",5,"Bombus lapidarius",0.4,0.162093591430182,0.138869779939834
+"Gorbea",2020,"5",5,"Pieris sp",0.6,0.0493054364602984,0.13866896710264
+"Gorbea",2020,"3",5,"Melanostoma scalare",0.142857142857143,0,1
+"Gorbea",2020,"3",5,"Episyrphus balteatus",0.142857142857143,0.0305927916798825,0.626885699978363
+"Gorbea",2020,"3",5,"Eupeodes latifasciatus",0.142857142857143,0.0305927916798825,0.626885699978363
+"Gorbea",2020,"3",5,"Lasioglossum morio",0.428571428571429,0.0607048332654271,0
+"Gorbea",2020,"3",5,"Chrysolina sp",0.142857142857143,0.0274971941638608,0
+"Gorbea",2020,"3",5,"Eristalis tenax",0.142857142857143,0.0274971941638608,0
+"Gorbea",2020,"3",5,"Eupeodes corollae",0.142857142857143,0.0274971941638608,0
+"Gorbea",2020,"3",5,"Osmia andrenoides",0.142857142857143,0.0274971941638608,0
+"Gorbea",2020,"3",5,"Sphaerophoria scripta",0.285714285714286,0.0535359555025824,0.0792037359527731
+"Gorbea",2020,"3",5,"Bombus pascuorum",0.142857142857143,0.0274971941638608,0
+"Gorbea",2020,"3",5,"Seladonia confusa",0.142857142857143,0,1
+"Gorbea",2020,"3",5,"Lassioglossum morio",0.285714285714286,0.0541625289639192,0.346696286146654
+"Gorbea",2020,"3",5,"Merodon geniculatus",0.714285714285714,0.104771487702528,0.0550673643549799
+"Gorbea",2020,"3",5,"Zygaena sp",0.142857142857143,0.0283616599138905,0.764591086633362
+"Gorbea",2020,"2",6,"Platycheirus sp",0.6,0.576923076923077,0.19147086904362
+"Gorbea",2020,"2",6,"Melanostoma scalare",0.2,0.0961538461538461,0
+"Gorbea",2020,"2",6,"Apis mellifera",0.2,0,1
+"Gorbea",2020,"2",6,"Sphaerophoria scripta",0.2,0.192307692307692,0
+"Gorbea",2020,"2",6,"Episyrphus balteatus",0.2,0.192307692307692,0
+"Gorbea",2020,"2",6,"Bombus lapidarius",0.2,0.192307692307692,0
+"Gorbea",2020,"2",6,"Bombus pascuorum",0.2,0,1
+"Gorbea",2020,"4",6,"Eristalis tenax",0.166666666666667,0,0.844360937770434
+"Gorbea",2020,"4",6,"Didea intermedia",0.333333333333333,0,0.75
+"Gorbea",2020,"4",6,"Platycheirus albimanus",0.166666666666667,0.25,0.0943609377704336
+"Gorbea",2020,"4",6,"Bombus sp.",0.166666666666667,0.583333333333333,0.304290371200269
+"Gorbea",2020,"4",6,"Sphaerophoria scripta",0.166666666666667,0.0833333333333333,0
+"Gorbea",2020,"4",6,"Cerambycidae",0.666666666666667,0.416666666666667,0.328245926036575
+"Gorbea",2020,"5",6,"Sphaerophoria scripta",0.666666666666667,1,0.769577289690815
+"Gorbea",2020,"5",6,"Erebia meolans",0.333333333333333,1,0.684535123214271
+"Gorbea",2020,"5",6,"Cerambycidae",0.333333333333333,0,1
+"Gorbea",2020,"3",6,"Bombus lapidarius",0.1,0.115830115830116,0.70489320144548
+"Gorbea",2020,"3",6,"Andrena bucephala",0.1,0,1
+"Gorbea",2020,"3",6,"Lasioglossum calceatum",0.3,0.154440154440154,0.32381602842755
+"Gorbea",2020,"3",6,"Bombus pratorum",0.2,0.154440154440154,0.231847257525266
+"Gorbea",2020,"3",6,"Apis mellifera",0.2,0.196560196560197,0.301533678293022
+"Gorbea",2020,"3",6,"Bombus pascuorum",0.1,0.0831600831600832,0
+"Gorbea",2020,"3",6,"Sphaerophoria scripta",0.5,0,1
+"Gorbea",2020,"3",6,"Thymelicus sp",0.2,0.135135135135135,0.443405396792257
+"Gorbea",2020,"1",7,"Lasioglossum punctatissimum",0.272727272727273,0.0580127190584444,0.612179083437052
+"Gorbea",2020,"1",7,"Lucila sp",0.0909090909090909,0,1
+"Gorbea",2020,"1",7,"Platycheirus sp",0.0909090909090909,0,1
+"Gorbea",2020,"1",7,"Osmia notata",0.0909090909090909,0.0226356623962813,0.238316430834131
+"Gorbea",2020,"1",7,"Bombus pascuorum",0.272727272727273,0.0869182812944615,0.39038552634076
+"Gorbea",2020,"1",7,"Sphaerophoria scripta",0.0909090909090909,0.0212706436178423,0
+"Gorbea",2020,"1",7,"Eupeodes sp.",0.0909090909090909,0.0216438199010875,0.690997261121074
+"Gorbea",2020,"1",7,"Eristalis tenax",0.0909090909090909,0.0361273119098783,0.342774236611645
+"Gorbea",2020,"1",7,"Tachinidae NA",0.0909090909090909,0,1
+"Gorbea",2020,"1",7,"Apis mellifera",0.0909090909090909,0.0213034923416421,0.610081956212427
+"Gorbea",2020,"1",7,"Erebia meolans",0.454545454545455,0.11682641442581,0.33576499694376
+"Gorbea",2020,"1",7,"Trichius fasciatus",0.272727272727273,0.119502939458834,0.806234145187025
+"Gorbea",2020,"1",7,"Bombus hortorum",0.0909090909090909,0.0226356623962813,0.238316430834131
+"Gorbea",2020,"2",7,"Andrena minutuloides",0.142857142857143,0.0272104436274113,0.170199246317434
+"Gorbea",2020,"2",7,"Cheilosia nigripes",0.142857142857143,0,1
+"Gorbea",2020,"2",7,"Apis mellifera",0.285714285714286,0.0323727490822904,0.905831860697597
+"Gorbea",2020,"2",7,"Andrena agilissima",0.142857142857143,0,1
+"Gorbea",2020,"2",7,"Episyrphus balteatus",0.285714285714286,0.0685980278067006,0.219974224193019
+"Gorbea",2020,"2",7,"Eristalis tenax",0.142857142857143,0.0323727490822904,0.551512351564849
+"Gorbea",2020,"2",7,"Sphaerophoria scripta",0.142857142857143,0.0270453008789723,0
+"Gorbea",2020,"2",7,"Tachinidae NA",0.428571428571429,0.0712558849726428,0.234275456572271
+"Gorbea",2020,"2",7,"Bombus pratorum",0.428571428571429,0.10658883989468,0.333822154784621
+"Gorbea",2020,"2",7,"Erebia meolans",0.285714285714286,0.0554894966309948,0.116449396470736
+"Gorbea",2020,"2",7,"Syrphus ribesii",0.285714285714286,0.0787106446776612,0.344718890221202
+"Gorbea",2020,"4",7,"Lasioglossum morio",0.166666666666667,0,1
+"Gorbea",2020,"4",7,"Sphaerophoria scripta",0.166666666666667,0,0.453397430267098
+"Gorbea",2020,"4",7,"Lepidoptera NA",0.166666666666667,0,0.453397430267098
+"Gorbea",2020,"4",7,"Erebia meolans",0.166666666666667,0.0789473684210526,0
+"Gorbea",2020,"4",7,"Tachinidae NA",0.166666666666667,0,1
+"Gorbea",2020,"4",7,"Lampides boeticus",0.333333333333333,0,0.785575142355912
+"Gorbea",2020,"4",7,"Lassioglossum morio",0.166666666666667,0.315789473684211,0.12793479844024
+"Gorbea",2020,"4",7,"Bombus sp.",0.333333333333333,1.10526315789474,0.481846958343582
+"Gorbea",2020,"5",7,"Erebia meolans",0.2,0,1
+"Gorbea",2020,"5",7,"Sphaerophoria scripta",0.2,0.666666666666667,0.207518749639422
+"Gorbea",2020,"5",7,"Lampides boeticus",0.8,1.33333333333333,0.515566527728176
+"Gorbea",2020,"3",7,"Melitta tricincta",0.0769230769230769,0,1
+"Gorbea",2020,"3",7,"Helophilus trivittatus",0.153846153846154,0.042968949818405,0.384713565260313
+"Gorbea",2020,"3",7,"Exosoma sp",0.153846153846154,0.0352959230651184,0.356169618652559
+"Gorbea",2020,"3",7,"Andrena rhyssonota",0.153846153846154,0.0467852118047904,0.339988723975905
+"Gorbea",2020,"3",7,"Megachile willugbiella",0.307692307692308,0.0515468731031778,0.393765486496035
+"Gorbea",2020,"3",7,"Apis mellifera",0.307692307692308,0.0661197753570365,0.315409661555317
+"Gorbea",2020,"3",7,"Sphaerophoria scripta",0.0769230769230769,0.028122966652741,0.132805521046336
+"Gorbea",2020,"3",7,"Bombus pratorum",0.0769230769230769,0.0243091642529462,0.541843090008674
+"Gorbea",2020,"3",7,"Bombus pascuorum",0.153846153846154,0.0235554314655209,0.760917598561454
+"Gorbea",2020,"3",7,"Chrysotoxum NA",0.0769230769230769,0.0252718489653846,0.0836861800173475
+"Gorbea",2020,"3",7,"Bombus lapidarius",0.0769230769230769,0.0252718489653846,0.0836861800173475
+"Gorbea",2020,"3",7,"Bombus sp.",0.0769230769230769,0.028122966652741,0.132805521046336
+"Gorbea",2020,"3",7,"Coenonympha arcania",0.0769230769230769,0.0278911839605481,0.252778263690786
+"Gorbea",2020,"3",7,"Melanargia sp",0.0769230769230769,0.028122966652741,0.132805521046336
+"Gorbea",2020,"3",7,"Thymelicus sp",0.615384615384615,0.0658468753408223,0.501111726699088
+"Gorbea",2020,"3",7,"Zygaena lonicerae",0.230769230769231,0.0626163726257554,0.215637713465282
+"Gorbea",2020,"3",7,"Andrena minutula",0.153846153846154,0.0430020410389044,0.220734465026625
+"Gorbea",2020,"2",8,"Andrena wikella",0.25,0.0289424860853432,0.482103834861515
+"Gorbea",2020,"2",8,"Eupeodes latifasciatus",0.25,0.0363636363636364,0.452382609564265
+"Gorbea",2020,"2",8,"Bombus pascuorum",0.25,0.0198624904507257,0.53037193893758
+"Gorbea",2020,"2",8,"Bombus pratorum",0.125,0.0348250163134938,0.594316128917787
+"Gorbea",2020,"2",8,"Eristalis tenax",0.375,0.0443181818181818,0.548092524272529
+"Gorbea",2020,"2",8,"Sphaerophoria scripta",0.125,0.0315691158156912,0.744041975190184
+"Gorbea",2020,"2",8,"Pieris sp",0.125,0.0299194476409666,0
+"Gorbea",2020,"2",8,"Apis mellifera",0.125,0.0348250163134938,0.594316128917787
+"Gorbea",2020,"2",8,"Melanostoma scalare",0.5,0.0913595819443193,0.594203163964917
+"Gorbea",2020,"1",8,"Didea sp",0.0666666666666667,0.0295657530027718,0
+"Gorbea",2020,"1",8,"Eristalis similis",0.333333333333333,0.0631429398300403,0.499542244166572
+"Gorbea",2020,"1",8,"Bombus lapidarius",0.0666666666666667,0.0295657530027718,0
+"Gorbea",2020,"1",8,"Thymelicus sp",0.4,0.0453626174230253,0.423911446847573
+"Gorbea",2020,"1",8,"Bombus pratorum",0.2,0.0344258767840493,0.509884569917995
+"Gorbea",2020,"1",8,"Eristalis tenax",0.0666666666666667,0.0295657530027718,0
+"Gorbea",2020,"1",8,"Bombus pascuorum",0.0666666666666667,0.0260046461634479,0
+"Gorbea",2020,"1",8,"Apis mellifera",0.0666666666666667,0.0488927822030273,0.255958024809815
+"Gorbea",2020,"1",8,"Sphaerophoria scripta",0.0666666666666667,0.0276163626948967,0.338358104107972
+"Gorbea",2020,"1",8,"Trichius fasciatus",0.2,0.070911089312517,0.254848512134887
+"Gorbea",2020,"1",8,"Melanostoma scalare",0.0666666666666667,0,1
+"Gorbea",2020,"1",8,"Coenonympha arcania",0.0666666666666667,0.0198904258540175,0.744041975190185
+"Gorbea",2020,"1",8,"Erebia meolans",0.0666666666666667,0.0277138178786458,0.594316128917787
+"Gorbea",2020,"1",8,"Lasiommata maera",0.466666666666667,0.0825587715254797,0.360101693211751
+"Gorbea",2020,"1",8,"Andrena minutula",0.2,0.0392997655113991,0.37570794235821
+"Gorbea",2020,"1",8,"Macroglossum stellatarum",0.0666666666666667,0.0245899119886067,0.744041975190185
+"Gorbea",2020,"3",8,"Anoplius sp",0.0833333333333333,0.0202702702702703,0.684535123214271
+"Gorbea",2020,"3",8,"Eristalis sp.",0.0833333333333333,0.0386100386100386,0.764242397321407
+"Gorbea",2020,"3",8,"Bombus pratorum",0.0833333333333333,0.0498960498960499,0.528484794642814
+"Gorbea",2020,"3",8,"Thymelicus sp",0.25,0.0308880308880309,0.5
+"Gorbea",2020,"3",8,"Sphaerophoria scripta",0.166666666666667,0.0294840294840295,0.619906233284066
+"Gorbea",2020,"3",8,"Ochlodes sylvanus",0.0833333333333333,0.0311850311850312,0.796707580990507
+"Gorbea",2020,"3",8,"Bombus hortorum",0.0833333333333333,0.0216216216216216,0.5
+"Gorbea",2020,"3",8,"Eristalis tenax",0.166666666666667,0.036036036036036,0
+"Gorbea",2020,"3",8,"Bombus lapidarius",0.166666666666667,0,1
+"Gorbea",2020,"3",8,"Lasioglossum calceatum",0.0833333333333333,0.0294840294840295,0
+"Gorbea",2020,"3",8,"Bombus pascuorum",0.166666666666667,0.0324324324324324,0.17376534287144
+"Gorbea",2020,"3",8,"Episyrphus balteatus",0.333333333333333,0.0410537119397879,0.626348152315402
+"Gorbea",2020,"3",8,"Melanargia sp",0.0833333333333333,0.0216216216216216,0.5
+"Gorbea",2020,"3",8,"Stratiomydae NA",0.166666666666667,0.0251414204902577,0.550823104752373
+"Gorbea",2020,"5",8,"Lycaenidae",0.25,0,1
+"Gorbea",2020,"5",8,"Apis mellifera",0.5,0.454545454545455,0.406598009240067
+"Gorbea",2020,"5",8,"Andrena wikella",0.25,0.113636363636364,0
+"Gorbea",2020,"5",8,"Lampides boeticus",0.25,0.454545454545455,0.262807514205999
+"Gorbea",2020,"5",8,"Sphaerophoria scripta",0.25,0.113636363636364,0
+"Gorbea",2020,"5",8,"Bombus hortorum",0.5,0.113636363636364,0.5
+"Gorbea",2020,"4",8,"Eristalis similis",0.125,0.103703703703704,0.352314537622003
+"Gorbea",2020,"4",8,"Andrena minutuloides",0.125,0,0.731322700662714
+"Gorbea",2020,"4",8,"Eristalis tenax",0.25,0,0.606911951845934
+"Gorbea",2020,"4",8,"Tachinidae NA",0.125,0,1
+"Gorbea",2020,"4",8,"Apis mellifera",0.25,0.103703703703704,0.606911951845934
+"Gorbea",2020,"4",8,"Erebia meolans",0.125,0,0.352314537622003
+"Gorbea",2020,"4",8,"Sphaerophoria scripta",0.25,0.207407407407407,0.243048252151911
+"Gorbea",2020,"4",8,"Bombus hortorum",0.375,0.103703703703704,0.717829717457605
+"Gorbea",2020,"4",8,"Bombus pascuorum",0.125,0.278229448961156,0.881244266209356
+"Gorbea",2021,"2",1,"Sphaerophoria sp",0.4,0.375,0.44211410869774
+"Gorbea",2021,"2",1,"Andrena cineraria",0.2,0,1
+"Gorbea",2021,"2",1,"Diptera",0.2,0.375,0
+"Gorbea",2021,"2",1,"Eristalis sp.",0.4,0.75,0.44211410869774
+"Gorbea",2021,"2",1,"Apis mellifera",0.2,0,1
+"Gorbea",2021,"3",1,"Bombus lapidarius",0.666666666666667,0.166666666666667,0.269577289690815
+"Gorbea",2021,"3",1,"Andrena nitida",0.333333333333333,0.666666666666667,0.0158126761905531
+"Gorbea",2021,"3",1,"Bombus pascuorum",0.333333333333333,0.666666666666667,0.0158126761905531
+"Gorbea",2021,"3",1,"Eristalis sp.",0.333333333333333,0,1
+"Gorbea",2021,"1",1,"Eristalis sp.",0.25,0.104761904761905,0.0331726027645887
+"Gorbea",2021,"1",1,"Eristalis similis",0.5,0.122222222222222,0
+"Gorbea",2021,"1",1,"Apis mellifera",0.25,0.1,0.836485890687118
+"Gorbea",2021,"1",1,"Eristalis tenax",0.25,0.0611111111111111,0
+"Gorbea",2021,"1",1,"Bombus terrestris",0.5,0.2,0.221995314554157
+"Gorbea",2021,"1",1,"Andrena nitida",0.5,0.1375,0.230755635782949
+"Gorbea",2021,"2",2,"Eristalis sp.",0.333333333333333,0.111111111111111,0
+"Gorbea",2021,"2",2,"Eristalis tenax",0.333333333333333,0.212121212121212,0.283791072995835
+"Gorbea",2021,"2",2,"Bombus terrestris",0.333333333333333,0,1
+"Gorbea",2021,"2",2,"Andrena nitida",0.333333333333333,0.111111111111111,0
+"Gorbea",2021,"2",2,"Eupeodes sp.",0.666666666666667,0.491228070175439,0.168251487587384
+"Gorbea",2021,"2",2,"Apis mellifera",0.333333333333333,0.0982456140350877,0.138345833092948
+"Gorbea",2021,"3",2,"Eristalis sp.",0.5,1,0
+"Gorbea",2021,"3",2,"Bombus lapidarius",0.5,0,1
+"Gorbea",2021,"3",2,"Andrena nigroaenea",0.5,1,0
+"Gorbea",2021,"2",3,"Eupeodes sp.",0.5,0.25,0.191209936721745
+"Gorbea",2021,"2",3,"Apis mellifera",0.5,0,0.428571428571429
+"Gorbea",2021,"2",3,"Andrena cf morio",0.5,0.166666666666667,0.142857142857143
+"Gorbea",2021,"2",3,"Andrena minutula",0.5,0.833333333333333,0.461575407202689
+"Gorbea",2021,"2",3,"Eristalis sp.",0.5,0,0.428571428571429
+"Gorbea",2021,"2",3,"Andrena nitida",0.5,0,0.526107454263302
+"Gorbea",2021,"2",3,"Eristalis tenax",0.5,0.0833333333333333,0
+"Gorbea",2021,"2",3,"Lasioglossum immunitum",0.5,0,0.25
+"Gorbea",2021,"1",2,"Apis mellifera",0.333333333333333,0.0846560846560847,0
+"Gorbea",2021,"1",2,"Eupeodes corollae",0.666666666666667,0.345679012345679,0.0791921101956599
+"Gorbea",2021,"1",2,"Eristalis sp.",0.333333333333333,0.046608406158968,0.63915119328547
+"Gorbea",2021,"1",2,"Eupeodes sp.",0.333333333333333,0.0455840455840456,0
+"Gorbea",2021,"1",2,"Bombus sp.",0.333333333333333,0.0846560846560847,0
+"Gorbea",2021,"1",2,"Andrena bicolor",0.333333333333333,0.0455840455840456,0
+"Gorbea",2021,"1",2,"Bombus soroeensis",0.333333333333333,0,1
+"Gorbea",2021,"1",2,"Pieris brassicae",0.333333333333333,0.0455840455840456,0
+"Gorbea",2021,"5",2,"Empis sp",0.5,0,1
+"Gorbea",2021,"5",2,"Eristalis tenax",0.5,1.84615384615385,0.633901173991074
+"Gorbea",2021,"5",2,"Bombus hortorum",0.5,0.153846153846154,0
+"Gorbea",2021,"4",1,"Empis sp",0.5,1,0
+"Gorbea",2021,"4",1,"Eristalis tenax",0.5,0,1
+"Gorbea",2021,"4",1,"Apis mellifera",0.5,1,0
+"Gorbea",2021,"3",3,"Bombus lapidarius",0.2,0.0769230769230769,0
+"Gorbea",2021,"3",3,"Lasioglossum tricinctum",0.2,0,1
+"Gorbea",2021,"3",3,"Lasioglossum immunitum",0.2,0.0817916260954236,0.333333333333333
+"Gorbea",2021,"3",3,"Eupeodes sp.",0.2,0.0817916260954236,0.333333333333333
+"Gorbea",2021,"3",3,"Curculionoidea",0.8,0.280936454849498,0.171421069102083
+"Gorbea",2021,"3",3,"Andrena bicolor",0.4,0.197802197802198,0.33106484053047
+"Gorbea",2021,"3",3,"Pyrgus malvoides",0.2,0.0769230769230769,0
+"Gorbea",2021,"1",3,"Apis mellifera",0.142857142857143,0.0306965761511216,0
+"Gorbea",2021,"1",3,"Eristalis tenax",0.142857142857143,0,1
+"Gorbea",2021,"1",3,"Eupeodes corollae",0.142857142857143,0.0755960457452995,0.631230313756394
+"Gorbea",2021,"1",3,"Eristalis sp.",0.142857142857143,0,1
+"Gorbea",2021,"1",3,"Cheilosia sp",0.285714285714286,0.0306965761511216,0.378311738570717
+"Gorbea",2021,"1",3,"Diptera",0.142857142857143,0.0562770562770563,0.53607843901029
+"Gorbea",2021,"1",3,"Bombus pascuorum",0.142857142857143,0.0293619424054207,0.764591086633362
+"Gorbea",2021,"1",3,"Lasioglossum tricinctum",0.142857142857143,0.0355434039644566,0.391476786611725
+"Gorbea",2021,"1",3,"Andrena cf morio",0.428571428571429,0.0613931523022432,0.0466282063539081
+"Gorbea",2021,"1",3,"Anthophora plumipes",0.142857142857143,0.0562770562770563,0.53607843901029
+"Gorbea",2021,"1",3,"Episyrphus sp",0.142857142857143,0,1
+"Gorbea",2021,"2",4,"Apis mellifera",0.25,0.0780487804878049,0.467148150472353
+"Gorbea",2021,"2",4,"Eristalis tenax",0.75,0.0260162601626016,0.516371939410634
+"Gorbea",2021,"2",4,"Pieris napi",0.5,0.0520325203252033,0
+"Gorbea",2021,"2",4,"Platycheirus albimanus",0.25,0.0473022912047302,0.647944686991101
+"Gorbea",2021,"2",4,"Eupeodes sp.",0.25,0.028906955736224,0.511675493094024
+"Gorbea",2021,"2",4,"Bombus pascuorum",0.25,0.028906955736224,0.511675493094024
+"Gorbea",2021,"2",4,"Lucilia silvarum",0.25,0.0260162601626016,0
+"Gorbea",2021,"2",4,"Pararge aegeria",0.25,0.0400250156347717,0
+"Gorbea",2021,"4",2,"Sphaerophoria scripta",0.4,0.0540540540540541,0.435623143345562
+"Gorbea",2021,"4",2,"Empis sp",0.2,0.0337837837837838,0.755349457881774
+"Gorbea",2021,"4",2,"Eristalis tenax",0.4,0.111486486486486,0.591490836586689
+"Gorbea",2021,"4",2,"Andrena bicolor",0.6,0.0705052878965922,0.118525520410967
+"Gorbea",2021,"4",2,"Apis mellifera",0.4,0.03955174686882,0.85890578583639
+"Gorbea",2021,"5",3,"Empis sp",0.2,0,1
+"Gorbea",2021,"5",3,"Coleoptera",0.2,0.208333333333333,0.207518749639422
+"Gorbea",2021,"5",3,"Myolepta sp",0.2,0,1
+"Gorbea",2021,"5",3,"Bombus pascuorum",0.4,0.333333333333333,0.115771782604519
+"Gorbea",2021,"5",3,"Orthoptera",0.4,0.333333333333333,0.115771782604519
+"Gorbea",2021,"5",3,"Pyrgus malvoides",0.2,0,1
+"Gorbea",2021,"5",3,"Sphaerophoria scripta",0.2,0.208333333333333,0.207518749639422
+"Gorbea",2021,"3",4,"Bombus lapidarius",0.666666666666667,0.145689655172414,0.400125656513276
+"Gorbea",2021,"3",4,"Sphaerophoria scripta",0.166666666666667,0,1
+"Gorbea",2021,"3",4,"Lasioglossum sp",0.333333333333333,0.0416666666666667,0.576423531589197
+"Gorbea",2021,"3",4,"Eristalis tenax",0.166666666666667,0.0416666666666667,0
+"Gorbea",2021,"3",4,"Andrena minutuloides",0.333333333333333,0.400236826524571,0.288128012979134
+"Gorbea",2021,"3",4,"Chrysolina sp",0.166666666666667,0.0420398009950249,0.183810695891564
+"Gorbea",2021,"3",4,"Platycheirus albimanus",0.333333333333333,0.287414965986395,0.127688106512636
+"Gorbea",2021,"2",5,"Bombus sylvestris",0.2,0.5,0.471679166426281
+"Gorbea",2021,"2",5,"Sphaerophoria scripta",0.2,0.5,0.471679166426281
+"Gorbea",2021,"2",5,"Andrena bicolor",0.2,0,0.635402979293942
+"Gorbea",2021,"2",5,"Empis sp",0.2,0,0.127582832057874
+"Gorbea",2021,"2",5,"Apis mellifera",0.2,0.5,0.471679166426281
+"Gorbea",2021,"2",5,"Anthocharis cardamines",0.2,0,0.666666666666667
+"Gorbea",2021,"2",5,"Bombylius sp.",0.2,0,1
+"Gorbea",2021,"2",5,"Pyrgus malvoides",0.2,0,0.666666666666667
+"Gorbea",2021,"2",5,"Coleoptera",0.2,0,1
+"Gorbea",2021,"1",4,"Apis mellifera",0.125,0.0332467532467532,0.529182173266724
+"Gorbea",2021,"1",4,"Eupeodes sp.",0.125,0,0.320504541508784
+"Gorbea",2021,"1",4,"Lucilia caesar",0.125,0.0394488759970993,0.897513949722965
+"Gorbea",2021,"1",4,"Bombus pascuorum",0.125,0,0.128883506973656
+"Gorbea",2021,"1",4,"Eristalis tenax",0.125,0,0.668336504905781
+"Gorbea",2021,"1",4,"Andrena bicolor",0.375,0,0.587962605244426
+"Gorbea",2021,"1",4,"Eristalis sp.",0.125,0,0.764591086633362
+"Gorbea",2021,"1",4,"Bombylius sp.",0.125,0.0217687074829932,0
+"Gorbea",2021,"1",4,"Empis sp",0.25,0.0351648351648352,0.0303217116776001
+"Gorbea",2021,"1",4,"Eucera nigrescens",0.125,0,0.128883506973656
+"Gorbea",2021,"1",4,"Sphaerophoria scripta",0.125,0,0.128883506973656
+"Gorbea",2021,"1",4,"Orthoptera",0.125,0.0304761904761905,0.185618961790403
+"Gorbea",2021,"1",4,"Lasioglossum sp",0.125,0.0304761904761905,0.185618961790403
+"Gorbea",2021,"1",4,"Lasioglossum immunitum",0.125,0.0304761904761905,0.185618961790403
+"Gorbea",2021,"1",4,"Lasiommata maera",0.125,0,1
+"Gorbea",2021,"1",4,"Anthophora plumipes",0.125,0,0.764591086633362
+"Gorbea",2021,"1",4,"Eucera sp",0.125,0.0548571428571429,0.507055881017835
+"Gorbea",2021,"1",4,"Eupeodes corollae",0.125,0.0332467532467532,0.529182173266724
+"Gorbea",2021,"1",4,"Bombus lapidarius",0.125,0,0.764591086633362
+"Gorbea",2021,"1",4,"Vanessa cardui",0.25,0.0677248677248677,0.499369988176384
+"Gorbea",2021,"1",4,"Macroglossum stellatarum",0.125,0.0332467532467532,0.529182173266724
+"Gorbea",2021,"5",4,"Myolepta sp",0.2,0,1
+"Gorbea",2021,"5",4,"Empis sp",0.2,0,1
+"Gorbea",2021,"5",4,"Eupeodes corollae",0.6,1.2,0.357524458920352
+"Gorbea",2021,"5",4,"Bombus terrestris",0.6,0.8,0.162076524393122
+"Gorbea",2021,"3",5,"Episyrphus balteatus",0.25,0.180451127819549,0.238458928435401
+"Gorbea",2021,"3",5,"Bombus lapidarius",0.0833333333333333,0,1
+"Gorbea",2021,"3",5,"Andrena minutuloides",0.166666666666667,0,1
+"Gorbea",2021,"3",5,"Lasioglossum immunitum",0.0833333333333333,0,1
+"Gorbea",2021,"3",5,"Sphaerophoria scripta",0.0833333333333333,0.0406421459053038,0
+"Gorbea",2021,"3",5,"Melanostoma scalare",0.0833333333333333,0.0406421459053038,0
+"Gorbea",2021,"3",5,"Bombus pascuorum",0.0833333333333333,0.0408849105255415,0.266548417315831
+"Gorbea",2021,"3",5,"Lucilia caesar",0.583333333333333,0.304765693612797,0.205016449363274
+"Gorbea",2021,"3",5,"Chrysolina sp",0.0833333333333333,0.077994593556583,0.420724092279552
+"Gorbea",2021,"3",5,"Apis mellifera",0.0833333333333333,0.0406421459053038,0
+"Gorbea",2021,"3",5,"Eupeodes corollae",0.25,0.204544926278599,0.332992043969055
+"Gorbea",2021,"4",3,"Lasioglossum immunitum",0.166666666666667,0.0546218487394958,0
+"Gorbea",2021,"4",3,"Macroglossum stellatarum",0.166666666666667,0,0.397940008672037
+"Gorbea",2021,"4",3,"Eupeodes sp.",0.166666666666667,0.117647058823529,0.414958932462041
+"Gorbea",2021,"4",3,"Sphaerophoria scripta",0.166666666666667,0.0546218487394958,0
+"Gorbea",2021,"4",3,"Orthoptera",0.333333333333333,0.0470588235294118,0.578428918391028
+"Gorbea",2021,"4",3,"Oedemera nobilis",0.166666666666667,0.112250404749056,0.633259363433009
+"Gorbea",2021,"4",3,"Diptera",0.5,0.0556149732620321,0.449090505498313
+"Gorbea",2021,"4",3,"Andrena nitida",0.166666666666667,0.0986717267552182,0.523390070612346
+"Gorbea",2021,"4",3,"Lasioglossum punctatissimum",0.166666666666667,0,0.397940008672037
+"Gorbea",2021,"4",3,"Pyrgus sp.",0.166666666666667,0,0.397940008672037
+"Gorbea",2021,"4",3,"Formicidae",0.166666666666667,0.0546218487394958,0
+"Gorbea",2021,"4",3,"Bombus sylvestris",0.166666666666667,0.0546218487394958,0
+"Gorbea",2021,"4",3,"Melanostoma scalare",0.166666666666667,0,0.397940008672037
+"Gorbea",2021,"4",3,"Eupeodes corollae",0.5,0.117647058823529,0.418197458300831
+"Gorbea",2021,"5",5,"Lasioglossum immunitum",0.25,0.0606060606060606,0
+"Gorbea",2021,"5",5,"Sphaerophoria scripta",0.25,0.121212121212121,0
+"Gorbea",2021,"5",5,"Lucilia caesar",0.25,0,0.775756175782425
+"Gorbea",2021,"5",5,"Eupeodes sp.",0.25,0,0.882350578875136
+"Gorbea",2021,"5",5,"Sphegina sp",0.25,0.424242424242424,0.174518598919247
+"Gorbea",2021,"5",5,"Eupeodes corollae",0.25,0,0.775756175782425
+"Gorbea",2021,"5",5,"Episyrphus balteatus",0.5,0.727272727272727,0.31186678946975
+"Gorbea",2021,"5",5,"Pyrrhocoris sp",0.25,0,0.479321964444228
+"Gorbea",2021,"1",5,"Sphaerophoria scripta",0.166666666666667,0.0128091086995197,0
+"Gorbea",2021,"1",5,"Eupeodes sp.",0.166666666666667,0.0369012967672685,0.682399917227346
+"Gorbea",2021,"1",5,"Lasioglossum immunitum",0.333333333333333,0.0176427346238667,0.629842403753383
+"Gorbea",2021,"1",5,"Eristalis tenax",0.166666666666667,0.0152440607685148,0.48567519827826
+"Gorbea",2021,"1",5,"Apis mellifera",0.166666666666667,0.0170011806375443,0.69622079825115
+"Gorbea",2021,"1",5,"Eucera nigrescens",0.166666666666667,0.0203274985883682,0
+"Gorbea",2021,"1",5,"Melanostoma scalare",0.666666666666667,0.0232450476352915,0.76348507462955
+"Gorbea",2021,"1",5,"Bombus pascuorum",0.333333333333333,0.0146103896103896,0.0137030116178363
+"Gorbea",2021,"1",5,"Macroglossum stellatarum",0.166666666666667,0.0108442979340135,0.601924930994973
+"Gorbea",2021,"1",5,"Andrena minutuloides",0.333333333333333,0.0483496990814064,0.706710342051205
+"Gorbea",2021,"3",6,"Bombus pascuorum",0.1,0.0466666666666667,0.0312063501139658
+"Gorbea",2021,"3",6,"Eristalis tenax",0.1,0,0.839415180343328
+"Gorbea",2021,"3",6,"Melanostoma scalare",0.1,0,0.571682658968605
+"Gorbea",2021,"3",6,"Sphaerophoria scripta",0.2,0,0.56489361792061
+"Gorbea",2021,"3",6,"Eristalis sp.",0.1,0.0461538461538462,0
+"Gorbea",2021,"3",6,"Chrysolina sp",0.1,0.0461538461538462,0
+"Gorbea",2021,"3",6,"Pyrgus malvoides",0.2,0.0875,0.424658809081343
+"Gorbea",2021,"3",6,"Bombus lapidarius",0.1,0.12,0.293729881211748
+"Gorbea",2021,"3",6,"Lucilia caesar",0.1,0.0875,0.290372055497892
+"Gorbea",2021,"3",6,"Lepidoptera",0.1,0.0466666666666667,0.0312063501139658
+"Gorbea",2021,"3",6,"Andrena minutuloides",0.3,0.0461538461538462,0.588192209023527
+"Gorbea",2021,"3",6,"Lasioglossum immunitum",0.1,0,1
+"Gorbea",2021,"3",6,"Nomada sp",0.1,0,1
+"Gorbea",2021,"3",6,"Trichius sp.",0.3,0.323076923076923,0.253057873992285
+"Gorbea",2021,"3",6,"Apis mellifera",0.1,0,0.571682658968605
+"Gorbea",2021,"4",4,"Sphaerophoria scripta",0.166666666666667,0.0725138121546961,0.0642150259807987
+"Gorbea",2021,"4",4,"Lucilia caesar",0.166666666666667,0,0.666666666666667
+"Gorbea",2021,"4",4,"Colias croceus",0.166666666666667,0.0692977824709609,0
+"Gorbea",2021,"4",4,"Eupeodes corollae",0.166666666666667,0.0696656050955414,0.0642150259807987
+"Gorbea",2021,"4",4,"Episyrphus balteatus",0.333333333333333,0.124525616698292,0.243662996023236
+"Gorbea",2021,"4",4,"Erebia meolans",0.166666666666667,0,0.666666666666667
+"Gorbea",2021,"4",4,"Pyrgus malvoides",0.833333333333333,0.479014598540146,0.281210337087192
+"Gorbea",2021,"5",6,"Lasioglossum immunitum",0.333333333333333,0.046151372212693,0.192918215239697
+"Gorbea",2021,"5",6,"Coenonympha pamphilus",0.333333333333333,0.0396518375241779,0
+"Gorbea",2021,"5",6,"Eupeodes sp.",0.666666666666667,0.0680632411067194,0
+"Gorbea",2021,"5",6,"Platycheirus albimanus",0.333333333333333,0.046151372212693,0.192918215239697
+"Gorbea",2021,"5",6,"Melanostoma scalare",0.333333333333333,0.0396518375241779,0
+"Gorbea",2021,"5",6,"Sphaerophoria scripta",0.666666666666667,0.046151372212693,0.55337838521384
+"Gorbea",2021,"5",6,"Eristalis sp.",0.333333333333333,0.0914401019541206,0.348145172242002
+"Gorbea",2021,"5",6,"Lasioglossum sp",0.333333333333333,0.046151372212693,0.192918215239697
+"Gorbea",2021,"5",6,"Lepidoptera",0.333333333333333,0.046151372212693,0.192918215239697
+"Gorbea",2021,"5",6,"Eristalis tenax",0.333333333333333,0.046151372212693,0.192918215239697
+"Gorbea",2021,"5",6,"Bombus pascuorum",0.666666666666667,0.247135410686813,0.275054124753089
+"Gorbea",2021,"1",6,"Sphaerophoria scripta",0.25,0.0443412162162162,0.413310235642735
+"Gorbea",2021,"1",6,"Lucilia caesar",0.125,0,0.690621223762786
+"Gorbea",2021,"1",6,"Bombus pascuorum",0.25,0.0320991847826087,0.101854373005232
+"Gorbea",2021,"1",6,"Eristalis tenax",0.125,0.0193014705882353,0
+"Gorbea",2021,"1",6,"Eucera nigrescens",0.25,0.0454326923076923,0.576668742141177
+"Gorbea",2021,"1",6,"Lasioglossum immunitum",0.125,0,0.737382651307814
+"Gorbea",2021,"1",6,"Apis mellifera",0.125,0.0230712890625,0.514412688162233
+"Gorbea",2021,"1",6,"Eristalis sp.",0.125,0.0230712890625,0.514412688162233
+"Gorbea",2021,"1",6,"Lasioglossum tricinctum",0.25,0.0996980500582072,0.266218552450636
+"Gorbea",2021,"1",6,"Macroglossum stellatarum",0.125,0,1
+"Gorbea",2021,"1",6,"Episyrphus balteatus",0.625,0.0923295454545455,0.287982449538199
+"Gorbea",2021,"2",6,"Sphaerophoria scripta",0.2,0.0219173997316237,0.660004237221409
+"Gorbea",2021,"2",6,"Eristalis tenax",0.1,0,1
+"Gorbea",2021,"2",6,"Lucilia caesar",0.1,0.0219173997316237,0.431712076302918
+"Gorbea",2021,"2",6,"Eupeodes luniger",0.1,0.0219173997316237,0.431712076302918
+"Gorbea",2021,"2",6,"Diptera",0.1,0.0219173997316237,0.431712076302918
+"Gorbea",2021,"2",6,"Platycheirus albimanus",0.2,0.032937580393151,0.463442604988586
+"Gorbea",2021,"2",6,"Bombus pascuorum",0.2,0.0510957785154417,0.192750649302237
+"Gorbea",2021,"2",6,"Eristalis sp.",0.1,0.0187370346412081,0
+"Gorbea",2021,"2",6,"Lasioglossum immunitum",0.3,0,1
+"Gorbea",2021,"2",6,"Episyrphus balteatus",0.3,0.112003224899056,0.186791307596767
+"Gorbea",2021,"2",6,"Apis mellifera",0.1,0.0187370346412081,0
+"Gorbea",2021,"2",6,"Epistrophe flava",0.4,0.111050634685593,0.050546637177732
+"Gorbea",2021,"4",5,"Sphaerophoria scripta",0.166666666666667,0,0.787253946446637
+"Gorbea",2021,"4",5,"Lasioglossum punctatissimum",0.5,0.280040689672858,0.397591255669796
+"Gorbea",2021,"4",5,"Empis sp",0.166666666666667,0.0300825617560282,0.293272907624672
+"Gorbea",2021,"4",5,"Diptera",0.333333333333333,0.090443521113151,0.12319196084805
+"Gorbea",2021,"4",5,"Ochlodes sylvanus",0.166666666666667,0.106642360715506,0.188311877446104
+"Gorbea",2021,"4",5,"Platycheirus albimanus",0.166666666666667,0,0.787253946446637
+"Gorbea",2021,"4",5,"Scaeva dignota",0.166666666666667,0.0313772065091421,0.450059429388141
+"Gorbea",2021,"4",5,"Eristalis tenax",0.166666666666667,0.0312010400346678,0
+"Gorbea",2021,"4",5,"Bombus pascuorum",0.666666666666667,0.175800587611854,0.471574751492623
+"Gorbea",2021,"3",7,"Eristalis tenax",0.2,0.0357142857142857,0.24839270116357
+"Gorbea",2021,"3",7,"Coenonympha pamphilus",0.1,0.0301587301587302,0.226023968370879
+"Gorbea",2021,"3",7,"Bombus hortorum",0.1,0.0361904761904762,0.550909494501687
+"Gorbea",2021,"3",7,"Ochlodes sylvanus",0.1,0.0251322751322751,0
+"Gorbea",2021,"3",7,"Sphaerophoria scripta",0.1,0.0246753246753247,0.471679166426281
+"Gorbea",2021,"3",7,"Exosoma sp",0.1,0.0178571428571429,0.471679166426281
+"Gorbea",2021,"3",7,"Bombus lapidarius",0.2,0.0246753246753247,0.703640219717878
+"Gorbea",2021,"3",7,"Merodon geniculatus",0.2,0.0331010452961672,0.265888128146307
+"Gorbea",2021,"3",7,"Lasioglossum immunitum",0.3,0.0347985347985348,0.273152095196964
+"Gorbea",2021,"3",7,"Zygaena lonicerae",0.1,0,1
+"Gorbea",2021,"3",7,"Apis mellifera",0.2,0.0452380952380952,0.502336523583303
+"Gorbea",2021,"3",7,"Bombus pascuorum",0.4,0.0331010452961672,0.798954885851413
+"Gorbea",2021,"3",7,"Chrysolina sp",0.1,0.0315614617940199,0.24839270116357
+"Gorbea",2021,"5",7,"Cerambycidae",0.5,0.666666666666667,0.685797250726568
+"Gorbea",2021,"5",7,"Bombus pascuorum",0.25,1.33333333333333,0.768074227794258
+"Gorbea",2021,"5",7,"Sphaerophoria scripta",0.25,0,0
+"Gorbea",2021,"5",7,"Coenonympha pamphilus",0.5,0,0.764765384012139
+"Gorbea",2022,"1",1,"Anthomyia sp",0.333333333333333,NA,1
+"Gorbea",2022,"1",1,"Bombus pascuorum",0.333333333333333,NA,1
+"Gorbea",2022,"1",1,"Eupeodes corollae",0.333333333333333,NA,1
+"Gorbea",2022,"2",1,"Bombus terrestris",0.25,0,1
+"Gorbea",2022,"2",1,"Apis mellifera",0.5,0.857142857142857,0
+"Gorbea",2022,"2",1,"Anthomyia sp",0.75,1.14285714285714,0.118819016099226
+"Gorbea",2022,"3",1,"Bombus pascuorum",0.125,0.0498067840274796,0
+"Gorbea",2022,"3",1,"Eupeodes corollae",0.125,0.0498067840274796,0
+"Gorbea",2022,"3",1,"Calliphora vicina",0.375,0.0564476885644769,0.262975177723057
+"Gorbea",2022,"3",1,"Bombus ruderarius",0.125,0.0492276353759973,0.790081020030618
+"Gorbea",2022,"3",1,"Platycheirus albimanus",0.25,0.204850482693666,0.184860139855987
+"Gorbea",2022,"3",1,"Anthomyia sp",0.25,0.0940794809407948,0.306908497742586
+"Gorbea",2022,"3",1,"Halictus smaragdulus",0.375,0.141119221411192,0.156315259250358
+"Gorbea",2022,"3",1,"Andrena limata",0.375,0.0627196539605299,0.434808223510422
+"Gorbea",2022,"3",1,"Lasioglossum leucopus",0.125,0,1
+"Gorbea",2022,"3",1,"Osmia caerulescens",0.125,0.169343065693431,0.17823321439156
+"Gorbea",2022,"1",2,"Andrena limata",0.166666666666667,0,0.91855139640598
+"Gorbea",2022,"1",2,"Bombus ruderarius",0.166666666666667,0.1,0.0465921651825021
+"Gorbea",2022,"1",2,"Bombus pascuorum",0.166666666666667,0.1,0.0465921651825021
+"Gorbea",2022,"1",2,"Eupeodes luniger",0.333333333333333,0.6,0.422701662658084
+"Gorbea",2022,"1",2,"Eupeodes corollae",0.166666666666667,0,1
+"Gorbea",2022,"1",2,"Calliphora vicina",0.166666666666667,0.2,0.192411576395559
+"Gorbea",2022,"1",2,"Apis mellifera",0.166666666666667,0.25,0.225199373333695
+"Gorbea",2022,"1",2,"Bombus soroeensis",0.166666666666667,0,0.395469022438916
+"Gorbea",2022,"1",2,"Bombus terrestris",0.333333333333333,0,0.926778743407111
+"Gorbea",2022,"1",2,"Andrena propinqua",0.166666666666667,0,0.35398516288991
+"Gorbea",2022,"2",2,"Eupeodes corollae",0.333333333333333,0.111830905995839,0.150691290036776
+"Gorbea",2022,"2",2,"Andrena limata",0.166666666666667,0.0261579907882159,0.0141769556917079
+"Gorbea",2022,"2",2,"Empis sp",0.5,0.161972268791945,0.120005354899574
+"Gorbea",2022,"2",2,"Andrena minutula",0.166666666666667,0.0269185897618302,0
+"Gorbea",2022,"2",2,"Andrena nigroaenea",0.166666666666667,0.0269185897618302,0
+"Gorbea",2022,"2",2,"Dasyrhamphis ater",0.166666666666667,0,1
+"Gorbea",2022,"2",2,"Bombus terrestris",0.333333333333333,0.0524448386739106,0.420129093438369
+"Gorbea",2022,"2",2,"Cheilosia velutina",0.5,0.107750036836924,0.277281547270169
+"Gorbea",2022,"2",2,"Bombus sylvestris",0.166666666666667,0.123554764999658,0.405074813712873
+"Gorbea",2022,"2",2,"Scaeva pyrastri",0.666666666666667,0.279145579773444,0.0648336562792568
+"Gorbea",2022,"2",2,"Apis mellifera",0.166666666666667,0.0269185897618302,0
+"Gorbea",2022,"2",2,"Platycheirus albimanus",0.166666666666667,0.0261579907882159,0.0141769556917079
+"Gorbea",2022,"4",2,"Empis sp",0.25,0.0869565217391304,0.0643606210509877
+"Gorbea",2022,"4",2,"Eupeodes corollae",0.25,0,1
+"Gorbea",2022,"4",2,"Andrena limata",0.25,0.0985507246376812,0.128683051550208
+"Gorbea",2022,"4",2,"Andrena nigroaenea",0.5,0.0377428307123034,0.626389131845393
+"Gorbea",2022,"4",2,"Lasioglossum leucopus",0.5,0.104347826086957,0.10230337562393
+"Gorbea",2022,"4",2,"Halictus smaragdulus",0.25,0.0537549407114625,0
+"Gorbea",2022,"4",2,"Apis mellifera",0.25,0.0328502415458937,0
+"Gorbea",2022,"4",2,"Platycheirus albimanus",0.25,0.021372446306967,0.775756175782425
+"Gorbea",2022,"4",2,"Lasioglossum lativentre",0.25,0.0328502415458937,0
+"Gorbea",2022,"1",3,"Bombus pascuorum",0.8,0.779220779220779,0.248694165486941
+"Gorbea",2022,"1",3,"Bombus soroeensis",0.2,0.244897959183673,0.356207187108022
+"Gorbea",2022,"1",3,"Eupeodes corollae",0.4,0.12987012987013,0.5
+"Gorbea",2022,"3",2,"Bombus lapidarius",0.333333333333333,NA,NA
+"Gorbea",2022,"3",2,"Eupeodes corollae",0.333333333333333,NA,NA
+"Gorbea",2022,"3",2,"Bombus pascuorum",0.333333333333333,NA,NA
+"Gorbea",2022,"4",3,"Meliscaeva sp",0.25,0.0276828434723172,0
+"Gorbea",2022,"4",3,"Eristalis sp.",0.25,0.138414217361586,0.351259366003621
+"Gorbea",2022,"4",3,"Calliphora vicina",0.25,0.0880817746846455,0.125114011128602
+"Gorbea",2022,"4",3,"Apis mellifera",0.5,0.0360520752197619,0.755318771891689
+"Gorbea",2022,"4",3,"Empis sp",0.25,0.0276828434723172,0
+"Gorbea",2022,"4",3,"Lasioglossum leucopus",0.5,0.048444976076555,0.556320715503675
+"Gorbea",2022,"4",3,"Halictus smaragdulus",0.5,0.112744671596346,0.175262131070318
+"Gorbea",2022,"4",3,"Eupeodes corollae",0.75,0.0516746411483254,0.0853854602687049
+"Gorbea",2022,"4",3,"Andrena sp",0.5,0.0344497607655502,0.0127384772001033
+"Gorbea",2022,"5",3,"Pyrgus sp.",0.333333333333333,0.494117647058824,0.278094091659499
+"Gorbea",2022,"5",3,"Andrena nigroaenea",0.333333333333333,0,0.61223806496151
+"Gorbea",2022,"5",3,"Lasioglossum sp",0.333333333333333,0.352941176470588,0.204173742463878
+"Gorbea",2022,"5",3,"Apis mellifera",0.333333333333333,0,0.81053618106566
+"Gorbea",2022,"5",3,"Anthophora subterranea",0.333333333333333,0.0705882352941176,0
+"Gorbea",2022,"5",3,"Bombus sylvarum",0.666666666666667,0.141176470588235,0.482612317881603
+"Gorbea",2022,"5",3,"Lepidoptera",0.333333333333333,0.0705882352941176,0
+"Gorbea",2022,"5",3,"Eristalis sp.",0.333333333333333,0.0705882352941176,0
+"Gorbea",2022,"2",3,"Calliphora vicina",0.2,0.0206766917293233,0
+"Gorbea",2022,"2",3,"Eupeodes corollae",0.2,0,1
+"Gorbea",2022,"2",3,"Sphaerophoria scripta",0.2,0.31015037593985,0.267110358894936
+"Gorbea",2022,"2",3,"Apis mellifera",0.4,0.0272859568275528,0.356234312097097
+"Gorbea",2022,"2",3,"Halictus smaragdulus",0.2,0.0206766917293233,0
+"Gorbea",2022,"2",3,"Andrena cineraria",0.6,0.130589631974674,0.069506967496992
+"Gorbea",2022,"2",3,"Platycheirus albimanus",0.2,0.0413533834586466,0.103520623553279
+"Gorbea",2022,"2",3,"Eristalis sp.",0.4,0.216383983213849,0.320072132558035
+"Gorbea",2022,"2",3,"Sphex sp",0.6,0.0731199314592966,0.0619510409537809
+"Gorbea",2022,"2",3,"Bombus sylvestris",0.2,0.144736842105263,0.176234026572493
+"Gorbea",2022,"2",3,"Anthocharis cardamines",0.2,0.0413533834586466,0.103520623553279
+"Gorbea",2022,"2",3,"Bombus pascuorum",0.2,0.0206766917293233,0
+"Gorbea",2022,"1",4,"Pararge aegeria",0.25,0.206675045384723,0.37965666017415
+"Gorbea",2022,"1",4,"Sphaerophoria scripta",0.375,0.0406912513809531,0.702081754425906
+"Gorbea",2022,"1",4,"Apis mellifera",0.125,0.0178991578160389,0.422114881702232
+"Gorbea",2022,"1",4,"Halictus smaragdulus",0.125,0,1
+"Gorbea",2022,"1",4,"Eupeodes corollae",0.125,0.0244079424764167,0.195778946124526
+"Gorbea",2022,"1",4,"Platycheirus albimanus",0.25,0.0605303469712518,0
+"Gorbea",2022,"1",4,"Calliphora vicina",0.125,0.0492831541218638,0.119671987161749
+"Gorbea",2022,"1",4,"Bombus pascuorum",0.375,0.0440719444715157,0.254457040285926
+"Gorbea",2022,"1",4,"Lasioglossum leucopus",0.125,0.0244079424764167,0.195778946124526
+"Gorbea",2022,"1",4,"Bombus terrestris",0.25,0.0605303469712518,0
+"Gorbea",2022,"1",4,"Lasioglossum immunitum",0.125,0.0255478347111588,0
+"Gorbea",2022,"1",4,"Bombus pratorum",0.5,0.230941640423298,0.329130031672305
+"Gorbea",2022,"3",3,"Bombus pascuorum",0.285714285714286,0,0.849485002168009
+"Gorbea",2022,"3",3,"Halictus smaragdulus",0.142857142857143,0,0.569323441926607
+"Gorbea",2022,"3",3,"Sphaerophoria scripta",0.142857142857143,0,1
+"Gorbea",2022,"3",3,"Osmia emarginata",0.285714285714286,0.428571428571429,0.492101660394506
+"Gorbea",2022,"3",3,"Bombus ruderarius",0.142857142857143,0,1
+"Gorbea",2022,"3",3,"Eupeodes corollae",0.142857142857143,0.244897959183673,0.569323441926607
+"Gorbea",2022,"3",3,"Platycheirus albimanus",0.285714285714286,0.285714285714286,0.503214597672861
+"Gorbea",2022,"4",4,"Eupeodes corollae",0.333333333333333,0.108695652173913,0.052371901428583
+"Gorbea",2022,"4",4,"Sphaerophoria scripta",0.333333333333333,0.135869565217391,0.602986551075004
+"Gorbea",2022,"4",4,"Andrena cineraria",0.333333333333333,0,1
+"Gorbea",2022,"4",4,"Lasioglossum leucopus",0.166666666666667,0.0543478260869565,0
+"Gorbea",2022,"4",4,"Apis mellifera",0.333333333333333,0.118577075098814,0.252371901428583
+"Gorbea",2022,"4",4,"Bombus ruderarius",0.166666666666667,0.173913043478261,0.485449689650553
+"Gorbea",2022,"4",4,"Platycheirus albimanus",0.5,0.0966183574879227,0
+"Gorbea",2022,"4",4,"Calliphora vicina",0.333333333333333,0.072463768115942,0.25
+"Gorbea",2022,"5",4,"Cheilosia nigripes",0.166666666666667,0,1
+"Gorbea",2022,"5",4,"Andrena propinqua",0.166666666666667,0.0444155477917561,0.75
+"Gorbea",2022,"5",4,"Sphaerophoria scripta",0.166666666666667,0,0.353759374819711
+"Gorbea",2022,"5",4,"Bombus pascuorum",0.166666666666667,0.0436422413793103,0
+"Gorbea",2022,"5",4,"Eupeodes corollae",0.166666666666667,0,0.672843562021703
+"Gorbea",2022,"5",4,"Lasioglossum sp",0.166666666666667,0,0.353759374819711
+"Gorbea",2022,"5",4,"Bombus ruderarius",0.166666666666667,0,0.353759374819711
+"Gorbea",2022,"5",4,"Bombus lapidarius",0.166666666666667,0.043448275862069,0.353759374819711
+"Gorbea",2022,"5",4,"Andrena sp",0.333333333333333,0.0436422413793103,0.563791416028937
+"Gorbea",2022,"5",4,"Melanomya sp",0.333333333333333,0.0676530246987233,0
+"Gorbea",2022,"5",4,"Anthophora agama",0.166666666666667,0.118855465884079,0.283791072995835
+"Gorbea",2022,"5",4,"Merodon sp.",0.166666666666667,0.043448275862069,0.353759374819711
+"Gorbea",2022,"5",4,"Platycheirus albimanus",0.166666666666667,0.0436422413793103,0
+"Gorbea",2022,"5",4,"Calliphora vicina",0.166666666666667,0.0436422413793103,0
+"Gorbea",2022,"5",4,"Apis mellifera",0.5,0.187636508041565,0.261903114566525
+"Gorbea",2022,"2",4,"Anthocharis cardamines",0.428571428571429,0.0883838383838384,0
+"Gorbea",2022,"2",4,"Sphaerophoria scripta",0.142857142857143,0,0.555365526391925
+"Gorbea",2022,"2",4,"Eupeodes corollae",0.142857142857143,0.109034267912773,0.463581935105285
+"Gorbea",2022,"2",4,"Apis mellifera",0.428571428571429,0.148755312689739,0.190943611217508
+"Gorbea",2022,"2",4,"Platycheirus albimanus",0.142857142857143,0.0729166666666667,0.212443967960018
+"Gorbea",2022,"2",4,"Calliphora vicina",0.142857142857143,0,1
+"Gorbea",2022,"2",4,"Tipula sp",0.142857142857143,0.0416666666666667,0
+"Gorbea",2022,"2",4,"Pieris napi",0.285714285714286,0.104166666666667,0.331718239514975
+"Gorbea",2022,"2",4,"Melanomya sp",0.142857142857143,0,0.691175192705984
+"Gorbea",2022,"2",4,"Andrena propinqua",0.714285714285714,0.14957264957265,0.21419013002862
+"Gorbea",2022,"2",4,"Maniola jurtina",0.142857142857143,0,0.321060801097007
+"Gorbea",2022,"2",4,"Merodon sp.",0.285714285714286,0.111111111111111,0.187825318186096
+"Gorbea",2022,"2",4,"Psithyrus quadricolor",0.142857142857143,0.0436953807740325,0.321060801097007
+"Gorbea",2022,"3",4,"Melangyna sp.",0.0909090909090909,0,1
+"Gorbea",2022,"3",4,"Sphaerophoria scripta",0.0909090909090909,0,0.698970004336019
+"Gorbea",2022,"3",4,"Diptera",0.0909090909090909,0,0.698970004336019
+"Gorbea",2022,"3",4,"Bombus lapidarius",0.0909090909090909,0,1
+"Gorbea",2022,"3",4,"Melanomya sp",0.0909090909090909,0.195266272189349,0.31828953173278
+"Gorbea",2022,"3",4,"Osmia emarginata",0.363636363636364,0.0976331360946746,0.595665116893745
+"Gorbea",2022,"3",4,"Calliphora vicina",0.0909090909090909,0.0769230769230769,0
+"Gorbea",2022,"3",4,"Halictus smaragdulus",0.0909090909090909,0,1
+"Gorbea",2022,"3",4,"Lasioglossum sp",0.272727272727273,0.241758241758242,0.21448144046255
+"Gorbea",2022,"3",4,"Bombus pascuorum",0.0909090909090909,0.112820512820513,0.645632359728884
+"Gorbea",2022,"3",4,"Bombus ruderarius",0.0909090909090909,0,1
+"Gorbea",2022,"3",4,"Lasioglossum leucopus",0.272727272727273,0.203076923076923,0.481746829390881
+"Gorbea",2022,"1",5,"Eristalis sp.",0.375,0.0817470238344925,0.40211420738826
+"Gorbea",2022,"1",5,"Bombus pascuorum",0.125,0.0488755012658696,0.297588025268987
+"Gorbea",2022,"1",5,"Halictus smaragdulus",0.125,0,0.297588025268987
+"Gorbea",2022,"1",5,"Sphaerophoria scripta",0.25,0,0.769886429531481
+"Gorbea",2022,"1",5,"Andrena propinqua",0.125,0,0.150414497311283
+"Gorbea",2022,"1",5,"Platycheirus albimanus",0.125,0,0.8
+"Gorbea",2022,"1",5,"Melangyna sp.",0.25,0.0549515408891603,0.148193648791832
+"Gorbea",2022,"1",5,"Calliphora vicina",0.25,0.1065499046935,0.422891156601607
+"Gorbea",2022,"1",5,"Andrena cineraria",0.125,0,0.408048247239513
+"Gorbea",2022,"1",5,"Systoechus sp",0.375,0.0823056024945618,0.709130768459463
+"Gorbea",2022,"1",5,"Bombus terrestris",0.125,0.024199463624044,0
+"Gorbea",2022,"1",5,"Merodon sp.",0.125,0.0270772838121614,0.438529015588479
+"Gorbea",2022,"1",5,"Eucera nigrescens",0.125,0.0263891521906149,0.150414497311283
+"Gorbea",2022,"1",5,"Bombus lapidarius",0.25,0.0416506045306191,0
+"Gorbea",2022,"1",5,"Pararge aegeria",0.625,0.147616881504076,0.563737856262046
+"Gorbea",2022,"1",5,"Bombylius sp.",0.125,0.0263891521906149,0.150414497311283
+"Gorbea",2022,"4",5,"Lucilia caesar",0.5,0.0893023255813953,0.411480944588517
+"Gorbea",2022,"4",5,"Sphaerophoria scripta",0.25,0.0573134328358209,0.43542496594642
+"Gorbea",2022,"4",5,"Bombus terrestris",0.25,0.0556521739130435,0
+"Gorbea",2022,"4",5,"Coenonympha pamphilus",0.25,0.0853333333333333,0.386480588002632
+"Gorbea",2022,"4",5,"Eupeodes corollae",0.25,0.0548571428571429,0.43542496594642
+"Gorbea",2022,"4",5,"Platycheirus albimanus",0.25,0.0573134328358209,0.43542496594642
+"Gorbea",2022,"4",5,"Halictus smaragdulus",0.75,0.103783783783784,0.255196363688734
+"Gorbea",2022,"5",5,"Platycheirus albimanus",0.2,0.0334060728764271,0.0824000792981561
+"Gorbea",2022,"5",5,"Lasioglossum sp",0.2,0.0334060728764271,0.0824000792981561
+"Gorbea",2022,"5",5,"Melanomya sp",0.2,0.0334060728764271,0.0824000792981561
+"Gorbea",2022,"5",5,"Halictus sp",0.4,0.0355815053479064,0.254528562037972
+"Gorbea",2022,"5",5,"Bombus pascuorum",0.2,0.0616969301455998,0.309927072118498
+"Gorbea",2022,"5",5,"Bombus lucorum",0.6,0.0371963441672028,0.657482658924429
+"Gorbea",2022,"5",5,"Eristalis sp.",0.2,0.0189350778000016,0.488083950380369
+"Gorbea",2022,"5",5,"Sphaerophoria scripta",0.2,0.0269520595441727,0.149725846272397
+"Gorbea",2022,"5",5,"Andrena cineraria",0.2,0.0268717255365895,0
+"Gorbea",2022,"5",5,"Andrena limata",0.2,0.0427780019811425,0.380145855763003
+"Gorbea",2022,"5",5,"Eupeodes sp.",0.2,0.0334060728764271,0.0824000792981561
+"Gorbea",2022,"5",5,"Pyrgus sp.",0.2,0.0616969301455998,0.309927072118498
+"Gorbea",2022,"5",5,"Bombus hortorum",0.6,0.0933036369213534,0.418317505330755
+"Gorbea",2022,"5",5,"Calliphora vicina",0.2,0.0268717255365895,0
+"Gorbea",2022,"5",5,"Bombus lapidarius",0.2,0.0268717255365895,0
+"Gorbea",2022,"5",5,"Bombus sp.",0.4,0.0732114239242232,0.534465828100968
+"Gorbea",2022,"3",5,"Melanomya sp",0.285714285714286,0.0772727272727273,0.243662996023236
+"Gorbea",2022,"3",5,"Sphaerophoria scripta",0.142857142857143,0.123636363636364,0.377563470352785
+"Gorbea",2022,"3",5,"Halictus smaragdulus",0.142857142857143,0,1
+"Gorbea",2022,"3",5,"Bombus pascuorum",0.142857142857143,0.0727272727272727,0.0642150259807986
+"Gorbea",2022,"3",5,"Apis mellifera",0.142857142857143,0.0883116883116883,0.311218264823608
+"Gorbea",2022,"3",5,"Scaeva pyrastri",0.142857142857143,0,0.79854425687008
+"Gorbea",2022,"3",5,"Osmia emarginata",0.428571428571429,0.112396694214876,0.317714349576988
+"Gorbea",2022,"3",5,"Calliphora vicina",0.142857142857143,0.0883116883116883,0.311218264823608
+"Gorbea",2022,"3",5,"Diptera",0.142857142857143,0.123636363636364,0.377563470352785
+"Gorbea",2022,"3",5,"Bombus lapidarius",0.142857142857143,0,0.471679166426281
+"Gorbea",2022,"3",5,"Andrena ovatula",0.428571428571429,0.0951048951048951,0.529034056025605
+"Gorbea",2022,"2",5,"Halictus confusus",0.1,0.0253760211552284,0.428555964120285
+"Gorbea",2022,"2",5,"Sphaerophoria scripta",0.1,0,0.686392139262749
+"Gorbea",2022,"2",5,"Bombus sp.",0.2,0,0.759985785628488
+"Gorbea",2022,"2",5,"Melanomya sp",0.1,0,0.486703593883948
+"Gorbea",2022,"2",5,"Eupeodes corollae",0.4,0.0602278315445803,0.186392365869532
+"Gorbea",2022,"2",5,"Platycheirus albimanus",0.2,0.044991685789666,0.261152512000639
+"Gorbea",2022,"2",5,"Calliphora vicina",0.1,0.0249919007728977,0
+"Gorbea",2022,"2",5,"Cheilosia nigripes",0.2,0.0610462651555832,0.20113621883971
+"Gorbea",2022,"2",5,"Eristalis sp.",0.7,0.0977525781860467,0.202733114427602
+"Gorbea",2022,"2",5,"Bombus pascuorum",0.1,0.0249919007728977,0
+"Gorbea",2022,"2",5,"Andrena sp",0.1,0.0267685433563652,0.486703593883948
+"Gorbea",2022,"2",5,"Bombus lapidarius",0.1,0.0247111681643132,0.136324287461737
+"Gorbea",2022,"2",5,"Halictus smaragdulus",0.3,0.0744013602672938,0.108249969562803
+"Gorbea",2022,"2",5,"Pieris brassicae",0.5,0.136211089444805,0.259079500326035
+"Gorbea",2022,"1",6,"Sphaerophoria scripta",0.111111111111111,0.0214852236735335,0.44004276628317
+"Gorbea",2022,"1",6,"Halictus smaragdulus",0.111111111111111,0,0.813347588761057
+"Gorbea",2022,"1",6,"Eristalis sp.",0.222222222222222,0,0.921607344862053
+"Gorbea",2022,"1",6,"Bombus pascuorum",0.222222222222222,0.0379879836621124,0.242489360679472
+"Gorbea",2022,"1",6,"Platycheirus albimanus",0.222222222222222,0.112680359839363,0.217318966183154
+"Gorbea",2022,"1",6,"Melanomya sp",0.111111111111111,0,0.354288746865108
+"Gorbea",2022,"1",6,"Syrphidae",0.222222222222222,0,1
+"Gorbea",2022,"1",6,"Syrphus sp.",0.111111111111111,0.0230822559164978,0.289348023355489
+"Gorbea",2022,"1",6,"Calliphora vicina",0.111111111111111,0.0230822559164978,0.289348023355489
+"Gorbea",2022,"1",6,"Merodon sp.",0.222222222222222,0.0560298566504651,0.130864416432579
+"Gorbea",2022,"1",6,"Bombus lapidarius",0.555555555555556,0.185625448416739,0.458336844640317
+"Gorbea",2022,"1",6,"Andrena propinqua",0.222222222222222,0.0517840187502563,0.0720223505424281
+"Gorbea",2022,"1",6,"Eucera nigrescens",0.111111111111111,0.0449640521770356,0.387368590970319
+"Gorbea",2022,"4",6,"Bombus terrestris",0.142857142857143,0.0688956433637285,0.301029995663981
+"Gorbea",2022,"4",6,"Halictus smaragdulus",0.142857142857143,0,0.698970004336019
+"Gorbea",2022,"4",6,"Calliphora vicina",0.142857142857143,0.0852130325814536,0
+"Gorbea",2022,"4",6,"Scaeva pyrastri",0.142857142857143,0.0852130325814536,0
+"Gorbea",2022,"4",6,"Eristalis sp.",0.285714285714286,0,0.822816179864442
+"Gorbea",2022,"4",6,"Erebia meolans",0.285714285714286,0.311355311355311,0.321934490594286
+"Gorbea",2022,"4",6,"Sphaerophoria scripta",0.285714285714286,0.17989417989418,0.036386914251926
+"Gorbea",2022,"4",6,"Diptera",0.142857142857143,0.0852130325814536,0
+"Gorbea",2022,"4",6,"Andrena sp",0.714285714285714,0.202380952380952,0.446122097274002
+"Gorbea",2022,"3",6,"Eupeodes corollae",0.25,0.050179211469534,0.436208583971063
+"Gorbea",2022,"3",6,"Calliphora vicina",0.25,0.0432098765432099,0.127582832057874
+"Gorbea",2022,"3",6,"Sphaerophoria scripta",0.25,0.0388888888888889,0.847598050457413
+"Gorbea",2022,"3",6,"Apis mellifera",0.125,0.0409356725146199,0.226294385530917
+"Gorbea",2022,"3",6,"Halictus smaragdulus",0.25,0.0555555555555556,0
+"Gorbea",2022,"3",6,"Bombus pascuorum",0.25,0.0432098765432099,0.436208583971063
+"Gorbea",2022,"3",6,"Eristalis sp.",0.25,0.033096926713948,0.781895708014468
+"Gorbea",2022,"3",6,"Bombus sp.",0.125,0.0471380471380471,0.386852807234542
+"Gorbea",2022,"3",6,"Zygaena lonicerae",0.25,0.0740740740740741,0.57199077386255
+"Gorbea",2022,"3",6,"Bombus lapidarius",0.125,0.0409356725146199,0.226294385530917
+"Gorbea",2022,"5",6,"Bombus sylvarum",0.166666666666667,0.06,0.221848749616356
+"Gorbea",2022,"5",6,"Melanomya sp",0.166666666666667,0.06,0.221848749616356
+"Gorbea",2022,"5",6,"Platycheirus albimanus",0.166666666666667,0.12,0.620584101458771
+"Gorbea",2022,"5",6,"Sphaerophoria scripta",0.333333333333333,0.0533333333333333,0.661412384802437
+"Gorbea",2022,"5",6,"Oedemera sp.",0.166666666666667,0,0.698970004336019
+"Gorbea",2022,"5",6,"Bombus pascuorum",0.333333333333333,0.105365853658537,0.600665948226854
+"Gorbea",2022,"5",6,"Bombus lucorum",0.166666666666667,0,0.698970004336019
+"Gorbea",2022,"5",6,"Coenonympha pamphilus",0.666666666666667,0.096,0.143239144599159
+"Gorbea",2022,"5",6,"Halictus smaragdulus",0.333333333333333,0.0738461538461538,0.0990305290495895
+"Gorbea",2022,"2",6,"Platycheirus albimanus",0.3,0.0384736543453223,0.643182570626144
+"Gorbea",2022,"2",6,"Sphaerophoria scripta",0.2,0.0223194088372794,0.562354049497353
+"Gorbea",2022,"2",6,"Diptera",0.3,0.0177552314521243,0.858614438709679
+"Gorbea",2022,"2",6,"Apis mellifera",0.1,0.0824158340227837,0.353084392284148
+"Gorbea",2022,"2",6,"Calliphora vicina",0.3,0.0478720946351832,0.186064105615629
+"Gorbea",2022,"2",6,"Halictus smaragdulus",0.1,0.0223194088372794,0.221760826842402
+"Gorbea",2022,"2",6,"Andrena minutula",0.1,0.0220219369101267,0
+"Gorbea",2022,"2",6,"Episyrphus balteatus",0.1,0.0371432668865625,0.111829168918144
+"Gorbea",2022,"2",6,"Eristalis sp.",0.1,0.0223194088372794,0.221760826842402
+"Gorbea",2022,"2",6,"Bombus pascuorum",0.1,0.0223194088372794,0.221760826842402
+"Gorbea",2022,"2",6,"Merodon sp.",0.1,0.0166990338100541,0.789690082142848
+"Gorbea",2022,"2",6,"Episyrphus auricollis",0.5,0.0900907365526434,0.220923423739744
+"Gorbea",2022,"2",6,"Nomada sheppardana",0.3,0.0804302032492974,0.108850098673551
+"Gorbea",2022,"1",7,"Sphaerophoria scripta",0.133333333333333,0,0.892545075470035
+"Gorbea",2022,"1",7,"Eristalis arbustorum",0.0666666666666667,0,0.839455914565979
+"Gorbea",2022,"1",7,"Bombus lapidarius",0.133333333333333,0.0923944049214696,0.513675908160869
+"Gorbea",2022,"1",7,"Eristalis sp.",0.0666666666666667,0,0.839455914565979
+"Gorbea",2022,"1",7,"Calliphora vicina",0.266666666666667,0,0.900059815025881
+"Gorbea",2022,"1",7,"Platycheirus albimanus",0.133333333333333,0.112471237919926,0.11649457002459
+"Gorbea",2022,"1",7,"Pararge aegeria",0.0666666666666667,0.011442483262325,0
+"Gorbea",2022,"1",7,"Andrena ovatula",0.333333333333333,0.126254838829225,0.122466369258606
+"Gorbea",2022,"1",7,"Apis mellifera",0.0666666666666667,0.0322469982847341,0.052632886303066
+"Gorbea",2022,"1",7,"Bombus pascuorum",0.0666666666666667,0,0.678911829131957
+"Gorbea",2022,"1",7,"Eupeodes corollae",0.0666666666666667,0.011592767966335,0.627228177562749
+"Gorbea",2022,"1",7,"Halictus smaragdulus",0.0666666666666667,0,0.839455914565979
+"Gorbea",2022,"1",7,"Lasioglossum leucopus",0.133333333333333,0.0216185331083694,0
+"Gorbea",2022,"1",7,"Merodon sp.",0.2,0.0216185331083694,0.287565878689644
+"Gorbea",2022,"1",7,"Syrphus sp.",0.133333333333333,0.0506738544474393,0.220806517210335
+"Gorbea",2022,"1",7,"Lassiomata megera",0.4,0.211765059658237,0.212799270326846
+"Gorbea",2022,"1",7,"Andrena propinqua",0.133333333333333,0.0213709047446231,0.183835647162285
+"Gorbea",2022,"2",7,"Sphaerophoria scripta",0.166666666666667,0.0167154938919905,0.806573596382729
+"Gorbea",2022,"2",7,"Platycheirus albimanus",0.166666666666667,0.0379746835443038,0.0795180903023762
+"Gorbea",2022,"2",7,"Eristalis sp.",0.333333333333333,0.030379746835443,0.193777478769415
+"Gorbea",2022,"2",7,"Andrena ovatula",0.166666666666667,0.0168776371308017,0
+"Gorbea",2022,"2",7,"Halictus smaragdulus",0.333333333333333,0.0371635737986973,0.801376453762834
+"Gorbea",2022,"2",7,"Calliphora vicina",0.666666666666667,0.0423434524476308,0.0844650259492076
+"Gorbea",2022,"2",7,"Eupeodes corollae",0.5,0.0466198475889598,0.171893463398477
+"Gorbea",2022,"4",7,"Erebia meolans",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Bombus terrestris",0.285714285714286,0.416976917349218,0.352654728569336
+"Gorbea",2022,"4",7,"Halictus smaragdulus",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Sphaerophoria scripta",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Syrphus sp.",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Bombus hortorum",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Andrena ovatula",0.285714285714286,0.141772151898734,0.342398603373972
+"Gorbea",2022,"4",7,"Lasioglossum leucopus",0.142857142857143,0,1
+"Gorbea",2022,"4",7,"Bombus lucorum",0.142857142857143,0,0.0397474322108725
+"Gorbea",2022,"4",7,"Pyrgus sp.",0.142857142857143,0.10126582278481,0
+"Gorbea",2022,"4",7,"Coenonympha pamphilus",0.142857142857143,0,1
+"Gorbea",2022,"4",7,"Lasioglossum sexnotatum",0.428571428571429,0,0.803783721997632
+"Gorbea",2022,"4",7,"Bombus pascuorum",0.142857142857143,0,0.0397474322108725
+"Gorbea",2022,"5",7,"Sphaerophoria scripta",0.333333333333333,0,0.669517976278159
+"Gorbea",2022,"5",7,"Nomada elsei",0.333333333333333,0,0.669517976278159
+"Gorbea",2022,"5",7,"Halictus smaragdulus",0.333333333333333,0,0.535614381022527
+"Gorbea",2022,"5",7,"Cupido sp.",0.333333333333333,0.0762146713242299,0.853759374819711
+"Gorbea",2022,"5",7,"Bombus hortorum",0.333333333333333,0.0298507462686567,0
+"Gorbea",2022,"5",7,"Lasioglossum leucopus",0.333333333333333,0.0298507462686567,0
+"Gorbea",2022,"5",7,"Coenonympha pamphilus",0.666666666666667,0.111940298507463,0.614632956431853
+"Gorbea",2022,"3",7,"Ochlodes sylvanus",0.0909090909090909,0.0380874949185403,0.541843090008674
+"Gorbea",2022,"3",7,"Halictus smaragdulus",0.181818181818182,0.083556287301914,0.603911408931365
+"Gorbea",2022,"3",7,"Sphaerophoria scripta",0.272727272727273,0.0657241528167494,0.196167294573602
+"Gorbea",2022,"3",7,"Bombus lapidarius",0.0909090909090909,0.0296119809394146,0.252778263690786
+"Gorbea",2022,"3",7,"Bombus pascuorum",0.181818181818182,0.0549936788874842,0.298837127231725
+"Gorbea",2022,"3",7,"Lasioglossum leucopus",0.181818181818182,0.0338954750375689,0.521835197122908
+"Gorbea",2022,"3",7,"Halictus sp",0.0909090909090909,0.0481194690265487,0.258018006999973
+"Gorbea",2022,"3",7,"Diptera",0.181818181818182,0.0481194690265487,0.466171816627171
+"Gorbea",2022,"3",7,"Apis mellifera",0.0909090909090909,0.0321274547300951,0.32881225852876
+"Gorbea",2022,"3",7,"Calliphora vicina",0.272727272727273,0.0447251496346344,0.403987096134738
+"Gorbea",2022,"3",7,"Zygaena lonicerae",0.636363636363636,0.0753759514821462,0.348977899835475
+"Gorbea",2022,"3",7,"Macroglossum stellatarum",0.0909090909090909,0.0338954750375689,0.0836861800173476
