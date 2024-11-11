@@ -403,14 +403,7 @@ all_df <- all_df %>%
 all_df <- all_df %>%
   filter(!(Pollinator_id == "" | str_detect(Pollinator_id, "^\\d+$")))
 
-gor<-all_df%>%
-  filter(Site=="Gorbea")
-unique(gor$Pollinator_id)
-#158
-doñ<-all_df%>%
-  filter(Site=="Doñana")
-unique(doñ$Pollinator_id)
-#151
+
 unique(all_df$Pollinator_family)
 
 total_visits <- nrow(gor)
@@ -437,15 +430,53 @@ all_df$Planta <- dplyr::recode(all_df$Planta, "Helleborus viridis" = "Helleborus
                                            " Thymus praecox subsp. polytrichus" = "Thymus praecox subsp. polytrichus"
 )
 
+poll.all <- all_df%>%
+  distinct(Pollinator_id) %>%    
+  arrange(Pollinator_id)        
+print(plants.all)
+
+all_df$Pollinator_id <- dplyr::recode(all_df$Pollinator_id, "abeja peque\x96a" = "Hymenoptera",
+                               "mosca gris puntos negros"="Diptera",
+                               "Andrena allaudi"="Andrena alluaudi",
+                               "Andrena cinerea" ="Andrena cineraria",
+                               "Eristalis  similis" ="Eristalis similis",
+                               "Lasioglossum  albocinctum"="Lasioglossum albocinctum",
+                               "Lassioglossum morio"= "Lasioglossum morio",
+                               "Lassiomata megera"= "Lasiomata megera",
+                               "Lepidoptera NA" ="Lepidoptera",
+                               "Merodon sp." =  "Merodon sp",
+                               "Myathropa  florea"= "Myathropa florea",
+                               "Myothropa florea" ="Myathropa florea",
+                               "Platycheirus  sp" ="Platycheirus sp"
+                               )
+
+gor<-all_df%>%
+  filter(Site=="Gorbea")
+unique(gor$Pollinator_id)
+#155
+doñ<-all_df%>%
+  filter(Site=="Doñana")
+unique(doñ$Pollinator_id)
+#144
 all_df <- all_df%>%
   select(-X)
 
-write.csv(all_df, "data/useful/all_data.csv")
 
-unique
+web <- table(all_df$Planta, all_df$Pollinator_id)
+web <- as.matrix(web)
+view(web)
 
 all_df<-read.csv("./data/useful/all_data.csv")
+all_df <- all_df %>%
+  mutate(
+    Pollinator_genus = ifelse(is.na(Pollinator_genus) | str_detect(str_trim(Pollinator_genus), "^\\s*$|^\\?"), word(Pollinator_id, 1), Pollinator_genus)
+  )
 
+all_df$Pollinator_genus<- dplyr::recode(all_df$Pollinator_genus, "abeja" = "Hymenoptera")
+all_df <- all_df %>%
+  select(-X)
+
+write.csv(all_df, "data/useful/all_data.csv")
 
 # Calcular el número de visitas por cada orden y su porcentaje
 gor<-all_df%>%
@@ -454,6 +485,7 @@ gor<-all_df%>%
 doñ<-all_df%>%
   filter(Site=="Doñana")
 
+total_visits <- nrow(gor)
 visits_by_order <- gor %>%
   group_by(Order) %>%
   summarise(Count = n()) %>%
@@ -496,3 +528,4 @@ bombus.d <- doñ %>%
   group_by(Pollinator_id) %>%
   summarise(Count = n()) %>%
   mutate(perc.ap = (Count / total_visits.d) * 100)
+

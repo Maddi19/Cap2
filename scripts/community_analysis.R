@@ -1,19 +1,19 @@
 ######COMMUNITY ANALYSIS
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,dplyr, lme4, carData,effects, easystats, lmertTest,
+pacman::p_load(tidyverse,here, dplyr, lme4, carData,effects, easystats, lmertTest,
                performance,see,gridExtra,car, lattice,ggplot2,bipartite,
                glmmTMB)
 
-
-
-sitems<-read.csv("data/sitems_meanfs.csv")
+getwd()
+sitems<-read.csv(here("data","useful", "sitems_meanfs.csv"))
 
 #FRUITset
 sitems.fs <- sitems %>%
   filter(!is.na(mean.fs)& !is.nan(mean.fs))
 sitems.fs <- sitems.fs %>%
   mutate(mean.fs = if_else(mean.fs == 1, 0.9999, mean.fs))
+
 
 
 m1<-lm( mean.fs ~  poll.sp + total.visits + Anidamiento + comp.fun.pol + Year + Periodo , data=sitems.fs)
@@ -113,6 +113,7 @@ sitems.g$Year <- as.factor(sitems.g$Year)
 sitems.g$Periodo <- as.factor(sitems.g$Periodo)
 
 # MODELO 1
+View(sitems.g)
 m1.g<-lmer(poll.sp ~ Periodo + Year + (1|Bosque),  data=sitems.g)
 # COMPRUEBO NORMALIDAD RESIDUOS.
 install.packages("insight")
@@ -175,7 +176,9 @@ allEffects(m2.d)
 plot(allEffects(m2.d))
 
 # MODELO 3 - ANIDAMIENTO
-m3.g<-lmer(Anidamiento ~ Year + Periodo + (1|Bosque), data = sitems.g)
+sitems.g$Periodo <- as.factor (sitems.g$Periodo)
+sitems.g$Year <- as.factor (sitems.g$Year)
+m3.g<-glmmTMB(Anidamiento ~ Year + Periodo + (1|Bosque), data = sitems.g)
 # COMPRUEBO NORMALIDAD RESIDUOS
 check_model(m3.g)
 report(m3.g)
@@ -186,7 +189,7 @@ allEffects(m3.g)
 plot(allEffects(m3.g))
 summary(m3.g)
 
-m3.d<-lmer(Anidamiento ~ Year + Periodo + (1|Bosque), data = sitems.d)
+m3.d<-glmmTMB(Anidamiento ~ Year + Periodo + (1|Bosque), data = sitems.d)
 # COMPRUEBO NORMALIDAD RESIDUOS
 check_model(m3.d)
 model_dashboard(m3.d)
@@ -197,14 +200,21 @@ effects_list <- allEffects(m3.g)
 # Convertimos las listas a data.frames
 df_year <- as.data.frame(effects_list$Year)
 df_year$Periodo <- NA  # Añadimos columna Periodo vacía para combinar
+df_year$Site_id <- NA  # Añadimos columna Periodo vacía para combinar
 df_year$Type <- "Year"
+
+df_site <- as.data.frame(effects_list$Site_id)
+df_site$Periodo <- NA  # Añadimos columna Periodo vacía para combinar
+df_site$Year <- NA  # Añadimos columna Periodo vacía para combinar
+df_site$Type <- "Site"
 
 df_periodo <- as.data.frame(effects_list$Periodo)
 df_periodo$Year <- NA  # Añadimos columna Year vacía para combinar
+df_periodo$Site_id <- NA  # Añadimos columna Year vacía para combinar
 df_periodo$Type <- "Periodo"
 
 # Combinamos los dos data.frames
-df_combined <- bind_rows(df_year, df_periodo) %>%
+df_combined <- bind_rows(df_year, df_periodo, df_site) %>%
   mutate(Periodo = ifelse(is.na(Periodo), as.integer(as.character(Year)), Periodo)) %>%
   mutate(Year = ifelse(is.na(Year), NA, Year)) %>%
   filter(!is.na(Periodo))
@@ -244,8 +254,8 @@ hamar <- j +
   )
 
 # Añadir barras de error
-se1 <- df$fit + df$se
-se2 <- df$fit - df$se
+se1 <- df_combined$fit + df_combined$se
+se2 <- df_combined$fit - df_combined$se
 
 hamar3 <- hamar + geom_errorbar(
   aes(ymin=se2, ymax=se1), 
@@ -287,8 +297,9 @@ qqmath(m5.d)
 model_dashboard(m5.d)
 
 sitems.g$Periodo <- as.factor(sitems.g$Periodo)
+
 # MODELO 6 - COMPLEMENTARIEDAD FUNC. POL.
-m6.g<-lmer(comp.fun.pol ~ Periodo + plant.sp + (1|Year) + (1|Bosque), data=sitems.g)
+m6.g<-glmmTMB(comp.fun.pol ~ Periodo + Year + plant.sp + poll.sp + (1|Bosque), data=sitems.g)
 # COMPRUEBO NORMALIDAD RESIDUOS
 check_model(m6.g)
 model_dashboard(m6.g)
@@ -298,7 +309,7 @@ allEffects(m6.g)
 plot(allEffects(m6.g))
 
 sitems.d$Periodo <- as.factor(sitems.d$Periodo)
-m6.d<-lmer(comp.fun.pol ~  Periodo + plant.sp + (1|Year) + (1|Bosque), data=sitems.d)
+m6.d<-glmmTMB(comp.fun.pol ~  Periodo + Year + plant.sp + poll.sp  + (1|Bosque), data=sitems.d)
 # COMPRUEBO NORMALIDAD RESIDUOS
 check_model(m6.d)
 model_dashboard(m6.d)
@@ -310,12 +321,12 @@ library(dplyr)
 # Obtener las predicciones del modelo
 sitems.g$predicted <- predict(m6.g, type="response", re.form = NA)
 mean_predictions <- sitems.g %>%
-  group_by(Year, Periodo) %>%
+  group_by(Year, Periodo, Site_id) %>%
   summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
 
 sitems.d$predicted <- predict(m6.d, type="response", re.form = NA)
 mean_predictions.d <- sitems.d %>%
-  group_by(Year, Periodo) %>%
+  group_by(Year, Periodo, Site_id) %>%
   summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
 
 library(ggplot2)
@@ -353,8 +364,44 @@ data_list <- list(
 plots <- map(data_list, ~ create_plot(.x$data, .x$mean_predictions, .x$title))
 
 # Mostrar los gráficos
-print(plots$g)
-print(plots$d)
+p1<-print(plots$g)
+p2<-print(plots$d)
+
+save(p1,p2,file = "Rdata/funcomp.RData")
+
+
+######COMPLEMENTARIDAD FUNCIONAL PLANTAS
+m7.g<-glmmTMB(comp.fun.pl ~ Periodo + Year + plant.sp + poll.sp + (1|Bosque), data=sitems.g)
+m7.d<-glmmTMB(comp.fun.pl ~  Periodo + Year + plant.sp + poll.sp  + (1|Bosque), data=sitems.d)
+
+
+# Obtener las predicciones del modelo
+sitems.g$predicted.pl <- predict(m7.g, type="response", re.form = NA)
+mean_predictions.pl <- sitems.g %>%
+  group_by(Year, Periodo, Site_id) %>%
+  summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
+
+sitems.d$predicted.pl <- predict(m7.d, type="response", re.form = NA)
+mean_predictions.pl.d <- sitems.d %>%
+  group_by(Year, Periodo, Site_id) %>%
+  summarise(mean_predicted = mean(predicted, na.rm = TRUE), .groups = 'drop')
+
+# Lista de datos y títulos
+data_list <- list(
+  g = list(data = sitems.g, mean_predictions = mean_predictions.pl, title = "Gorbea"),
+  d = list(data = sitems.d, mean_predictions = mean_predictions.pl.d, title = "Doñana")
+)
+
+# Generar gráficos para cada conjunto de datos usando map
+plots <- map(data_list, ~ create_plot(.x$data, .x$mean_predictions, .x$title))
+
+# Mostrar los gráficos
+p3<-print(plots$g)
+p4<-print(plots$d)
+
+save(p3,p4,file = "Rdata/funcomp.pl.RData")
+
+
 
 library(glmmTMB)
 # MODELO 11 - COMPLEMENTARIEDAD FUNC. POL.

@@ -98,6 +98,11 @@ With regard to the functional complementarity of pollinators and plants, the sam
 
 ### Species complementarity through time and space
 
+```{r species_presence}
+load("scripts/presence_plot.RData")
+presence_plot
+```
+
 ### Species level reproductive success
 
 ```{r cars}

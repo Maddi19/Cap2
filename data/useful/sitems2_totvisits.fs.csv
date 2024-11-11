@@ -1,237 +1,237 @@
-"","X","Site_id","Year","Bosque","Periodo","Planta","norm_degree","weight_closeness","d","match","tot.visits.pl","pl.mean.fs"
-"1",1,"Doñana",2020,"Pinar Puebla",1,"Cistus ladanifer",0.111111111111111,0.0316831683168317,0,"Doñana_2020_Pinar Puebla_1_Cistus ladanifer",2,NA
-"2",2,"Doñana",2020,"Pinar Puebla",1,"Rosmarinus officinalis",0.222222222222222,0,1,"Doñana_2020_Pinar Puebla_1_Rosmarinus officinalis",107,NA
-"3",3,"Doñana",2020,"Pinar Puebla",1,"Cistus salvifolius",0.111111111111111,0.0196972078160197,0.647389321559071,"Doñana_2020_Pinar Puebla_1_Cistus salvifolius",2,NA
-"4",4,"Doñana",2020,"Pinar Puebla",1,"Lavandula stoechas",0.777777777777778,0.151949888866438,0.410043723977943,"Doñana_2020_Pinar Puebla_1_Lavandula stoechas",1,NA
-"5",5,"Doñana",2020,"Pinar Hinojos",1,"Halimium commutatum",0.875,1.75,0,"Doñana_2020_Pinar Hinojos_1_Halimium commutatum",35,NA
-"6",6,"Doñana",2020,"Pinar Hinojos",1,"Romulea bulbocodium",0.25,0.25,1,"Doñana_2020_Pinar Hinojos_1_Romulea bulbocodium",2,NA
-"7",7,"Doñana",2020,"Pinar Hinojos",1,"Halimium commutatum",0.875,1.75,0.647389321559071,"Doñana_2020_Pinar Hinojos_1_Halimium commutatum",35,NA
-"8",8,"Doñana",2020,"Pinar Hinojos",1,"Romulea bulbocodium",0.25,0.25,0.410043723977943,"Doñana_2020_Pinar Hinojos_1_Romulea bulbocodium",2,NA
-"9",9,"Doñana",2020,"Villamanrique Chaparral",2,"Rosmarinus officinalis",0.375,0.133333333333333,0,"Doñana_2020_Villamanrique Chaparral_2_Rosmarinus officinalis",22,NA
-"10",10,"Doñana",2020,"Villamanrique Chaparral",2,"Asphodelus fistulosus",0.75,1.86666666666667,1,"Doñana_2020_Villamanrique Chaparral_2_Asphodelus fistulosus",4,NA
-"11",11,"Doñana",2020,"Villamanrique Chaparral",2,"Rosmarinus officinalis",0.375,0.133333333333333,0.647389321559071,"Doñana_2020_Villamanrique Chaparral_2_Rosmarinus officinalis",22,NA
-"12",12,"Doñana",2020,"Villamanrique Chaparral",2,"Asphodelus fistulosus",0.75,1.86666666666667,0.410043723977943,"Doñana_2020_Villamanrique Chaparral_2_Asphodelus fistulosus",4,NA
-"13",13,"Doñana",2020,"Villamanrique Sur",2,"Rosmarinus officinalis",0.333333333333333,NA,0,"Doñana_2020_Villamanrique Sur_2_Rosmarinus officinalis",11,NA
-"14",14,"Doñana",2020,"Villamanrique Sur",2,"Cistus salvifolius",0.666666666666667,NA,1,"Doñana_2020_Villamanrique Sur_2_Cistus salvifolius",3,NA
-"15",15,"Doñana",2020,"Villamanrique Sur",2,"Rosmarinus officinalis",0.333333333333333,NA,0.647389321559071,"Doñana_2020_Villamanrique Sur_2_Rosmarinus officinalis",11,NA
-"16",16,"Doñana",2020,"Villamanrique Sur",2,"Cistus salvifolius",0.666666666666667,NA,0.410043723977943,"Doñana_2020_Villamanrique Sur_2_Cistus salvifolius",3,NA
-"17",17,"Doñana",2020,"Pinar Aznalcazar",2,"Rosmarinus officinalis",0.2,0.117647058823529,0,"Doñana_2020_Pinar Aznalcazar_2_Rosmarinus officinalis",25,NA
-"18",18,"Doñana",2020,"Pinar Aznalcazar",2,"Cistus albidus",1,1.88235294117647,1,"Doñana_2020_Pinar Aznalcazar_2_Cistus albidus",1,NA
-"19",19,"Doñana",2020,"Pinar Aznalcazar",2,"Rosmarinus officinalis",0.2,0.117647058823529,0.647389321559071,"Doñana_2020_Pinar Aznalcazar_2_Rosmarinus officinalis",25,NA
-"20",20,"Doñana",2020,"Pinar Aznalcazar",2,"Cistus albidus",1,1.88235294117647,0.410043723977943,"Doñana_2020_Pinar Aznalcazar_2_Cistus albidus",1,NA
-"21",21,"Doñana",2020,"Pinar Puebla",3,"Cistus salvifolius",0.2,0.0306377964354102,0,"Doñana_2020_Pinar Puebla_3_Cistus salvifolius",21,NA
-"22",22,"Doñana",2020,"Pinar Puebla",3,"Genista hirsuta",0.266666666666667,0.111446482470397,1,"Doñana_2020_Pinar Puebla_3_Genista hirsuta",1,NA
-"23",23,"Doñana",2020,"Pinar Puebla",3,"Cistus ladanifer",0.6,0.184826491797158,0.647389321559071,"Doñana_2020_Pinar Puebla_3_Cistus ladanifer",6,NA
-"24",24,"Doñana",2020,"Pinar Puebla",3,"Rosmarinus officinalis",0.133333333333333,0.0974124809741248,0.410043723977943,"Doñana_2020_Pinar Puebla_3_Rosmarinus officinalis",16,NA
-"25",25,"Doñana",2020,"Pinar Puebla",3,"Lavandula stoechas",0.0666666666666667,0.0306377964354102,0,"Doñana_2020_Pinar Puebla_3_Lavandula stoechas",9,NA
-"26",26,"Doñana",2020,"Pinar Puebla",3,"Cistus crispus",0.4,0.149776261422669,1,"Doñana_2020_Pinar Puebla_3_Cistus crispus",3,NA
-"27",27,"Doñana",2020,"Pinar Puebla",3,"Leontodon hispidus",0.133333333333333,0.0547945205479452,0.647389321559071,"Doñana_2020_Pinar Puebla_3_Leontodon hispidus",2,NA
-"28",28,"Doñana",2020,"Pinar Puebla",3,"Echium plantagineum",0.333333333333333,0.216795711733174,0.410043723977943,"Doñana_2020_Pinar Puebla_3_Echium plantagineum",4,NA
-"29",29,"Doñana",2020,"Pinar Hinojos",3,"Cistus albidus",0.125,0.375,0,"Doñana_2020_Pinar Hinojos_3_Cistus albidus",1,NA
-"30",30,"Doñana",2020,"Pinar Hinojos",3,"Leontodon hispidus",0.125,0,1,"Doñana_2020_Pinar Hinojos_3_Leontodon hispidus",14,NA
-"31",31,"Doñana",2020,"Pinar Hinojos",3,"Halimium calycinum",0.125,0.375,0.647389321559071,"Doñana_2020_Pinar Hinojos_3_Halimium calycinum",1,NA
-"32",32,"Doñana",2020,"Pinar Hinojos",3,"Echium plantagineum",0.875,0.75,0.410043723977943,"Doñana_2020_Pinar Hinojos_3_Echium plantagineum",1,NA
-"33",33,"Doñana",2020,"Pinar Puebla",4,"Cistus salvifolius",0.166666666666667,0,0,"Doñana_2020_Pinar Puebla_4_Cistus salvifolius",5,NA
-"34",34,"Doñana",2020,"Pinar Puebla",4,"Galactite tomentosa",0.166666666666667,0,1,"Doñana_2020_Pinar Puebla_4_Galactite tomentosa",3,NA
-"35",35,"Doñana",2020,"Pinar Puebla",4,"Leontodon hispidus",0.5,1,0.647389321559071,"Doñana_2020_Pinar Puebla_4_Leontodon hispidus",2,NA
-"36",36,"Doñana",2020,"Pinar Puebla",4,"Cistus crispus",0.333333333333333,1,0.410043723977943,"Doñana_2020_Pinar Puebla_4_Cistus crispus",1,NA
-"37",37,"Doñana",2020,"Pinar Hinojos",4,"Leontodon hispidus",0.5,0.115384615384615,0,"Doñana_2020_Pinar Hinojos_4_Leontodon hispidus",20,NA
-"38",38,"Doñana",2020,"Pinar Hinojos",4,"Cistus salvifolius",0.166666666666667,0.416666666666667,1,"Doñana_2020_Pinar Hinojos_4_Cistus salvifolius",3,NA
-"39",39,"Doñana",2020,"Pinar Hinojos",4,"Cistus libanotis",0.166666666666667,0.25,0.647389321559071,"Doñana_2020_Pinar Hinojos_4_Cistus libanotis",5,NA
-"40",40,"Doñana",2020,"Pinar Hinojos",4,"Anthemis arvensis",1,0.120689655172414,0.410043723977943,"Doñana_2020_Pinar Hinojos_4_Anthemis arvensis",6,NA
-"41",41,"Doñana",2020,"Pinar Aznalcazar",4,"Galactite tomentosa",0.181818181818182,0.666666666666667,0,"Doñana_2020_Pinar Aznalcazar_4_Galactite tomentosa",5,NA
-"42",42,"Doñana",2020,"Pinar Aznalcazar",4,"Leontodon hispidus",0.181818181818182,0,1,"Doñana_2020_Pinar Aznalcazar_4_Leontodon hispidus",6,NA
-"43",43,"Doñana",2020,"Pinar Aznalcazar",4,"Convolvulus arvensis",0.272727272727273,1.33333333333333,0.647389321559071,"Doñana_2020_Pinar Aznalcazar_4_Convolvulus arvensis",2,NA
-"44",44,"Doñana",2020,"Pinar Aznalcazar",4,"Cistus crispus",0.454545454545455,0,0.410043723977943,"Doñana_2020_Pinar Aznalcazar_4_Cistus crispus",2,NA
-"45",45,"Doñana",2020,"Villamanrique Sur",6,"Andryala integrifolia",0.75,0.5,0,"Doñana_2020_Villamanrique Sur_6_Andryala integrifolia",8,NA
-"46",46,"Doñana",2020,"Villamanrique Sur",6,"Cistus salvifolius",0.125,0,1,"Doñana_2020_Villamanrique Sur_6_Cistus salvifolius",1,NA
-"47",47,"Doñana",2020,"Villamanrique Sur",6,"Halimium halimifolium",0.25,0.333333333333333,0.647389321559071,"Doñana_2020_Villamanrique Sur_6_Halimium halimifolium",2,NA
-"48",48,"Doñana",2020,"Villamanrique Sur",6,"Scolymus hispanicus",0.125,0.333333333333333,0.410043723977943,"Doñana_2020_Villamanrique Sur_6_Scolymus hispanicus",1,NA
-"49",49,"Doñana",2021,"Pinar Hinojos",8,"Halimium halimifolium",0.0909090909090909,0.25,0,"Doñana_2021_Pinar Hinojos_8_Halimium halimifolium",24,NA
-"50",50,"Doñana",2021,"Pinar Hinojos",8,"Leontodon longirostris",0.0909090909090909,0,1,"Doñana_2021_Pinar Hinojos_8_Leontodon longirostris",10,NA
-"51",51,"Doñana",2021,"Pinar Hinojos",8,"Andryala integrifolia",0.454545454545455,0.5,0.647389321559071,"Doñana_2021_Pinar Hinojos_8_Andryala integrifolia",1,NA
-"52",52,"Doñana",2021,"Pinar Hinojos",8,"Crepis vesicaria",0.545454545454545,0.75,0.410043723977943,"Doñana_2021_Pinar Hinojos_8_Crepis vesicaria",2,NA
-"53",53,"Doñana",2021,"Pinar Hinojos",9,"Leontodon longirostris",0.666666666666667,1,0,"Doñana_2021_Pinar Hinojos_9_Leontodon longirostris",1,NA
-"54",54,"Doñana",2021,"Pinar Hinojos",9,"Crepis vesicaria",0.333333333333333,0,1,"Doñana_2021_Pinar Hinojos_9_Crepis vesicaria",1,NA
-"55",55,"Doñana",2021,"Pinar Hinojos",9,"Andryala integrifolia",0.333333333333333,1,0.647389321559071,"Doñana_2021_Pinar Hinojos_9_Andryala integrifolia",3,NA
-"56",56,"Doñana",2021,"Pinar Hinojos",9,"Halimium halimifolium",0.333333333333333,0,0.410043723977943,"Doñana_2021_Pinar Hinojos_9_Halimium halimifolium",2,NA
-"57",57,"Doñana",2021,"Villamanrique Chaparral",1,"Rosmarinus officinalis",0.5,0.0112994350282486,0,"Doñana_2021_Villamanrique Chaparral_1_Rosmarinus officinalis",113,NA
-"58",58,"Doñana",2021,"Villamanrique Chaparral",1,"Asphodelus ramosus",0.375,0.00677966101694915,1,"Doñana_2021_Villamanrique Chaparral_1_Asphodelus ramosus",4,NA
-"59",59,"Doñana",2021,"Villamanrique Chaparral",1,"Cistus salviifolius",0.125,0.0225988700564972,0.647389321559071,"Doñana_2021_Villamanrique Chaparral_1_Cistus salviifolius",4,NA
-"60",60,"Doñana",2021,"Villamanrique Chaparral",1,"Lavandula stoechas",0.375,0.0329983500824959,0.410043723977943,"Doñana_2021_Villamanrique Chaparral_1_Lavandula stoechas",6,NA
-"61",61,"Doñana",2021,"Villamanrique Chaparral",9,"Myrtus communis",0.142857142857143,NA,0,"Doñana_2021_Villamanrique Chaparral_9_Myrtus communis",9,NA
-"62",62,"Doñana",2021,"Villamanrique Chaparral",9,"Echium plantagineum",0.571428571428571,NA,1,"Doñana_2021_Villamanrique Chaparral_9_Echium plantagineum",11,NA
-"63",63,"Doñana",2021,"Villamanrique Chaparral",9,"Andryala integrifolia",0.142857142857143,NA,0.647389321559071,"Doñana_2021_Villamanrique Chaparral_9_Andryala integrifolia",1,NA
-"64",64,"Doñana",2021,"Villamanrique Chaparral",9,"Scolymus hispanicus",0.142857142857143,NA,0.410043723977943,"Doñana_2021_Villamanrique Chaparral_9_Scolymus hispanicus",1,NA
-"65",65,"Doñana",2021,"Villamanrique Sur",1,"Cistus salviifolius",1,1.23076923076923,0,"Doñana_2021_Villamanrique Sur_1_Cistus salviifolius",32,NA
-"66",66,"Doñana",2021,"Villamanrique Sur",1,"Rosmarinus officinalis",0.111111111111111,0.769230769230769,1,"Doñana_2021_Villamanrique Sur_1_Rosmarinus officinalis",5,NA
-"67",67,"Doñana",2021,"Villamanrique Sur",1,"Cistus salviifolius",1,1.23076923076923,0.647389321559071,"Doñana_2021_Villamanrique Sur_1_Cistus salviifolius",32,NA
-"68",68,"Doñana",2021,"Villamanrique Sur",1,"Rosmarinus officinalis",0.111111111111111,0.769230769230769,0.410043723977943,"Doñana_2021_Villamanrique Sur_1_Rosmarinus officinalis",5,NA
-"69",69,"Doñana",2021,"Villamanrique Sur",2,"Cistus salviifolius",1,1.375,0,"Doñana_2021_Villamanrique Sur_2_Cistus salviifolius",78,0.963636363636364
-"70",70,"Doñana",2021,"Villamanrique Sur",2,"Rosmarinus officinalis",0.0769230769230769,0.625,1,"Doñana_2021_Villamanrique Sur_2_Rosmarinus officinalis",15,NA
-"71",71,"Doñana",2021,"Villamanrique Sur",2,"Cistus salviifolius",1,1.375,0.647389321559071,"Doñana_2021_Villamanrique Sur_2_Cistus salviifolius",78,0.963636363636364
-"72",72,"Doñana",2021,"Villamanrique Sur",2,"Rosmarinus officinalis",0.0769230769230769,0.625,0.410043723977943,"Doñana_2021_Villamanrique Sur_2_Rosmarinus officinalis",15,NA
-"73",73,"Doñana",2021,"Villamanrique Sur",4,"Cistus salviifolius",0.9375,1.27272727272727,0,"Doñana_2021_Villamanrique Sur_4_Cistus salviifolius",49,0.92
-"74",74,"Doñana",2021,"Villamanrique Sur",4,"Halimium halimifolium",0.25,0.727272727272727,1,"Doñana_2021_Villamanrique Sur_4_Halimium halimifolium",5,NA
-"75",75,"Doñana",2021,"Villamanrique Sur",4,"Cistus salviifolius",0.9375,1.27272727272727,0.647389321559071,"Doñana_2021_Villamanrique Sur_4_Cistus salviifolius",49,0.92
-"76",76,"Doñana",2021,"Villamanrique Sur",4,"Halimium halimifolium",0.25,0.727272727272727,0.410043723977943,"Doñana_2021_Villamanrique Sur_4_Halimium halimifolium",5,NA
-"77",77,"Doñana",2021,"Pinar Aznalcazar",8,"Cistus crispus",0.133333333333333,NA,0,"Doñana_2021_Pinar Aznalcazar_8_Cistus crispus",17,1
-"78",78,"Doñana",2021,"Pinar Aznalcazar",8,"Tolpis barbata",0.733333333333333,NA,1,"Doñana_2021_Pinar Aznalcazar_8_Tolpis barbata",2,NA
-"79",79,"Doñana",2021,"Pinar Aznalcazar",8,"Aetheorhiza bulbosa",0.0666666666666667,NA,0.647389321559071,"Doñana_2021_Pinar Aznalcazar_8_Aetheorhiza bulbosa",4,NA
-"80",80,"Doñana",2021,"Pinar Aznalcazar",8,"Echium plantagineum",0.0666666666666667,NA,0.410043723977943,"Doñana_2021_Pinar Aznalcazar_8_Echium plantagineum",1,NA
-"81",81,"Doñana",2021,"Pinar Puebla",6,"Galactites tomentosus",0.444444444444444,1.02923976608187,0,"Doñana_2021_Pinar Puebla_6_Galactites tomentosus",8,NA
-"82",82,"Doñana",2021,"Pinar Puebla",6,"Andryala integrifolia",0.444444444444444,0.355555555555556,1,"Doñana_2021_Pinar Puebla_6_Andryala integrifolia",5,NA
-"83",83,"Doñana",2021,"Pinar Puebla",6,"Andryala arenaria",0.444444444444444,0,0.647389321559071,"Doñana_2021_Pinar Puebla_6_Andryala arenaria",12,NA
-"84",84,"Doñana",2021,"Pinar Puebla",6,"Tolpis barbata",0.111111111111111,0.111111111111111,0.410043723977943,"Doñana_2021_Pinar Puebla_6_Tolpis barbata",1,NA
-"85",85,"Doñana",2021,"Pinar Puebla",7,"Galactites tomentosus",0.5,1.42857142857143,0,"Doñana_2021_Pinar Puebla_7_Galactites tomentosus",2,NA
-"86",86,"Doñana",2021,"Pinar Puebla",7,"Andryala arenaria",0.166666666666667,0,1,"Doñana_2021_Pinar Puebla_7_Andryala arenaria",11,NA
-"87",87,"Doñana",2021,"Pinar Puebla",7,"Silene colorata",0.333333333333333,0,0.647389321559071,"Doñana_2021_Pinar Puebla_7_Silene colorata",2,NA
-"88",88,"Doñana",2021,"Pinar Puebla",7,"Tolpis barbata",0.333333333333333,0.571428571428571,0.410043723977943,"Doñana_2021_Pinar Puebla_7_Tolpis barbata",4,NA
-"89",89,"Gorbea",2020,"5",2,"Taraxacum sp.",0.285714285714286,0,0,"Gorbea_2020_5_2_Taraxacum sp.",1,NA
-"90",90,"Gorbea",2020,"5",2,"Potentilla erecta",0.428571428571429,0.0192307692307692,1,"Gorbea_2020_5_2_Potentilla erecta",3,NA
-"91",91,"Gorbea",2020,"5",2,"Scilla verna",0.285714285714286,1.98076923076923,0.647389321559071,"Gorbea_2020_5_2_Scilla verna",104,NA
-"92",92,"Gorbea",2020,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.142857142857143,0,0.410043723977943,"Gorbea_2020_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA
-"93",93,"Gorbea",2020,"5",4,"Scorzonera humilis",0.0833333333333333,0,0,"Gorbea_2020_5_4_Scorzonera humilis",6,NA
-"94",94,"Gorbea",2020,"5",4,"Ranunculus sp.",0.583333333333333,1,1,"Gorbea_2020_5_4_Ranunculus sp.",1,NA
-"95",95,"Gorbea",2020,"5",4,"Potentilla erecta",0.0833333333333333,0,0.647389321559071,"Gorbea_2020_5_4_Potentilla erecta",25,NA
-"96",96,"Gorbea",2020,"5",4,"Daboecia cantabrica",0.416666666666667,1,0.410043723977943,"Gorbea_2020_5_4_Daboecia cantabrica",1,NA
-"97",97,"Gorbea",2020,"2",8,"Trifolium repens",0.444444444444444,0.0588780236747298,0,"Gorbea_2020_2_8_Trifolium repens",11,NA
-"98",98,"Gorbea",2020,"2",8,"Plantago sp.",0.222222222222222,0.0266236385639371,1,"Gorbea_2020_2_8_Plantago sp.",2,NA
-"99",99,"Gorbea",2020,"2",8,"Prunella grandiflora",0.111111111111111,0.0353407415906864,0.647389321559071,"Gorbea_2020_2_8_Prunella grandiflora",1,NA
-"100",100,"Gorbea",2020,"2",8,"Prunella vulgaris",0.333333333333333,0.0266236385639371,0.410043723977943,"Gorbea_2020_2_8_Prunella vulgaris",3,NA
-"101",101,"Gorbea",2020,"2",8,"Bellis perennis",0.222222222222222,0.038630377524144,0,"Gorbea_2020_2_8_Bellis perennis",15,NA
-"102",102,"Gorbea",2020,"2",8,"Ranunculus sp.",0.111111111111111,0.041044776119403,1,"Gorbea_2020_2_8_Ranunculus sp.",2,NA
-"103",103,"Gorbea",2020,"2",8,"Taraxacum sp.",0.111111111111111,0.0329747254165077,0.647389321559071,"Gorbea_2020_2_8_Taraxacum sp.",2,NA
-"104",104,"Gorbea",2020,"2",8,"Thymus praecox subsp. polytrichus",0.333333333333333,0.0997682705005856,0.410043723977943,"Gorbea_2020_2_8_Thymus praecox subsp. polytrichus",1,NA
-"105",105,"Gorbea",2020,"3",8,"Erica vagans",0.214285714285714,0.0354609929078014,0,"Gorbea_2020_3_8_Erica vagans",2,NA
-"106",106,"Gorbea",2020,"3",8,"Achillea millefolium",0.0714285714285714,0.0350877192982456,1,"Gorbea_2020_3_8_Achillea millefolium",3,NA
-"107",107,"Gorbea",2020,"3",8,"Trifolium repens",0.142857142857143,0.0374531835205993,0.647389321559071,"Gorbea_2020_3_8_Trifolium repens",2,NA
-"108",108,"Gorbea",2020,"3",8,"Prunella grandiflora",0.0714285714285714,0.0256410256410256,0.410043723977943,"Gorbea_2020_3_8_Prunella grandiflora",6,NA
-"109",109,"Gorbea",2020,"3",8,"Thymus praecox subsp. polytrichus",0.142857142857143,0.0350877192982456,0,"Gorbea_2020_3_8_Thymus praecox subsp. polytrichus",6,NA
-"110",110,"Gorbea",2020,"3",8,"Trifolium pratense",0.0714285714285714,0,1,"Gorbea_2020_3_8_Trifolium pratense",9,NA
-"111",111,"Gorbea",2020,"3",8,"Plantago sp.",0.214285714285714,0.037037037037037,0.647389321559071,"Gorbea_2020_3_8_Plantago sp.",3,NA
-"112",112,"Gorbea",2020,"3",8,"Potentilla erecta",0.0714285714285714,0,0.410043723977943,"Gorbea_2020_3_8_Potentilla erecta",1,NA
-"113",113,"Gorbea",2020,"3",8,"Bellis perennis",0.0714285714285714,0.0374531835205993,0,"Gorbea_2020_3_8_Bellis perennis",1,NA
-"114",114,"Gorbea",2020,"3",8,"Teucrium pyrenaicum L. subsp. pyrenaicum",0.142857142857143,0.0617283950617284,1,"Gorbea_2020_3_8_Teucrium pyrenaicum L. subsp. pyrenaicum",1,NA
-"115",115,"Gorbea",2020,"3",8,"Ranunculus sp.",0.428571428571429,0.0617283950617284,0.647389321559071,"Gorbea_2020_3_8_Ranunculus sp.",1,NA
-"116",116,"Gorbea",2020,"3",8,"Lotus corniculatus",0.0714285714285714,0.0466200466200466,0.410043723977943,"Gorbea_2020_3_8_Lotus corniculatus",1,NA
-"117",117,"Gorbea",2020,"5",8,"Erica cinerea",0.166666666666667,0,0,"Gorbea_2020_5_8_Erica cinerea",11,NA
-"118",118,"Gorbea",2020,"5",8,"Ulex gallii",0.833333333333333,0.290909090909091,1,"Gorbea_2020_5_8_Ulex gallii",4,NA
-"119",119,"Gorbea",2020,"5",8,"Daboecia cantabrica",0.166666666666667,0.290909090909091,0.647389321559071,"Gorbea_2020_5_8_Daboecia cantabrica",2,NA
-"120",120,"Gorbea",2020,"5",8,"Potentilla erecta",0.166666666666667,0.242424242424242,0.410043723977943,"Gorbea_2020_5_8_Potentilla erecta",2,NA
-"121",121,"Gorbea",2020,"4",8,"Erica cinerea",0.111111111111111,0.165289256198347,0,"Gorbea_2020_4_8_Erica cinerea",5,NA
-"122",122,"Gorbea",2020,"4",8,"Taraxacum sp.",0.333333333333333,0,1,"Gorbea_2020_4_8_Taraxacum sp.",5,NA
-"123",123,"Gorbea",2020,"4",8,"Potentilla erecta",0.111111111111111,0.13986013986014,0.647389321559071,"Gorbea_2020_4_8_Potentilla erecta",12,NA
-"124",124,"Gorbea",2020,"4",8,"Ranunculus sp.",0.222222222222222,0.12987012987013,0.410043723977943,"Gorbea_2020_4_8_Ranunculus sp.",1,NA
-"125",125,"Gorbea",2020,"4",8,"Prunella grandiflora",0.111111111111111,0,0,"Gorbea_2020_4_8_Prunella grandiflora",1,NA
-"126",126,"Gorbea",2020,"4",8,"Jasione sp.",0.111111111111111,0.165289256198347,1,"Gorbea_2020_4_8_Jasione sp.",1,NA
-"127",127,"Gorbea",2020,"4",8,"Trifolium repens",0.444444444444444,0.25974025974026,0.647389321559071,"Gorbea_2020_4_8_Trifolium repens",1,NA
-"128",128,"Gorbea",2020,"4",8,"Bellis perennis",0.111111111111111,0,0.410043723977943,"Gorbea_2020_4_8_Bellis perennis",1,NA
-"129",129,"Gorbea",2021,"1",1,"Ranunculus ficaria",0.166666666666667,0.116883116883117,0,"Gorbea_2021_1_1_Ranunculus ficaria",1,NA
-"130",130,"Gorbea",2021,"1",1,"Taraxacum sp.",0.333333333333333,0.122448979591837,1,"Gorbea_2021_1_1_Taraxacum sp.",14,NA
-"131",131,"Gorbea",2021,"1",1,"Helleborus viridis subsp. occidentalis",0.166666666666667,0.111801242236025,0.647389321559071,"Gorbea_2021_1_1_Helleborus viridis subsp. occidentalis",4,NA
-"132",132,"Gorbea",2021,"1",1,"Bellis perennis",0.833333333333333,0.428571428571429,0.410043723977943,"Gorbea_2021_1_1_Bellis perennis",1,NA
-"133",133,"Gorbea",2021,"3",2,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_3_2_Scilla verna",2,0.791363636363636
-"134",134,"Gorbea",2021,"3",2,"Lathyrus linifolius",0.666666666666667,NA,1,"Gorbea_2021_3_2_Lathyrus linifolius",1,0.54
-"135",135,"Gorbea",2021,"3",2,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_3_2_Scilla verna",2,0.791363636363636
-"136",136,"Gorbea",2021,"3",2,"Lathyrus linifolius",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_3_2_Lathyrus linifolius",1,0.54
-"137",137,"Gorbea",2021,"2",3,"Taraxacum sp.",0.5,NA,0,"Gorbea_2021_2_3_Taraxacum sp.",16,NA
-"138",138,"Gorbea",2021,"2",3,"Bellis perennis",0.5,NA,1,"Gorbea_2021_2_3_Bellis perennis",8,NA
-"139",139,"Gorbea",2021,"2",3,"Taraxacum sp.",0.5,NA,0.647389321559071,"Gorbea_2021_2_3_Taraxacum sp.",16,NA
-"140",140,"Gorbea",2021,"2",3,"Bellis perennis",0.5,NA,0.410043723977943,"Gorbea_2021_2_3_Bellis perennis",8,NA
-"141",141,"Gorbea",2021,"5",2,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_5_2_Scilla verna",13,NA
-"142",142,"Gorbea",2021,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.666666666666667,NA,1,"Gorbea_2021_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA
-"143",143,"Gorbea",2021,"5",2,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_5_2_Scilla verna",13,NA
-"144",144,"Gorbea",2021,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA
-"145",145,"Gorbea",2021,"4",1,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_4_1_Scilla verna",1,0.612169312169312
-"146",146,"Gorbea",2021,"4",1,"Taraxacum sp.",0.666666666666667,NA,1,"Gorbea_2021_4_1_Taraxacum sp.",2,NA
-"147",147,"Gorbea",2021,"4",1,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_4_1_Scilla verna",1,0.612169312169312
-"148",148,"Gorbea",2021,"4",1,"Taraxacum sp.",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_4_1_Taraxacum sp.",2,NA
-"149",149,"Gorbea",2021,"2",4,"Taraxacum sp.",0.5,0.177777777777778,0,"Gorbea_2021_2_4_Taraxacum sp.",27,NA
-"150",150,"Gorbea",2021,"2",4,"Bellis perennis",0.125,0.253968253968254,1,"Gorbea_2021_2_4_Bellis perennis",5,NA
-"151",151,"Gorbea",2021,"2",4,"Pedicularis sylvatica subsp. sylvatica",0.625,0.355555555555556,0.647389321559071,"Gorbea_2021_2_4_Pedicularis sylvatica subsp. sylvatica",1,NA
-"152",152,"Gorbea",2021,"2",4,"Viola riviniana",0.125,0.253968253968254,0.410043723977943,"Gorbea_2021_2_4_Viola riviniana",1,NA
-"153",153,"Gorbea",2021,"1",4,"Taraxacum sp.",0.285714285714286,0,0,"Gorbea_2021_1_4_Taraxacum sp.",19,NA
-"154",154,"Gorbea",2021,"1",4,"Bellis perennis",0.0476190476190476,0.5,1,"Gorbea_2021_1_4_Bellis perennis",11,NA
-"155",155,"Gorbea",2021,"1",4,"Vicia pyrenaica",0.19047619047619,0,0.647389321559071,"Gorbea_2021_1_4_Vicia pyrenaica",13,1
-"156",156,"Gorbea",2021,"1",4,"Erysimum gorbeanum",0.0476190476190476,0,0.410043723977943,"Gorbea_2021_1_4_Erysimum gorbeanum",4,NA
-"157",157,"Gorbea",2021,"1",4,"Veronica sp.",0.0952380952380952,0,0,"Gorbea_2021_1_4_Veronica sp.",2,NA
-"158",158,"Gorbea",2021,"1",4,"Scilla verna",0.142857142857143,0,1,"Gorbea_2021_1_4_Scilla verna",2,0.813888888888889
-"159",159,"Gorbea",2021,"1",4,"Ranunculus repens",0.0952380952380952,0.5,0.647389321559071,"Gorbea_2021_1_4_Ranunculus repens",1,NA
-"160",160,"Gorbea",2021,"1",4,"Erinus alpinus",0.285714285714286,0.5,0.410043723977943,"Gorbea_2021_1_4_Erinus alpinus",1,NA
-"161",161,"Gorbea",2021,"3",5,"Ranunculus repens",0.363636363636364,0.204499528492523,0,"Gorbea_2021_3_5_Ranunculus repens",20,NA
-"162",162,"Gorbea",2021,"3",5,"Pedicularis sylvatica subsp. sylvatica",0.0909090909090909,0.0491452991452991,1,"Gorbea_2021_3_5_Pedicularis sylvatica subsp. sylvatica",2,NA
-"163",163,"Gorbea",2021,"3",5,"Bellis perennis",0.0909090909090909,0,0.647389321559071,"Gorbea_2021_3_5_Bellis perennis",9,NA
-"164",164,"Gorbea",2021,"3",5,"Potentilla erecta",0.0909090909090909,0,0.410043723977943,"Gorbea_2021_3_5_Potentilla erecta",3,NA
-"165",165,"Gorbea",2021,"3",5,"Potentilla montana",0.0909090909090909,0.0491452991452991,0,"Gorbea_2021_3_5_Potentilla montana",1,NA
-"166",166,"Gorbea",2021,"3",5,"Helianthemum nummularium",0.0909090909090909,0,1,"Gorbea_2021_3_5_Helianthemum nummularium",1,0.444444444444444
-"167",167,"Gorbea",2021,"3",5,"Vicia pyrenaica",0.0909090909090909,0.0491452991452991,0.647389321559071,"Gorbea_2021_3_5_Vicia pyrenaica",1,NA
-"168",168,"Gorbea",2021,"3",5,"Pilosella officinarum",0.272727272727273,0.118728246842126,0.410043723977943,"Gorbea_2021_3_5_Pilosella officinarum",1,NA
-"169",169,"Gorbea",2021,"3",5,"Hippocrepis comosa",0.0909090909090909,0.0475154550434306,0,"Gorbea_2021_3_5_Hippocrepis comosa",1,0.585714285714286
-"170",170,"Gorbea",2021,"3",5,"Lotus corniculatus",0.545454545454545,0.501345352462918,1,"Gorbea_2021_3_5_Lotus corniculatus",1,NA
-"171",171,"Gorbea",2021,"3",5,"Lathyrus linifolius",0.0909090909090909,0.0491452991452991,0.647389321559071,"Gorbea_2021_3_5_Lathyrus linifolius",1,0.333333333333333
-"172",172,"Gorbea",2021,"3",5,"Thymus praecox subsp. polytrichus",0.0909090909090909,0,0.410043723977943,"Gorbea_2021_3_5_Thymus praecox subsp. polytrichus",1,NA
-"173",173,"Gorbea",2021,"5",5,"Taraxacum sp.",0.5,1.84615384615385,0,"Gorbea_2021_5_5_Taraxacum sp.",5,NA
-"174",174,"Gorbea",2021,"5",5,"Bellis perennis",0.125,0.153846153846154,1,"Gorbea_2021_5_5_Bellis perennis",22,NA
-"175",175,"Gorbea",2021,"5",5,"Myosotis lamottiana",0.25,0,0.647389321559071,"Gorbea_2021_5_5_Myosotis lamottiana",1,NA
-"176",176,"Gorbea",2021,"5",5,"Ranunculus repens",0.25,0,0.410043723977943,"Gorbea_2021_5_5_Ranunculus repens",2,NA
-"177",177,"Gorbea",2021,"1",6,"Pilosella officinarum",0.454545454545455,0.787256820909887,0,"Gorbea_2021_1_6_Pilosella officinarum",2,NA
-"178",178,"Gorbea",2021,"1",6,"Taraxacum sp.",0.0909090909090909,0,1,"Gorbea_2021_1_6_Taraxacum sp.",4,NA
-"179",179,"Gorbea",2021,"1",6,"Ranunculus repens",0.0909090909090909,0.0303564168586529,0.647389321559071,"Gorbea_2021_1_6_Ranunculus repens",7,NA
-"180",180,"Gorbea",2021,"1",6,"Bellis perennis",0.0909090909090909,0.0303564168586529,0.410043723977943,"Gorbea_2021_1_6_Bellis perennis",55,NA
-"181",181,"Gorbea",2021,"1",6,"Vicia pyrenaica",0.0909090909090909,0.0602852785502826,0,"Gorbea_2021_1_6_Vicia pyrenaica",13,0.966666666666667
-"182",182,"Gorbea",2021,"1",6,"Medicago lupulina",0.454545454545455,0.083756440566036,1,"Gorbea_2021_1_6_Medicago lupulina",1,NA
-"183",183,"Gorbea",2021,"1",6,"Geranium robertianum",0.272727272727273,0.0838827040188803,0.647389321559071,"Gorbea_2021_1_6_Geranium robertianum",1,NA
-"184",184,"Gorbea",2021,"1",6,"Hutchinsia alpina",0.181818181818182,0,0.410043723977943,"Gorbea_2021_1_6_Hutchinsia alpina",1,NA
-"185",185,"Gorbea",2021,"5",7,"Erica tetralix",0.25,0.333333333333333,0,"Gorbea_2021_5_7_Erica tetralix",3,NA
-"186",186,"Gorbea",2021,"5",7,"Daboecia cantabrica",0.25,0,1,"Gorbea_2021_5_7_Daboecia cantabrica",2,NA
-"187",187,"Gorbea",2021,"5",7,"Potentilla erecta",0.5,0,0.647389321559071,"Gorbea_2021_5_7_Potentilla erecta",11,NA
-"188",188,"Gorbea",2021,"5",7,"Erica cinerea",0.5,1.66666666666667,0.410043723977943,"Gorbea_2021_5_7_Erica cinerea",1,NA
-"189",189,"Gorbea",2022,"2",1,"Helleborus viridis subsp. occidentalis",0.666666666666667,0.865384615384615,0,"Gorbea_2022_2_1_Helleborus viridis subsp. occidentalis",5,NA
-"190",190,"Gorbea",2022,"2",1,"Potentilla sterilis",0.333333333333333,0.230769230769231,1,"Gorbea_2022_2_1_Potentilla sterilis",2,NA
-"191",191,"Gorbea",2022,"2",1,"Ranunculus ficaria",0.666666666666667,0.346153846153846,0.647389321559071,"Gorbea_2022_2_1_Ranunculus ficaria",1,NA
-"192",192,"Gorbea",2022,"2",1,"Hepatica nobilis",0.333333333333333,0,0.410043723977943,"Gorbea_2022_2_1_Hepatica nobilis",1,1
-"193",193,"Gorbea",2022,"3",1,"Helleborus viridis subsp. occidentalis",0.1,0.0581818181818182,0,"Gorbea_2022_3_1_Helleborus viridis subsp. occidentalis",1,NA
-"194",194,"Gorbea",2022,"3",1,"Scilla verna",0.1,0.0692640692640693,1,"Gorbea_2022_3_1_Scilla verna",18,0.755555555555556
-"195",195,"Gorbea",2022,"3",1,"Lathyrus linifolius",0.1,0,0.647389321559071,"Gorbea_2022_3_1_Lathyrus linifolius",7,0.283333333333333
-"196",196,"Gorbea",2022,"3",1,"Bellis perennis",0.2,0.111888111888112,0.410043723977943,"Gorbea_2022_3_1_Bellis perennis",1,NA
-"197",197,"Gorbea",2022,"3",1,"Potentilla erecta",0.2,0.0808080808080808,0,"Gorbea_2022_3_1_Potentilla erecta",2,NA
-"198",198,"Gorbea",2022,"3",1,"Taraxacum officinale",0.1,0.0632411067193676,1,"Gorbea_2022_3_1_Taraxacum officinale",2,NA
-"199",199,"Gorbea",2022,"3",1,"Hippocrepis comosa",0.8,0.140762463343109,0.647389321559071,"Gorbea_2022_3_1_Hippocrepis comosa",1,NA
-"200",200,"Gorbea",2022,"3",1,"Potentilla montana",0.2,0.0890538033395176,0.410043723977943,"Gorbea_2022_3_1_Potentilla montana",1,NA
-"201",201,"Gorbea",2022,"4",2,"Bellis perennis",0.222222222222222,0.266666666666667,0,"Gorbea_2022_4_2_Bellis perennis",3,NA
-"202",202,"Gorbea",2022,"4",2,"Taraxacum officinale",0.222222222222222,0.16,1,"Gorbea_2022_4_2_Taraxacum officinale",22,NA
-"203",203,"Gorbea",2022,"4",2,"Scilla verna",0.666666666666667,0.3,0.647389321559071,"Gorbea_2022_4_2_Scilla verna",2,0.603095238095238
-"204",204,"Gorbea",2022,"4",2,"Vaccinium myrtillus",0.111111111111111,0,0.410043723977943,"Gorbea_2022_4_2_Vaccinium myrtillus",1,NA
-"205",205,"Gorbea",2022,"4",3,"Taraxacum officinale",0.444444444444444,0.256,0,"Gorbea_2022_4_3_Taraxacum officinale",30,NA
-"206",206,"Gorbea",2022,"4",3,"Bellis perennis",0.333333333333333,0.174545454545455,1,"Gorbea_2022_4_3_Bellis perennis",7,NA
-"207",207,"Gorbea",2022,"4",3,"Scilla verna",0.111111111111111,0.182857142857143,0.647389321559071,"Gorbea_2022_4_3_Scilla verna",3,0.454166666666667
-"208",208,"Gorbea",2022,"4",3,"Potentilla erecta",0.777777777777778,0.194782608695652,0.410043723977943,"Gorbea_2022_4_3_Potentilla erecta",4,NA
-"209",209,"Gorbea",2022,"1",4,"Taraxacum officinale",0.416666666666667,0.112813095785944,0,"Gorbea_2022_1_4_Taraxacum officinale",29,NA
-"210",210,"Gorbea",2022,"1",4,"Bellis perennis",0.0833333333333333,0,1,"Gorbea_2022_1_4_Bellis perennis",15,NA
-"211",211,"Gorbea",2022,"1",4,"Pinguicula grandiflora",0.25,0.141261696347721,0.647389321559071,"Gorbea_2022_1_4_Pinguicula grandiflora",1,NA
-"212",212,"Gorbea",2022,"1",4,"Hutchinsia alpina",0.0833333333333333,0.0274599542334096,0.410043723977943,"Gorbea_2022_1_4_Hutchinsia alpina",1,NA
-"213",213,"Gorbea",2022,"1",4,"Scilla verna",0.0833333333333333,0.0274599542334096,0,"Gorbea_2022_1_4_Scilla verna",2,NA
-"214",214,"Gorbea",2022,"1",4,"Vicia pyrenaica",0.166666666666667,0.0444528875379939,1,"Gorbea_2022_1_4_Vicia pyrenaica",4,0.481481481481481
-"215",215,"Gorbea",2022,"1",4,"Erysimum gorbeanum",0.666666666666667,0.126384012962463,0.647389321559071,"Gorbea_2022_1_4_Erysimum gorbeanum",1,NA
-"216",216,"Gorbea",2022,"1",4,"Helleborus viridis subsp. occidentalis",0.0833333333333333,0.106242905788876,0.410043723977943,"Gorbea_2022_1_4_Helleborus viridis subsp. occidentalis",7,NA
-"217",217,"Gorbea",2022,"1",5,"Taraxacum officinale",0.25,0.197849659567639,0,"Gorbea_2022_1_5_Taraxacum officinale",19,NA
-"218",218,"Gorbea",2022,"1",5,"Vicia pyrenaica",0.125,0,1,"Gorbea_2022_1_5_Vicia pyrenaica",19,0.888888888888889
-"219",219,"Gorbea",2022,"1",5,"Ranunculus sp.",0.0625,0.0220747790187401,0.647389321559071,"Gorbea_2022_1_5_Ranunculus sp.",7,NA
-"220",220,"Gorbea",2022,"1",5,"Bellis perennis",0.0625,0.024108488196886,0.410043723977943,"Gorbea_2022_1_5_Bellis perennis",32,NA
-"221",221,"Gorbea",2022,"1",5,"Geranium robertianum",0.1875,0.0528968052069237,0,"Gorbea_2022_1_5_Geranium robertianum",1,NA
-"222",222,"Gorbea",2022,"1",5,"Medicago lupulina",0.3125,0.0776916260110671,1,"Gorbea_2022_1_5_Medicago lupulina",4,NA
-"223",223,"Gorbea",2022,"1",5,"Erinus alpinus",0.5,0.124360443350313,0.647389321559071,"Gorbea_2022_1_5_Erinus alpinus",2,NA
-"224",224,"Gorbea",2022,"1",5,"Hutchinsia alpina",0.25,0,0.410043723977943,"Gorbea_2022_1_5_Hutchinsia alpina",1,NA
-"225",225,"Gorbea",2022,"4",5,"Ranunculus sp.",0.285714285714286,0.19047619047619,0,"Gorbea_2022_4_5_Ranunculus sp.",3,NA
-"226",226,"Gorbea",2022,"4",5,"Potentilla erecta",0.428571428571429,0.285714285714286,1,"Gorbea_2022_4_5_Potentilla erecta",7,NA
-"227",227,"Gorbea",2022,"4",5,"Veronica officinalis",0.285714285714286,0.228571428571429,0.647389321559071,"Gorbea_2022_4_5_Veronica officinalis",3,NA
-"228",228,"Gorbea",2022,"4",5,"Polygala vulgaris",0.428571428571429,0.114285714285714,0.410043723977943,"Gorbea_2022_4_5_Polygala vulgaris",2,NA
-"229",229,"Gorbea",2022,"3",6,"Trifolium repens",0.3,0.0730752501087429,0,"Gorbea_2022_3_6_Trifolium repens",2,NA
-"230",230,"Gorbea",2022,"3",6,"Lotus corniculatus",0.1,0.0458140169075539,1,"Gorbea_2022_3_6_Lotus corniculatus",4,0.616666666666667
-"231",231,"Gorbea",2022,"3",6,"Helianthemum nummularium",0.3,0.0514075887392901,0.647389321559071,"Gorbea_2022_3_6_Helianthemum nummularium",3,NA
-"232",232,"Gorbea",2022,"3",6," Thymus praecox subsp. polytrichus",0.4,0.0609800362976406,0.410043723977943,"Gorbea_2022_3_6_ Thymus praecox subsp. polytrichus",6,NA
-"233",233,"Gorbea",2022,"3",6,"Plantago sp.",0.1,0.030281182408075,0,"Gorbea_2022_3_6_Plantago sp.",1,NA
-"234",234,"Gorbea",2022,"3",6,"Teucrium pyrenaicum L. subsp. pyrenaicum",0.2,0.0458140169075539,1,"Gorbea_2022_3_6_Teucrium pyrenaicum L. subsp. pyrenaicum",4,NA
-"235",235,"Gorbea",2022,"3",6,"Vicia pyrenaica",0.2,0.0401913875598086,0.647389321559071,"Gorbea_2022_3_6_Vicia pyrenaica",1,NA
-"236",236,"Gorbea",2022,"3",6,"Bellis perennis",0.1,0.0323886639676113,0.410043723977943,"Gorbea_2022_3_6_Bellis perennis",1,NA
+"","X","Site_id","Year","Bosque","Periodo","Planta","norm_degree","weight_closeness","d","match","tot.visits.pl","pl.mean.fs","se.pl.fs","pl.mean.sn","se.pl.sn"
+"1",1,"Doñana",2020,"Pinar Puebla",1,"Cistus ladanifer",0.111111111111111,0.0316831683168317,0,"Doñana_2020_Pinar Puebla_1_Cistus ladanifer",2,NA,NA,NA,NA
+"2",2,"Doñana",2020,"Pinar Puebla",1,"Rosmarinus officinalis",0.222222222222222,0,1,"Doñana_2020_Pinar Puebla_1_Rosmarinus officinalis",107,NA,NA,NA,NA
+"3",3,"Doñana",2020,"Pinar Puebla",1,"Cistus salvifolius",0.111111111111111,0.0196972078160197,0.647389321559071,"Doñana_2020_Pinar Puebla_1_Cistus salvifolius",2,NA,NA,NA,NA
+"4",4,"Doñana",2020,"Pinar Puebla",1,"Lavandula stoechas",0.777777777777778,0.151949888866438,0.410043723977943,"Doñana_2020_Pinar Puebla_1_Lavandula stoechas",1,NA,NA,NA,NA
+"5",5,"Doñana",2020,"Pinar Hinojos",1,"Halimium commutatum",0.875,1.75,0,"Doñana_2020_Pinar Hinojos_1_Halimium commutatum",35,NA,NA,NA,NA
+"6",6,"Doñana",2020,"Pinar Hinojos",1,"Romulea bulbocodium",0.25,0.25,1,"Doñana_2020_Pinar Hinojos_1_Romulea bulbocodium",2,NA,NA,NA,NA
+"7",7,"Doñana",2020,"Pinar Hinojos",1,"Halimium commutatum",0.875,1.75,0.647389321559071,"Doñana_2020_Pinar Hinojos_1_Halimium commutatum",35,NA,NA,NA,NA
+"8",8,"Doñana",2020,"Pinar Hinojos",1,"Romulea bulbocodium",0.25,0.25,0.410043723977943,"Doñana_2020_Pinar Hinojos_1_Romulea bulbocodium",2,NA,NA,NA,NA
+"9",9,"Doñana",2020,"Villamanrique Chaparral",2,"Rosmarinus officinalis",0.375,0.133333333333333,0,"Doñana_2020_Villamanrique Chaparral_2_Rosmarinus officinalis",22,NA,NA,NA,NA
+"10",10,"Doñana",2020,"Villamanrique Chaparral",2,"Asphodelus fistulosus",0.75,1.86666666666667,1,"Doñana_2020_Villamanrique Chaparral_2_Asphodelus fistulosus",4,NA,NA,NA,NA
+"11",11,"Doñana",2020,"Villamanrique Chaparral",2,"Rosmarinus officinalis",0.375,0.133333333333333,0.647389321559071,"Doñana_2020_Villamanrique Chaparral_2_Rosmarinus officinalis",22,NA,NA,NA,NA
+"12",12,"Doñana",2020,"Villamanrique Chaparral",2,"Asphodelus fistulosus",0.75,1.86666666666667,0.410043723977943,"Doñana_2020_Villamanrique Chaparral_2_Asphodelus fistulosus",4,NA,NA,NA,NA
+"13",13,"Doñana",2020,"Villamanrique Sur",2,"Rosmarinus officinalis",0.333333333333333,NA,0,"Doñana_2020_Villamanrique Sur_2_Rosmarinus officinalis",11,NA,NA,NA,NA
+"14",14,"Doñana",2020,"Villamanrique Sur",2,"Cistus salvifolius",0.666666666666667,NA,1,"Doñana_2020_Villamanrique Sur_2_Cistus salvifolius",3,NA,NA,NA,NA
+"15",15,"Doñana",2020,"Villamanrique Sur",2,"Rosmarinus officinalis",0.333333333333333,NA,0.647389321559071,"Doñana_2020_Villamanrique Sur_2_Rosmarinus officinalis",11,NA,NA,NA,NA
+"16",16,"Doñana",2020,"Villamanrique Sur",2,"Cistus salvifolius",0.666666666666667,NA,0.410043723977943,"Doñana_2020_Villamanrique Sur_2_Cistus salvifolius",3,NA,NA,NA,NA
+"17",17,"Doñana",2020,"Pinar Aznalcazar",2,"Rosmarinus officinalis",0.2,0.117647058823529,0,"Doñana_2020_Pinar Aznalcazar_2_Rosmarinus officinalis",25,NA,NA,NA,NA
+"18",18,"Doñana",2020,"Pinar Aznalcazar",2,"Cistus albidus",1,1.88235294117647,1,"Doñana_2020_Pinar Aznalcazar_2_Cistus albidus",1,NA,NA,NA,NA
+"19",19,"Doñana",2020,"Pinar Aznalcazar",2,"Rosmarinus officinalis",0.2,0.117647058823529,0.647389321559071,"Doñana_2020_Pinar Aznalcazar_2_Rosmarinus officinalis",25,NA,NA,NA,NA
+"20",20,"Doñana",2020,"Pinar Aznalcazar",2,"Cistus albidus",1,1.88235294117647,0.410043723977943,"Doñana_2020_Pinar Aznalcazar_2_Cistus albidus",1,NA,NA,NA,NA
+"21",21,"Doñana",2020,"Pinar Puebla",3,"Cistus salvifolius",0.2,0.0306377964354102,0,"Doñana_2020_Pinar Puebla_3_Cistus salvifolius",21,NA,NA,NA,NA
+"22",22,"Doñana",2020,"Pinar Puebla",3,"Genista hirsuta",0.266666666666667,0.111446482470397,1,"Doñana_2020_Pinar Puebla_3_Genista hirsuta",1,NA,NA,NA,NA
+"23",23,"Doñana",2020,"Pinar Puebla",3,"Cistus ladanifer",0.6,0.184826491797158,0.647389321559071,"Doñana_2020_Pinar Puebla_3_Cistus ladanifer",6,NA,NA,NA,NA
+"24",24,"Doñana",2020,"Pinar Puebla",3,"Rosmarinus officinalis",0.133333333333333,0.0974124809741248,0.410043723977943,"Doñana_2020_Pinar Puebla_3_Rosmarinus officinalis",16,NA,NA,NA,NA
+"25",25,"Doñana",2020,"Pinar Puebla",3,"Lavandula stoechas",0.0666666666666667,0.0306377964354102,0,"Doñana_2020_Pinar Puebla_3_Lavandula stoechas",9,NA,NA,NA,NA
+"26",26,"Doñana",2020,"Pinar Puebla",3,"Cistus crispus",0.4,0.149776261422669,1,"Doñana_2020_Pinar Puebla_3_Cistus crispus",3,NA,NA,NA,NA
+"27",27,"Doñana",2020,"Pinar Puebla",3,"Leontodon hispidus",0.133333333333333,0.0547945205479452,0.647389321559071,"Doñana_2020_Pinar Puebla_3_Leontodon hispidus",2,NA,NA,NA,NA
+"28",28,"Doñana",2020,"Pinar Puebla",3,"Echium plantagineum",0.333333333333333,0.216795711733174,0.410043723977943,"Doñana_2020_Pinar Puebla_3_Echium plantagineum",4,NA,NA,NA,NA
+"29",29,"Doñana",2020,"Pinar Hinojos",3,"Cistus albidus",0.125,0.375,0,"Doñana_2020_Pinar Hinojos_3_Cistus albidus",1,NA,NA,NA,NA
+"30",30,"Doñana",2020,"Pinar Hinojos",3,"Leontodon hispidus",0.125,0,1,"Doñana_2020_Pinar Hinojos_3_Leontodon hispidus",14,NA,NA,NA,NA
+"31",31,"Doñana",2020,"Pinar Hinojos",3,"Halimium calycinum",0.125,0.375,0.647389321559071,"Doñana_2020_Pinar Hinojos_3_Halimium calycinum",1,NA,NA,NA,NA
+"32",32,"Doñana",2020,"Pinar Hinojos",3,"Echium plantagineum",0.875,0.75,0.410043723977943,"Doñana_2020_Pinar Hinojos_3_Echium plantagineum",1,NA,NA,NA,NA
+"33",33,"Doñana",2020,"Pinar Puebla",4,"Cistus salvifolius",0.166666666666667,0,0,"Doñana_2020_Pinar Puebla_4_Cistus salvifolius",5,NA,NA,NA,NA
+"34",34,"Doñana",2020,"Pinar Puebla",4,"Galactite tomentosa",0.166666666666667,0,1,"Doñana_2020_Pinar Puebla_4_Galactite tomentosa",3,NA,NA,NA,NA
+"35",35,"Doñana",2020,"Pinar Puebla",4,"Leontodon hispidus",0.5,1,0.647389321559071,"Doñana_2020_Pinar Puebla_4_Leontodon hispidus",2,NA,NA,NA,NA
+"36",36,"Doñana",2020,"Pinar Puebla",4,"Cistus crispus",0.333333333333333,1,0.410043723977943,"Doñana_2020_Pinar Puebla_4_Cistus crispus",1,NA,NA,NA,NA
+"37",37,"Doñana",2020,"Pinar Hinojos",4,"Leontodon hispidus",0.5,0.115384615384615,0,"Doñana_2020_Pinar Hinojos_4_Leontodon hispidus",20,NA,NA,NA,NA
+"38",38,"Doñana",2020,"Pinar Hinojos",4,"Cistus salvifolius",0.166666666666667,0.416666666666667,1,"Doñana_2020_Pinar Hinojos_4_Cistus salvifolius",3,NA,NA,NA,NA
+"39",39,"Doñana",2020,"Pinar Hinojos",4,"Cistus libanotis",0.166666666666667,0.25,0.647389321559071,"Doñana_2020_Pinar Hinojos_4_Cistus libanotis",5,NA,NA,NA,NA
+"40",40,"Doñana",2020,"Pinar Hinojos",4,"Anthemis arvensis",1,0.120689655172414,0.410043723977943,"Doñana_2020_Pinar Hinojos_4_Anthemis arvensis",6,NA,NA,NA,NA
+"41",41,"Doñana",2020,"Pinar Aznalcazar",4,"Galactite tomentosa",0.181818181818182,0.666666666666667,0,"Doñana_2020_Pinar Aznalcazar_4_Galactite tomentosa",5,NA,NA,NA,NA
+"42",42,"Doñana",2020,"Pinar Aznalcazar",4,"Leontodon hispidus",0.181818181818182,0,1,"Doñana_2020_Pinar Aznalcazar_4_Leontodon hispidus",6,NA,NA,NA,NA
+"43",43,"Doñana",2020,"Pinar Aznalcazar",4,"Convolvulus arvensis",0.272727272727273,1.33333333333333,0.647389321559071,"Doñana_2020_Pinar Aznalcazar_4_Convolvulus arvensis",2,NA,NA,NA,NA
+"44",44,"Doñana",2020,"Pinar Aznalcazar",4,"Cistus crispus",0.454545454545455,0,0.410043723977943,"Doñana_2020_Pinar Aznalcazar_4_Cistus crispus",2,NA,NA,NA,NA
+"45",45,"Doñana",2020,"Villamanrique Sur",6,"Andryala integrifolia",0.75,0.5,0,"Doñana_2020_Villamanrique Sur_6_Andryala integrifolia",8,NA,NA,NA,NA
+"46",46,"Doñana",2020,"Villamanrique Sur",6,"Cistus salvifolius",0.125,0,1,"Doñana_2020_Villamanrique Sur_6_Cistus salvifolius",1,NA,NA,NA,NA
+"47",47,"Doñana",2020,"Villamanrique Sur",6,"Halimium halimifolium",0.25,0.333333333333333,0.647389321559071,"Doñana_2020_Villamanrique Sur_6_Halimium halimifolium",2,NA,NA,NA,NA
+"48",48,"Doñana",2020,"Villamanrique Sur",6,"Scolymus hispanicus",0.125,0.333333333333333,0.410043723977943,"Doñana_2020_Villamanrique Sur_6_Scolymus hispanicus",1,NA,NA,NA,NA
+"49",49,"Doñana",2021,"Pinar Hinojos",8,"Halimium halimifolium",0.0909090909090909,0.25,0,"Doñana_2021_Pinar Hinojos_8_Halimium halimifolium",24,NA,NA,NA,NA
+"50",50,"Doñana",2021,"Pinar Hinojos",8,"Leontodon longirostris",0.0909090909090909,0,1,"Doñana_2021_Pinar Hinojos_8_Leontodon longirostris",10,NA,NA,NA,NA
+"51",51,"Doñana",2021,"Pinar Hinojos",8,"Andryala integrifolia",0.454545454545455,0.5,0.647389321559071,"Doñana_2021_Pinar Hinojos_8_Andryala integrifolia",1,NA,NA,NA,NA
+"52",52,"Doñana",2021,"Pinar Hinojos",8,"Crepis vesicaria",0.545454545454545,0.75,0.410043723977943,"Doñana_2021_Pinar Hinojos_8_Crepis vesicaria",2,NA,NA,NA,NA
+"53",53,"Doñana",2021,"Pinar Hinojos",9,"Leontodon longirostris",0.666666666666667,1,0,"Doñana_2021_Pinar Hinojos_9_Leontodon longirostris",1,NA,NA,NA,NA
+"54",54,"Doñana",2021,"Pinar Hinojos",9,"Crepis vesicaria",0.333333333333333,0,1,"Doñana_2021_Pinar Hinojos_9_Crepis vesicaria",1,NA,NA,NA,NA
+"55",55,"Doñana",2021,"Pinar Hinojos",9,"Andryala integrifolia",0.333333333333333,1,0.647389321559071,"Doñana_2021_Pinar Hinojos_9_Andryala integrifolia",3,NA,NA,NA,NA
+"56",56,"Doñana",2021,"Pinar Hinojos",9,"Halimium halimifolium",0.333333333333333,0,0.410043723977943,"Doñana_2021_Pinar Hinojos_9_Halimium halimifolium",2,NA,NA,NA,NA
+"57",57,"Doñana",2021,"Villamanrique Chaparral",1,"Rosmarinus officinalis",0.5,0.0112994350282486,0,"Doñana_2021_Villamanrique Chaparral_1_Rosmarinus officinalis",113,NA,NA,NA,NA
+"58",58,"Doñana",2021,"Villamanrique Chaparral",1,"Asphodelus ramosus",0.375,0.00677966101694915,1,"Doñana_2021_Villamanrique Chaparral_1_Asphodelus ramosus",4,NA,NA,NA,NA
+"59",59,"Doñana",2021,"Villamanrique Chaparral",1,"Cistus salviifolius",0.125,0.0225988700564972,0.647389321559071,"Doñana_2021_Villamanrique Chaparral_1_Cistus salviifolius",4,NA,NA,NA,NA
+"60",60,"Doñana",2021,"Villamanrique Chaparral",1,"Lavandula stoechas",0.375,0.0329983500824959,0.410043723977943,"Doñana_2021_Villamanrique Chaparral_1_Lavandula stoechas",6,NA,NA,NA,NA
+"61",61,"Doñana",2021,"Villamanrique Chaparral",9,"Myrtus communis",0.142857142857143,NA,0,"Doñana_2021_Villamanrique Chaparral_9_Myrtus communis",9,NA,NA,NA,NA
+"62",62,"Doñana",2021,"Villamanrique Chaparral",9,"Echium plantagineum",0.571428571428571,NA,1,"Doñana_2021_Villamanrique Chaparral_9_Echium plantagineum",11,NA,NA,NA,NA
+"63",63,"Doñana",2021,"Villamanrique Chaparral",9,"Andryala integrifolia",0.142857142857143,NA,0.647389321559071,"Doñana_2021_Villamanrique Chaparral_9_Andryala integrifolia",1,NA,NA,NA,NA
+"64",64,"Doñana",2021,"Villamanrique Chaparral",9,"Scolymus hispanicus",0.142857142857143,NA,0.410043723977943,"Doñana_2021_Villamanrique Chaparral_9_Scolymus hispanicus",1,NA,NA,NA,NA
+"65",65,"Doñana",2021,"Villamanrique Sur",1,"Cistus salviifolius",1,1.23076923076923,0,"Doñana_2021_Villamanrique Sur_1_Cistus salviifolius",32,NA,NA,NA,NA
+"66",66,"Doñana",2021,"Villamanrique Sur",1,"Rosmarinus officinalis",0.111111111111111,0.769230769230769,1,"Doñana_2021_Villamanrique Sur_1_Rosmarinus officinalis",5,NA,NA,NA,NA
+"67",67,"Doñana",2021,"Villamanrique Sur",1,"Cistus salviifolius",1,1.23076923076923,0.647389321559071,"Doñana_2021_Villamanrique Sur_1_Cistus salviifolius",32,NA,NA,NA,NA
+"68",68,"Doñana",2021,"Villamanrique Sur",1,"Rosmarinus officinalis",0.111111111111111,0.769230769230769,0.410043723977943,"Doñana_2021_Villamanrique Sur_1_Rosmarinus officinalis",5,NA,NA,NA,NA
+"69",69,"Doñana",2021,"Villamanrique Sur",2,"Cistus salviifolius",1,1.375,0,"Doñana_2021_Villamanrique Sur_2_Cistus salviifolius",78,0.963636363636364,0.0243934688454522,0.0486124603246586,0.0227396407350594
+"70",70,"Doñana",2021,"Villamanrique Sur",2,"Rosmarinus officinalis",0.0769230769230769,0.625,1,"Doñana_2021_Villamanrique Sur_2_Rosmarinus officinalis",15,NA,NA,NA,NA
+"71",71,"Doñana",2021,"Villamanrique Sur",2,"Cistus salviifolius",1,1.375,0.647389321559071,"Doñana_2021_Villamanrique Sur_2_Cistus salviifolius",78,0.963636363636364,0.0243934688454522,0.0486124603246586,0.0227396407350594
+"72",72,"Doñana",2021,"Villamanrique Sur",2,"Rosmarinus officinalis",0.0769230769230769,0.625,0.410043723977943,"Doñana_2021_Villamanrique Sur_2_Rosmarinus officinalis",15,NA,NA,NA,NA
+"73",73,"Doñana",2021,"Villamanrique Sur",4,"Cistus salviifolius",0.9375,1.27272727272727,0,"Doñana_2021_Villamanrique Sur_4_Cistus salviifolius",49,0.92,0.032659863237109,-0.0956643497865624,0.0384980057926141
+"74",74,"Doñana",2021,"Villamanrique Sur",4,"Halimium halimifolium",0.25,0.727272727272727,1,"Doñana_2021_Villamanrique Sur_4_Halimium halimifolium",5,NA,NA,NA,NA
+"75",75,"Doñana",2021,"Villamanrique Sur",4,"Cistus salviifolius",0.9375,1.27272727272727,0.647389321559071,"Doñana_2021_Villamanrique Sur_4_Cistus salviifolius",49,0.92,0.032659863237109,-0.0956643497865624,0.0384980057926141
+"76",76,"Doñana",2021,"Villamanrique Sur",4,"Halimium halimifolium",0.25,0.727272727272727,0.410043723977943,"Doñana_2021_Villamanrique Sur_4_Halimium halimifolium",5,NA,NA,NA,NA
+"77",77,"Doñana",2021,"Pinar Aznalcazar",8,"Cistus crispus",0.133333333333333,NA,0,"Doñana_2021_Pinar Aznalcazar_8_Cistus crispus",17,1,NA,-0.420991309195062,0.0841799330765185
+"78",78,"Doñana",2021,"Pinar Aznalcazar",8,"Tolpis barbata",0.733333333333333,NA,1,"Doñana_2021_Pinar Aznalcazar_8_Tolpis barbata",2,NA,NA,NA,NA
+"79",79,"Doñana",2021,"Pinar Aznalcazar",8,"Aetheorhiza bulbosa",0.0666666666666667,NA,0.647389321559071,"Doñana_2021_Pinar Aznalcazar_8_Aetheorhiza bulbosa",4,NA,NA,NA,NA
+"80",80,"Doñana",2021,"Pinar Aznalcazar",8,"Echium plantagineum",0.0666666666666667,NA,0.410043723977943,"Doñana_2021_Pinar Aznalcazar_8_Echium plantagineum",1,NA,NA,NA,NA
+"81",81,"Doñana",2021,"Pinar Puebla",6,"Galactites tomentosus",0.444444444444444,1.02923976608187,0,"Doñana_2021_Pinar Puebla_6_Galactites tomentosus",8,NA,NA,NA,NA
+"82",82,"Doñana",2021,"Pinar Puebla",6,"Andryala integrifolia",0.444444444444444,0.355555555555556,1,"Doñana_2021_Pinar Puebla_6_Andryala integrifolia",5,NA,NA,NA,NA
+"83",83,"Doñana",2021,"Pinar Puebla",6,"Andryala arenaria",0.444444444444444,0,0.647389321559071,"Doñana_2021_Pinar Puebla_6_Andryala arenaria",12,NA,NA,NA,NA
+"84",84,"Doñana",2021,"Pinar Puebla",6,"Tolpis barbata",0.111111111111111,0.111111111111111,0.410043723977943,"Doñana_2021_Pinar Puebla_6_Tolpis barbata",1,NA,NA,NA,NA
+"85",85,"Doñana",2021,"Pinar Puebla",7,"Galactites tomentosus",0.5,1.42857142857143,0,"Doñana_2021_Pinar Puebla_7_Galactites tomentosus",2,NA,NA,NA,NA
+"86",86,"Doñana",2021,"Pinar Puebla",7,"Andryala arenaria",0.166666666666667,0,1,"Doñana_2021_Pinar Puebla_7_Andryala arenaria",11,NA,NA,NA,NA
+"87",87,"Doñana",2021,"Pinar Puebla",7,"Silene colorata",0.333333333333333,0,0.647389321559071,"Doñana_2021_Pinar Puebla_7_Silene colorata",2,NA,NA,NA,NA
+"88",88,"Doñana",2021,"Pinar Puebla",7,"Tolpis barbata",0.333333333333333,0.571428571428571,0.410043723977943,"Doñana_2021_Pinar Puebla_7_Tolpis barbata",4,NA,NA,NA,NA
+"89",89,"Gorbea",2020,"5",2,"Taraxacum sp.",0.285714285714286,0,0,"Gorbea_2020_5_2_Taraxacum sp.",1,NA,NA,NA,NA
+"90",90,"Gorbea",2020,"5",2,"Potentilla erecta",0.428571428571429,0.0192307692307692,1,"Gorbea_2020_5_2_Potentilla erecta",3,NA,NA,NA,NA
+"91",91,"Gorbea",2020,"5",2,"Scilla verna",0.285714285714286,1.98076923076923,0.647389321559071,"Gorbea_2020_5_2_Scilla verna",104,NA,NA,NA,NA
+"92",92,"Gorbea",2020,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.142857142857143,0,0.410043723977943,"Gorbea_2020_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA,NA,NA,NA
+"93",93,"Gorbea",2020,"5",4,"Scorzonera humilis",0.0833333333333333,0,0,"Gorbea_2020_5_4_Scorzonera humilis",6,NA,NA,NA,NA
+"94",94,"Gorbea",2020,"5",4,"Ranunculus sp.",0.583333333333333,1,1,"Gorbea_2020_5_4_Ranunculus sp.",1,NA,NA,NA,NA
+"95",95,"Gorbea",2020,"5",4,"Potentilla erecta",0.0833333333333333,0,0.647389321559071,"Gorbea_2020_5_4_Potentilla erecta",25,NA,NA,NA,NA
+"96",96,"Gorbea",2020,"5",4,"Daboecia cantabrica",0.416666666666667,1,0.410043723977943,"Gorbea_2020_5_4_Daboecia cantabrica",1,NA,NA,NA,NA
+"97",97,"Gorbea",2020,"2",8,"Trifolium repens",0.444444444444444,0.0588780236747298,0,"Gorbea_2020_2_8_Trifolium repens",11,NA,NA,NA,NA
+"98",98,"Gorbea",2020,"2",8,"Plantago sp.",0.222222222222222,0.0266236385639371,1,"Gorbea_2020_2_8_Plantago sp.",2,NA,NA,NA,NA
+"99",99,"Gorbea",2020,"2",8,"Prunella grandiflora",0.111111111111111,0.0353407415906864,0.647389321559071,"Gorbea_2020_2_8_Prunella grandiflora",1,NA,NA,NA,NA
+"100",100,"Gorbea",2020,"2",8,"Prunella vulgaris",0.333333333333333,0.0266236385639371,0.410043723977943,"Gorbea_2020_2_8_Prunella vulgaris",3,NA,NA,NA,NA
+"101",101,"Gorbea",2020,"2",8,"Bellis perennis",0.222222222222222,0.038630377524144,0,"Gorbea_2020_2_8_Bellis perennis",15,NA,NA,NA,NA
+"102",102,"Gorbea",2020,"2",8,"Ranunculus sp.",0.111111111111111,0.041044776119403,1,"Gorbea_2020_2_8_Ranunculus sp.",2,NA,NA,NA,NA
+"103",103,"Gorbea",2020,"2",8,"Taraxacum sp.",0.111111111111111,0.0329747254165077,0.647389321559071,"Gorbea_2020_2_8_Taraxacum sp.",2,NA,NA,NA,NA
+"104",104,"Gorbea",2020,"2",8,"Thymus praecox subsp. polytrichus",0.333333333333333,0.0997682705005856,0.410043723977943,"Gorbea_2020_2_8_Thymus praecox subsp. polytrichus",1,NA,NA,NA,NA
+"105",105,"Gorbea",2020,"3",8,"Erica vagans",0.214285714285714,0.0354609929078014,0,"Gorbea_2020_3_8_Erica vagans",2,NA,NA,NA,NA
+"106",106,"Gorbea",2020,"3",8,"Achillea millefolium",0.0714285714285714,0.0350877192982456,1,"Gorbea_2020_3_8_Achillea millefolium",3,NA,NA,NA,NA
+"107",107,"Gorbea",2020,"3",8,"Trifolium repens",0.142857142857143,0.0374531835205993,0.647389321559071,"Gorbea_2020_3_8_Trifolium repens",2,NA,NA,NA,NA
+"108",108,"Gorbea",2020,"3",8,"Prunella grandiflora",0.0714285714285714,0.0256410256410256,0.410043723977943,"Gorbea_2020_3_8_Prunella grandiflora",6,NA,NA,NA,NA
+"109",109,"Gorbea",2020,"3",8,"Thymus praecox subsp. polytrichus",0.142857142857143,0.0350877192982456,0,"Gorbea_2020_3_8_Thymus praecox subsp. polytrichus",6,NA,NA,NA,NA
+"110",110,"Gorbea",2020,"3",8,"Trifolium pratense",0.0714285714285714,0,1,"Gorbea_2020_3_8_Trifolium pratense",9,NA,NA,NA,NA
+"111",111,"Gorbea",2020,"3",8,"Plantago sp.",0.214285714285714,0.037037037037037,0.647389321559071,"Gorbea_2020_3_8_Plantago sp.",3,NA,NA,NA,NA
+"112",112,"Gorbea",2020,"3",8,"Potentilla erecta",0.0714285714285714,0,0.410043723977943,"Gorbea_2020_3_8_Potentilla erecta",1,NA,NA,NA,NA
+"113",113,"Gorbea",2020,"3",8,"Bellis perennis",0.0714285714285714,0.0374531835205993,0,"Gorbea_2020_3_8_Bellis perennis",1,NA,NA,NA,NA
+"114",114,"Gorbea",2020,"3",8,"Teucrium pyrenaicum L. subsp. pyrenaicum",0.142857142857143,0.0617283950617284,1,"Gorbea_2020_3_8_Teucrium pyrenaicum L. subsp. pyrenaicum",1,NA,NA,NA,NA
+"115",115,"Gorbea",2020,"3",8,"Ranunculus sp.",0.428571428571429,0.0617283950617284,0.647389321559071,"Gorbea_2020_3_8_Ranunculus sp.",1,NA,NA,NA,NA
+"116",116,"Gorbea",2020,"3",8,"Lotus corniculatus",0.0714285714285714,0.0466200466200466,0.410043723977943,"Gorbea_2020_3_8_Lotus corniculatus",1,NA,NA,NA,NA
+"117",117,"Gorbea",2020,"5",8,"Erica cinerea",0.166666666666667,0,0,"Gorbea_2020_5_8_Erica cinerea",11,NA,NA,NA,NA
+"118",118,"Gorbea",2020,"5",8,"Ulex gallii",0.833333333333333,0.290909090909091,1,"Gorbea_2020_5_8_Ulex gallii",4,NA,NA,NA,NA
+"119",119,"Gorbea",2020,"5",8,"Daboecia cantabrica",0.166666666666667,0.290909090909091,0.647389321559071,"Gorbea_2020_5_8_Daboecia cantabrica",2,NA,NA,NA,NA
+"120",120,"Gorbea",2020,"5",8,"Potentilla erecta",0.166666666666667,0.242424242424242,0.410043723977943,"Gorbea_2020_5_8_Potentilla erecta",2,NA,NA,NA,NA
+"121",121,"Gorbea",2020,"4",8,"Erica cinerea",0.111111111111111,0.165289256198347,0,"Gorbea_2020_4_8_Erica cinerea",5,NA,NA,NA,NA
+"122",122,"Gorbea",2020,"4",8,"Taraxacum sp.",0.333333333333333,0,1,"Gorbea_2020_4_8_Taraxacum sp.",5,NA,NA,NA,NA
+"123",123,"Gorbea",2020,"4",8,"Potentilla erecta",0.111111111111111,0.13986013986014,0.647389321559071,"Gorbea_2020_4_8_Potentilla erecta",12,NA,NA,NA,NA
+"124",124,"Gorbea",2020,"4",8,"Ranunculus sp.",0.222222222222222,0.12987012987013,0.410043723977943,"Gorbea_2020_4_8_Ranunculus sp.",1,NA,NA,NA,NA
+"125",125,"Gorbea",2020,"4",8,"Prunella grandiflora",0.111111111111111,0,0,"Gorbea_2020_4_8_Prunella grandiflora",1,NA,NA,NA,NA
+"126",126,"Gorbea",2020,"4",8,"Jasione sp.",0.111111111111111,0.165289256198347,1,"Gorbea_2020_4_8_Jasione sp.",1,NA,NA,NA,NA
+"127",127,"Gorbea",2020,"4",8,"Trifolium repens",0.444444444444444,0.25974025974026,0.647389321559071,"Gorbea_2020_4_8_Trifolium repens",1,NA,NA,NA,NA
+"128",128,"Gorbea",2020,"4",8,"Bellis perennis",0.111111111111111,0,0.410043723977943,"Gorbea_2020_4_8_Bellis perennis",1,NA,NA,NA,NA
+"129",129,"Gorbea",2021,"1",1,"Ranunculus ficaria",0.166666666666667,0.116883116883117,0,"Gorbea_2021_1_1_Ranunculus ficaria",1,NA,NA,NA,NA
+"130",130,"Gorbea",2021,"1",1,"Taraxacum sp.",0.333333333333333,0.122448979591837,1,"Gorbea_2021_1_1_Taraxacum sp.",14,NA,NA,NA,NA
+"131",131,"Gorbea",2021,"1",1,"Helleborus viridis subsp. occidentalis",0.166666666666667,0.111801242236025,0.647389321559071,"Gorbea_2021_1_1_Helleborus viridis subsp. occidentalis",4,NA,NA,NA,NA
+"132",132,"Gorbea",2021,"1",1,"Bellis perennis",0.833333333333333,0.428571428571429,0.410043723977943,"Gorbea_2021_1_1_Bellis perennis",1,NA,NA,NA,NA
+"133",133,"Gorbea",2021,"3",2,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_3_2_Scilla verna",2,1,NA,NA,NA
+"134",134,"Gorbea",2021,"3",2,"Lathyrus linifolius",0.666666666666667,NA,1,"Gorbea_2021_3_2_Lathyrus linifolius",1,0.5,NA,-0.407514561598894,NA
+"135",135,"Gorbea",2021,"3",2,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_3_2_Scilla verna",2,1,NA,NA,NA
+"136",136,"Gorbea",2021,"3",2,"Lathyrus linifolius",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_3_2_Lathyrus linifolius",1,0.5,NA,-0.407514561598894,NA
+"137",137,"Gorbea",2021,"2",3,"Taraxacum sp.",0.5,NA,0,"Gorbea_2021_2_3_Taraxacum sp.",16,NA,NA,NA,NA
+"138",138,"Gorbea",2021,"2",3,"Bellis perennis",0.5,NA,1,"Gorbea_2021_2_3_Bellis perennis",8,NA,NA,NA,NA
+"139",139,"Gorbea",2021,"2",3,"Taraxacum sp.",0.5,NA,0.647389321559071,"Gorbea_2021_2_3_Taraxacum sp.",16,NA,NA,NA,NA
+"140",140,"Gorbea",2021,"2",3,"Bellis perennis",0.5,NA,0.410043723977943,"Gorbea_2021_2_3_Bellis perennis",8,NA,NA,NA,NA
+"141",141,"Gorbea",2021,"5",2,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_5_2_Scilla verna",13,NA,NA,NA,NA
+"142",142,"Gorbea",2021,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.666666666666667,NA,1,"Gorbea_2021_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA,NA,NA,NA
+"143",143,"Gorbea",2021,"5",2,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_5_2_Scilla verna",13,NA,NA,NA,NA
+"144",144,"Gorbea",2021,"5",2,"Pedicularis sylvatica subsp. sylvatica",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_5_2_Pedicularis sylvatica subsp. sylvatica",2,NA,NA,NA,NA
+"145",145,"Gorbea",2021,"4",1,"Scilla verna",0.333333333333333,NA,0,"Gorbea_2021_4_1_Scilla verna",1,0.666666666666667,NA,0.278988835417959,NA
+"146",146,"Gorbea",2021,"4",1,"Taraxacum sp.",0.666666666666667,NA,1,"Gorbea_2021_4_1_Taraxacum sp.",2,NA,NA,NA,NA
+"147",147,"Gorbea",2021,"4",1,"Scilla verna",0.333333333333333,NA,0.647389321559071,"Gorbea_2021_4_1_Scilla verna",1,0.666666666666667,NA,0.278988835417959,NA
+"148",148,"Gorbea",2021,"4",1,"Taraxacum sp.",0.666666666666667,NA,0.410043723977943,"Gorbea_2021_4_1_Taraxacum sp.",2,NA,NA,NA,NA
+"149",149,"Gorbea",2021,"2",4,"Taraxacum sp.",0.5,0.177777777777778,0,"Gorbea_2021_2_4_Taraxacum sp.",27,NA,NA,NA,NA
+"150",150,"Gorbea",2021,"2",4,"Bellis perennis",0.125,0.253968253968254,1,"Gorbea_2021_2_4_Bellis perennis",5,NA,NA,NA,NA
+"151",151,"Gorbea",2021,"2",4,"Pedicularis sylvatica subsp. sylvatica",0.625,0.355555555555556,0.647389321559071,"Gorbea_2021_2_4_Pedicularis sylvatica subsp. sylvatica",1,NA,NA,NA,NA
+"152",152,"Gorbea",2021,"2",4,"Viola riviniana",0.125,0.253968253968254,0.410043723977943,"Gorbea_2021_2_4_Viola riviniana",1,NA,NA,NA,NA
+"153",153,"Gorbea",2021,"1",4,"Taraxacum sp.",0.285714285714286,0,0,"Gorbea_2021_1_4_Taraxacum sp.",19,NA,NA,NA,NA
+"154",154,"Gorbea",2021,"1",4,"Bellis perennis",0.0476190476190476,0.5,1,"Gorbea_2021_1_4_Bellis perennis",11,NA,NA,NA,NA
+"155",155,"Gorbea",2021,"1",4,"Vicia pyrenaica",0.19047619047619,0,0.647389321559071,"Gorbea_2021_1_4_Vicia pyrenaica",13,1,NA,-0.669039665224362,NA
+"156",156,"Gorbea",2021,"1",4,"Erysimum gorbeanum",0.0476190476190476,0,0.410043723977943,"Gorbea_2021_1_4_Erysimum gorbeanum",4,NA,NA,NA,NA
+"157",157,"Gorbea",2021,"1",4,"Veronica sp.",0.0952380952380952,0,0,"Gorbea_2021_1_4_Veronica sp.",2,NA,NA,NA,NA
+"158",158,"Gorbea",2021,"1",4,"Scilla verna",0.142857142857143,0,1,"Gorbea_2021_1_4_Scilla verna",2,1,NA,-0.27675200978616,NA
+"159",159,"Gorbea",2021,"1",4,"Ranunculus repens",0.0952380952380952,0.5,0.647389321559071,"Gorbea_2021_1_4_Ranunculus repens",1,NA,NA,NA,NA
+"160",160,"Gorbea",2021,"1",4,"Erinus alpinus",0.285714285714286,0.5,0.410043723977943,"Gorbea_2021_1_4_Erinus alpinus",1,NA,NA,NA,NA
+"161",161,"Gorbea",2021,"3",5,"Ranunculus repens",0.363636363636364,0.204499528492523,0,"Gorbea_2021_3_5_Ranunculus repens",20,NA,NA,NA,NA
+"162",162,"Gorbea",2021,"3",5,"Pedicularis sylvatica subsp. sylvatica",0.0909090909090909,0.0491452991452991,1,"Gorbea_2021_3_5_Pedicularis sylvatica subsp. sylvatica",2,NA,NA,NA,NA
+"163",163,"Gorbea",2021,"3",5,"Bellis perennis",0.0909090909090909,0,0.647389321559071,"Gorbea_2021_3_5_Bellis perennis",9,NA,NA,NA,NA
+"164",164,"Gorbea",2021,"3",5,"Potentilla erecta",0.0909090909090909,0,0.410043723977943,"Gorbea_2021_3_5_Potentilla erecta",3,NA,NA,NA,NA
+"165",165,"Gorbea",2021,"3",5,"Potentilla montana",0.0909090909090909,0.0491452991452991,0,"Gorbea_2021_3_5_Potentilla montana",1,NA,NA,NA,NA
+"166",166,"Gorbea",2021,"3",5,"Helianthemum nummularium",0.0909090909090909,0,1,"Gorbea_2021_3_5_Helianthemum nummularium",1,0.333333333333333,NA,-0.145989457973426,NA
+"167",167,"Gorbea",2021,"3",5,"Vicia pyrenaica",0.0909090909090909,0.0491452991452991,0.647389321559071,"Gorbea_2021_3_5_Vicia pyrenaica",1,NA,NA,NA,NA
+"168",168,"Gorbea",2021,"3",5,"Pilosella officinarum",0.272727272727273,0.118728246842126,0.410043723977943,"Gorbea_2021_3_5_Pilosella officinarum",1,NA,NA,NA,NA
+"169",169,"Gorbea",2021,"3",5,"Hippocrepis comosa",0.0909090909090909,0.0475154550434306,0,"Gorbea_2021_3_5_Hippocrepis comosa",1,0.5,NA,NA,NA
+"170",170,"Gorbea",2021,"3",5,"Lotus corniculatus",0.545454545454545,0.501345352462918,1,"Gorbea_2021_3_5_Lotus corniculatus",1,NA,NA,NA,NA
+"171",171,"Gorbea",2021,"3",5,"Lathyrus linifolius",0.0909090909090909,0.0491452991452991,0.647389321559071,"Gorbea_2021_3_5_Lathyrus linifolius",1,0.333333333333333,NA,-0.799802217037096,NA
+"172",172,"Gorbea",2021,"3",5,"Thymus praecox subsp. polytrichus",0.0909090909090909,0,0.410043723977943,"Gorbea_2021_3_5_Thymus praecox subsp. polytrichus",1,NA,NA,NA,NA
+"173",173,"Gorbea",2021,"5",5,"Taraxacum sp.",0.5,1.84615384615385,0,"Gorbea_2021_5_5_Taraxacum sp.",5,NA,NA,NA,NA
+"174",174,"Gorbea",2021,"5",5,"Bellis perennis",0.125,0.153846153846154,1,"Gorbea_2021_5_5_Bellis perennis",22,NA,NA,NA,NA
+"175",175,"Gorbea",2021,"5",5,"Myosotis lamottiana",0.25,0,0.647389321559071,"Gorbea_2021_5_5_Myosotis lamottiana",1,NA,NA,NA,NA
+"176",176,"Gorbea",2021,"5",5,"Ranunculus repens",0.25,0,0.410043723977943,"Gorbea_2021_5_5_Ranunculus repens",2,NA,NA,NA,NA
+"177",177,"Gorbea",2021,"1",6,"Pilosella officinarum",0.454545454545455,0.787256820909887,0,"Gorbea_2021_1_6_Pilosella officinarum",2,NA,NA,NA,NA
+"178",178,"Gorbea",2021,"1",6,"Taraxacum sp.",0.0909090909090909,0,1,"Gorbea_2021_1_6_Taraxacum sp.",4,NA,NA,NA,NA
+"179",179,"Gorbea",2021,"1",6,"Ranunculus repens",0.0909090909090909,0.0303564168586529,0.647389321559071,"Gorbea_2021_1_6_Ranunculus repens",7,NA,NA,NA,NA
+"180",180,"Gorbea",2021,"1",6,"Bellis perennis",0.0909090909090909,0.0303564168586529,0.410043723977943,"Gorbea_2021_1_6_Bellis perennis",55,NA,NA,NA,NA
+"181",181,"Gorbea",2021,"1",6,"Vicia pyrenaica",0.0909090909090909,0.0602852785502826,0,"Gorbea_2021_1_6_Vicia pyrenaica",13,1,NA,-0.27675200978616,NA
+"182",182,"Gorbea",2021,"1",6,"Medicago lupulina",0.454545454545455,0.083756440566036,1,"Gorbea_2021_1_6_Medicago lupulina",1,NA,NA,NA,NA
+"183",183,"Gorbea",2021,"1",6,"Geranium robertianum",0.272727272727273,0.0838827040188803,0.647389321559071,"Gorbea_2021_1_6_Geranium robertianum",1,NA,NA,NA,NA
+"184",184,"Gorbea",2021,"1",6,"Hutchinsia alpina",0.181818181818182,0,0.410043723977943,"Gorbea_2021_1_6_Hutchinsia alpina",1,NA,NA,NA,NA
+"185",185,"Gorbea",2021,"5",7,"Erica tetralix",0.25,0.333333333333333,0,"Gorbea_2021_5_7_Erica tetralix",3,NA,NA,NA,NA
+"186",186,"Gorbea",2021,"5",7,"Daboecia cantabrica",0.25,0,1,"Gorbea_2021_5_7_Daboecia cantabrica",2,NA,NA,NA,NA
+"187",187,"Gorbea",2021,"5",7,"Potentilla erecta",0.5,0,0.647389321559071,"Gorbea_2021_5_7_Potentilla erecta",11,NA,NA,NA,NA
+"188",188,"Gorbea",2021,"5",7,"Erica cinerea",0.5,1.66666666666667,0.410043723977943,"Gorbea_2021_5_7_Erica cinerea",1,NA,NA,NA,NA
+"189",189,"Gorbea",2022,"2",1,"Helleborus viridis subsp. occidentalis",0.666666666666667,0.865384615384615,0,"Gorbea_2022_2_1_Helleborus viridis subsp. occidentalis",5,NA,NA,NA,NA
+"190",190,"Gorbea",2022,"2",1,"Potentilla sterilis",0.333333333333333,0.230769230769231,1,"Gorbea_2022_2_1_Potentilla sterilis",2,NA,NA,NA,NA
+"191",191,"Gorbea",2022,"2",1,"Ranunculus ficaria",0.666666666666667,0.346153846153846,0.647389321559071,"Gorbea_2022_2_1_Ranunculus ficaria",1,NA,NA,NA,NA
+"192",192,"Gorbea",2022,"2",1,"Hepatica nobilis",0.333333333333333,0,0.410043723977943,"Gorbea_2022_2_1_Hepatica nobilis",1,1,NA,NA,NA
+"193",193,"Gorbea",2022,"3",1,"Helleborus viridis subsp. occidentalis",0.1,0.0581818181818182,0,"Gorbea_2022_3_1_Helleborus viridis subsp. occidentalis",1,NA,NA,NA,NA
+"194",194,"Gorbea",2022,"3",1,"Scilla verna",0.1,0.0692640692640693,1,"Gorbea_2022_3_1_Scilla verna",18,0.25,NA,-1.08532990306078,NA
+"195",195,"Gorbea",2022,"3",1,"Lathyrus linifolius",0.1,0,0.647389321559071,"Gorbea_2022_3_1_Lathyrus linifolius",7,0,NA,NA,NA
+"196",196,"Gorbea",2022,"3",1,"Bellis perennis",0.2,0.111888111888112,0.410043723977943,"Gorbea_2022_3_1_Bellis perennis",1,NA,NA,NA,NA
+"197",197,"Gorbea",2022,"3",1,"Potentilla erecta",0.2,0.0808080808080808,0,"Gorbea_2022_3_1_Potentilla erecta",2,NA,NA,NA,NA
+"198",198,"Gorbea",2022,"3",1,"Taraxacum officinale",0.1,0.0632411067193676,1,"Gorbea_2022_3_1_Taraxacum officinale",2,NA,NA,NA,NA
+"199",199,"Gorbea",2022,"3",1,"Hippocrepis comosa",0.8,0.140762463343109,0.647389321559071,"Gorbea_2022_3_1_Hippocrepis comosa",1,NA,NA,NA,NA
+"200",200,"Gorbea",2022,"3",1,"Potentilla montana",0.2,0.0890538033395176,0.410043723977943,"Gorbea_2022_3_1_Potentilla montana",1,NA,NA,NA,NA
+"201",201,"Gorbea",2022,"4",2,"Bellis perennis",0.222222222222222,0.266666666666667,0,"Gorbea_2022_4_2_Bellis perennis",3,NA,NA,NA,NA
+"202",202,"Gorbea",2022,"4",2,"Taraxacum officinale",0.222222222222222,0.16,1,"Gorbea_2022_4_2_Taraxacum officinale",22,NA,NA,NA,NA
+"203",203,"Gorbea",2022,"4",2,"Scilla verna",0.666666666666667,0.3,0.647389321559071,"Gorbea_2022_4_2_Scilla verna",2,0.714285714285714,NA,NA,NA
+"204",204,"Gorbea",2022,"4",2,"Vaccinium myrtillus",0.111111111111111,0,0.410043723977943,"Gorbea_2022_4_2_Vaccinium myrtillus",1,NA,NA,NA,NA
+"205",205,"Gorbea",2022,"4",3,"Taraxacum officinale",0.444444444444444,0.256,0,"Gorbea_2022_4_3_Taraxacum officinale",30,NA,NA,NA,NA
+"206",206,"Gorbea",2022,"4",3,"Bellis perennis",0.333333333333333,0.174545454545455,1,"Gorbea_2022_4_3_Bellis perennis",7,NA,NA,NA,NA
+"207",207,"Gorbea",2022,"4",3,"Scilla verna",0.111111111111111,0.182857142857143,0.647389321559071,"Gorbea_2022_4_3_Scilla verna",3,0.333333333333333,NA,NA,NA
+"208",208,"Gorbea",2022,"4",3,"Potentilla erecta",0.777777777777778,0.194782608695652,0.410043723977943,"Gorbea_2022_4_3_Potentilla erecta",4,NA,NA,NA,NA
+"209",209,"Gorbea",2022,"1",4,"Taraxacum officinale",0.416666666666667,0.112813095785944,0,"Gorbea_2022_1_4_Taraxacum officinale",29,NA,NA,NA,NA
+"210",210,"Gorbea",2022,"1",4,"Bellis perennis",0.0833333333333333,0,1,"Gorbea_2022_1_4_Bellis perennis",15,NA,NA,NA,NA
+"211",211,"Gorbea",2022,"1",4,"Pinguicula grandiflora",0.25,0.141261696347721,0.647389321559071,"Gorbea_2022_1_4_Pinguicula grandiflora",1,NA,NA,NA,NA
+"212",212,"Gorbea",2022,"1",4,"Hutchinsia alpina",0.0833333333333333,0.0274599542334096,0.410043723977943,"Gorbea_2022_1_4_Hutchinsia alpina",1,NA,NA,NA,NA
+"213",213,"Gorbea",2022,"1",4,"Scilla verna",0.0833333333333333,0.0274599542334096,0,"Gorbea_2022_1_4_Scilla verna",2,NA,NA,NA,NA
+"214",214,"Gorbea",2022,"1",4,"Vicia pyrenaica",0.166666666666667,0.0444528875379939,1,"Gorbea_2022_1_4_Vicia pyrenaica",4,0.5,NA,-0.37889000400135,NA
+"215",215,"Gorbea",2022,"1",4,"Erysimum gorbeanum",0.666666666666667,0.126384012962463,0.647389321559071,"Gorbea_2022_1_4_Erysimum gorbeanum",1,NA,NA,NA,NA
+"216",216,"Gorbea",2022,"1",4,"Helleborus viridis subsp. occidentalis",0.0833333333333333,0.106242905788876,0.410043723977943,"Gorbea_2022_1_4_Helleborus viridis subsp. occidentalis",7,NA,NA,NA,NA
+"217",217,"Gorbea",2022,"1",5,"Taraxacum officinale",0.25,0.197849659567639,0,"Gorbea_2022_1_5_Taraxacum officinale",19,NA,NA,NA,NA
+"218",218,"Gorbea",2022,"1",5,"Vicia pyrenaica",0.125,0,1,"Gorbea_2022_1_5_Vicia pyrenaica",19,0,NA,NA,NA
+"219",219,"Gorbea",2022,"1",5,"Ranunculus sp.",0.0625,0.0220747790187401,0.647389321559071,"Gorbea_2022_1_5_Ranunculus sp.",7,NA,NA,NA,NA
+"220",220,"Gorbea",2022,"1",5,"Bellis perennis",0.0625,0.024108488196886,0.410043723977943,"Gorbea_2022_1_5_Bellis perennis",32,NA,NA,NA,NA
+"221",221,"Gorbea",2022,"1",5,"Geranium robertianum",0.1875,0.0528968052069237,0,"Gorbea_2022_1_5_Geranium robertianum",1,NA,NA,NA,NA
+"222",222,"Gorbea",2022,"1",5,"Medicago lupulina",0.3125,0.0776916260110671,1,"Gorbea_2022_1_5_Medicago lupulina",4,NA,NA,NA,NA
+"223",223,"Gorbea",2022,"1",5,"Erinus alpinus",0.5,0.124360443350313,0.647389321559071,"Gorbea_2022_1_5_Erinus alpinus",2,NA,NA,NA,NA
+"224",224,"Gorbea",2022,"1",5,"Hutchinsia alpina",0.25,0,0.410043723977943,"Gorbea_2022_1_5_Hutchinsia alpina",1,NA,NA,NA,NA
+"225",225,"Gorbea",2022,"4",5,"Ranunculus sp.",0.285714285714286,0.19047619047619,0,"Gorbea_2022_4_5_Ranunculus sp.",3,NA,NA,NA,NA
+"226",226,"Gorbea",2022,"4",5,"Potentilla erecta",0.428571428571429,0.285714285714286,1,"Gorbea_2022_4_5_Potentilla erecta",7,NA,NA,NA,NA
+"227",227,"Gorbea",2022,"4",5,"Veronica officinalis",0.285714285714286,0.228571428571429,0.647389321559071,"Gorbea_2022_4_5_Veronica officinalis",3,NA,NA,NA,NA
+"228",228,"Gorbea",2022,"4",5,"Polygala vulgaris",0.428571428571429,0.114285714285714,0.410043723977943,"Gorbea_2022_4_5_Polygala vulgaris",2,NA,NA,NA,NA
+"229",229,"Gorbea",2022,"3",6,"Trifolium repens",0.3,0.0730752501087429,0,"Gorbea_2022_3_6_Trifolium repens",2,NA,NA,NA,NA
+"230",230,"Gorbea",2022,"3",6,"Lotus corniculatus",0.1,0.0458140169075539,1,"Gorbea_2022_3_6_Lotus corniculatus",4,0.333333333333333,NA,0.680769844587791,NA
+"231",231,"Gorbea",2022,"3",6,"Helianthemum nummularium",0.3,0.0514075887392901,0.647389321559071,"Gorbea_2022_3_6_Helianthemum nummularium",3,NA,NA,NA,NA
+"232",232,"Gorbea",2022,"3",6," Thymus praecox subsp. polytrichus",0.4,0.0609800362976406,0.410043723977943,"Gorbea_2022_3_6_ Thymus praecox subsp. polytrichus",6,NA,NA,NA,NA
+"233",233,"Gorbea",2022,"3",6,"Plantago sp.",0.1,0.030281182408075,0,"Gorbea_2022_3_6_Plantago sp.",1,NA,NA,NA,NA
+"234",234,"Gorbea",2022,"3",6,"Teucrium pyrenaicum L. subsp. pyrenaicum",0.2,0.0458140169075539,1,"Gorbea_2022_3_6_Teucrium pyrenaicum L. subsp. pyrenaicum",4,NA,NA,NA,NA
+"235",235,"Gorbea",2022,"3",6,"Vicia pyrenaica",0.2,0.0401913875598086,0.647389321559071,"Gorbea_2022_3_6_Vicia pyrenaica",1,NA,NA,NA,NA
+"236",236,"Gorbea",2022,"3",6,"Bellis perennis",0.1,0.0323886639676113,0.410043723977943,"Gorbea_2022_3_6_Bellis perennis",1,NA,NA,NA,NA
