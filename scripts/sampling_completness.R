@@ -1862,8 +1862,11 @@ library(gghalves)
 install.packages("ggdist")
 library(ggdist)
 
+
+dat.total2 <- read.csv("data/sampl.compl.csv")
+
 Fig_complete<-ggplot(dat.total2, aes(x=sampling_type, y=values, fill=factor(V6)))+
-  geom_boxplot() +facet_wrap(~site*ind) + scale_fill_manual(values=wes_palette(n=3, name="GrandBudapest1")) +
+  geom_boxplot() +facet_wrap(~site*ind) + scale_fill_manual(values = c("#B24745FF", "#79AF97FF", "#6A6599FF")) +
   ylab("Sampling completeness") + labs(fill="Year")+
   xlab("Network aggregation") + theme_bw() + ylim(0.2, 1)
 
@@ -1886,7 +1889,7 @@ Fig_complete.pruebas <- ggplot(dat.total2, aes(x = sampling_type, y = values, fi
     position = position_jitter(seed = 1, width = .1)
   ) +
   facet_wrap(~site * ind) +
-  scale_fill_manual(values = wes_palette(n = 3, name = "GrandBudapest1")) +
+  scale_fill_manual(values = pal_jama("default")(3)) +
   ylab("Sampling completeness") +
   labs(fill = "Year") +
   xlab("Network aggregation") +
