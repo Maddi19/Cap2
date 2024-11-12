@@ -13,6 +13,9 @@ source("./scripts/toolbox.R")
 
 ##cargar all data
 all_df<-read.csv("./data/useful/all_data.csv")
+all_df <- all_df %>%
+  mutate(Pollinator_id = recode(Pollinator_id, "Platycheirus  sp" = "Platycheirus sp"))
+
 
 gor<-all_df%>%
   filter(Site=="Gorbea")
@@ -20,44 +23,11 @@ unique(gor$Pollinator_id)
 
 doñ<-all_df%>%
   filter(Site=="Doñana")
-unique_pl<- gor %>%
+
+unique_pl<- doñ %>%
   distinct(Pollinator_id) %>%  
   arrange(Pollinator_id)
 
-
-##################VIOLIN PLOT#############
-install.packages("hrbrthemes")
-library(hrbrthemes)
-library(ggsci)
-unique(all_df$Pollinator_family)
-
-crear_violin_plot <- function(dataset, title) {
-  dataset_grouped <- dataset %>%
-    group_by(Order, Periodo, Year) %>%
-    summarise(count = n(), .groups = 'drop') %>%
-    ungroup() 
-  # Asegúrate de que el valor de 'Suma_Observaciones' sea usado para ajustar el ancho del violín
-  ggplot(dataset_grouped, aes(x = Periodo, y = Order, fill = Order)) +
-    geom_violin(aes(weight = count), scale = "count", trim = FALSE) +  # Usa el peso para ajustar el área del violín
-    scale_fill_npg() +                                  # Colores de NPG para el Order
-    theme_ipsum() +                                     # Tema minimalista
-    labs(title = title, x = "Periodo (semana del año)", y = "Order") +  # Etiquetas de los ejes
-    theme(legend.position = "right") +                   # Posición de la leyenda a la derecha
-    facet_wrap(~ Year, scales = "free_x") +               # Crear un panel para cada año
-    scale_x_continuous(breaks = 1:9, limits = c(1, 9))   # Configurar el rango y los ticks del eje x
-}
-
-# Crear una lista de datasets y títulos
-datasets <- list(gor = gor, doñ = doñ)
-titles <- c("Cantidad de Observaciones por Orden en cada Periodo (Gorbea)",
-            "Cantidad de Observaciones por Orden en cada Periodo (Doñana)")
-
-# Aplicar la función a cada dataset usando purrr::map2
-plots <- map2(datasets, titles, crear_violin_plot)
-
-# Mostrar los gráficos
-print(plots[[1]])  # Gorbea
-print(plots[[2]])  # Doñana
 
 ######INFO WEBS
 unique(gor$Pollinator_id)
@@ -315,7 +285,7 @@ web1=matrix(table(doñ$Planta,doñ$Pollinator_id),nrow=length(levels(doñ$Planta
 (V=sum(web1)) 
 (I=sum(web1!=0))
 
-
+str(all_df)
 ##########WEBS############
 ########################
 

@@ -42,8 +42,12 @@ presence_plot <- ggplot(datos_rangos %>% filter(Planta %in% especies_seleccionad
                    axis.text.y = element_text(size = 10),
                    axis.title.x = element_text(size = 12),
                    legend.position = "none"
-                 )
+                 )+
+                 scale_x_continuous(breaks = 1:9) 
 
+
+all_df <- all_df %>%
+  mutate(Pollinator_id = recode(Pollinator_id, "Platycheirus  sp" = "Platycheirus sp"))
 
 all_df$Periodo <- as.numeric(all_df$Periodo)
 
