@@ -2,6 +2,7 @@ rm(list = ls(all.names = TRUE))
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
 pacman::p_load(tidyverse,here, ggpubr, dplyr,ggplot2,ggsci,Polychrome, RColorBrewer,ggpubr)
 
+
 all_df<-read.csv(here("data","useful", "all_data.csv"))
 
 plantas_visitas <- all_df %>%
@@ -94,4 +95,5 @@ violin_pol <- ggplot(datos_rep, aes(x = Periodo, y = Pollinator_id, fill = Polli
   )+
   scale_x_continuous(breaks = 1:9) 
 
+ggsave(violin_pol, file="Figs/violin_pol.jpg", dpi=300, width=12, height = 7)
 save(presence_plot, violin_pol, file="scripts/presence_plot.RData")

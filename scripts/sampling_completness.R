@@ -31,12 +31,16 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.d20<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.d20<-poll.d20 + theme_set(
-  theme_bw() + theme(
-    legend.position = "none",
-    legend.text = element_blank(),
-    axis.title = element_blank() 
-  ))
+poll.d20 <- poll.d20 + 
+  scale_color_manual(values = c("#6A6599FF")) +  
+  theme_bw() +  # Tema blanco y negro
+  theme(
+    legend.position = "none",        
+    legend.text = element_blank(),   
+    axis.title = element_blank()     
+  )
+
+# Mostrar el gráfico
 poll.d20
 #calculate sampling completeness as observed/estimated species richness
 samp_comp_poll<-round(rar$AsyEst$Observed[1]/rar$AsyEst$Estimator[1],2)
