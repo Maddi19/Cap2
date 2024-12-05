@@ -1,6 +1,6 @@
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,here, dplyr,ggplot2,ggsci,Polychrome, RColorBrewer,ggpubr)
+pacman::p_load(tidyverse,here, ggpubr, dplyr,ggplot2,ggsci,Polychrome, RColorBrewer,ggpubr)
 
 all_df<-read.csv(here("data","useful", "all_data.csv"))
 
@@ -27,6 +27,7 @@ datos_rangos <- all_df %>%
   summarise(inicio = min(Periodo), fin = max(Periodo))
 
 
+
 length(unique(datos_rangos$Planta))
 colors<-get_palette("jama",55)
 
@@ -35,7 +36,7 @@ presence_plot <- ggplot(datos_rangos %>% filter(Planta %in% especies_seleccionad
                 aes(y = Planta)) +
                 geom_linerange(aes(xmin = inicio, xmax = fin, color = Planta), size = 4) +
                 scale_color_manual(values = colors) +
-                labs(x = "Periodo", y = "Especie") +
+                labs(x = "Sampling period", y = "Species") +
                 facet_wrap(~ Site, scales = "free_y")+
                 theme_minimal() +
                 theme(
@@ -82,7 +83,7 @@ colors<-get_palette("jama",45)
 violin_pol <- ggplot(datos_rep, aes(x = Periodo, y = Pollinator_id, fill = Pollinator_id)) +
   geom_violin(color = NA, bw = 0.35) +  # Gráfico de violín con borde negro, la anchura se ajusta automáticamente
   scale_fill_manual(values = colors) +  # Usar la paleta de colores especificada (jama de ggsci)
-  labs(x = "Periodo", y = "Especie", fill = "Polinizador") +  # Etiquetas
+  labs(x = "Sampling period", y = "Species", fill = "Polinizador") +  # Etiquetas
   facet_wrap(~ Site, scales = "free_y") +  # Un gráfico para cada Site
   theme_minimal() +
   theme(
