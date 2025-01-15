@@ -108,5 +108,5 @@ anim_save("mapa_orozko_temperatura.gif", animation = animacion)
 
 
 
-# Abrir el GIF en tu navegador (si usas RStudio)
+## Abrir el GIF en tu navegador (si usas RStudio)
 browseURL("mapa_orozko_temperatura.gif")
