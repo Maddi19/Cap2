@@ -2,8 +2,11 @@
 title: "Cap2"
 author: "maddi"
 date: "`r Sys.Date()`"
-output: word_document
+output:  
+  word_document:
+    reference_docx: "plantilla.docx"
 bibliography: references.bib
+csl: ecology-letters.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -14,23 +17,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-Biodiversity plays a vital role in maintaining the functionality of ecosystems. The results of previous experiments have demonstrated that an increase in species richness can lead to improvements in ecosystem functioning (e.g., increase in biomass due to higher plant species richness [@cardinale2004]). In particular, recent research has sought to elucidate the impact of diversity at different trophic levels on ecosystem functionality, with a particular focus on those related to pollination and plant reproductive success (REF BASCOMPTE JORDANO). It has been demonstrated that an increase in pollinator species diversity can enhance the reproductive success of plants (REF artamendi et al ).
+Ecological communities are composed of multiple species that interact with one another, thereby forming complex interaction networks. A fundamental understanding of the patterns of change in these interaction networks and the mechanisms that determine the interactions between species is essential for the prediction of changes in community structure (REF) and, consequently, in ecosystem functions [@burkle2013].
 
-The majority of studies in this field have traditionally focused on biodiversity through the lens of species richness (REF). However, it is equally important to consider the structure of the community. It is insufficient to merely enumerate the number of species; rather, an understanding of the manner in which species are organized and interact within an ecosystem provides a more comprehensive account of its functionality and stability (magrach 2021). Community structure exerts a significant influence on the manner in which the constituent components of an ecosystem contribute to its overall functioning. This underscores the necessity for studies that integrate both species richness and community-level analyses in order to gain a more profound understanding of biodiversity and its role in ecosystem sustainability[@magrach2023].
+Interactions between species are not random; rather, they follow highly structured patterns[@bascompte2003; @bastolla2009], and the structure of these networks has implications for the constancy of species interactions, species coexistence[@bascompte2006] and, consequently, co-evolutionary dynamics [@maia2019; @guimarães2017]. In the case of mutualistic networks, a distinctive feature is the presence of a nested architectural pattern[@bascompte2003; @rohr2014], whereby specialist species interact with a subset of the species with which more generalist species interact[@bascompte2003; @bastolla2009]. In other words, there is a small number of highly connected species that interact with a large number of species, while the majority of species have few connections and are part of the interactions of the highly connected ones[@maia2019]. These species, which are highly connected, form the core of the network and favour functional complementarity [@maia2019; @guimarãesjr2011] , as they create interactions with species of different traits, facilitating diverse but functionally complementary interactions. This ensures that different species play unique but integrated roles within the network. HOBETO EXPLIKATU
 
-In particular, we have focused on a static view by pooling data, where if one species interacts with another at one time, it is assumed that this will always happen. This means that we have not investigated how these interactions may vary over time, where different variables may influence them. For instance, CaraDonna and Waser (2020) discovered that pollinator species typically classified as generalists in the overall network were, in reality, significantly more specialized when analyzed on a week-to-week basis. Now is the time to study the dynamics of community patterns over time. HABLAR MAS SOBRE EL TIEMPO, VARIACIONES EN UN MISMO AÑO, PRIMAVERA
+Nevertheless, these patterns of species interactions are not static in nature, they vary depending on the abundance of interacting species, their phenology, morphology and/or behaviour [@vázquez2009; @stang2006; @maia2019; @peralta2020], all of which can change through time, leading to network structures than can also vary. EXPLICAR MAS. PAPER PERALTA. However, a common approach (and a pitfall) in many community ecology studies is to aggregate data collected across different periods of time (e.g., days, weeks, years) into a single community. One of the consequences of this aggregation of data over time is for example the inclusion of species within the same network that do not exhibit matching phenological patterns and were not present concurrently[@schwarz2020].
 
-DIFERENCIAS ENTRE ESTRUCTURA COMUNIDAD Y A NIVEL DE ESPECIE. macroscala y microescala.
+In order to avoid these problems, some studies have transitioned from examining static interactions at discrete locations and time points to incorporating the temporal and spatial variability of interactions between species [@peralta2020; @trøjelsgaard2016; @magrach2023]. For example, in the case of plant-pollinator networks, recent studies have demonstrated that species interactions vary in space and time [@magrach2023; @cirtwill2018]. This variability is supported by two main processes: species turnover and interaction rewiring [@trøjelsgaard2015; @magrach2023]. EXPLICAR MAS LO QUE ES CADA COSA. Furthermore, as temporal variability in interactions is subject to changes in species diversity, the sampling effort may be also an important driver of the temporal scale-dependence of network structure[@schwarz2020; @caradonna2020a]. For instance, pollinator species typically classified as generalists in the overall network, could be in reality, significantly more specialized when analyzed on a week-to-week basis[@schwarz2020]. Therefore, pollinators demonstrate considerable flexibility in their utilisation of available resources and can change interaction partners throughout the season.
 
-Here, we present an empirical study linking pollinator visitation and plant reproductive success at the community level and species level. We use data collected within two different habitat types (Atlantic mountain grasslands and the understory of Mediterranean woodlands) across two consecutive years in the Mediterranean woodlands and three consecutive years in the mountain grasslands. Our aim is first to understand if macroscale community features (nestedness, functional complementarity) change over small scale time (weekly networks)) and big scale time lapses (seasonally aggregated networks). Second, we ask if microscale features of species (degree of generalization, closeness) vary also through the different time scales. Third, we focus on understanding if adding information on selected interaction network structure indices to previously used simple visitation metrics (e.g., number and diversity of pollinator species) explains better the differences observed in reproductive success.
+An understanding of how species organise themselves and interact in an ecosystem over time facilitates a more complete comprehension of its functionality, persistance and stability, as these interactions determine species coexistence[@caradonna2020a]. The structure of the community influences the contribution of each component of the network to the overall functionality of the ecosystem[@magrach2021]. This underscores the necessity for studies that integrate both species richness and community-level analyses in order to gain a more profound understanding of biodiversity and its role in ecosystem stability[@magrach2023]. In this context, it is crucial to examine both macro-scale or network-level measures, such as nestedness or general functional complementarity, and micro-scale or species-level indices, such as the degree of generalization or weighted closeness of each species.
 
-Specifically, our research aims to answer the following questions at two different levels (site or community level, and species level): (i) at the site level, (1) how dynamic are nestedness and functional complementarity through time in the two climatic zones? do they explain community level reproductive success? ; at the species level (2) does the degree of pollinator generalization change through time? and is it link to species level plant reproductive success? (3) Is plant or pollinator species closeness dynamic through time, and what is its relation to plant species reproductive success?
+PARRAFO SOBRE ESTRUCTURA Y FUNCION. We know from Artamendi et al 2024 that there is a positive relationship between species diversity and function, but we know less about the mechanisms by which this diversity affects function. One of these may be structure, and in particular variability in structure over time, which may benefit different plant species (if we are talking about plant reproductive success) at different times. In this context, it is important to study both macro-scale or network level measures, such as nestedness, and micro-scale or species level indices, such as the degree or functional complementarity of each species. NESTEDNESS Y COMPLEMENTARITY PAPER AINHOA. SI LOS RATIOS DE NESTEDNESS Y COMPLEMENTARIDAD VARIAN EN EL TIEMPO MAS ESPECIES DISTINTAS SE PODRIAN BENEFICIAR DE LA POLINIZACION Y EL OVERALL REPRODUCTIVE SUCCESS DE LA COMUNIDAS ES MAYOR. ANALISIS: CV DE ESTAS VARIABLES Y VER SI LOS SITIOS MAS VARIANTES SON LOS QUE TIENEN MAYOR EXITO REPRO.
+
+Here, we assess the impact of temporal and spatial variation in plant-pollinator community structure, plant reproductive success at the community and species levels. We use data collected within two different habitat types and regions in Spain (Atlantic mountain grasslands in the N Spain and the understory of Mediterranean woodlands in the S Spain) across three consecutive years the former, and two in the latter. Our aim is first to understand if macro-scale community features (e.g., nestedness, functional complementarity) change through time, both over small scale periods of time (weekly intervals) as well as large scale time periods (seasonally aggregated networks across multiple years). Second, we ask if micro-scale features of species (degree of generalization, closeness) vary also through the different time scales. Third, we focus on understanding if adding information on selected interaction network structure indices to previously used simple visitation metrics (e.g., number and diversity of pollinator species) explains better the differences observed in reproductive success.
+
+Specifically, our research aims to answer the following questions at two different levels (community and species level): (i) at the site level, (1) how dynamic are nestedness and functional complementarity through time in the two climatic zones? do they explain community level reproductive success? ; at the species level (2) does the degree of pollinator generalization change through time? and is it link to species level plant reproductive success? (3) Is plant or pollinator species closeness dynamic through time, and what is its relation to plant species reproductive success? (4) Are there differences between the temporal and spatial scales of data aggregation and sampling completeness?
 
 ## Methodology
 
 ### Study sites
 
-We collected data in two different study areas and habitat types in Spain: within the vicinity of Doñana National Park in SW Spain and at Gorbea Natural Park, located in N Spain. Doñana features a Mediterranean climate, with warm, dry summers and cool, humid winters. Annual precipitation is 500 mm, and mean temperatures during the study period range from 12.5 to 22.5ºC (REF pizarro2021). Surveys were conducted within fragmented woodlands of stone pines (Pinus pinea) that host a rich understory of flowering shrubs and annual plants (Aparicio 2007). In turn, surveys in Gorbea were conducted within an area characterized by the influence of the Atlantic Ocean, with mild winters and summers and high annual precipitation values, \~ 1,300 mm. Here, mean temperatures during the study period range from 10 to 17.5 ∘ C (Pizarro et al. 2021). Vegetation in the area is composed of beech forests, in conjunction with abundant coniferous plantations. There is also a substantial presence of shrubland and meadows, together with dispersed outrocks, present mainly in the steepest areas of the mountain (Albizu et al. 2002).
+The data was collected in two distinct study areas, each representing a different habitat. The first area was Doñana National Park in south-west Spain, and the second was Gorbea Natural Park in the Basque Country in northern Spain. Doñana features a Mediterranean climate, with warm, dry summers and cool, humid winters. Annual precipitation is 500 mm, and mean temperatures during the study period range from 12.5 to 22.5ºC (REF pizarro2021). Surveys were conducted within fragmented woodlands of stone pines (Pinus pinea) that host a rich understory of flowering shrubs and annual plants (Aparicio 2007). In turn, surveys in Gorbea were conducted within an area characterized by the influence of the Atlantic Ocean, with mild winters and summers and high annual precipitation values, \~ 1,300 mm. Here, mean temperatures during the study period range from 10 to 17.5 ∘ C (Pizarro et al. 2021). Vegetation in the area is composed of beech forests, in conjunction with abundant coniferous plantations. There is also a substantial presence of shrubland and meadows, together with dispersed outrocks, present mainly in the steepest areas of the mountain (Albizu et al. 2002).
 
 Surveys were conducted during two consecutive years (2020 and 2021) in Doñana and three consecutive years (2020, 2021 and 2022) in Gorbea. Within each area we selected five sites within similar elevations (ranging from 50 to 150 m a.s.l. in the case of Doñana and between 800 and 900 m.a.s.l in the case of Gorbea), as well as within similar habitat and soil types, reducing potential confounding factors. Similarity in plant composition between sites was 0.41 ± 0.04 in both areas and across both study years (plant mean Sørensen beta-diversity). The average distance between sites ranged from 3.2 to 24.2 in the case of Doñana and from 1.3 to 4.6 km in Gorbea. In Doñana, one of the sites had to substituted in 2021 due to impossibility of access in the second year of sampling and it was changed to a nearby very similar area.
 
@@ -74,7 +81,7 @@ Throughout all the analyses performed we first scaled all independent variables 
 
 *Change in community richness and structure through time*
 
-We assessed whether the structure of the community, particularly community-level network metrics varied through time as the flowering period advanced. For this, we used General Linear Mixed Models (GLMMs) with each of the metrics as response variables (nestedness, functional complementarity….) and sampling period and …….. as explanatory variables. In this case we usedGaussian distribution models.
+We assessed whether the structure of the community, particularly community-level network metrics varied through time as the flowering period advanced. For this, we used General Linear Mixed Models (GLMMs) with each of the metrics as response variables (nestedness, functional complementarity for plants and pollinators) and sampling period and year as explanatory variables. In this case we used Gaussian distribution models.
 
 *Relationship between community structure and function through time*
 
@@ -82,57 +89,292 @@ We then evaluated whether community structure was related to ecosystem function,
 
 Before running any models, we calculated variance inflation factors (VIFs) which provide an overview of the correlation between the different variables to be included. We found that total visits had a high VIF value (\>3?¿) as it was particularly correlated with functional complementarity. We thus always ran parallel models that include either variable.
 
-First, we assessed how community structure metrics affected community-level average reproductive success by fitting GLMMs that included xxx,xxx,xxx,XX and total visits or functional complementarity as independent variables, also including their interaction with the sampling period. In this case we use beta-family distribution models. The beta family is particularly suitable for modeling response variables that are continuous and constrained within the interval (0, 1), as it allows for the modeling of non-normal distributions.Second, we evaluated how the role of each individual species within the larger community affected its individual reproductive success by fitting GLMMs with XX,xxx,xxx and xxx as independent variables. Similarly, we included sampling period and its interaction with all other variables to assess whether these relationships changed through time.
-
-e  
+First, we assessed how community structure metrics affected community-level average reproductive success by fitting GLMMs that included pollinator richness, plant richness, total visits, nestedness and functional complementarity for plants and pollinators as independent variables, also including their interaction with the sampling period. In this case we use beta-family distribution models. The beta family is particularly suitable for modeling response variables that are continuous and constrained within the interval (0, 1), as it allows for the modeling of non-normal distributions. Second, we evaluated how the role of each individual plant species within the larger community affected its individual reproductive success by fitting GLMMs with XX,xxx,xxx and xxx as independent variables. Similarly, we included sampling period and its interaction with all other variables to assess whether these relationships changed through time.
 
 All models were performed in parallel for both the Gorbea and Doñana datasets. In both cases, the sampling sites (five sampling sites for each study site) were included as a random factor. From these models, we derived predictive values for subsequent visualisation for each study site and each year, as well as secondary figures also visualised by sampling site.
 
 ## Results
 
-Across both our study areas and years, our sampling spanned XXX h of observation. During this time, we recorded a total of 61 and 90 plant species in Doñana and Gorbea, respectively. Out of these, 75.4 % of the plant species found in the different sites in Doñana, and 72.2 % of the plant species present in Gorbea received at least one visit from floral visitors. Within our sampling we recorded 3939 interactions (1690, 956 and 1293 for 2020, 2021 and 2022) involving 155 pollinator species and 65 plant species for Gorbea and 2617 interactions (879 and 1738 for 2020 and 2021 respectively) involving 144 pollinator species and 46 plant species for Doñana (Table 1). We recorded a total of 452 and 646 unique combinations of plants and flower visitors in each of the study areas (Doñana and Gorbea) through the time. These interactions involved 197 and 282 distinct combinations of plants and flower visitors for Doñana in 2020 and 2021 (being 37.61% and 56.42% of them unique for those years) and 282, 208 and 301 distinct interactions for Gorbea in 2020, 2021 and 2022 (being 30.03%, 19.81% and 32.82% of them exclusive for each year).
+Across both our study areas and years, our sampling spanned XXX h of observation. During this time, we recorded a total of 61 and 90 plant species in Doñana and Gorbea, respectively. Out of these, 75.4 % of the plant species found in the different sites in Doñana, and 72.2 % of the plant species present in Gorbea received at least one visit from floral visitors. Within our sampling we recorded 3939 interactions (1690, 956 and 1293 for 2020, 2021 and 2022) involving 155 pollinator species and 65 plant species for Gorbea and 2617 interactions (879 and 1738 for 2020 and 2021 respectively) involving 144 pollinator species and 46 plant species for Doñana (Table 1 and Figure 1). We recorded a total of 452 and 646 unique combinations of plants and flower visitors in each of the study areas (Doñana and Gorbea) through the time. These interactions involved 197 and 282 distinct combinations of plants and flower visitors for Doñana in 2020 and 2021 (being 37.61% and 56.42% of them unique for those years) and 282, 208 and 301 distinct interactions for Gorbea in 2020, 2021 and 2022 (being 30.03%, 19.81% and 32.82% of them exclusive for each year).
+
+```{r richnes, echo=FALSE}
+knitr::include_graphics("Figs/richness_plots.png")
+```
+
+**Figure 1. Plant and pollinator species richness throughout time in both study sites.**
 
 In Doñana, the most represented order of flower visitors was Hymenoptera, involved in 69.51 % of the interactions observed. Specifically, Apidae represented the most common family within the order, representing 48.34 % of the interactions and interactions involving Apis mellifera, the managed European honeybee, represented 41.77 % of all interactions. Following Hymenoptera, the next most common order was Diptera representing 15.28 % of the interactions, and specifically the family Syrphidae representing 10.39 %. In turn, Coleoptera represented 13.34% of the interactions and Lepidoptera 1.75%. In Gorbea, the most abundant group were Diptera which accounted for 63.03 % of the interactions, and specifically the family Syrphidae represented 52.75 %, followed by Hymenoptera, representing 29.93 %, and specifically the family Apidae representing 19.01 %, but in this case Apis mellifera represented 8.55 % of the interactions and different species in the Bombus genus 9.7 %. Coleoptera and Lepidoptera represented 3.7 % and 3.17 % of interactions.
 
-```{r p1}
+Our sampling has revealed that in both Doñana and Gorbea, there are plant species that are present at the beginning of the season and disappear thereafter, while others are present throughout (Figure 1). Additionally, a few species have been observed to exhibit long flowering periods, which span the entire season. Furthermore, in regard to pollinators, it has been observed that their prevalence within the community exhibits fluctuations throughout the course of a single year, as well as fluctuations in their level of activity (Figure 2). This illustrates the temporal variability of the species assemblage at a single study site, emphasising the importance of sampling over time to gain a more comprehensive understanding of the community.
+
+```{r p1, fig.width=9,  dpi=300, echo=FALSE}
 load("scripts/presence_plot.RData")
 presence_plot
+```
+
+**Figure 2. Distribution of plants that have been measured for reproductive success, as well as those that receive frequent visits throughout the spring season.**
+
+```{r p2, echo=FALSE, fig.width= 10, fig.height=6, dpi=300}
+load("scripts/presence_plot.RData")
 violin_pol
 ```
 
+**Figure 3. Presence and abundance of the most frequent pollinator species during the spring season.**
+
 ### Sampling completeness
 
-Our sampling completeness analyses revealed that our survey was able to capture high sampling coverage for both plant and pollinator communities in both study years. We detected 81% and 77% of pollinator species in 2020 and 2021, respectively, in the case of Doñana, and 66%, 54%, and 50% in the case of Gorbea in 2020, 2021, and 2022 (Fig 2 and Supplementary Fig. X). Regarding plant species, we detected 95% and 88% for 2020 and 2021, respectively, in Doñana, and 92%, 94%, and 92% for 2020, 2021, and 2022 in Gorbea. In the case of plant-pollinator links, sampling completeness is lower in both study areas (60% and 60% for 2020 and 2021 in the case of Doñana and 44%, 51% and 53% in the case of Gorbea) for the three sampling years.
+Our sampling completeness analyses revealed that our survey was able to capture high sampling coverage for both plant and pollinator communities in both study years. We detected 81% and 77% of pollinator species in 2020 and 2021, respectively, in the case of Doñana, and 66%, 54%, and 50% in the case of Gorbea in 2020, 2021, and 2022 (Figure 3 and Supplementary Fig. X). Regarding plant species, we detected 95% and 88% for 2020 and 2021, respectively, in Doñana, and 92%, 94%, and 92% for 2020, 2021, and 2022 in Gorbea. In the case of plant-pollinator links, sampling completeness is lower in both study areas (60% and 60% for 2020 and 2021 in the case of Doñana and 44%, 51% and 53% in the case of Gorbea) for the three sampling years.
+
+```{r p3, echo=FALSE}
+knitr::include_graphics("Figs/sampling.png")
+```
 
 Nevertheless, these values are subject to alteration when alternative amplitudes or scales are taken into account during the calculation of sampling completeness values. For example, if sampling completeness is calculated aggregating data across sites for each of the different periods, we obtain highly variable coverage values ranging from 47.03% to 75.82% in the case of pollinators in Doñana and from 21.52 to 91.98% in the case of Gorbea in 2020 (Supplementary Fig. X and Table X). Similarly, in the case of plant species, sampling completeness is more variable when period is considered as sampling breadth, with between 65.48 to 98.47% of plant species being identified in the case of Doñana and between 36.32% and 95.36% in the case of Gorbea in 2020. In the case of links, these values ranged from 7.25% to 64.73% in the case of Doñana and between 36.86 and 81.3 % in Gorbea. Aggregating data through time for each site, showed values ranging between 37% and 84.58% for pollinator species detected in Doñana in 2020, while in Gorbea's different sites, the values ranged between 42.43% and 65.51%. The proportion of plant species detected in Doñana ranged from 74.37% to 94.17%, while in Gorbea it ranged from 57.7% to 96%. In the case of links, the corresponding values were 41.64% to 65.23% in Doñana and 22.99% to 42.98% in Gorbea.
+
+```{r p4, echo=FALSE}
+load("full_sampling.RData")
+fig.t
+```
+
+**Figure 5. Plant, pollinator and link richness sampling completeness for Gorbea over the three sampling years, with aggregated data presented for analysis.**
+
+REPETIR FIGURA DOÑANA
 
 An inspection of interactions shows that 37.61% and 56.42% of the interactions observed in Doñana in 2020 and 2021 are unique to that year, i.e., they are not observed the other year (Table 1). In turn, in Gorbea these proportions stand at 30.03% , 19.81% and 32.82% respectively for 2020, 2021 and 2022. In turn, pollinator species that are uniquely found in one of the study years represent 25.69% and 50% of all pollinator species in 2020 and 2021 respectively in the case of Doñana, and 27.10% ,11.61% and 23.23% in the case of Gorbea. For plant species involved in interactions, values of species uniquely found to interact one of the study years stand at 34.78% and 32.61% in 2020 and 2021 for Doñana and 9.23%, 4.62% and 16.93% for Gorbea.
 
 ### Community network structure
 
-With respect to the temporal dynamics of plant-pollinator networks´ nestedness, markedly divergent patterns emerge across the sampling seasons within the two study areas, as illustrated in Fig. X.A-B. However, when focusing on the patterns observed within each study site across different sampling years, we could appreciate similarities, where the network structure of Gorbea displayed a greater degree of fluctuation in its nestedness. In Gorbea, the data indicated a decrease in nestedness at the start of the sampling season, which then increases midway through and stabilises at higher values. This corresponds to a greater degree of nestedness within the network. In Doñana, we observed that the level of nestedness tends to increase throughout the sampling period, reaching a peak in the middle of the sampling period. However, as the sampling period progresses with spring, the level of nestedness begins to decrease. Concurrently, our findings revealed that the interaction networks of the Gorbea sampling areas exhibited considerably greater variability, both between and within the same sampling site across different years, in comparison to the Doñana sampling areas (Supplementary Fig. XA-B). In contrast, the opposite occurred in the Doñana sampling areas, where a consistent pattern is observed in all five sites in both years throughout the sampling period.
+With respect to the temporal dynamics of plant-pollinator networks’ nestedness, markedly divergent patterns emerge across the sampling seasons within the two study areas, as illustrated in Fig. X.A-B. However, these differences were not statistically significant for either Gorbea (estimate=0.037, p=0.44) or Doñana (estimate=0.015, p=0,79).
 
-With regard to the functional complementarity of pollinators and plants, the same temporal patterns were observed for both of them. As was observed in the Gorbea nesting network, the functional complementarity of both pollinators and plants exhibited greater fluctuation in Gorbea, with the same pattern being observed for all three years of sampling. The highest values of functional complementarity were detected in the middle of the sampling season.
+However, when focusing on the patterns observed within each study site across different sampling years, similarities can be appreciated, as no differences were observed from year to year. In Gorbea, an increase in the nestedness of the network structure was observed throughout the sampling season in each sampled year. In Doñana, the level of nestedness tends to increase during the sampling period, reaching a peak in the middle. However, as the sampling period progresses into spring, the level of nestedness begins to decrease gradually. Concurrently, our findings indicated that the interaction networks in the Gorbea sampling areas exhibited distinct patterns. Three sites showed an increase in nestedness with the flowering period, while two sites exhibited a more consistent pattern over time. These patterns were consistent across different sampling years. In contrast, the Doñana networks displayed more variability in their patterns across years. While all five sampling sites in Doñana followed a similar trend of increasing nestedness followed by a decrease, the specific pattern varied depending on the year of sampling.
+
+Furthermore, nestedness tended to increase with pollinator species richness in both Gorbea (estimate=0.25, p=0.018) and Doñana (estimate=0.29, p=0.04). In the case of Doñana, nestedness also increased with plant species richness (estimate=0.92, p\<0.001).
+
+```{r anidamiento, echo=FALSE}
+load("Rdata/indices.RData")
+
+
+plot_anidamiento_gorbea <- plots[["anidamiento"]][["Gorbea"]]
+print(plot_anidamiento_gorbea)
+
+plot_anidamiento_donana <- plots[["anidamiento"]][["Doñana"]]
+print(plot_anidamiento_donana)
+
+
+```
+
+.esto en el supplementary:
+
+```{r supl}
+##supplementary
+load("Rdata/indices_bosque.RData")
+plots_bosque_g <- plots [["anidamiento"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots [["anidamiento"]][["Doñana"]]
+print(plots_bosque_d)
+```
+
+With regard to the functional complementarity of pollinators and plants, the same temporal patterns were observed for both of them. As with the nestedness, the patterns of oscillation of functional complementarity throughout the flowering season were observed to be repeated and consistent across sampling years at both study sites (Figure X). However, we found a significant decrease in the functional complementarity of pollinators (estimate=-0.57, p\<0.01) and plants (estimate-0.56, p=0.01) for 2022 in Gorbea . In Gorbea, functional complementarity was found to increase in the middle of the flowering season for all three sampling years, while in Doñana, pollinators´ functional complementarity was observed to decrease throughout the season, being this negative tendency statistically significant (estimate=-0.16, p\<0.001). We observed a sligthly negative pattern throughout the sampling season of Gorbea (estimate=-0.1, p=0.06). In contrast to the observed for nestedness patterns, the five sampling sites at both study sites exhibited strikingly similar trends throughout the flowering season and across the different sampling years.
+
+It was observed that the richness of pollinator species positively influenced functional complementarity of pollinators (estimate = 0.4, p = 0.001) and functional complementarity of plants (estimate=0.4, p=0.002) in Gorbea. However, this association did not attain significance in Doñana, either, for functional complementarity of pollinators (estimate = 0.11, p = 0.34) and plants (estimate = 0.08, p = 0.43). We found no evidence that plant species richness influenced functional complementarity of pollinators in Gorbea (estimate = 0.25, p = 0.09) or Doñana (estimate = -0.07, p = 0.73).
+
+```{r compl.fun, echo=FALSE}
+load("Rdata/indices.RData")
+
+plot_compl_g <- plots[["comp_pol"]][["Gorbea"]]
+print(plot_compl_g)
+
+plot_compl_d<- plots[["comp_pol"]][["Doñana"]]
+print(plot_compl_d)
+
+```
+
+esto tambien supplementary
+
+```{r supl.2}
+##supplementary
+load("Rdata/indices_bosque.RData")
+plots_bosque_g <- plots [["comp_pol"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots [["comp_pol"]][["Doñana"]]
+print(plots_bosque_d)
+```
 
 ### Community level reproductive success
 
-### Species complementarity through time and space
+In examining the reproductive success of the community, as indicated by fruit set and seed number per fruit, our findings revealed disparate trends between Doñana and Gorbea for the two models rebuilt. For both fruit set and the total number of seeds per fruit recorded for the community, we observe the same trend in the effect of the variables for the two models we built (Table 1 and Table 2).
 
-```{r species_presence}
-load("scripts/presence_plot.RData")
-presence_plot
+At Doñana, we identified a sampling point that exerted a considerable influence on the outcomes of our models. Consequently, we opted to exclude this data point. Our analysis indicated that plant species richness had a pronounced negative impact on the collective reproductive success of the community across both fruit set and seed number per fruit metrics (Table 1 and Table 2) for both study sites. As the functional complementarity of pollinators demonstrated a high collinearity value with the total number of visits to the sampling point, it was observed that in the model incorporating this variable, functional complementarity had a positive influence on the reproductive success of the plants in the community in the case of Gorbea, but no influence in the case of Doñana. Nevertheless, our findings revealed no discernible impact of the overall number of visits documented on each sampling day or pollinator diversity on the reproductive success of plants in Gorbea and Doñana. It can be observed that the effect of functional complementarity on the reproductive success of plants in Gorbea is dependent on the sampling period, with functional complementarity showing a diminished impact on reproductive success as the sampling season progresses. This indicates that the effect in question exhibits significant variability over time during the same year. Furthermore, the impact of functional complementarity on reproductive success was observed to be less pronounced in 2022 compared to the baseline year of 2021. Moreover, the model that incorporates the functional complementarity variable demonstrates that, in a similar way to functional complementarity, the impact of nestedness on reproductive success during the spring sampling season is diminished as the season progresses. Additionally, it was observed that in the model incorporating the total number of visits recorded on each sampling day, the effect of nestedness was found to be less pronounced in 2022 with respect to the total number of seeds per plant (Table 2).
+
+**Table 1. Results of GLMM showing effects between network structur e metrics and total visits on community level fruit set for Doñana and Gorbea.** **M6 refers to models that include functional complementarity of pollinators and M7 refers to models that include the total number of visits recorded for each sampling day. Bold letters indicate variables with large effects.**
+
+```{r fruitset, echo=FALSE}
+load("fruitset_table.RData")
+table
 ```
 
-### Species level reproductive success
+**Table 2. Results of GLMM showing effects between network structure metrics and total visits on community level seed number per fruit for Doñana and Gorbea.** **M6 refers to models that include functional complementarity of pollinators and M7 refers to models that include the total number of visits recorded for each sampling day. Bold letters indicate variables with large effects.**
 
-```{r cars}
-summary(cars)
+```{r seeds, echo=FALSE}
+load("seeds_table.RData")
+table_seeds
+```
+
+```{r plots, echo=FALSE}
+load("plots_models_fruits.RData")
+final_combined_plot
+```
+
+**Figure X. Partial residual plots showing the effect of the single predictor which best explains the variability in community level fruit set. Dots represent average values of fruit set at the level of the community for all plant species considered (N=31).**
+
+With regard to the impact of the sampling period on reproductive success, our findings indicate that in Doñana, reproductive success declined as the season advanced. Conversely, in Gorbea, the period exhibited no discernible influence on its own (Figure Boxplot). Nevertheless, a slight trend was identified whereby the highest values of reproductive success were recorded in mid-spring, followed by a decline.
+
+```{r boxplot, echo=FALSE}
+load("boxplot.period_fruitset.RData")
+combined_boxplot
+```
+
+**Figure X. Figure illustrating the impact of the sampling period on community level plant reproductive success.**
+
+```{r plots_seeds, echo=FALSE}
+load("plots_models_seeds.RData")
+final_combined_plot.sn
+
+
+```
+
+**Figure X. Partial residual plots showing the effect of the single predictor which best explains the variability in community level seed number per fruit. Dots represent average values of fruit set at the level of the community for all plant species considered (N=31 for Doñana and 29 for Gorbea).**
+
+### Community stability
+
+We found no evidence that variation in network nestedness or variation in functional complementarity of pollinators was related to community level reproductive success.
+
+```{r cv, echo=FALSE}
+knitr::include_graphics("Figs/cv_nest_comp.png")
+```
+
+ESTABILDIAD DEL EXITO REPRODUCTIVO A LO LARGO DE LA TEMPORADA
+
+Y CV DEL EXITO REPRODUCTIVO SEGUN LA RIEUZA DE POLL.
+
+Sale no significativo para total visits y para riqueza de plantas, por eso no hay plot de estos. FALTA REDEACTAR ESTO, CON LOS ESTADISTICOS.
+
+```{r cv.fs, echo=FALSE}
+load("RData/cv_fs.RData")
+print(p1)
+p2 <- plots[[1]]
+print(p2)
+```
+
+### Species level analysis
+
+Este modelo para cada indice en cada sitio (Gorbea y Doñana). Son graficos con los valores predichos de los modelos. Tengo que dar el z value o el estimate? o todos? En el texto dirias algo mas?
+
+```         
+INDICE ~ (poll.sp + plant.sp) * Periodo + Year + (1 | Bosque)
+```
+
+**Specialization:** It was observed that the index of plant specialisation exhibited a tendency to decrease (z value= -2.7, p\<0.01) with the spring sampling period in Gorbea, in contrast to the more dynamic and seasonal fluctuations observed in Doñana (Figure X) where there was no relation with the sampling period. Furthermore, these trends were consistently evident across the five sampling sites in Gorbea and Doñana, and were reproducible across different sampling years (Supplementary Figure X). Furthermore, our study revealed that plant specialisation is directly correlated with the richness of the flora in both study sites Doñana (z value = -4.81, p\<0.0001) and Gorbea (z value = -4.3, p\<0.0001). As plant diversity increases, plant specialisation tends to decline. We also observed a positive interaction between pollinator species richness and plant specialization in Doñana.
+
+```{r plots_plantas, echo=FALSE}
+load("Rdata/indices_plantas.RData")
+plot_d_gorbea <- plots[["Specialization"]][["Gorbea"]]
+print(plot_d_gorbea)
+
+plot_d_donana <- plots[["Specialization"]][["Doñana"]]
+print(plot_d_donana)
+
+##supplementary
+load("Rdata/indicesplanta_bosque.RData")
+plots_bosque_g <- plots[["Specialization"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots[["Specialization"]][["Doñana"]]
+print(plots_bosque_d)
+```
+
+**Degree:** Supplementary Figures X and X illustrate that there are spatially and temporally differentiated patterns for Gorbea and Doñana. In Gorbea, there is a notable variation in normalised grade values between sites. Some sites, such as site 3, exhibit consistently lower values with less dispersion, whereas others, such as site, demonstrate greater variability. With regard to temporal variation in Gorbea (Figure X), the later periods tend to exhibit lower values (z value = -1.68, p = 0.09), but no significant differences were observed between years. Furthermore, for the case of Gorbea, our findings indicated that plant richness has a negative impact (z value = -2.62, p \< 0.01) on the degree or number of different interactions that a plant engages in with other pollinator species. In contrast, in Doñana, differences between sites are less pronounced, but there is greater stability in the degree values across periods. However, there are also fluctuations between years, with some sites showing slight decreases in 2021 compared to 2020.
+
+```{r degree_plantas}
+load("Rdata/indices_plantas.RData")
+plot_degree_gorbea <- plots[["Degree"]][["Gorbea"]]
+print(plot_degree_gorbea)
+
+plot_degree_donana <- plots[["Degree"]][["Doñana"]]
+print(plot_degree_donana)
+
+##supplementary
+load("Rdata/indicesplanta_bosque.RData")
+plots_bosque_g <- plots[["Degree"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots[["Degree"]][["Doñana"]]
+print(plots_bosque_d)
+```
+
+**Closeness:** With regard to the centrality of the plants, no trend was identified throughout the season in either Gorbea or Doñana (Figure X). However, an increase in plant closeness was observed in Gorbea in 2021 (z value = 1.75, p\<008). In Gorbea, the richness of plant species was found to have a negative effect (z value = -3.16, p\<0.001) on each plant species´ closeness. In contrast, in Doñana, it was the richness of pollinators that demonstrated a negative effect (z value = -2.72, p \< 0.01), with this effect becoming more positive throughout the sampling period (z value = 3.28, p \< 0.001). In both Gorbea and Doñana, differences in the dynamism of closeness were observed according to the sampling site (Supplementary Figure X and X).
+
+```{r closeness, echo=FALSE}
+load("Rdata/indices_plantas.RData")
+
+plot_clos_gorbea <- plots[["Closeness"]][["Gorbea"]]
+print(plot_clos_gorbea)
+
+plot_clos_donana <- plots[["Closeness"]][["Doñana"]]
+print(plot_clos_donana)
+
+##supplementary
+load("Rdata/indicesplanta_bosque.RData")
+plots_bosque_g <- plots[["Closeness"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots[["Closeness"]][["Doñana"]]
+print(plots_bosque_d)
+
+```
+
+**Niche complementarity:** With regard to time variability of niche complementarity, no trend was identified during the sampling period in either Gorbea or Doñana (Figure X and X). This indicates that niche complementarity exhibits a highly dynamic pattern throughout the spring, which is consistent across different sampling years. In the niche complementarity of plant species, two contrasting patterns were observed in Gorbea and Doñana. Pollinator richness was found to negatively influence ( z value = -2.2, p = 0.02) plant complementarity in Gorbea, whereas in Doñana, it had a positive effect (z value = 2.44, p = 0.015), with a negative trend observed throughout the sampling period (z-value = -2.66, p \< 0.01).
+
+```{r morisita, echo=FALSE}
+load("Rdata/indices_plantas.RData")
+plot_niche_gorbea <- plots[["morisita"]][["Gorbea"]]
+print(plot_niche_gorbea)
+
+plot_niche_donana <- plots[["morisita"]][["Doñana"]]
+print(plot_niche_donana)
+
+##supplementary
+load("Rdata/indicesplanta_bosque.RData")
+plots_bosque_g <- plots[["morisita"]][["Gorbea"]]
+print(plots_bosque_g)
+
+plots_bosque_d <- plots[["morisita"]][["Doñana"]]
+print(plots_bosque_d)
+```
+
+### **Plant species level reproductive success**
+
+modelo 6 nada, da error. AICs : m7=-191.19, m8=-198.12, m9=-190.9
+
+cual nos quedamos? m8 el mejor pero igual no tiene sentido quitar tanto morisita como el total visits.
+
+```{r fs.table}
+load("RData/splevel.fruitset_table.RData")
+table
+```
+
+plots de reproductive success vs specialization, closeness y morisitia?? con modelo m7. ninguna es significativa pero. Tengo que cambiar la llinea de tendencia que me haga con mi modelo en vez de cogiendo lm.... creo qe por eso sale tan exagerado.
+
+```{r plots_splevel}
+
+load("RData/sp.level_fs")
+final_combined_plot
 ```
 
 ## Discussion
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+IDEIAK:
 
-## References
+### References

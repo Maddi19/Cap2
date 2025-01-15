@@ -1,0 +1,639 @@
+---
+title: "Species level analysis"
+format: html
+editor: visual
+---
+
+### Plant species level reproductive success
+
+Con scale escalamos variables explicativas (d, grado,centralidad, tot visitas por planta)
+
+```{r load}
+#| echo: false
+#| warning: false
+#| message: false
+rm(list = ls(all.names = TRUE)) 
+pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
+pacman::p_load(tidyverse,here, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, MuMIn, ggsci, cowplot)
+               
+
+sitems2<-read.csv(here("data","useful", "all_info.csv"))
+
+##seed number ya esta escalado desde antes
+
+sitems2$Year<-as.factor(sitems2$Year)
+
+#glimpse(sitems2)
+sitems2_rescaled <- sitems2 %>%
+  mutate(norm_degree = scale(Degree),
+         closeness = scale(Closeness),
+         Specialization = scale(Specialization), 
+         tot.visits.pl = scale(tot.visits.pl),
+         morisita = morisita
+  )
+
+sitems2.fs <- sitems2_rescaled %>%
+  filter(!is.na(pl.mean.fs)& !is.nan(pl.mean.fs))
+
+
+
+sitems2.fs <- sitems2.fs %>%
+  mutate(pl.mean.fs = if_else(pl.mean.fs == 1.00, 0.9999, pl.mean.fs))
+
+sitems2.fs <- sitems2.fs %>%
+  mutate(pl.mean.fs = if_else(pl.mean.fs == 0.00, 0.00001, pl.mean.fs))
+
+
+```
+
+PLOTS DE COMO CAMBIA RIQUEZA CON PERIODO.
+
+```{r riqueza}
+#| echo: false
+#| warning: false
+#| message: false
+sitems_riqueza <- sitems2 %>%
+  group_by(Site_id, Bosque, Year, Periodo) %>%
+  summarise(
+    mean_richness_plants = mean(plant.sp, na.rm = TRUE),
+    mean_richness_pollinators = mean(poll.sp, na.rm = TRUE)
+  )
+
+library(ggsci)
+variables <- list(
+  plant = "mean_richness_plants",
+  pollinator = "mean_richness_pollinators"
+)
+
+y_titles <- c("Plant Richness", "Pollinator Richness")
+
+crear_grafico <- function(variable, title) {
+  ggplot(sitems_riqueza, aes(x = Periodo, y = .data[[variable]], color = as.factor(Year), group = Year)) +
+    geom_point(size = 2) +
+    stat_summary(
+      aes(group = Year, color = as.factor(Year)),
+      fun = mean,
+      geom = "point",
+      shape = 21,
+      size = 4,
+      fill = "white",  # White fill for the mean points
+      position = position_dodge(width = 0.2)
+    ) +
+    stat_summary(
+      aes(group = Year, color = as.factor(Year)),
+      fun = mean,
+      geom = "line",
+      size = 1,  
+      linetype = "solid",  
+      position = position_dodge(width = 0.2)
+    ) +
+    facet_wrap(~ Site_id) +
+    scale_color_npg() +
+    scale_x_continuous(breaks = 1:9) +
+    labs(
+      title = paste(title, "throughout time"),  # Use the custom title for the plot
+      x = "Period",
+      y = title,  # Set the Y-axis label to the custom title
+      color = "Year"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(size = 10, face = "bold"),
+      legend.position = "bottom"
+    )
+}
+
+
+plots <- map2(variables, y_titles, crear_grafico)
+
+
+p1 <- print(plots[[1]])  
+p2 <- print(plots[[2]])
+
+library(cowplot)
+combined_plot <- plot_grid(p1,p2, labels = c("A", "B"), ncol=1)
+
+ggsave("Figs/richness_plots.png", combined_plot, width = 7, height = 8, dpi = 300, bg="white")
+
+
+```
+
+```{r repro}
+
+### rellenamos columnas sin pol.sp y plant.sp de los datos originales. 
+#filter <- d.21.gorb %>%
+ # filter((Bosque == 3 & Periodo == 2) | (Bosque == 4 & Periodo == 1))
+
+##para 3-2
+riqueza_pollinizadores_1 <- 3 
+riqueza_plantas_1 <- 2
+
+##para 4-1
+riqueza_pollinizadores_2 <- 3  
+riqueza_plantas_2 <- 2
+
+# Rellenar manualmente las columnas seleccionadas
+sitems2.fs <- sitems2.fs %>%
+  mutate(
+    poll.sp = case_when(
+      Site_id == "Gorbea" & Year == 2021 & Bosque == 3 & Periodo == 2 ~ riqueza_pollinizadores_1,
+      Site_id == "Gorbea" & Year == 2021 & Bosque == 4 & Periodo == 1 ~ riqueza_pollinizadores_2,
+      TRUE ~ poll.sp
+    ),
+    plant.sp = case_when(
+      Site_id == "Gorbea" & Year == 2021 & Bosque == 3 & Periodo == 2 ~ riqueza_plantas_1,
+      Site_id == "Gorbea" & Year == 2021 & Bosque == 4 & Periodo == 1 ~ riqueza_plantas_2,
+      TRUE ~ plant.sp
+    ))
+
+
+###CHECK COLLINEARITIES
+mod_glmm <- glmmTMB(
+  pl.mean.fs ~ Specialization + Degree + Closeness + morisita + tot.visits.pl + poll.sp + plant.sp + Periodo + Year + (1 | Bosque) + (1|Site_id), 
+  family = "beta_family", 
+  data = sitems2.fs
+)
+check_collinearity(mod_glmm)
+
+##total visits high collinearity, lo corremos como modelo aparte
+##degree moderate, se puede quitar del modelo, que al final la especializacion te da una idea de cuantas inetarcciones distintas tiene una especie
+#global_model <- glmmTMB(pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque) + (1|Site_id), family = "beta_family",data = sitems2.fs, na.action = na.exclude )
+
+#model_set <- dredge(global_model, trace = TRUE)
+#model_set
+
+# Seleccionar el mejor modelo basado en AIC
+#best_model <- get.models(model_set, subset = 1)[[1]]
+#summary(best_model)
+
+# Ver más detalles de los modelos candidatos
+#sw(model_set) 
+
+##no hay muchos datos, asique full model con site como random
+
+###morisita NAs rellenar por 0s. 
+sitems2.fs <- sitems2.fs %>%
+  mutate(morisita = ifelse(is.na(morisita), 0, morisita))
+
+formulas.full <- list(
+  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
+  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
+  m9 = pl.mean.fs~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id)
+  )
+models.full <- map(formulas.full, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs, na.action = na.exclude))
+aic_results <- map(models.full, AIC)
+print(aic_results)
+
+##mejor modelo sin morisita (tiene muchas Nas, se pierden datos y sin total.visits.pl)
+
+sitems2.fs.d<-sitems2.fs%>%
+  filter(Site_id=="Doñana")
+
+sitems2.fs.g<-sitems2.fs%>%
+  filter(Site_id=="Gorbea")
+
+sitems2.fs.g$Periodo <- as.numeric(sitems2.fs.g$Periodo)
+sitems2.fs.d$Periodo <- as.numeric(sitems2.fs.d$Periodo)
+sitems2.fs.g$Bosque <- as.factor(sitems2.fs.g$Bosque)
+sitems2.fs.d$Bosque <- as.factor(sitems2.fs.d$Bosque)
+
+# List of model formulas for fruit set
+formulas <- list(
+  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque),
+  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque),
+  m9 = pl.mean.fs~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque)
+  )
+
+formulas.d <- list(
+  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1 | Bosque),
+  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness  ) *  Periodo  + (1 | Bosque),
+ m9 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl) *  Periodo  + (1 | Bosque))
+
+
+models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.g, na.action = na.exclude))
+
+models.d <- map(formulas.d, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.d, na.action = na.exclude))
+
+####SEED NUMBER FULL MODEL
+formulas.sn.full <- list(
+  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque) + (1|Site_id),
+  m7 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque)  + (1|Site_id),
+  m8 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque) + (1|Site_id),
+  m9 = pl.mean.sn~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque) + (1|Site_id)
+  )
+
+models.sn.full <- map(formulas.sn.full, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs, na.action = na.exclude))
+
+aic_results <- map(models.sn.full, AIC)
+print(aic_results)
+
+###models para cada site
+formulas.sn <- list(
+  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque),
+  m7 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque),
+  m8 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque),
+  m9 = pl.mean.sn~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque)
+  )
+
+formulas.d.sn <- list(
+  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1 | Bosque))
+
+models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs.g, na.action = na.exclude))
+
+models.d.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs.d, na.action = na.exclude))
+p
+```
+
+SIN MORISITA EN LOS MODELOS LAS DEMAS VARIABLES CAMBIAN. 30 OBSERVACIONES PARA MODELOS CN MORISITA, 68 SIN MORISITA. CUAL SERIA EL APROPIADO?? CON SEEED NUMBER ERROR NAs. FALTA DE INFO POR POCOS DATOS??? ME FALTA ESTA PARTE DE RELACIONAR CON EL EXITO REPRODUCTIVO QUE NO SE MUY BIEN COMO SOLUCIONARLO.
+
+```{r table fruit set}
+#| warning: false
+#| message: false
+
+library(gridExtra)
+library(grid)
+install.packages("kableExtra")
+library(kableExtra)
+
+resultados_full <- map_dfr(models.full, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)))}, .id = "model.full")
+
+resultados_d <- map_dfr(models.d, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+}, .id = "modelo_d")
+
+
+resultados_g <- map_dfr(models.g, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
+}, .id = "modelo_g")
+
+
+resultados_full <- resultados_full %>%
+  select( model= model.full, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+
+
+resultados_d <- resultados_d %>%
+  select( Region,model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+
+resultados_g <- resultados_g %>%
+  select(Region, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
+
+
+library(kableExtra)
+# Combinar los resultados en una sola tabla
+tabla_final <- bind_rows(resultados_full)
+
+tabla_final_df <- as.data.frame(tabla_final)
+tabla_final_df <- tabla_final_df %>%
+  mutate(negrita =`p value` < 0.05) 
+# Crear una tabla con desplazamiento horizontal
+tabla_kable <- tabla_final_df %>%
+  select(-negrita) %>% 
+  kable("html") %>%
+  kable_styling("striped", full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#0073e6") %>% # Estilo del encabezado
+  column_spec(1:5, border_left = TRUE) # Estilo de columnas
+
+# Aplicar estilo de negrita para las filas con p < 0.05
+for (i in which(tabla_final_df$negrita)) {
+  tabla_kable <- tabla_kable %>% row_spec(i, bold = TRUE, color = "black")
+}
+
+# Mostrar la tabla
+table<-tabla_kable
+table
+
+save(table, file="RData/splevel.fruitset_table.RData")
+```
+
+```{r table seednumber}
+#| warning: false
+#| message: false
+
+resultados.sn_full <- map_dfr(models.sn.full, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)))}, .id = "model.full")
+
+resultados.sn_full <- resultados.sn_full %>%
+  select( model= model.full, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+
+tabla_final <- bind_rows(resultados.sn_full)
+
+tabla_final_df <- as.data.frame(tabla_final)
+tabla_final_df <- tabla_final_df %>%
+  mutate(negrita =`p value` < 0.05) 
+# Crear una tabla con desplazamiento horizontal
+tabla_kable <- tabla_final_df %>%
+  select(-negrita) %>% 
+  kable("html") %>%
+  kable_styling("striped", full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#0073e6") %>% # Estilo del encabezado
+  column_spec(1:5, border_left = TRUE) # Estilo de columnas
+
+# Aplicar estilo de negrita para las filas con p < 0.05
+for (i in which(tabla_final_df$negrita)) {
+  tabla_kable <- tabla_kable %>% row_spec(i, bold = TRUE, color = "black")
+}
+
+# Mostrar la tabla
+table<-tabla_kable
+table
+```
+
+```{r repro plots}
+#| warning: false
+#| message: false
+
+sitems2.fs.d <- sitems2.fs.d %>%
+  mutate(
+    efecto_parcial = predict(models.d$m6, type = "response", re.form = NA),
+    efecto_m7 = predict(models.d$m7, type = "response", re.form = NA),
+    efecto_sn = ifelse(is.na(mean.sn), NA, predict(models.d.sn$m6, type = "response", re.form = NA)),
+    efecto_sn_m7 = ifelse(is.na(mean.sn), NA, predict(models.d.sn$m7, type = "response", re.form = NA))
+  )
+
+sitems2.fs.g <- sitems2.fs.g %>%
+  mutate(
+    efecto_parcial = predict(models.g$m6, type = "response", re.form = NA),
+    efecto_m7 = predict(models.g$m7, type = "response", re.form = NA),
+    efecto_sn = ifelse(is.na(mean.sn), NA, predict(models.g.sn$m6, type = "response", re.form = NA)),
+    efecto_sn_m7 = ifelse(is.na(mean.sn), NA, predict(models.g.sn$m7, type = "response", re.form = NA))
+  )
+
+
+###modelo m7 con morisita
+
+create_plot <- function(data, x_variable) {
+  x_labels <- setNames(c("Morisita", "Closeness",  "Specialization"), 
+                       c("morisita", "Closeness", "Specialization"))
+  p <- ggplot(data, aes_string(x = x_variable, y = "efecto_m7")) +
+     geom_point(alpha = 0.6, color="#069" ) +        
+    geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE)  + 
+    labs(
+       x = x_labels[[x_variable]],
+      y = "Fruit set"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.title = element_text(size = 12)
+    )
+}
+
+# Variables para las que se generarán los gráficos
+variables <- c("morisita", "Closeness", "Specialization")
+
+# Crear los gráficos usando map
+plots <- map(variables, ~ create_plot(sitems2.fs.d, .x))
+names(plots) <- c("plot_1a", "plot_1b", "plot_1c")  
+for (p in plots) {
+  print(p)
+}
+
+
+# Crear y guardar los gráficos del segundo conjunto
+plots_2 <- map(variables, ~ create_plot(sitems2.fs.g, .x))
+names(plots_2) <- c("plot_2a", "plot_2b", "plot_2c")   
+for (p in plots_2) {
+  print(p)
+}
+
+
+plots$plot_1a
+plots$plot_1b
+plots$plot_1c
+
+library(patchwork)
+
+combined_plot_1  <- plot_grid(
+  plots$plot_1a, 
+  plots$plot_1b, 
+  plots$plot_1c, 
+  ncol = 3,   
+  labels = c("A", "B", "C")) 
+combined_plot_1 
+
+
+plots_2$plot_2a
+plots_2$plot_2b
+plots_2$plot_2c
+
+combined_plot_2  <- plot_grid(
+  plots_2$plot_2a, 
+  plots_2$plot_2b, 
+  plots_2$plot_2c, 
+  ncol = 3,   
+  labels = c("D", "E", "F"))
+combined_plot_2
+
+library(cowplot)
+title_doñana <- ggdraw() + 
+  draw_label("Doñana", fontface = 'bold', size = 12, hjust = 0.5)
+
+title_gorbea <- ggdraw() + 
+  draw_label("Gorbea", fontface = 'bold', size = 12, hjust = 0.5)
+
+
+doñana_combined <- plot_grid(title_doñana, combined_plot_1, ncol = 1, rel_heights = c(0.1, 1))
+gorbea_combined <- plot_grid(title_gorbea, combined_plot_2, ncol = 1, rel_heights = c(0.1, 1))
+
+
+final_combined_plot <- plot_grid(
+  doñana_combined, gorbea_combined, 
+  ncol = 1, rel_heights = c(1, 1),  label_size = 12
+)
+
+save(final_combined_plot, file="RData/sp.level_fs")
+```
+
+### Indices de cada especie de planta
+
+```{r indices}
+#| warning: false
+#| message: false
+library(ggsci)
+sitems2_rescaled$Periodo <- as.numeric(sitems2_rescaled$Periodo)
+sitems.g <- sitems2_rescaled %>% filter(Site_id == "Gorbea")
+sitems.d <- sitems2_rescaled %>% filter(Site_id == "Doñana")
+
+
+sitems.g <- sitems2_rescaled %>% 
+  filter(Site_id == "Gorbea") %>% 
+  filter(!is.na(Specialization) & !is.na(Periodo))
+str(sitems.g)
+
+ggplot(sitems.g, aes(x = Periodo, y = Specialization, color= Year)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = TRUE, color = "black", linetype = "dashed") + # Línea de regresión con error
+  theme_bw() + # Tema blanco y negro
+  labs(
+    title = "Exploratory Plot: Especialización vs Periodo", 
+    x = "Periodo", 
+    y = "Especialización (d)", 
+    color = "Year"
+  ) +
+  scale_color_npg() + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+
+datasets <- list(Gorbea = sitems.g, Doñana = sitems.d)
+
+models <- list(
+  Specialization = Specialization ~  ((poll.sp^2) + plant.sp) * Periodo + Year + (1|Bosque),
+  Degree = Degree ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
+  Closeness = Closeness ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
+   morisita = morisita ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque)
+)
+
+# Función para ajustar modelos y generar predicciones
+predict_and_summarise <- function(data, formula) {
+   data_filtered <- data %>%
+    filter(complete.cases(select(data, all.vars(formula)))) 
+ model <- glmmTMB(formula, data = data_filtered, family = "gaussian")
+ pred_results <- predict(model, type = "response", se.fit = TRUE, re.form = NA)
+  
+  data_filtered$predicted <- pred_results$fit
+  data_filtered$se <- pred_results$se.fit
+  
+  mean_predictions <- data_filtered %>%
+    group_by(Year, Periodo) %>%
+    summarise(mean_predicted = mean(predicted, na.rm = TRUE), 
+              se_predicted = sd(predicted, na.rm = TRUE) / sqrt(n()),
+              .groups = 'drop')
+
+  return(list(data = data_filtered, mean_predictions = mean_predictions))
+}
+
+create_plot <- function(data, mean_predictions, y_variable, plot_title) {
+  ggplot(data, aes(x = Periodo, y = !!sym(y_variable))) +
+    geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
+    geom_point(data = mean_predictions, aes(y = mean_predicted),
+               color = "#3C5488FF", size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
+    geom_line(data = mean_predictions, aes(y = mean_predicted, group = Year),
+              color = "#3C5488FF", size = 0.7, alpha = 0.75) +
+    facet_wrap(~ Year) +
+    scale_color_npg() +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    labs(
+      x = "Periodo",
+      y = case_when(
+        y_variable == "Degree" ~ "Normalised degree",
+        y_variable == "Specialization" ~ "Specialization",
+        y_variable == "Closeness" ~ "Closeness",
+        y_variable == "morisita" ~ "Niche complementarity"
+      ),
+      color = "Year"
+    ) +
+    ggtitle(plot_title) +
+    scale_x_continuous(breaks = 1:9) 
+}
+
+# Aplicar modelos y generar gráficos
+results <- map(models, ~ map(datasets, predict_and_summarise, formula = .x))
+
+# Crear gráficos
+plots <- map2(results, names(results), function(res, model_name) {
+  map2(res, names(res), function(data_res, site_name) {
+    create_plot(data_res$data, data_res$mean_predictions, model_name, paste(site_name, model_name))
+  })
+})
+
+# Mostrar gráficos
+plots <- walk(plots, ~ walk(.x, print))
+save(plots,file = "Rdata/indices_plantas.RData")
+
+
+
+model_results <- map(models, function(formula) {
+  map(datasets, ~ glmmTMB(formula, data = .x, family = "gaussian"))
+})
+
+summary_results <- map(model_results, function(model_list) {
+  map(model_list, summary)
+})
+
+summary(model_results[[4]][[2]]) 
+```
+
+```{r plot bosques}
+#| warning: false
+#| message: false
+
+predict_bosque <- function(data, formula) {
+  data_filtered <- data %>%
+    filter(complete.cases(select(data, all.vars(formula)))) 
+  model <- glmmTMB(formula, data = data_filtered, family = "gaussian")
+  pred_results <- predict(model, type = "response", se.fit = TRUE, re.form = NA)
+  
+  data_filtered$predicted <- pred_results$fit
+  data_filtered$se <- pred_results$se.fit
+  
+  mean_predictions <- data_filtered %>%
+    group_by(Year, Periodo, Bosque) %>%
+    summarise(mean_predicted = mean(predicted, na.rm = TRUE), 
+              se_predicted = sd(predicted, na.rm = TRUE) / sqrt(n()),
+              .groups = 'drop')
+
+  return(list(data = data_filtered, mean_predictions = mean_predictions))
+}
+
+sortu_plot <- function(data, mean_predictions, y_variable, plot_title) {
+  ggplot(data, aes(x = Periodo, y = !!sym(y_variable)))  +
+    geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
+    geom_point(data = mean_predictions, aes_string(y = "mean_predicted", color = "as.factor(Year)"),
+               size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
+    geom_line(data = mean_predictions, aes_string(y = "mean_predicted", group = "Year", color = "as.factor(Year)"),
+              size = 0.7, alpha = 0.75) +
+    facet_wrap(~ Bosque) +  # Facetar por Bosque
+    scale_color_npg() +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    labs(x = "Periodo", y = case_when(
+        y_variable == "Degree" ~ "Normalised degree",
+        y_variable == "Specialization" ~ "Specialization",
+        y_variable == "Closeness" ~ "Closeness",
+        y_variable == "morisita" ~ "Niche complementarity"
+      ), 
+         color = "Year") +
+    ggtitle(plot_title)+
+    scale_x_continuous(breaks = 1:9) 
+}
+
+# Aplicar modelos y generar gráficos para cada combinación
+results <- map(models, ~ map(datasets, predict_bosque, formula = .x))
+
+# Generar gráficos usando la información de `results`
+plots <- map2(results, names(results), function(res, model_name) {
+ 
+  map2(res, names(res), function(data_res, site_name) {
+    sortu_plot(data_res$data, data_res$mean_predictions, model_name, paste(site_name, model_name)) 
+  })
+})
+
+# Mostrar gráficos
+plots<-walk(plots, ~ walk(.x, print))
+save(plots,file = "Rdata/indicesplanta_bosque.RData")
+```
+
+**Indices \~ funcion**
+
+```{r funcion}
+#| warning: false
+#| message: false
+
+
+```
