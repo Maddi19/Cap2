@@ -30,7 +30,6 @@ sitems<-read.csv(here("data","useful", "sitems_meanrepro.csv"))
   
 sitems$Year<-as.factor(sitems$Year)
 sitems$Bosque<-as.character(sitems$Bosque)
-sitems$Periodo<-as.factor(sitems$Periodo)
 
 glimpse(sitems)
 sitems_rescaled <- sitems %>%
@@ -63,9 +62,8 @@ sitems.fs.d<-sitems.fs%>%
 sitems.fs.g<-sitems.fs%>%
   filter(sitems.fs$Site_id=="Gorbea")
 
+str(sitems.fs.g)
 
-sitems.fs.g$Periodo <- as.factor(sitems.fs.g$Periodo)
-sitems.fs.d$Periodo <- as.factor(sitems.fs.d$Periodo)
 sitems.fs.g$Bosque <- as.factor(sitems.fs.g$Bosque)
 sitems.fs.d$Bosque <- as.factor(sitems.fs.d$Bosque)
 
@@ -161,9 +159,6 @@ plot(resid(model_glmmTMB.int) ~ fitted(model_glmmTMB.int),
 qqnorm(resid(model_glmmTMB.int))
 # Histograma de residuos
 hist(resid(model_glmmTMB.int), main = "Histograma de residuos glmmTMB", xlab = "Residuos")
-
-
-
 
 
 
@@ -422,9 +417,9 @@ sitems.fs.g<- sitems.fs.g%>%
          efecto_sn.m7=predict(models.g.sn$m7, type = "response", re.form = NA))
 
 create_plot <- function(data, x_variable) {
-  x_labels <- setNames(c("Pollinator richness", "Plant richness",  "Pollinator func. complementarity"), 
-                       c("poll.sp", "plant.sp", "comp.fun.pol"))
-  ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
+  x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
+                       c("plant.sp", "comp.fun.pol"))
+     ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
      geom_point(alpha = 0.6, color="#069" ) +        
     geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE)  + 
     labs(
