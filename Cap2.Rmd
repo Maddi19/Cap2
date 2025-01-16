@@ -95,7 +95,7 @@ All models were performed in parallel for both the Gorbea and Doñana datasets. 
 
 ## Results
 
-Across both our study areas and years, our sampling spanned XXX h of observation. During this time, we recorded a total of 61 and 90 plant species in Doñana and Gorbea, respectively. Out of these, 75.4 % of the plant species found in the different sites in Doñana, and 72.2 % of the plant species present in Gorbea received at least one visit from floral visitors. Within our sampling we recorded 3939 interactions (1690, 956 and 1293 for 2020, 2021 and 2022) involving 155 pollinator species and 65 plant species for Gorbea and 2617 interactions (879 and 1738 for 2020 and 2021 respectively) involving 144 pollinator species and 46 plant species for Doñana (Table 1 and Figure 1). We recorded a total of 452 and 646 unique combinations of plants and flower visitors in each of the study areas (Doñana and Gorbea) through the time. These interactions involved 197 and 282 distinct combinations of plants and flower visitors for Doñana in 2020 and 2021 (being 37.61% and 56.42% of them unique for those years) and 282, 208 and 301 distinct interactions for Gorbea in 2020, 2021 and 2022 (being 30.03%, 19.81% and 32.82% of them exclusive for each year).
+Across both our study areas and years, our sampling spanned XXX h of observation. During this time, we recorded a total of 61 and 90 plant species in Doñana and Gorbea, respectively. Out of these, 75.4 % of the plant species found in the different sites in Doñana, and 72.2 % of the plant species present in Gorbea received at least one visit from floral visitors. Within our sampling we recorded 3939 interactions (1690, 956 and 1293 for 2020, 2021 and 2022) involving 155 pollinator species and 65 plant species for Gorbea and 2617 interactions (879 and 1738 for 2020 and 2021 respectively) involving 144 pollinator species and 46 plant species for Doñana (Table 1 and Figure 1). We recorded a total of 452 and 646 unique combinations of plants and flower visitors in each of the study areas (Doñana and Gorbea) through the time. These interactions involved 197 and 282 distinct combinations of plants and flower visitors for Doñana in 2020 and 2021 (being 37.61% and 56.42% of them unique for those years) and 282, 208 and 301 distinct interactions for Gorbea in 2020, 2021 and 2022 (being 30.03%, 19.81% and 32.82% of them exclusive for each year). We found that the composition of the interactions varied strongly between years, only 17.34% of the interactions were common for the three sampling years in Gorbea, being this percentage even lower for Doñana, where only 5.97% of the interactions were observed in both sampling years. This was more influenced by the change in pollinator species composition than by the change in plant species composition at both sampling sites, as the percentage of unique pollinator species per year sampled was higher for pollinators than for plants.
 
 ```{r richnes, echo=FALSE}
 knitr::include_graphics("Figs/richness_plots.png")
@@ -223,11 +223,11 @@ table_seeds
 ```
 
 ```{r plots, echo=FALSE}
-load("plots_models_fruits.RData")
-final_combined_plot
+load("RData/rs_comm.RData")
+p.d.rs_final
 ```
 
-**Figure X. Partial residual plots showing the effect of the single predictor which best explains the variability in community level fruit set. Dots represent average values of fruit set at the level of the community for all plant species considered (N=31).**
+**Figure X. Partial residual plots for Doñana showing the effect of the single predictor which best explains the variability in community level fruit set. Dots represent average values of fruit set (N=31) and seed number per fruit (N=31) at the level of the community for all plant species considered.**
 
 With regard to the impact of the sampling period on reproductive success, our findings indicate that in Doñana, reproductive success declined as the season advanced. Conversely, in Gorbea, the period exhibited no discernible influence on its own (Figure Boxplot). Nevertheless, a slight trend was identified whereby the highest values of reproductive success were recorded in mid-spring, followed by a decline.
 
@@ -238,14 +238,14 @@ combined_boxplot
 
 **Figure X. Figure illustrating the impact of the sampling period on community level plant reproductive success.**
 
-```{r plots_seeds, echo=FALSE}
-load("plots_models_seeds.RData")
-final_combined_plot.sn
+```{r rs.gorbea, echo=FALSE}
+load("RData/rs_comm.RData")
+p.g.rs_final
 
 
 ```
 
-**Figure X. Partial residual plots showing the effect of the single predictor which best explains the variability in community level seed number per fruit. Dots represent average values of fruit set at the level of the community for all plant species considered (N=31 for Doñana and 29 for Gorbea).**
+**Figure X. Partial residual plots for Gorbea showing the effect of the single predictor which best explains the variability in community level seed number per fruit. Dots represent average values of fruit set (N=31) and seed number per fruit (N=29) at the level of the community for all plant species considered.**
 
 ### Community stability
 
@@ -375,6 +375,12 @@ final_combined_plot
 
 ## Discussion
 
-IDEIAK:
+In this study, we found that both the structure of the community and species´ roles undergo changes throughout the same flowering season in both study sites (Doñana and Gorbea). These changes exhibit similar patterns across all sampling years, and showed large differences between the two climatic sampling zones.
+
+In both study sites, significant changes were observed in the pollinator community assemblage in comparison to the plant community between years, with a consequent interaction turnover between years. Furthermore, during the flowering season, there is an observed fluctuation in the presence of species, as well as a change in their abundance. This variation results in changes to the network structure on a weekly basis throughout the season. Many studies have reported large changes in community composition and interactions between and within years [@cirtwill2018; @caradonna2017; @alarcón2008; @caradonna2020a].
+
+CAMBIOS EN LA ESTRUCTURA DE LA COMUNIDAD
+
+CAMBIOS EN LOS ROLES FUNCIONALES DE LAS PLANTAS
 
 ### References
