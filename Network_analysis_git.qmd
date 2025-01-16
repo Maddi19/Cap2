@@ -464,9 +464,41 @@ for (p in plots.g) {
   print(p)
 }
 
-p.d <- plots.sub[[1]]
-p.g.plant <- plots.g[[1]]
-p.g.fc <- plots.g[[2]]
+
+
+
+library(ggeffects)
+# Función para crear un gráfico con predicciones
+create_plot_with_predictions <- function(data, x_variable, model) {
+  # Obtener predicciones del modelo
+  predicciones <- ggpredict(model, terms = x_variable)
+  
+  # Crear el gráfico
+  ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
+    geom_point(alpha = 0.6, color = "#069") +
+    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
+                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
+    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
+    labs(
+      x = x_variable,
+      y = "Fruit set"
+    ) +
+    theme_minimal()
+}
+
+# Variables para graficar
+variables <- c("plant.sp", "comp.fun.pol")
+
+# Crear gráficos para `sitems.fs.g` y `models.g`
+plots_g <- map(variables, ~ create_plot_with_predictions(sitems.fs.g, .x, models.g$m6))
+
+# Crear gráficos para `sitems.fs.d` y `models.d`
+plots_d <- map(variables, ~ create_plot_with_predictions(sitems.fs.d, .x, models.d.sub$m6))
+
+# Mostrar los gráficos
+p.g.plant <- plots_g[[1]]
+p.g.fc <- plots_g[[2]]
+p.d.plant <- plots_d[[1]]
 
 ##seed number
 create_plot.sn<- function(data, x_variable) {
