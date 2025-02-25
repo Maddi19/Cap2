@@ -21,10 +21,22 @@ escalamos variables con rescale. Eliminamos filas de sitios donde no hay informa
 #| message: false
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,here, patchwork, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, nlme, performance)
+pacman::p_load(tidyverse,here, patchwork, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, nlme, performance, cowplot, ggeffects, ggsci)
 
+
+fs<-read.csv(here("data", "rep.suc", "plant_fruitset.csv"))
 
 sitems<-read.csv(here("data","useful", "sitems_meanrepro.csv"))
+pielou <- read.csv(here("data","useful","datos_floracion.csv"))
+
+pielou <- pielou %>%
+  rename(Site_id = Site )
+
+sitems <- sitems %>%
+  left_join(pielou %>% select(Site_id, Year, Periodo, Bosque, H, J), 
+            by = c("Site_id", "Year", "Periodo", "Bosque"))
+
+
 #villa.s <- sitems %>%
  # subset(Site_id == "Doñana" & Bosque == "Villamanrique Chaparral" & Year == "2021" & Periodo=="2")
   
@@ -32,6 +44,7 @@ sitems$Year<-as.factor(sitems$Year)
 sitems$Bosque<-as.character(sitems$Bosque)
 
 glimpse(sitems)
+
 sitems_rescaled <- sitems %>%
   mutate(Anidamiento = scale(Anidamiento),
          comp.fun.pol = scale(comp.fun.pol),
@@ -49,20 +62,72 @@ sitems.fs <- sitems_rescaled %>%
 sitems.fs <- sitems.fs %>%
   mutate(mean.fs = if_else(mean.fs == 1, 0.9999, mean.fs))
 
+##PCA
+#datos_pca <- sitems.fs %>% 
+#  select(Anidamiento, 
+#        comp.fun.pol, 
+#         comp.fun.pl, 
+#         total.visits, 
+#         poll.sp, 
+#         plant.sp,
+#         asymmetry,
+#         connectance,
+#         mean.fs)
+
+#modelo_pca <- prcomp(datos_pca, center = TRUE, scale. = TRUE)
+
+# 4. Resumen de la varianza explicada por los componentes principales
+#print(summary(modelo_pca))
+
+#install.packages("ggfortify")
+#library(ggfortify)
+
+#cargas <- as.data.frame(modelo_pca$rotation) %>%
+# rownames_to_column(var = "variable") %>%  # Agregamos los nombres de las variables
+#  mutate(PC1 = PC1 * 2,  # Escalamos las flechas para mejor visibilidad
+#         PC2 = PC2 * 2)
+#autoplot(modelo_pca, 
+#         data = sitems.fs, 
+#         colour = 'Site_id',      
+#        frame = TRUE,        
+#         frame.type = 'norm') +
+#  geom_segment(data = cargas, aes(x = 0, y = 0, xend = PC1, yend = PC2), 
+#               arrow = arrow(length = unit(0.2, "cm")), color = "blue") +
+  # Agregar nombres de las variables#  geom_text(data = cargas, aes(x = PC1, y = PC2, label = variable), 
+#            color = "blue", hjust = 1.1, vjust = 1.1, size = 4) +
+#  theme_minimal() +
+#  labs(title = "PCA de índices ecológicos", 
+#       x = "PC1 (Varianza explicada: 37.85%)",
+#       y = "PC2 (Varianza explicada: 26.01%)") +
+#  theme(plot.title = element_text(hjust = 0.5))
+
+#cargas <- as.data.frame(modelo_pca$rotation)
+#print(cargas)
+
+# 7. Opcional: Crear un scree plot para visualizar la varianza explicada
+#varianza <- modelo_pca$sdev^2 / sum(modelo_pca$sdev^2) * 100
+#ggplot(data = data.frame(PC = 1:length(varianza), Varianza = varianza), aes(x = PC, y = Varianza)) +
+#  geom_bar(stat = "identity", fill = "skyblue") +
+#  geom_line(aes(group = 1), color = "blue") +
+#  geom_point(color = "blue", size = 3) +
+#  theme_minimal() +
+#  labs(title = "Scree Plot", x = "Componentes principales", y = "Varianza explicada (%)")
 ```
 
 ```{r repro}
 #| warning: false
 #| message: false
 
-library(dplyr)
-sitems.fs.d<-sitems.fs%>%
-  filter(sitems.fs$Site_id=="Doñana")
+sitems.fs <- sitems.fs %>%
+  group_by(Bosque, Year, Site_id) %>% 
+  mutate(cv_nestedness = (sd(Anidamiento, na.rm = TRUE) / mean(Anidamiento, na.rm = TRUE)),
+         cv_comp = (sd(comp.fun.pol, na.rm = TRUE) / mean (comp.fun.pol, na.rem = TRUE))) %>%
+  ungroup()
 
-sitems.fs.g<-sitems.fs%>%
-  filter(sitems.fs$Site_id=="Gorbea")
-
-str(sitems.fs.g)
+sitems.fs.g <- sitems.fs %>%
+  filter(Site_id=="Gorbea")
+sitems.fs.d <- sitems.fs %>%
+  filter(Site_id=="Doñana")
 
 sitems.fs.g$Bosque <- as.factor(sitems.fs.g$Bosque)
 sitems.fs.d$Bosque <- as.factor(sitems.fs.d$Bosque)
@@ -73,7 +138,7 @@ library(glmmTMB)
 library(performance)
 library(nlme)
 m5_lme <- lme(
-  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits,  # Sin Periodo
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits + cv_nestedness,  # Sin Periodo
   random = list( ~ 1 | Bosque, ~ 1 | Year),
   correlation = corAR1(form = ~ Periodo | Bosque),  # Correlación AR(1) por Bosque
   method = "ML",
@@ -83,13 +148,23 @@ check_collinearity(m5_lme)
 
 
 model_glmmTMB.g <- glmmTMB(
-  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol +  Periodo + (1 | Bosque) + (1 | Year),
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits  + Periodo + (1 | Bosque) + (1 | Year),
   family = "beta_family",
   data = sitems.fs.g
 )
 
+check_collinearity(model_glmmTMB.g)
+
+
+model_glmmTMB.g.com<- glmmTMB(
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + Periodo + (1 | Bosque) + (1 | Year),
+  family = "beta_family",
+  data = sitems.fs.g
+)
+
+
 model_glmmTMB.d <- glmmTMB(
-  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol +  Periodo + (1 | Bosque) + (1 | Year),
+  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol +  Periodo + (1 | Bosque),
   family = "beta_family",
   data = sitems.fs.d
 )
@@ -100,28 +175,30 @@ model_glmmTMB.int <- glmmTMB(
   family = "beta_family",
   data = sitems.fs.g
 )
-
 summary(model_glmmTMB.int)
 
 
+
 model_glmmTMB.gint1 <- glmmTMB(
-  mean.fs ~ poll.sp + plant.sp + (Anidamiento + total.visits) * Periodo + (1 | Bosque) ,
+  mean.fs ~ (poll.sp + plant.sp + Anidamiento + total.visits) * Periodo * Year + (1 | Bosque) ,
   family = beta_family(),
   data = sitems.fs.g
 )
 
 
 model_glmmTMB.dint <- glmmTMB(
-  mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *       Periodo + (1 | Bosque) ,
+  mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) * Periodo + (1 | Bosque) ,
   family = beta_family(),
   data = sitems.fs.d
 )
 
+
 model_glmmTMB.dint1 <- glmmTMB(
-  mean.fs ~ poll.sp + plant.sp + (Anidamiento + comp.fun.pol) *       Periodo + (1 | Bosque) ,
+  mean.fs ~ (poll.sp + plant.sp + Anidamiento + tot.visits) * Periodo + (1 | Bosque) ,
   family = beta_family(),
   data = sitems.fs.d
 )
+
 
 
 
@@ -135,9 +212,9 @@ model_glmmTMB.dint1 <- glmmTMB(
 
 
 model_comparison <- data.frame(
- Model = c("glmmTMB.g", "glmmTMB.d","glmmTMB.int", "glmmTMB.gint1", "glmmTMB.dint", "glmmTMB.dint1"),
-  AIC = c(AIC(model_glmmTMB.g), AIC(model_glmmTMB.d), AIC(model_glmmTMB.int), AIC(model_glmmTMB.gint1),  AIC(model_glmmTMB.dint),AIC(model_glmmTMB.dint1)),
-  BIC = c(BIC(model_glmmTMB.g),BIC(model_glmmTMB.d), BIC(model_glmmTMB.int), BIC(model_glmmTMB.gint1), BIC(model_glmmTMB.dint), BIC(model_glmmTMB.dint1)))
+ Model = c("glmmTMB.g", "glmmTMB.g.cv", "glmmTMB.d","glmmTMB.d.cv", "glmmTMB.int", "glmmTMB.gint1", "glmmTMB.dint", "glmmTMB.dint1"),
+  AIC = c(AIC(model_glmmTMB.g.com), AIC(model_glmmTMB.g.cv),AIC(model_glmmTMB.d), AIC(model_glmmTMB.d.cv),AIC(model_glmmTMB.int), AIC(model_glmmTMB.gint1),AIC(model_glmmTMB.dint),AIC(model_glmmTMB.dint1)),
+  BIC = c(BIC(model_glmmTMB.g.com),BIC(model_glmmTMB.g.cv),BIC(model_glmmTMB.d), BIC(model_glmmTMB.d.cv),BIC(model_glmmTMB.int), BIC(model_glmmTMB.gint1), BIC(model_glmmTMB.dint), BIC(model_glmmTMB.dint1)))
 
 # Mostrar comparación de AIC y BIC
 print(model_comparison)
@@ -166,15 +243,15 @@ hist(resid(model_glmmTMB.int), main = "Histograma de residuos glmmTMB", xlab = "
 
 # List of model formulas for fruit set
 formulas <- list(
-  m6 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + comp.fun.pol) *  Periodo * Year + (1 | Bosque),
-  m7 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + total.visits) *  Periodo * Year + (1 | Bosque)
+  m6 = mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo * Year + (1 | Bosque),
+  m7 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  total.visits) *  Periodo * Year + (1 | Bosque)
 )
 
 models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.g))
 
 formulas.d <- list(
-  m6 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + comp.fun.pol) *  Periodo + (1 | Bosque),
-  m7 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + total.visits) * Periodo  + (1 | Bosque)
+  m6 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  comp.fun.pol) *  Periodo + (1 | Bosque),
+  m7 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  total.visits) * Periodo  + (1 | Bosque)
 )
 
 models.d <- map(formulas.d, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.d))
@@ -192,10 +269,6 @@ aic_results <- map(models.d.sub, AIC)
 print(aic_results)
 ```
 
-gorbea aprox deltaAIC\<2 para los dos modelos. doñana mejor el de compl funcional
-
-con map todos los plots de los modelos anteriores.
-
 **Tabla modelos estructura funcion**
 
 ```{r tables}
@@ -206,7 +279,7 @@ library(grid)
 install.packages("kableExtra")
 library(kableExtra)
 
-
+# Extraer estimates, std.error y z value para modelos de Gorbea (modelos 2 y 3)
 resultados_d <- map_dfr(models.d, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
@@ -219,7 +292,7 @@ resultados_d.sub <- map_dfr(models.d.sub, ~ {
     mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
 }, .id = "modelo.d.sub")
 
-# Extraer estimates, std.error y z value para modelos de Gorbea (modelos 2 y 3)
+
 resultados_g <- map_dfr(models.g, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
@@ -268,26 +341,26 @@ Mismos modelos para seed number
 
 ###models for seed number
 formulas.sn <- list(
-  m6 = mean.sn ~ poll.sp + plant.sp + (Anidamiento + comp.fun.pol) *  Periodo * Year + (1 | Bosque),
-  m7 = mean.sn ~ poll.sp + plant.sp + (Anidamiento + total.visits) *  Periodo * Year + (1 | Bosque)
+  m6 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *  Periodo * Year + (1 | Bosque),
+  m7 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits) *  Periodo * Year + (1 | Bosque)
 )
 
 models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.g))
 
 formulas.d.sn <- list(
-  m6 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + comp.fun.pol) *  Periodo + (1 | Bosque),
-  m7 = mean.fs ~ poll.sp + plant.sp + (Anidamiento + total.visits) * Periodo  + (1 | Bosque)
+  m6 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo + (1 | Bosque),
+  m7 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits ) * Periodo  + (1 | Bosque)
 )
 
 models.d.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.d))
 
 models.d.sub.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.d.sub))
 
-aic_results <- map(models.g, AIC)
+aic_results <- map(models.g.sn, AIC)
 print(aic_results)
-aic_results <- map(models.d, AIC)
+aic_results <- map(models.d.sn, AIC)
 print(aic_results)
-aic_results <- map(models.d.sub, AIC)
+aic_results <- map(models.d.sub.sn, AIC)
 print(aic_results)
 
 ###tabla
@@ -370,7 +443,7 @@ performance:: check_model(model)
 }
 
 plots.g <- map(formulas, check_and_plot.g)
-plots.g <- map(formulas.d, check_and_plot.d)
+plots.g<- map(formulas.d, check_and_plot.d)
 
 
 ```
@@ -425,53 +498,14 @@ sitems.fs.g<- sitems.fs.g%>%
     )
   )
 
-create_plot <- function(data, x_variable) {
-  x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
-                       c("plant.sp", "comp.fun.pol"))
-     ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
-     geom_point(alpha = 0.6, color="#069" ) +        
-     geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE)  +  
-    labs(
-       x = x_labels[[x_variable]],
-      y = "Fruit set"
-    ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-      axis.title = element_text(size = 10)
-    )
-}
-
-# Variables para las que se generarán los gráficos
-variables <- c("plant.sp", "comp.fun.pol")
-
-# Crear los gráficos usando map
-plots <- map(variables, ~ create_plot(sitems.fs.d, .x))
-
-for (p in plots) {
-  print(p)
-}
-
-plots.sub <- map(variables, ~ create_plot(sitems.fs.d.sub, .x))
-
-for (p in plots.sub) {
-  print(p)
-}
-
-plots.g <- map(variables, ~ create_plot(sitems.fs.g, .x))
-
-for (p in plots.g) {
-  print(p)
-}
-
-
-
 
 library(ggeffects)
 # Función para crear un gráfico con predicciones
 create_plot_with_predictions <- function(data, x_variable, model) {
   # Obtener predicciones del modelo
   predicciones <- ggpredict(model, terms = x_variable)
+  x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
+                       c("plant.sp", "comp.fun.pol"))
   
   # Crear el gráfico
   ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
@@ -480,10 +514,14 @@ create_plot_with_predictions <- function(data, x_variable, model) {
                 fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
     geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
     labs(
-      x = x_variable,
+      x = x_labels[[x_variable]],
       y = "Fruit set"
     ) +
-    theme_minimal()
+    theme_bw()+
+     theme(
+      axis.title = element_text(face = "bold", size=10),
+    
+    )
 }
 
 # Variables para graficar
@@ -493,7 +531,7 @@ variables <- c("plant.sp", "comp.fun.pol")
 plots_g <- map(variables, ~ create_plot_with_predictions(sitems.fs.g, .x, models.g$m6))
 
 # Crear gráficos para `sitems.fs.d` y `models.d`
-plots_d <- map(variables, ~ create_plot_with_predictions(sitems.fs.d, .x, models.d.sub$m6))
+plots_d <- map(variables, ~ create_plot_with_predictions(sitems.fs.d.sub, .x, models.d.sub$m6))
 
 # Mostrar los gráficos
 p.g.plant <- plots_g[[1]]
@@ -501,98 +539,89 @@ p.g.fc <- plots_g[[2]]
 p.d.plant <- plots_d[[1]]
 
 ##seed number
-create_plot.sn<- function(data, x_variable) {
+create_plot_with_predictions.sn <- function(data, x_variable, model) {
+  # Obtener predicciones del modelo
+  predicciones <- ggpredict(model, terms = x_variable)
   x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
                        c("plant.sp", "comp.fun.pol"))
+  
+  # Crear el gráfico
   ggplot(data, aes_string(x = x_variable, y = "efecto_sn")) +
-      geom_point(alpha = 0.6, color="#069" ) +        
-    geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE) + 
+    geom_point(alpha = 0.6, color = "#069") +
+    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
+                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
+    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
     labs(
-       x = x_labels[[x_variable]],
+      x = x_labels[[x_variable]],
       y = "Seed number"
     ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-      axis.title = element_text(size = 10)
+    theme_bw()+
+     theme(
+      axis.title = element_text(face = "bold", size=10),
+    
     )
 }
 
 # Variables para las que se generarán los gráficos
 variables <- c("plant.sp", "comp.fun.pol")
 
-# Crear los gráficos usando map
-plots <- map(variables, ~ create_plot.sn(sitems.fs.d, .x))
+plots_gsn <- map(variables, ~ create_plot_with_predictions.sn(sitems.fs.g, .x, models.g.sn$m7))
 
-for (p in plots) {
-  print(p)
-}
+# Crear gráficos para `sitems.fs.d` y `models.d`
+plots_dsn <- map(variables, ~ create_plot_with_predictions.sn(sitems.fs.d.sub, .x, models.d.sub.sn$m6))
 
-plots.sub.sn <- map(variables, ~ create_plot.sn(sitems.fs.d.sub, .x))
+p.dsn <- plots_dsn [[1]]
 
-for (p in plots.sub) {
-  print(p)
-}
-
-
-plots.g.sn<- map(variables, ~ create_plot.sn(sitems.fs.g, .x))
-
-for (p in plots.g) {
-  print(p)
-}
-
-p.d.sn <- plots.sub.sn [[1]]
-
-p.d.sn <- p.d.sn + 
+p.d.sn <- p.dsn + 
   annotate("text", 
            x = -1.5,  
            y = 0.5,             
            label = "Estimate: -0.14\np-value: 0.01", 
            hjust = 0, size = 4, color = "black")
 
-p.d <- p.d + 
+p.d.plant <- p.d.plant + 
   annotate("text", 
            x = -1.5,  
            y = 0.5,             
            label = "Estimate: -0.89\np-value: 0.01", 
            hjust = 0, size = 4, color = "black")
 
-p.gsn.plant <- plots.g.sn[[1]]
+p.gsn.plant <- plots_gsn[[1]]
 p.gsn.plant <- p.gsn.plant +
   annotate("text", 
            x = 1.3,  
            y = 0.9,             
            label = "Estimate: -0.45\np-value: 0.002", 
-           hjust = 0, size = 3, color = "black")
+           hjust = 0, size = 3.5, color = "black")
   
-p.gsn.fc <- plots.g.sn[[2]]
+p.gsn.fc <- plots_gsn[[2]]
 
 p.gsn.fc <- p.gsn.fc +
   annotate("text", 
            x = 0.85,  
            y = 0.8,             
            label = "Estimate: 3.85\np-value: 0.01", 
-           hjust = 0, size = 3, color = "black")
+           hjust = 0, size = 3.5, color = "black")
 
 p.g.plant <- p.g.plant +
   annotate("text", 
            x = 1.4,  
            y = 0.9,             
            label = "Estimate: -0.68\np-value: 0.008", 
-           hjust = 0, size = 3, color = "black")
+           hjust = 0, size = 3.5, color = "black")
 
 p.g.fc <- p.g.fc +
   annotate("text", 
            x = 0.85,  
            y = 0.9,             
            label = "Estimate: 8.24\np-value: 0.002", 
-           hjust = 0, size = 3, color = "black")
+           hjust = 0, size = 3.5, color = "black")
 
 
-library(cowplot)
+
 
 p.d.rs <- plot_grid(
-  p.d,  
+  p.d.plant,  
   p.d.sn, 
   labels = c("A", "B"),
   label_size = 12,  
@@ -603,7 +632,7 @@ p.d.rs <- plot_grid(
 p.d.rs_final <- ggdraw() +
   draw_label("Doñana", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
   draw_plot(p.d.rs, x = 0, y = 0, width = 1, height = 1)+
-  theme(plot.margin = margin(20, 10, 10, 10)) 
+  theme(plot.margin = margin(25, 10, 10, 10)) 
 
 
 
@@ -622,12 +651,16 @@ p.g.rs <- plot_grid(
 
 
 p.g.rs_final <- ggdraw() +
-  draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.08, hjust = 0.5) +
+  draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
   draw_plot(p.g.rs, x = 0, y = 0, width = 1, height = 1)+
-  theme(plot.margin = margin(35, 10, 10, 10)) 
+  theme(plot.margin = margin(25, 10, 10, 10)) 
 
 
 save(p.d.rs_final, p.g.rs_final, file="RData/rs_comm.RData")
+ggsave("Figs/p.d.res_final.png", p.d.rs_final, dpi=300, width=10, height = 5, bg= "white") 
+
+ggsave("Figs/p.g.res_final.png", p.g.rs_final, dpi=300, width=10, height = 6, bg= "white") 
+
 
 sitems.fs.d$Periodo <- as.factor(sitems.fs.d$Periodo)
 
@@ -698,6 +731,7 @@ create_plot.sn.m7<- function(data, x_variable) {
        x = x_labels[[x_variable]],
       y = "Seed number"
     ) +
+    facet_wrap(~Periodo)+
     theme_minimal() +
     theme(
       plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
@@ -746,7 +780,6 @@ fs_expanded <- fs %>%
               select(Site_id, Year, Bosque, Periodo, total.visits, poll.sp, plant.sp), 
             by = c("Site" = "Site_id", "Year", "Bosque", "Periodo"))
 
-fs_expanded$Periodo <- as.factor(fs$Periodo)
 
 library(lmerTest)
 modelo <- lmer(CV ~ total.visits + poll.sp + plant.sp + Periodo + (1|Site) + (1|Bosque), data = fs_expanded, na.action = na.exclude)
@@ -756,10 +789,8 @@ summary(modelo)
 
 ##aumento de diversidad de plantas aumenta la variacion asiqeue disminuye la estabilidad. 
 
-## la cantidad total de visitas registradas no tiene ningun efcto en la estabilidad. 
-
+## la cantidad total de visitas registradas no tiene ningun efcto en la estabilidad
 plot(modelo)
-
 anova(modelo, ddf = "Kenward-Roger")
 
 modelo_nulo <- lmer(CV ~ 1 + (1|Site) + (1|Bosque), data = fs_expanded, na.action = na.exclude)
@@ -780,44 +811,154 @@ p1 <- ggplot(fs, aes(x = Periodo, y = CV, color = Year)) +
   
 library(ggeffects)
 
-predicciones <- ggpredict(modelo, terms = "poll.sp")
+fs_expanded.g <- fs_expanded %>%
+  filter(Site=="Gorbea")
 
-variables_x <- "poll.sp"
-variables_y <- "CV"  
+fs_expanded.d <- fs_expanded %>%
+  filter(Site=="Doñana")
+
+hist(fs_expanded.d$CV)
+hist(1 / fs_expanded.d$CV)
+
+library(lmerTest)
+fs_expanded.g$CV[fs_expanded.g$CV == 0] <- 0.000001
+
+##A NIVEL DE AÑO AGREGADO
+### CV DE ANIDAMIENTO Y COMPL. INTERANUAL
+
+modelo.g.cuad <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + Year + (1|Bosque), 
+                     data = fs_expanded.g, 
+                     family = Gamma(link = "log"),
+                     na.action = na.exclude)
 
 library(broom.mixed)
-modelo_summary <- tidy(modelo, effects = "fixed")
+modelo_summary.cuad <- tidy(modelo.g.cuad, effects = "fixed")
+###nada significativo. AÑo 2022 datos de fruit set mas variables.
 
-annotations <- map(variables_x, ~ {
-  coef_info <- modelo_summary %>% filter(term == .x)
-  list(
-    estimate = round(coef_info$estimate, 4),
-    p_value = round(coef_info$p.value, 4)
-  )
-})
 
-plots <- map(variables_x, ~ {
-   annotation_data <- annotations[[1]] 
-  ggplot(fs_expanded, aes(x= .data[[.x]], y = fs_expanded[[variables_y]])) +
-    geom_point(alpha = 0.6, color="#069") +  
-    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high), 
-                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) + 
-    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth=1.2) + 
-    labs(x = "Pollinator richness" , y = "Fruit Set CV") +
-    annotate(
-      "text",
-      x = 1.75,
-      y = 1.5,
-      label = paste0("Estimate: ", annotation_data$estimate, "\n", "p-value: ", annotation_data$p_value),
-      hjust = 0, size = 4, color = "black"
+fs_expanded.d$CV[fs_expanded.d$CV == 0] <- 0.000001
+modelo.d <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + (1|Bosque), 
+                     data = fs_expanded.d, 
+                     family = Gamma(link = "log"),
+                     na.action = na.omit)
+
+# Modelo con interacción
+modelo_con_inter <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + poll.sp * Periodo + (1|Bosque),
+                      data = fs_expanded.d,
+                      family = Gamma(link = "log"),
+                      na.action = na.omit)
+
+# Prueba de razón de verosimilitud
+anova(modelo.d, modelo_con_inter)
+
+
+
+modelo_summary <- tidy(modelo.d, effects = "fixed")
+##verificar modelo
+library(DHARMa)
+library(performance)
+library(insight)
+
+simulationOutput <- simulateResiduals(fittedModel = modelo.d, n = 250)
+plot(simulationOutput)
+testDispersion(simulationOutput)
+residuals <- residuals(modelo.d, type = "pearson")  # Residuos de Pearson
+plot(fitted(modelo.d), residuals,
+     xlab = "Valores Ajustados", ylab = "Residuos de Pearson",
+     main = "Residuos vs. Valores Ajustados")
+abline(h = 0, col = "red") 
+
+
+##doñana plot
+create_plot_with_predictions.cv<- function(data, x_variable, model) {
+  # Obtener predicciones del modelo
+  predicciones <- ggpredict(model, terms = x_variable, bias_correction = TRUE)
+  x_labels <- setNames(c("Pollinator richness",  "Total visits", "Plant richness", "Periodo"), 
+                       c("poll.sp", "total.visits", "plant.sp", "Periodo"))
+  
+  # Crear el gráfico
+  ggplot(data, aes_string(x = x_variable, y = "CV")) +
+    geom_point(alpha = 0.6, color = "#069") +
+    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
+                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
+    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
+    labs(
+      x = x_labels[[x_variable]],
+      y = "Fruit set CV"
     ) +
-    theme_minimal()
-})
+    theme_bw()+
+    theme(
+      axis.title = element_text(face = "bold", size=10),
+    
+    )
+}
 
-p2 <- plots[[1]]
+
+# Variables para las que se generarán los gráficos
+variables <- c("poll.sp", "total.visits", "plant.sp", "Periodo")
+
+plots_dcv<- map(variables, ~ create_plot_with_predictions.cv(fs_expanded.g, .x, modelo.g))
+
+cv_poll <- plots_dcv[[1]]
+cv_visits <- plots_dcv[[2]]
+cv_plant <- plots_dcv[[3]]
+cv_period <- plots_dcv[[4]]
+
+p.cv_poll<- cv_poll + 
+  annotate("text", 
+           x = 2,  
+           y = 0.9,             
+           label = "Estimate: -0.41\np-value < 0.0001", 
+           hjust = 0, size = 3.5, color = "black")+
+  coord_cartesian(ylim = c(-1, 2), xlim = c(-1, 3.2))
+
+p.cv_visits <- cv_visits  + 
+  annotate("text", 
+           x = 0.5,  
+           y = 1.5,             
+           label = "Estimate: 0.32\np-value: 0.016", 
+           hjust = 0, size = 3.5, color = "black")+
+    coord_cartesian(ylim = c(-0.5, 1.8), xlim = c(-1, 2))
 
 
-save(p1,plots,fs_expanded, variables_y, file = "Rdata/cv_fs.RData" )
+p.cv_plant <- cv_plant + 
+  annotate("text", 
+           x = 0,  
+           y = 1.5,             
+           label = "Estimate: 0.27\np-value: 0.048", 
+           hjust = 0, size = 3.5, color = "black")
+
+
+p.cv_period <- cv_period + 
+  annotate("text", 
+           x = 1,  
+           y = 1.2,             
+           label = "Estimate: 0.13\np-value< 0.001", 
+           hjust = 0, size = 3.5, color = "black")
+
+
+plots_cv_doñana <- plot_grid(
+  p.cv_poll,
+  p.cv_visits,
+  NULL,
+  NULL,
+  p.cv_plant,
+  p.cv_period,
+  labels = c("A", "B","","","C","D"),
+  label_size = 12,
+  ncol=2,
+  rel_heights = c(1,0.1,1)
+)
+
+plots_cv_doñana <- ggdraw() +
+  draw_label("Doñana", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
+  draw_plot(plots_cv_doñana, x = 0, y = 0, width = 1, height = 1)+
+    theme(plot.margin = margin(25, 10, 10, 10)) 
+
+ggsave("Figs/plots_cv_doñana.png", plots_cv_doñana, dpi=300, width=10, height = 6, bg= "white") 
+
+ggsave("Figs/cv_period.png", p1, dpi=300, width=10, height = 6, bg= "white") 
+save(plots_cv_doñana, p1, file = "Rdata/cv_fs_doñana.RData" )
 
 ```
 
@@ -900,6 +1041,7 @@ hinojos <- sitems_rescaled %>%
     CV.comp = (Desviacion.comp / Media.comp))
 
 nest <- sitems_rescaled %>%
+  filter(!(Bosque == "Pinar Hinojos" & Year==2021))%>%
   group_by(Site_id, Year, Bosque) %>%
   summarize(
     Media = mean(Anidamiento, na.rm = TRUE),
@@ -929,16 +1071,27 @@ nest_final <- nest_expanded %>%
   filter(Year != 2020)
 
 
-
+library(lmerTest)
 modelo <- lmer(mean_fs ~ CV + (1|Site_id), data = nest_final)
 resumen <- summary(modelo)
 print(resumen)
 anova(modelo, ddf = "Kenward-Roger")
 
-modelo_nulo <- lmer(mean_fs ~ 1 + (1|Site_id), data = comp_final)
+modelo_nulo <- lmer(mean_fs ~ 1 + (1|Site_id), data = nest_final)
 anova(modelo_nulo, modelo)
 ###NO PODEMOS RECHAZAR HIPOTESIS NULA, DE QUE NO HAY RELACION ENTRE CV DEL NESTEDNESS Y MEAN FRUITSET. 
-##pendiente de la linea: 0.0013, p value 0.39
+##pendiente de la linea: -0.0032, p value 0.39
+
+sitems.fs <- sitems.fs %>%
+  group_by(Bosque, Year, Site_id) %>% 
+  mutate(cv_nestedness = (sd(Anidamiento, na.rm = TRUE) / mean(Anidamiento, na.rm = TRUE)),
+         cv_comp = (sd(comp.fun.pol, na.rm = TRUE) / mean (comp.fun.pol, na.rem = TRUE))) %>%
+  ungroup()
+
+sitems.fs.g <- sitems.fs %>%
+  filter(Site_id=="Gorbea")
+sitems.fs.d <- sitems.fs %>%
+  filter(Site_id=="Doñana")
 
 # Obtener las predicciones del modelo
 predicciones <- ggpredict(modelo, terms = "CV")
@@ -993,6 +1146,14 @@ model_glmmTMB.g <- glmmTMB(
   data = sitems.g
 )
 
+
+model_glmmTMB.g.int <- glmmTMB(
+  Anidamiento ~ (poll.sp + plant.sp) * Periodo + (1 | Bosque) + (1 | Year),
+  family = "gaussian",
+  data = sitems.g
+)
+hist(sitems.g$Anidamiento)
+
 model_lme.g <- lme(
   Anidamiento ~ poll.sp + plant.sp,
   random = list( ~ 1 | Bosque, ~ 1 | Year),
@@ -1016,9 +1177,9 @@ model_lme.d <- lme(
 
 
 model_comparison1 <- data.frame(
-  Model = c("glmmTMB", "lme"),
-  AIC = c(AIC(model_glmmTMB.g), AIC(model_lme.g), AIC(model_glmmTMB.d), AIC(model_lme.d)),
-  BIC = c(BIC(model_glmmTMB.g), BIC(model_lme.g), BIC(model_glmmTMB.d), BIC(model_lme.d))
+  Model = c("glmmTMB", "model.int", "lme", "glm.d", "lme.d"),
+  AIC = c(AIC(model_glmmTMB.g), AIC(model_glmmTMB.g.int), AIC(model_lme.g), AIC(model_glmmTMB.d), AIC(model_lme.d)),
+  BIC = c(BIC(model_glmmTMB.g), BIC(model_glmmTMB.g.int), BIC(model_lme.g), BIC(model_glmmTMB.d), BIC(model_lme.d))
 )
 
 # Mostrar comparación de AIC y BIC
@@ -1050,9 +1211,9 @@ models.full <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems
 # Crear lista de datasets con nombres completos
 datasets <- list(Gorbea = sitems.g, Doñana = sitems.d)
 models <- list(
-  anidamiento = Anidamiento ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque),
-  comp_pol = comp.fun.pol ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque),
-  comp_pl = comp.fun.pl ~ Periodo + poll.sp + plant.sp + Year + (1|Bosque) 
+  anidamiento = Anidamiento ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
+  comp_pol = comp.fun.pol ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
+  comp_pl = comp.fun.pl ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque) 
 )
 
 results <- function(data, formula) {
@@ -1086,20 +1247,19 @@ predict_and_summarise <- function(data, formula) {
 
 # Función para crear gráficos
 create_plot <- function(data, mean_predictions, y_variable, plot_title) {
-  ggplot(data, aes_string(x = "Periodo", y = y_variable)) +
+  ggplot(data, aes_string(x = "factor(Periodo)", y = y_variable)) +
     geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
-    geom_line(aes(y = predicted), color = "#3C5488FF", alpha = 0.75, size = 0.7) +
-    geom_point(data = mean_predictions, aes_string(y = "mean_predicted"),
-               color = "#3C5488FF", size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
-    geom_line(data = mean_predictions, aes_string(y = "mean_predicted", group = "Year"),
-              color = "#3C5488FF", size = 0.7, alpha = 0.75) +
-    facet_wrap(~ Year) +
-    scale_color_npg() +
+    geom_point(data = mean_predictions, aes(y = mean_predicted, color = Year),               size = 2.5, shape = 21, fill = "#FFFFFF", alpha = 0.75, stroke =
+                 1) +
+    geom_line(data = mean_predictions, aes(y = mean_predicted, group = Year, 
+                                          color = Year),
+             size = 0.7, alpha = 0.75) +
+    scale_color_npg(labels = levels(as.factor(data$Year))) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank()) +
-    labs(x = "Periodo", y = ifelse(y_variable == "Anidamiento", "Anidamiento", 
-                                     ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", " Poll. Functional Complementarity")), 
+    labs(x = "Period", y = ifelse(y_variable == "Anidamiento", "Nestedness", 
+                                     ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", " Pollinator funct. complementarity")), 
          color = "Year") +
     ggtitle(plot_title)
 }
@@ -1112,12 +1272,48 @@ plots <- map2(results, names(results), function(res, model_name) {
   map2(res, names(res), function(data_res, site_name) {
     y_variable <- ifelse(model_name == "anidamiento", "Anidamiento",
                   ifelse(model_name == "comp_pl", "comp.fun.pl", "comp.fun.pol"))
-    create_plot(data_res$data, data_res$mean_predictions, y_variable, paste(site_name, model_name))
+    create_plot(data_res$data, data_res$mean_predictions, y_variable, paste(site_name))
   })
 })
 
 # Mostrar gráficos
-plots <- walk(plots, ~ walk(.x, print))
+plots.print <- walk(plots, ~ walk(.x, print))
+
+combine_plots <- function(plot1, plot2, labels = c("A", "B"), label_size = 13, nrow=1) {
+  if (!is.null(plot1) && !is.null(plot2)) {
+    plot_grid(plot1, plot2, labels = labels, label_size = label_size, nrow=nrow)
+  } else {
+    cat("Uno o ambos gráficos son NULL.\n")
+    NULL
+  }
+}
+
+nest.g <- plots[[1]][[1]] + theme(legend.position = "none")
+nest.d <- plots[[1]][[2]] + theme(legend.position = "none")  
+
+comp.fun.g <- plots[[2]][[1]]+ theme(legend.position = "none")
+comp.fun.d <- plots[[2]][[2]]+ theme(legend.position = "none")
+
+comp.funpl.g <- plots[[3]][[1]]+ theme(legend.position = "none")
+comp.funpl.d <- plots[[3]][[2]]+ theme(legend.position = "none")
+
+
+
+# Combina los gráficos
+nest <- combine_plots(nest.g, nest.d, labels = c("A", "B"), label_size = 13)
+ggsave2("Figs/indices/nest.png", nest, width = 9, height = 4)
+
+comp <- combine_plots(comp.fun.g, comp.fun.d, labels = c("C", "D"), label_size = 13)
+
+ind <- combine_plots(nest, comp, labels = c(NULL, NULL), label_size = 0, nrow=2 )
+
+ggsave2("Figs/indices/ind.png", ind, width = 9, height = 7)
+
+
+comp.pl <- combine_plots(comp.funpl.g, comp.funpl.d, labels = c("A", "B"), label_size = 13, nrow=1)
+ggsave2("Figs/indices/comp.pl.png", comp.pl, width = 9, height = 4)
+
+
 save(plots,file = "Rdata/indices.RData")
 
 ```
@@ -1134,7 +1330,7 @@ predict_bosque <- function(data, formula) {
   return(list(data = data, mean_predictions = mean_predictions))
 }
 sortu_plot <- function(data, mean_predictions, y_variable, plot_title) {
-ggplot(data, aes_string(x = "Periodo", y = y_variable)) +
+ggplot(data, aes_string(x = "factor(Periodo)", y = y_variable)) +
     geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
     geom_point(data = mean_predictions, aes_string(y = "mean_predicted", color = "as.factor(Year)"),
                size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
@@ -1145,8 +1341,8 @@ ggplot(data, aes_string(x = "Periodo", y = y_variable)) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank()) +
-    labs(x = "Periodo", y = ifelse(y_variable == "Anidamiento", "Anidamiento", 
-                                   ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", "Functional Complementarity")), 
+    labs(x = "Period", y = ifelse(y_variable == "Anidamiento", "Nestedness", 
+                                   ifelse(y_variable == "comp.fun.pl", "Functional Complementarity of Plants", "Pollinator funct. complementarity")), 
          color = "Year") +
     ggtitle(plot_title)
 }
@@ -1164,6 +1360,26 @@ plots <- map2(results, names(results), function(res, model_name) {
 })
 
 # Mostrar gráficos
-plots<-walk(plots, ~ walk(.x, print))
+plots.print <-walk(plots, ~ walk(.x, print))
+
+
+
+ggsave2("Figs/indices/nest.bosque.png", nest.bosque, width = 7, height = 6)
+
+comp.g <- plots[[2]][[1]] + theme(legend.position = "bottom") 
+comp.d <- plots[[2]][[2]] + theme(legend.position = "none") 
+comp.bosque <- combine_plots(comp.g, comp.d, labels = c("A", "B"), label_size = 13, nrow=2)
+
+ggsave2("Figs/indices/comp.pol.bosque.png", comp.bosque, width = 8, height = 7)
+
+compl.g <- plots[[3]][[1]] + theme(legend.position = "bottom") 
+compl.d <- plots[[3]][[2]] + theme(legend.position = "none") 
+compl.bosque <- combine_plots(compl.g, compl.d, labels = c("A", "B"), label_size = 13, nrow=2)
+
+ggsave2("Figs/indices/comp.pl.bosque.png", compl.bosque, width = 8, height = 7)
+
+
+
+
 save(plots,file = "Rdata/indices_bosque.RData")
 ```

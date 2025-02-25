@@ -3,12 +3,12 @@ pacman::p_unload(pacman::p_loaded(), character.only = TRUE)
 pacman::p_load(tidyverse, dplyr, purr, iNEXT, wesandersom, ggplot2)
 
 
-d <- read.csv("./data/floral_resources_donana_20.csv")
-d.gorb <- read.csv("./data/floral_resources_gorbea_20.csv")
+d <- read.csv("./Data/floral_resources_donana_20.csv")
+d.gorb <- read.csv("./Data/floral_resources_gorbea_20.csv")
 d.21 <- read.csv("./data/floral_resources_donana_21.csv")
-d.21.gorb <- read.csv("./data/floral_resources_gorbea_21.csv")
+d.21.gorb <- read.csv("./Data/floral_resources_gorbea_21.csv")
 d.22.gorb <- read.csv(
-  "./data/rec_floralesG22.csv",
+  "./Data/rec_floralesG22.csv",
   header = TRUE,
   sep = ";",
   fileEncoding = "Latin1"
@@ -467,5 +467,15 @@ doñana <- doñana %>%
 doñana$Fecha<-dmy(doñana$Fecha)
 str(doñana$Fecha)
 gorbea$Bosque <- as.character(gorbea$Bosque)
+
+doñana <- doñana %>%
+  mutate(Site = "Doñana")
+
+doñana <- doñana %>%
+  filter(Especie.planta != "0")
+
+gorbea <- gorbea %>%
+  mutate(Site = "Gorbea")
+
 resources <- bind_rows(gorbea, doñana)
 write.csv(resources, "data/all_floral_resources.csv")

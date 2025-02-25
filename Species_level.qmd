@@ -14,10 +14,12 @@ Con scale escalamos variables explicativas (d, grado,centralidad, tot visitas po
 #| message: false
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,here, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, MuMIn, ggsci, cowplot)
+pacman::p_load(tidyverse,here, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, MuMIn, ggsci, cowplot, patchwork)
+
                
 
 sitems2<-read.csv(here("data","useful", "all_info.csv"))
+pielou <- read.csv(here("data","useful","datos_floracion.csv"))
 
 ##seed number ya esta escalado desde antes
 
@@ -175,17 +177,6 @@ check_collinearity(mod_glmm)
 sitems2.fs <- sitems2.fs %>%
   mutate(morisita = ifelse(is.na(morisita), 0, morisita))
 
-formulas.full <- list(
-  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
-  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
-  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id),
-  m9 = pl.mean.fs~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque) + (1 | Site_id)
-  )
-models.full <- map(formulas.full, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs, na.action = na.exclude))
-aic_results <- map(models.full, AIC)
-print(aic_results)
-
-##mejor modelo sin morisita (tiene muchas Nas, se pierden datos y sin total.visits.pl)
 
 sitems2.fs.d<-sitems2.fs%>%
   filter(Site_id=="Doñana")
@@ -200,52 +191,46 @@ sitems2.fs.d$Bosque <- as.factor(sitems2.fs.d$Bosque)
 
 # List of model formulas for fruit set
 formulas <- list(
-  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque),
-  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque),
-  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque),
-  m9 = pl.mean.fs~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque)
+  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m9 = pl.mean.fs~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1|Planta) + (1 | Bosque)
   )
 
 formulas.d <- list(
-  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1 | Bosque),
-  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1 | Bosque),
-  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness  ) *  Periodo  + (1 | Bosque),
- m9 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl) *  Periodo  + (1 | Bosque))
+  m6 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1|Planta) + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1|Planta) + (1 | Bosque),
+  m8 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness  ) *  Periodo  + (1|Planta) + (1 | Bosque),
+ m9 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl) *  Periodo  + (1|Planta) + (1 | Bosque))
 
 
 models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.g, na.action = na.exclude))
-
-models.d <- map(formulas.d, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.d, na.action = na.exclude))
-
-####SEED NUMBER FULL MODEL
-formulas.sn.full <- list(
-  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque) + (1|Site_id),
-  m7 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque)  + (1|Site_id),
-  m8 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque) + (1|Site_id),
-  m9 = pl.mean.sn~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque) + (1|Site_id)
-  )
-
-models.sn.full <- map(formulas.sn.full, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs, na.action = na.exclude))
-
-aic_results <- map(models.sn.full, AIC)
+aic_results <- map(models.g, AIC)
 print(aic_results)
 
+models.d <- map(formulas.d, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.d, na.action = na.exclude))
+aic_results <- map(models.d, AIC)
+print(aic_results)
+####SEED NUMBER 
 ###models para cada site
 formulas.sn <- list(
-  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1 | Bosque),
-  m7 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1 | Bosque),
-  m8 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1 | Bosque),
-  m9 = pl.mean.sn~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1 | Bosque)
+  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m7 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m8 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness ) *  Periodo * Year + (1|Planta) + (1 | Bosque),
+  m9 = pl.mean.sn~ (poll.sp + plant.sp + Specialization + Closeness + tot.visits.pl ) *  Periodo * Year + (1|Planta) + (1 | Bosque)
   )
 
 formulas.d.sn <- list(
-  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1 | Bosque),
-  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1 | Bosque))
+  m6 = pl.mean.sn ~ (poll.sp + plant.sp + Specialization + Closeness + morisita + tot.visits.pl) *  Periodo  + (1|Planta) + (1 | Bosque),
+  m7 = pl.mean.fs ~ (poll.sp + plant.sp + Specialization + Closeness + morisita ) *  Periodo  + (1|Planta) + (1 | Bosque))
 
 models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs.g, na.action = na.exclude))
+aic_results <- map(models.g.sn, AIC)
+print(aic_results)
 
 models.d.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems2.fs.d, na.action = na.exclude))
-p
+aic_results <- map(models.d.sn, AIC)
+print(aic_results)
 ```
 
 SIN MORISITA EN LOS MODELOS LAS DEMAS VARIABLES CAMBIAN. 30 OBSERVACIONES PARA MODELOS CN MORISITA, 68 SIN MORISITA. CUAL SERIA EL APROPIADO?? CON SEEED NUMBER ERROR NAs. FALTA DE INFO POR POCOS DATOS??? ME FALTA ESTA PARTE DE RELACIONAR CON EL EXITO REPRODUCTIVO QUE NO SE MUY BIEN COMO SOLUCIONARLO.
@@ -291,7 +276,7 @@ resultados_g <- resultados_g %>%
 
 library(kableExtra)
 # Combinar los resultados en una sola tabla
-tabla_final <- bind_rows(resultados_full)
+tabla_final <- bind_rows(resultados_g, resultados_d)
 
 tabla_final_df <- as.data.frame(tabla_final)
 tabla_final_df <- tabla_final_df %>%
@@ -328,11 +313,35 @@ resultados.sn_full <- map_dfr(models.sn.full, ~ {
 resultados.sn_full <- resultados.sn_full %>%
   select( model= model.full, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
 
-tabla_final <- bind_rows(resultados.sn_full)
+resultados_dsn <- map_dfr(models.d.sn, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+}, .id = "modelo_d")
+
+
+resultados_gsn <- map_dfr(models.g.sn, ~ {
+  coef_summary <- summary(.x)$coefficients$cond
+  tibble::as_tibble(coef_summary, rownames = "term") %>%
+    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
+}, .id = "modelo_g")
+
+
+resultados_full <- resultados_full %>%
+  select( model= model.full, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+
+
+resultados_dsn <- resultados_dsn %>%
+  select( Region,model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, p.value= `Pr(>|z|)`)
+
+resultados_gsn <- resultados_gsn %>%
+  select(Region, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  p.value = `Pr(>|z|)`)
+
+tabla_final <- bind_rows(resultados_dsn, resultados_gsn)
 
 tabla_final_df <- as.data.frame(tabla_final)
 tabla_final_df <- tabla_final_df %>%
-  mutate(negrita =`p value` < 0.05) 
+  mutate(negrita = p.value < 0.05) 
 # Crear una tabla con desplazamiento horizontal
 tabla_kable <- tabla_final_df %>%
   select(-negrita) %>% 
@@ -373,26 +382,77 @@ sitems2.fs.g <- sitems2.fs.g %>%
 
 
 ###modelo m7 con morisita
-
-create_plot <- function(data, x_variable) {
-  x_labels <- setNames(c("Morisita", "Closeness",  "Specialization"), 
-                       c("morisita", "Closeness", "Specialization"))
-  p <- ggplot(data, aes_string(x = x_variable, y = "efecto_m7")) +
-     geom_point(alpha = 0.6, color="#069" ) +        
-    geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE)  + 
+library(ggeffects)
+create_plot_with_predictions <- function(data, x_variable, model) {
+  # Obtener predicciones del modelo
+  predicciones <- ggpredict(model, terms = x_variable)
+  x_labels <- setNames(c("Pollinator richness",  "Closeness", "Morisita"), 
+                       c("poll.sp", "Closeness", "morisita"))
+  
+  # Crear el gráfico
+  ggplot(data, aes_string(x = x_variable, y = "efecto_m7")) +
+    geom_point(alpha = 0.6, color = "#069") +
+    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
+                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
+    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
     labs(
-       x = x_labels[[x_variable]],
+      x = x_labels[[x_variable]],
       y = "Fruit set"
     ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-      axis.title = element_text(size = 12)
-    )
+    theme_minimal()
 }
 
-# Variables para las que se generarán los gráficos
-variables <- c("morisita", "Closeness", "Specialization")
+# Variables para graficar
+variables <- c("poll.sp", "Closeness", "morisita")
+
+# Crear gráficos para `sitems.fs.g` y `models.g`
+plots_g <- map(variables, ~ create_plot_with_predictions(sitems2.fs.g, .x, models.g$m7))
+
+p.g.pol <- plots_g[[1]]
+p.g.clos <- plots_g[[2]]
+p.g.mor <- plots_g[[3]]
+
+
+
+p.g.pol <- p.g.pol +
+  annotate("text", 
+           x = 12,  
+           y = 0.7,             
+           label = "Estimate: 4.32\np-value: 0.049", 
+           hjust = 0, size = 3, color = "black")
+p.g.clos <- p.g.clos +
+  annotate("text", 
+           x = 0.1,  
+           y = 0.9,             
+           label = "Estimate: 79.55\np-value: 0.028", 
+           hjust = 0, size = 3, color = "black")
+p.g.mor <- p.g.mor +
+  annotate("text", 
+           x = 0.15,  
+           y = 0.3,             
+           label = "Estimate: 184.12\np-value: 0.026", 
+           hjust = 0, size = 3, color = "black")
+
+p.g.sp <- plot_grid(
+  p.g.pol,  
+  p.g.clos, 
+  p.g.mor,
+  labels = c("A", "B", "C"),
+  label_size = 12,  
+  ncol = 3
+)
+
+
+p.g.sp_final <- ggdraw() +
+  draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
+  draw_plot(p.g.sp, x = 0, y = 0, width = 1, height = 1)+
+  theme(plot.margin = margin(20, 10, 10, 10)) 
+
+
+save(p.g.sp_final, file="RData/splevel_repro.RData")
+
+ggsave("Figs/p.g_sp_final.png", p.g.sp_final, dpi=300, width=10, height = 6, bg= "white") 
+
 
 # Crear los gráficos usando map
 plots <- map(variables, ~ create_plot(sitems2.fs.d, .x))
@@ -402,12 +462,6 @@ for (p in plots) {
 }
 
 
-# Crear y guardar los gráficos del segundo conjunto
-plots_2 <- map(variables, ~ create_plot(sitems2.fs.g, .x))
-names(plots_2) <- c("plot_2a", "plot_2b", "plot_2c")   
-for (p in plots_2) {
-  print(p)
-}
 
 
 plots$plot_1a
@@ -457,6 +511,13 @@ final_combined_plot <- plot_grid(
 save(final_combined_plot, file="RData/sp.level_fs")
 ```
 
+```{r CV_plant}
+#| warning: false
+#| message: false
+#| 
+
+```
+
 ### Indices de cada especie de planta
 
 ```{r indices}
@@ -464,6 +525,7 @@ save(final_combined_plot, file="RData/sp.level_fs")
 #| message: false
 library(ggsci)
 sitems2_rescaled$Periodo <- as.numeric(sitems2_rescaled$Periodo)
+sitems2_rescaled$Year <- as.factor(sitems2_rescaled$Year)
 sitems.g <- sitems2_rescaled %>% filter(Site_id == "Gorbea")
 sitems.d <- sitems2_rescaled %>% filter(Site_id == "Doñana")
 
@@ -472,6 +534,7 @@ sitems.g <- sitems2_rescaled %>%
   filter(Site_id == "Gorbea") %>% 
   filter(!is.na(Specialization) & !is.na(Periodo))
 str(sitems.g)
+
 
 ggplot(sitems.g, aes(x = Periodo, y = Specialization, color= Year)) + 
   geom_point() + 
@@ -490,11 +553,28 @@ ggplot(sitems.g, aes(x = Periodo, y = Specialization, color= Year)) +
 datasets <- list(Gorbea = sitems.g, Doñana = sitems.d)
 
 models <- list(
-  Specialization = Specialization ~  ((poll.sp^2) + plant.sp) * Periodo + Year + (1|Bosque),
+  Specialization = Specialization ~  (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
   Degree = Degree ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
   Closeness = Closeness ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
    morisita = morisita ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque)
 )
+
+results <- function(data, formula) {
+  model <- glmmTMB(formula, data = data, family = "gaussian")
+  
+  # Resumen del modelo
+  model_summary <- summary(model)
+  
+  
+  return(model_summary)
+}
+
+# Usar map para calcular resultados
+results_all <- map(models, ~ map(datasets, results, formula = .x))
+
+# Visualización de los resultados
+results_all
+
 
 # Función para ajustar modelos y generar predicciones
 predict_and_summarise <- function(data, formula) {
@@ -515,15 +595,16 @@ predict_and_summarise <- function(data, formula) {
   return(list(data = data_filtered, mean_predictions = mean_predictions))
 }
 
-create_plot <- function(data, mean_predictions, y_variable, plot_title) {
+create_plot <- function(data, mean_predictions, y_variable) {
   ggplot(data, aes(x = Periodo, y = !!sym(y_variable))) +
     geom_point(aes(color = as.factor(Year)), alpha = 0.6) +
-    geom_point(data = mean_predictions, aes(y = mean_predicted),
-               color = "#3C5488FF", size = 2.5, shape = 21, fill = "#3C5488FF", alpha = 0.75) +
-    geom_line(data = mean_predictions, aes(y = mean_predicted, group = Year),
-              color = "#3C5488FF", size = 0.7, alpha = 0.75) +
-    facet_wrap(~ Year) +
-    scale_color_npg() +
+    geom_point(data = mean_predictions, aes(y = mean_predicted, color = Year),               size = 2.5, shape = 21, fill = "#FFFFFF", alpha = 0.75, stroke =
+                 1) +
+    geom_line(data = mean_predictions, aes(y = mean_predicted, group = Year, 
+                                          color = Year),
+             size = 0.7, alpha = 0.75) +
+    scale_color_npg(labels = levels(as.factor(data$Year)))+
+    scale_x_continuous(breaks = 1:9) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank()) +
@@ -532,24 +613,62 @@ create_plot <- function(data, mean_predictions, y_variable, plot_title) {
       y = case_when(
         y_variable == "Degree" ~ "Normalised degree",
         y_variable == "Specialization" ~ "Specialization",
-        y_variable == "Closeness" ~ "Closeness",
+        y_variable == "Closeness" ~ "Weighted closeness",
         y_variable == "morisita" ~ "Niche complementarity"
       ),
       color = "Year"
-    ) +
-    ggtitle(plot_title) +
-    scale_x_continuous(breaks = 1:9) 
+    ) 
+    
 }
 
 # Aplicar modelos y generar gráficos
 results <- map(models, ~ map(datasets, predict_and_summarise, formula = .x))
 
+
+
 # Crear gráficos
 plots <- map2(results, names(results), function(res, model_name) {
   map2(res, names(res), function(data_res, site_name) {
-    create_plot(data_res$data, data_res$mean_predictions, model_name, paste(site_name, model_name))
+    create_plot(data_res$data, data_res$mean_predictions, model_name)
   })
 })
+
+sp.g <- plots[[1]][[1]] + theme(legend.position = "none")
+sp.d <- plots[[1]][[2]] + theme(legend.position = "none")
+d.g <- plots[[2]][[1]] + theme(legend.position = "none")
+d.d <- plots[[2]][[2]]+ theme(legend.position = "none")
+wc.g <- plots[[3]][[1]] + theme(legend.position = "none")
+wc.d <- plots[[3]][[2]] + theme(legend.position = "none")
+m.g <- plots[[4]][[1]] + theme(legend.position = "bottom")
+m.d <- plots[[4]][[2]] + theme(legend.position = "none")
+
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend.years <- get_only_legend(m.g)  
+
+m.g <- plots[[4]][[1]] + theme(legend.position = "none")
+
+sp <- plot_grid(sp.d, sp.g, labels = c("A", "B"), label_size = 13)
+d <- plot_grid(d.d, d.g, labels = c("C", "D"), label_size = 13)
+wc <- plot_grid(wc.d, wc.g, labels = c("E", "F"), label_size = 13)
+m <- plot_grid(m.d, m.g, labels = c("G", "H"), label_size = 13)
+
+sp_level <- plot_grid (sp, d, wc, m, legend.years, ncol=1, nrow=5, rel_heights = c(1,1,1,1, 0.2))
+
+titulo_donana <- ggdraw() + draw_label("Doñana", fontface = "bold", size = 13)
+titulo_gorbea <- ggdraw() + draw_label("Gorbea", fontface = "bold", size = 13)
+fila_titulos <- plot_grid(titulo_donana, titulo_gorbea, ncol = 2)
+
+grafico_final <- plot_grid(fila_titulos, sp_level , ncol = 1, rel_heights = c(0.02, 1))
+
+
+ggsave2("Figs/indices/sp_level.png", grafico_final, width = 9, height = 14, bg="white")
 
 # Mostrar gráficos
 plots <- walk(plots, ~ walk(.x, print))
@@ -567,6 +686,8 @@ summary_results <- map(model_results, function(model_list) {
 
 summary(model_results[[4]][[2]]) 
 ```
+
+sp.bosque
 
 ```{r plot bosques}
 #| warning: false
@@ -620,9 +741,30 @@ results <- map(models, ~ map(datasets, predict_bosque, formula = .x))
 plots <- map2(results, names(results), function(res, model_name) {
  
   map2(res, names(res), function(data_res, site_name) {
-    sortu_plot(data_res$data, data_res$mean_predictions, model_name, paste(site_name, model_name)) 
+    sortu_plot(data_res$data, data_res$mean_predictions, model_name, paste(site_name)) 
   })
 })
+
+
+sp.g <- plots[[1]][[1]] +  theme(legend.position = "bottom")
+sp.d <- plots[[1]][[2]] + theme(legend.position = "none")
+d.g <- plots[[2]][[1]] + theme(legend.position = "bottom")
+d.d <- plots[[2]][[2]]+ theme(legend.position = "none")
+wc.g <- plots[[3]][[1]] + theme(legend.position = "bottom")
+wc.d <- plots[[3]][[2]] + theme(legend.position = "none")
+m.g <- plots[[4]][[1]] +  theme(legend.position = "bottom")
+m.d <- plots[[4]][[2]] + theme(legend.position = "none")
+
+
+sp.bosque <- plot_grid( sp.d, sp.g, labels = c("A", "B"), label_size = 13, nrow=2)
+ggsave2("Figs/indices/sp.bosque.png", sp.bosque, width = 8, height = 7)
+d.bosque <- plot_grid( d.d, d.g, labels = c("A", "B"), label_size = 13, nrow=2)
+ggsave2("Figs/indices/d.bosque.png", d.bosque, width = 8, height = 7)
+wc.bosque <- plot_grid( wc.d, wc.g, labels = c("A", "B"), label_size = 13, nrow=2)
+ggsave2("Figs/indices/wc.bosque.png", wc.bosque, width = 8, height = 7)
+m.bosque <- plot_grid( m.d, m.g, labels = c("A", "B"), label_size = 13, nrow=2)
+ggsave2("Figs/indices/m.bosque.png", m.bosque, width = 8, height = 7)
+
 
 # Mostrar gráficos
 plots<-walk(plots, ~ walk(.x, print))
