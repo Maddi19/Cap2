@@ -183,19 +183,13 @@ It was observed that pollinator species richness negatively influenced functiona
 
 ### **Population level reproductive success**
 
-modelo 6 nada, da error. AICs : m7=-191.19, m8=-198.12, m9=-190.9
-
-```{r fs.table}
-load("RData/splevel.fruitset_table.RData") 
-table
-```
-
-For the models relating species-level indices to the reproductive success of each species, we found high collinearity with the variable of total visits received per plant species and therefore excluded this from the models. In the case of Doñana, no variable significantly influenced the reproductive success of the plants. However, in Gorbea, we observed that pollinator species richness (estimate = 4.32, z value = 1.97, p = 0.049) , weighted closeness (estimate = 79.55, z value = 2.2, p = 0.028) and Morisita niche overlap (estimate = 184.12, z value = 2.22, p value = 0.026) increased the reproductive success of the plant species. It was also determined that the positive effect of pollinator richness (estimnate = -1, z value = -1.99, p = 0.047) and weighted closeness (estimate =-16.25, z value = -2.22, p value = 0.026) diminishes throughout the season, thereby exerting a greater influence on the reproductive success of the plants at the onset of the season. Furthermore, the study revealed that reproductive success at the species level remained constant throughout the flowering season at both study sites.
+For the models relating species-level indices to the reproductive success of each species, as specialization index gives us an idea of the number of different links a species could have, we removed the variable degree. In the case of Doñana, no variable significantly influenced the fruit set of the plants. However, in Gorbea, plant species richness (estimate = -1.24, z value = -2.35, p = 0.02; Figure 6A) and total received visits (estimate=-1.94, z=-2.6, p=0.008; Figure 6C) significantly reduced plant´s fruit set, while weighted closeness of each species (estimate=1.18, z value= 2.5, p=0.012; Figure 6B) and contribution to nestedness (estimate = 2.08, z value = 3.6, p value \< 0.0001; Figure 6D) had significant positive effects. Furthermore, we observed that sampling period significantly modulated the effects of contribution to nestedness and total received visits on fruit set, indicating that these relationships are not constant, but rather context-dependent (Supplementary Table S1 and Figure S16). Additionally, the interaction between sampling period and plant species richness exhibited a trending, non-significant effect (estimate = 0.214, z value = 1.763, p = 0.078), suggesting a possible temporal influence on the relationship between plant diversity and fruit set. Furthermore, the study revealed that reproductive success at the species level remained constant throughout the flowering season at both study sites (Supplementary Table S1). For the subset of plant species that we had at least data of 3 different periods, we could observed
 
 ```{r plots_splevel}
-load("RData/splevel_repro.RData") 
-p.g.sp_final
+knitr::include_graphics("Figs/p.g_sp_final1.png")
 ```
+
+In the case of the seed number each fruit produced, different trends were observed.
 
 ### Community level reproductive success
 

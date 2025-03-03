@@ -1,6 +1,6 @@
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,dplyr,purr,iNEXT,wesanderson,
+pacman::p_load(tidyverse,dplyr,purrr,iNEXT,wesanderson,
                here,plyr, lme4, carData,effects,
                performance,see,gridExtra,car, lattice,ggplot2,bipartite)
 
@@ -9,7 +9,12 @@ pacman::p_load(tidyverse,dplyr,purr,iNEXT,wesanderson,
 sitems <- read.csv("data/SITE_network_level_metrics.csv", sep=",")
 sitems1 <- read.csv("data/SITE_species_level_metrics.csv")
 sitems2 <- read.csv("data/SITE_plant_species_level_metrics.csv")
+sitems3 <- read.csv("SITE_plant_species_level_metrics_sinout.csv")
 
+sitems3 <- sitems3 %>%
+  mutate(Species = case_when(Species =="	Thymus praecox subsp. polytrichus" ~ "Thymus praecox subsp. polytrichus",
+                            TRUE ~ Species))
+         
 
 
 #calculate total number of visits per plant sps
@@ -55,6 +60,19 @@ sitems2$tot.visits.pl <-
 sitems2$tot.visits.pl[is.na(sitems2$tot.visits.sinout)] <- 0
 write.csv(sitems2, "data/sitems2_totvisits.csv")
 
+sitems3$match <-
+  paste(sitems3$Site,
+        sitems3$Year,
+        sitems3$Bosque,
+        sitems3$Periodo,
+        sitems3$Species,
+        sep = "_")
+
+sitems3$tot.visits.pl <-
+  all_df_with_visits$tot.visits.pl[match(sitems3$match, all_df_with_visits$j)]
+sitems3$tot.visits.pl[is.na(sitems3$tot.visits.sinout)] <- 0
+write.csv(sitems3, "data/sitems3.pl_totvisits.csv")
+
 ####reproductive success data
 
 all_df <- read.csv("./data/useful/all_data.csv")
@@ -69,13 +87,20 @@ d21.fs <- d21.rs %>%
 d21.fs$Periodo <- d21.fs$ronda
 d21.fs$Planta <- d21.fs$SP
 
-d21.meanfs <- d21.fs %>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.fs = sd(fruit_set)/sqrt(n))
+d21.fs <- d21.fs %>%
+  mutate(
+    Y_formateado = sprintf("%02d", Y), # Formatear Y
+    id_planta = case_when(
+      !is.na(planta) & planta != "" ~ paste0("(", X, ",", Y_formateado, ")", planta),
+      TRUE ~ paste0(X, ",", Y_formateado)
+    )
+  ) %>%
+  select(-Y_formateado)
 
 unique(d21.meanfs$Bosque)
+
+d21.fs <- d21.fs %>%
+  select(Site, Year, Bosque, Periodo, Planta, fruit_set, id_planta)
 
 library(readxl)
 d21.seed <- read_xlsx("./data/rep.suc/DoñanaFrutos2021.xlsx")
@@ -85,7 +110,10 @@ d21.seed <- d21.seed %>%
   group_by(Planta) %>%
   mutate(scaled_seeds = scale(`Semillas totales`)) %>%
   ungroup() %>%
-  select(Planta, Periodo, Bosque, Year, Site, `Semillas totales`, scaled_seeds)
+  select(Planta, Periodo, Bosque, Year, Site, `Semillas totales`, scaled_seeds, `Cuadrado/FUERA del cuadrado` )
+
+d21.seed <- d21.seed %>%
+  rename(id_planta = `Cuadrado/FUERA del cuadrado`)
 
 unique(d21.seed$Bosque)
 
@@ -97,20 +125,14 @@ d21.seed <- d21.seed %>%
                          "Villa Manrique Sur" = "Pinar Villamanrique Sur",
                          "Villa Manrique Este" = "Pinar Villamanrique Este"))
 
-d21.meanseed <- d21.seed %>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.sn = sd(scaled_seeds)/sqrt(n()))
-str(d21.meanseed)
-d21.meanseed$Periodo <- as.integer(d21.meanseed$Periodo)
-d21.meanseed$Year <- as.numeric(d21.meanseed$Year)
-d21.meanseed <- d21.meanseed %>% 
-  select(-n)
-d21.meanfs <- d21.meanfs %>%
-  select(-n)
+
+d21.repro <- d21.fs %>%
+  left_join(d21.meanseed, by = c("Bosque", "Site", "Year", "Periodo", "Planta", "id_planta"))
 
 d21.repro <- left_join(d21.meanfs, d21.meanseed)
+d21.repro <- d21.repro %>%
+  select(Site, Year, Bosque, Periodo, Planta, id_planta, fruit_set,mean.sn, se.sn)
+
 
 
 g21.rs <- read.csv("./data/rep.suc/frutos_G21.csv", sep = ";")
@@ -143,9 +165,6 @@ g21.rs <- g21.rs %>%
 
 
 
-hut <- g21.fs %>%
-  filter(str_starts(Planta, "Hutchinsia") | str_starts(Planta, "Helleborus"))
-
 
 g21.rs <- g21.rs %>%
   mutate(Semillas_viables = case_when(
@@ -165,6 +184,7 @@ g21.fs <- g21.rs %>%
 g21.fs <- g21.fs %>%
   dplyr::rename(Frutos_cuajados = Frutos_cuajados..ultimo.dato.registrado.)
   
+
 g21.fs <- g21.fs %>%
   mutate(
     total_flores_yemas = Flores_yemas_totales,
@@ -175,14 +195,17 @@ g21.fs <- g21.fs %>%
     Periodo = Periodo,
     Trat = Trat,
     Bosque = Punto,
-    fruit_set = Frutos_cuajados / total_flores_yemas,
-    fruit_set = if_else(
-      Planta %in% c("Hepatica nobilis", "Erysimum gorbeanum", "Pedicularis sylvatica", "Hutchinsia alpina",
-                    "Scilla verna", "Primula veris", "Helianthemum nummularium") & fruit_set > 1,
-      1,
-      fruit_set
-    )
-  ) 
+    fruit_set = Frutos_cuajados / total_flores_yemas)
+
+g21.fs <- g21.fs %>%
+  mutate(fruit_set = if_else(
+  Planta %in% c("Hepatica nobilis", "Erysimum gorbeanum", "Pedicularis sylvatica", "Hutchinsia alpina",
+                "Scilla verna", "Primula veris", "Helianthemum nummularium") & fruit_set > 1,
+  1,
+  fruit_set
+)
+) 
+   
 
 g21.fs <- g21.fs %>%
   mutate(
@@ -193,26 +216,48 @@ g21.fs <- g21.fs %>%
   )
 
 
-g21.fs$Planta <- dplyr::recode(g21.fs$Planta, "Vicia Pyrenaica" = "Vicia pyrenaica")
+g21.fs$Planta <- dplyr::recode(g21.fs$Planta, "Vicia Pyrenaica" = "Vicia pyrenaica",
+                               "Helleborus viridis"= "Helleborus viridis subsp. occidentalis")
 
 
-g21.mean.fs <- g21.fs %>%
-  filter(!Trat == "Embolsada") %>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.fs = sd(fruit_set)/sqrt(n))
+embols<- g21.fs %>%
+  filter(Trat == "Embolsada") 
+embols <- embols %>%
+  filter(fruit_set > 0)
 
-g21.mean.sn <- g21.fs %>%
-  filter(!Trat == "Embolsada") %>%
-  filter(!(is.na(scaled_seeds)))%>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.sn = sd(scaled_seeds)/sqrt(n))
+g21.fs<- g21.fs %>%
+  filter(!Trat == "Embolsada") 
 
-gorbea2021_mean.rep<- g21.mean.fs %>%
-  left_join(g21.mean.sn, by = c("Year", "Bosque", "Periodo", "Site"))
+
+observaciones_por_individuo <- g21.fs %>%
+  group_by(Site, Bosque, Periodo, Year, Planta, num) %>%
+  summarise(fruit_set = mean(fruit_set))
+
+g21.fs <- g21.fs %>%
+  rename(id_planta = num) 
+
+g21.fs <- g21.fs %>%
+  select(Site, Year, Bosque, Periodo, Planta, Semillas_viables, scaled_seeds, id_planta)
+
+
+
+g21.fs.fruit <- observaciones_por_individuo %>%
+  rename(id_planta = num)
+
+d21.seed <- d21.seed %>%
+  rename(Semillas_viables = `Semillas totales`)
+d21.seed$Year <- as.factor(d21.seed$Year)
+g21.fs$Year <- as.factor (g21.fs$Year)
+g21.fs$Bosque <- as.character (g21.fs$Bosque)
+g21.fs.fruit$Bosque <- as.character(g21.fs.fruit$Bosque)
+
+
+seeds <- bind_rows(d21.seed, g21.fs)
+
+fruits <- bind_rows(d21.fs, g21.fs.fruit)
+
+
+
 
 
 
@@ -253,14 +298,17 @@ g22.fs <- g22.fs %>%
     Periodo = Periodo,
     Embolsada = Embolsada,
     Bosque = Punto,
-    fruit_set = Frutos_cuajados / Flores,
-    fruit_set = if_else(
-      Planta %in% c("Hepatica nobilis", "Erysimum gorbeanum", "Pedicularis sylvatica", "Hutchinsia alpina",
-                    "Scilla verna", "Primula veris", "Helianthemum nummularium") & fruit_set > 1,
-      1,
-      fruit_set
-    )
-  ) 
+    fruit_set = Frutos_cuajados / Flores)
+
+g22.fs <- g22.fs %>%
+  mutate(fruit_set = if_else(
+  Planta %in% c("Hepatica nobilis", "Erysimum gorbeanum", "Pedicularis sylvatica", "Hutchinsia alpina",
+                "Scilla verna", "Primula veris", "Helianthemum nummularium", "Vicia pyrenaica", "Lathyrus linifolius") & fruit_set > 1,
+  1,
+  fruit_set
+)
+) 
+  
 
 g22.fs <- g22.fs %>%
   mutate(
@@ -271,42 +319,62 @@ g22.fs <- g22.fs %>%
   )
 
 
-g22.mean.fs <- g22.fs %>%
-  filter(Embolsada == "no") %>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.fs = sd(fruit_set)/sqrt(n))
-
-g22.mean.sn <- g22.fs %>%
-  filter(Embolsada == "no")%>%
-  filter(!(is.na(scaled_seeds)))%>%
-  group_by(Periodo, Bosque, Year, Site) %>%
-  dplyr::summarise(mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.sn = sd(scaled_seeds)/sqrt(n))
-
-gorbea2022_mean.rep<- g22.mean.fs %>%
-  left_join(g22.mean.sn, by = c("Year", "Bosque", "Periodo", "Site"))
+g22.fs$Planta <- dplyr::recode(g22.fs$Planta, "Helleborus viridis"= "Helleborus viridis subsp. occidentalis")
 
 
-                              
+embols<- g22.fs %>%
+  filter(Embolsada =="si" ) 
+embols <- embols %>%
+  filter(fruit_set > 0)
 
-gorbea2022_mean.rep$Bosque <- as.character(gorbea2022_mean.rep$Bosque)
-gorbea2021_mean.rep$Bosque <- as.character(gorbea2021_mean.rep$Bosque)
-gorbea2021_mean.rep$Periodo <- as.character(gorbea2021_mean.rep$Periodo)
-d21.repro$Periodo <- as.character(d21.repro$Periodo)
+g22.fs<- g22.fs %>%
+  filter(!Embolsada == "si") 
+
+
+observaciones_por_individuo <- g22.fs %>%
+  group_by(Site, Bosque, Periodo, Year, Planta, num) %>%
+  summarise(fruit_set = mean(fruit_set))
+
+g22.fs <- g22.fs %>%
+  rename(id_planta = num) 
+g22.fs <- g22.fs %>%
+  mutate(Site = "Gorbea")
+
+g22.fs <- g22.fs %>%
+  select(Site, Year, Bosque, Periodo, Planta, Semillas_viables, scaled_seeds, id_planta)
 
 
 
-fruit_set <- rbind (d21.repro, gorbea2021_mean.rep, gorbea2022_mean.rep)
-unique(fruit_set$Bosque)
-fruit_set$Bosque <- dplyr::recode(fruit_set$Bosque,"Pinar Villamanrique Este"= "Villamanrique Chaparral",
-                          "Pinar Villamanrique Sur"="Villamanrique Sur")
+g22.fs.fruit <- observaciones_por_individuo %>%
+  rename(id_planta = num)
 
-fruit_set$Bosque <- as.character(fruit_set$Bosque)
-fruit_set$Year <- as.factor(fruit_set$Year)
-fruit_set$Periodo<- as.factor(fruit_set$Periodo)
+g22.fs.fruit <- g22.fs.fruit %>%
+  mutate(Site = "Gorbea")
+
+g22.fs$Periodo <- as.numeric (g22.fs$Periodo)
+g22.fs$Bosque <- as.character(g22.fs$Bosque)
+g22.fs$Year <- as.factor(g22.fs$Year)
+
+seeds <- bind_rows(seeds, g22.fs)
+
+g22.fs.fruit$Periodo <- as.numeric (g22.fs.fruit$Periodo)
+g22.fs.fruit$Bosque <- as.character(g22.fs.fruit$Bosque)
+g22.fs.fruit$Year <- as.numeric(g22.fs.fruit$Year)
+
+fruits <- bind_rows(fruits, g22.fs.fruit)
+
+unique(fruits$Bosque)
+seeds$Bosque <- dplyr::recode(seeds$Bosque,"Pinar Villamanrique Este"= "Villamanrique Chaparral",
+                                  "Pinar Villamanrique Sur"="Villamanrique Sur")
+
+
+fruits$Bosque <- dplyr::recode(fruits$Bosque,"Pinar Villamanrique Este"= "Villamanrique Chaparral",
+                              "Pinar Villamanrique Sur"="Villamanrique Sur")
+
+write.csv(fruits, "./data/total_fruits.csv")
+write.csv(seeds, "./data/total_seeds.csv")
+
+
 fruit_set$match <-
   paste(fruit_set$Site,
         fruit_set$Year,
@@ -315,133 +383,47 @@ fruit_set$match <-
         sep = "_")  
 
 ##fruit set per plant sp
-sitems2 <- read.csv("data/sitems2_totvisits.csv")
-
-d21.fs.pl <- d21.fs %>%
-  group_by(Periodo, Bosque, Year, Site, Planta) %>%
-  dplyr::summarise(pl.mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.pl.fs = sd(fruit_set)/sqrt(n))
-d21.fs.pl$Year <- as.character(d21.fs.pl$Year)
-d21.fs.pl <- d21.fs.pl %>%
-  select(-n)
-
-d21.seed.pl <- d21.seed %>%
-  group_by(Periodo, Bosque, Year, Site, Planta) %>%
-  dplyr::summarise(pl.mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.pl.sn = sd(scaled_seeds)/sqrt(n))
-
-d21.seed.pl <- d21.seed.pl %>%
-  select(-n)
-
-d21.pl.repro <- left_join(d21.fs.pl, d21.seed.pl)
-
-
-g21.pl.fs <- g21.fs %>%
-  filter(!Trat == "Embolsada") %>%
-  group_by(Periodo, Bosque, Year, Planta) %>%
-  dplyr::summarise(pl.mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.fs = sd(fruit_set)/sqrt(n))
-
-g21.pl.sn <- g21.fs %>%
-  filter(!Trat == "Embolsada") %>%
-  filter(!(is.na(scaled_seeds)))%>%
-  group_by(Periodo, Bosque, Year, Planta) %>%
-  dplyr::summarise(pl.mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.sn = sd(scaled_seeds)/sqrt(n))
-                   
-gorbea2021_combined <- g21.pl.fs %>%
-  left_join(g21.pl.sn, by = c("Year", "Bosque", "Periodo", "Planta"))
-
-
-g22.pl.fs <- g22.fs %>%
-  filter(Embolsada == "no") %>%
-  group_by(Periodo, Bosque, Year, Planta) %>%
-  dplyr::summarise(pl.mean.fs = mean(fruit_set, na.rm = TRUE),
-                   n = n(),
-                   se.fs = sd(fruit_set)/sqrt(n))
-
-g22.pl.sn <- g22.fs %>%
-  filter(Embolsada == "no") %>%
-  filter(!(is.na(scaled_seeds)))%>%
-  group_by(Periodo, Bosque, Year, Planta) %>%
-  dplyr::summarise(pl.mean.sn = mean(scaled_seeds, na.rm = TRUE),
-                   n = n(),
-                   se.sn = sd(scaled_seeds)/sqrt(n))
-
-gorbea2022_combined <- g22.pl.fs %>%
-  left_join(g22.pl.sn, by = c("Year", "Bosque", "Periodo", "Planta"))
-
-gorbea2021_combined<- gorbea2021_combined %>%
-  mutate(Site="Gorbea")
-
-
-gorbea2021_combined$Bosque <- as.character(gorbea2021_combined$Bosque)
-gorbea2022_combined$Bosque <- as.character(gorbea2022_combined$Bosque)
-gorbea2021_combined$Periodo <- as.character(gorbea2021_combined$Periodo)
-gorbea2022_combined$Periodo <- as.character(gorbea2022_combined$Periodo)
-d21.pl.repro$Periodo <- as.character(d21.pl.repro$Periodo)
-d21.pl.repro$Year <- as.numeric (d21.pl.repro$Year)
-
-pl.fruit_set <- rbind (d21.pl.repro, gorbea2021_combined, gorbea2022_combined)
-
-pl.fruit_set$Bosque <- dplyr::recode(pl.fruit_set$Bosque,"Pinar Villamanrique Este"= "Villamanrique Chaparral",
-                                  "Pinar Villamanrique Sur"="Villamanrique Sur")
-pl.fruit_set$match <-
-  paste(pl.fruit_set$Site,
-        pl.fruit_set$Year,
-        pl.fruit_set$Bosque,
-        pl.fruit_set$Periodo,
-        pl.fruit_set$Planta,
-        sep = "_")  
-
-unique(pl.fruit_set$Planta)
-
-sitems2 <- read.csv("./data/sitems2_totvisits.csv")
-unique(sitems2$Especies)
-
-sitems2$Bosque <- as.character(sitems2$Bosque)
-sitems2 <- sitems2 %>%
-  dplyr::rename(Planta = Especies)
-
-sitems2$match <-
-  paste(sitems2$Site_id,
-        sitems2$Year,
-        sitems2$Bosque,
-        sitems2$Periodo,
-        sitems2$Planta,
-        sep = "_")
-
-sitems2$pl.mean.fs<-pl.fruit_set$pl.mean.fs[match(sitems2$match, pl.fruit_set$match)]
-sitems2$se.pl.fs<-pl.fruit_set$se.pl.fs[match(sitems2$match, pl.fruit_set$match)]
-sitems2$pl.mean.sn<-pl.fruit_set$pl.mean.sn[match(sitems2$match, pl.fruit_set$match)]
-sitems2$se.pl.sn<-pl.fruit_set$se.pl.sn[match(sitems2$match, pl.fruit_set$match)]
-
-
-write.csv(sitems2, "data/useful/sitems2_totvisits.fs.csv")
-
-####COMMUNITY NETWORK ANALYSIS
-
-sitems$Bosque <- as.character(sitems$Bosque)
-sitems$Year<- as.factor(sitems$Year)
-sitems$Periodo<- as.factor(sitems$Periodo)
-
-sitems$match <-
-  paste(sitems$Site_id,
-        sitems$Year,
-        sitems$Bosque,
-        sitems$Periodo,
-        sep = "_")
-
-unique(sitems$match)
-unique(fruit_set$match)
+sitems3 <- read.csv("data/sitems3.pl_totvisits.csv")
+sitems <- read.csv("data/SITE_network_level_metrics.csv", sep=",")
+fs <- read.csv("./data/total_fruits.csv")
+seeds <- read.csv("./data/total_seeds.csv")
 
 sitems <- sitems %>%
-  left_join(fruit_set %>% select(match, se.fs, mean.sn, se.sn), by = "match") %>%
-  filter(match %in% unique(sitems$match))
+  rename(Site=Site_id)
+
+sitems3 <- sitems3 %>%
+  left_join(sitems %>% select(Year, Site, Periodo, Bosque, poll.sp, plant.sp),
+            by = c("Year", "Site", "Periodo", "Bosque"))
+
+write.csv(sitems3, "data/sitems3.pl_totvisits.csv")
+
+sitems3 <- sitems3 %>%
+  rename(Planta = Species)
+
+seeds_con_indices <- seeds %>%
+  left_join(sitems3, by = c("Site", "Year", "Bosque", "Periodo", "Planta"))
+
+
+fruits_con_indices <- fruits %>%
+  left_join(sitems3, by = c("Site", "Year", "Bosque", "Periodo", "Planta"))
+
+ 
+write.csv(fruits_con_indices, "./data/plants_fs.csv")
+write.csv(seeds_con_indices, "./data/plants_seeds.csv")
+
+####COMMUNITY NETWORK ANALYSIS
+sitems <- read.csv("data/SITE_network_level_metrics.csv", sep=",")
+
+sitems$Bosque <- as.character(sitems$Bosque)
+
+sitems <- sitems %>%
+  rename(Site = Site_id)
+
+ntw_fruits <- fruits %>%
+  left_join(sitems, by = c("Site", "Year", "Bosque", "Periodo")) 
+
+ntw_seeds <- seeds %>%
+  left_join(sitems, by = c("Site", "Year", "Bosque", "Periodo")) 
 
 ##edo hola:
 sitems$mean.fs<-fruit_set$mean.fs[match(sitems$match, fruit_set$match)]
@@ -450,6 +432,7 @@ sitems$se.fs<-fruit_set$se.fs[match(sitems$match, fruit_set$match)]
 sitems$mean.sn<-fruit_set$mean.sn[match(sitems$match, fruit_set$match)]
 sitems$se.sn<-fruit_set$se.sn[match(sitems$match, fruit_set$match)]
 
+##add visits
 
 tot.visits<- pl.vis %>%
   dplyr::group_by(Site,Year,Bosque, Periodo) %>%
@@ -462,7 +445,27 @@ tot.visits$match <-
         tot.visits$Periodo,
         sep = "_")
 
-sitems$total.visits<-tot.visits$tot.vis[match(sitems$match, tot.visits$match)]
-unique(sitems$mean.fs)
-write.csv(sitems, "data/useful/sitems_meanrepro.csv")
+ntw_fruits$match <-
+  paste(ntw_fruits$Site,
+        ntw_fruits$Year,
+        ntw_fruits$Bosque,
+        ntw_fruits$Periodo,
+        sep = "_")
+
+ntw_seeds$match <-
+  paste(ntw_seeds$Site,
+        ntw_seeds$Year,
+        ntw_seeds$Bosque,
+        ntw_seeds$Periodo,
+        sep = "_")
+
+ntw_fruits$total.visits<-tot.visits$tot.vis[match(ntw_fruits$match, tot.visits$match )]
+ntw_seeds$total.visits<-tot.visits$tot.vis[match(ntw_seeds$match, tot.visits$match )]
+
+write.csv(ntw_fruits, "data/useful/sitems_ntwfruits.csv")
+write.csv(ntw_seeds, "data/useful/sitems_ntwseeds.csv")
+
+##add richness data to sitems3.
+
+
 
