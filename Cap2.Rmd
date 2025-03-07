@@ -183,71 +183,51 @@ It was observed that pollinator species richness negatively influenced functiona
 
 ### **Population level reproductive success**
 
-For the models relating species-level indices to the reproductive success of each species, as specialization index gives us an idea of the number of different links a species could have, we removed the variable degree. In the case of Doñana, no variable significantly influenced the fruit set of the plants. However, in Gorbea, plant species richness (estimate = -1.24, z value = -2.35, p = 0.02; Figure 6A) and total received visits (estimate=-1.94, z=-2.6, p=0.008; Figure 6C) significantly reduced plant´s fruit set, while weighted closeness of each species (estimate=1.18, z value= 2.5, p=0.012; Figure 6B) and contribution to nestedness (estimate = 2.08, z value = 3.6, p value \< 0.0001; Figure 6D) had significant positive effects. Furthermore, we observed that sampling period significantly modulated the effects of contribution to nestedness and total received visits on fruit set, indicating that these relationships are not constant, but rather context-dependent (Supplementary Table S1 and Figure S16). Additionally, the interaction between sampling period and plant species richness exhibited a trending, non-significant effect (estimate = 0.214, z value = 1.763, p = 0.078), suggesting a possible temporal influence on the relationship between plant diversity and fruit set. Furthermore, the study revealed that reproductive success at the species level remained constant throughout the flowering season at both study sites (Supplementary Table S1). For the subset of plant species that we had at least data of 3 different periods, we could observed
+Firstly, we compared a null model with two simpler models including plant species ID as random effect and as fixed effect. We observed that fruit set significantly varied according to plant species ID (random effect model: χ² =21.48, df=1, p\<0.0001; fixed effect model: χ² =60.87, df=17, p\<0.0001). Secondly, we performed four different complex models including the variables pollinator species richness, plant species richness, plant speceis specialization, plant species weighted closeness, niche complementarity as the morisita index, total received visits, contribution to nestedness, sampling period and year. Model comparison using AIC revealed that including plant species ID as a random or fixed effect did not improve the initial model (ΔAIC \< 2), so we did not add it. For the models relating species-level indices to the reproductive success of each species, as specialization index gives us an idea of the number of different links a species could have, we removed the variable degree.
+
+In the case of Doñana, no variable significantly influenced the fruit set of the plants. However, in Gorbea, plant species richness (estimate = -1.24, z value = -2.35, p = 0.02; Supplementary Figure S16A) and total received visits (estimate=-1.94, z=-2.6, p=0.008; Supplementary Figure S16C) significantly reduced plant´s fruit set, while weighted closeness of each species (estimate=1.18, z value= 2.5, p=0.012; Supplementary Figure S16B) and contribution to nestedness (estimate = 2.08, z value = 3.6, p value \< 0.0001; Supplementary Figure S16D) had significant positive effects. Furthermore, we observed that sampling period significantly modulated the effects of contribution to nestedness and total received visits on fruit set, indicating that these relationships are not constant, but rather context-dependent (Supplementary Table S1 and Figure 6A and 6C). Additionally, the interaction between sampling period and plant species richness exhibited a trending, non-significant effect (estimate = 0.214, z value = 1.763, p = 0.078, Figure 6B), suggesting a possible temporal influence on the relationship between plant diversity and fruit set. Furthermore, the study revealed that reproductive success at the species level remained constant throughout the flowering season at both study sites (Supplementary Table S1). For the subset of plant species that we had at least data of 3 different periods, we could not observed significant differences of plant species richness effect on plant fruit set, as there was no interaction between plant identification ID and plant species richness (Likelihood Ratio Test: χ² = 4.57, p=0.71, df=7), while we observed that plant species richnes**efined*undefined*undefine**
 
 ```{r plots_splevel}
-knitr::include_graphics("Figs/p.g_sp_final1.png")
+knitr::include_graphics("Figs/gorb.fs_int.png")
 ```
 
-In the case of the seed number each fruit produced, different trends were observed.
+**Figure 6. Changes in plant fruit set in different sampling periods and its interaction with A) contribution to nestedness, B) plant richness and C) total for Gorbea study site.**
+
+For seed number per fruit, the trends differed from those observed for fruit set. In Gorbea, we found a significant interaction between pollinator species richness and sampling period (estimate = 0.236, z value = 1.987, p = 0.047, Figure 7D), indicating that the positive relationship between pollinator richness and seed number became stronger as the sampling season progressed. This suggests that the influence of pollinator diversity on seed production increased later in the season. Moreover, sampling pethe sampling period showed a *non-significant positive trend* on seed number in Gorbea (estimate = 0.22, z value = 1.88, p = 0.066). In Doñana we observed that fruits produced at least 1.5 seeds (z value=4.2, p=0) even when all other variables are equal to zero (Supplementary Table S2). Plant species richness had a significant positive effect on the number of seeds produced (estimate=0.48, z value=2.3, p=0.022), while plant specialization (estimate= -0.28, z value= -2.9, p=0.004) and contribution to nestedness (estimate=-0.33, z value=-2.4, p=0.015) negatively influenced seed production. The effect of contribution to nestedness on seed production showed a significant interaction with the sampling period (estimate=0.11, z value=3.4, p=0.001, Figure 7A), indicating that the effect became less negative throughout the sampling period. The same trend was detected for weighted closeness (estimate=0.15, z value=3.03, p=0.002, Figure 7B), while the effect of total received visits became more negative throughout the sampling period (estimate=-0.052, z value=-2.03, p=0.042, Figure 7C). In contrast to Gorbea, where the sampling period had a slight, positive effect on seed production (estimate=0.22, z=1.84, p=0.06), we observed a significant negative effect of the sampling period on seed production in Doñana (estimate=-0.31, z=-8.4, p\<0.0001).
+
+```{r seed.sp}
+knitr::include_graphics("Figs/doñana_sn.int.png")
+```
+
+**Figure 7.** **Changes in the number of seeds produced per fruit in different sampling periods and its interaction with A) contribution to nestedness, B) weighted closeness and C) total received visits for Doñana study site, and D) the interaction between sampling period and pollinator species richness in Gorbea study site.**
 
 ### Community level reproductive success
 
-In examining the reproductive success of the community, as indicated by fruit set and seed number per fruit, our findings revealed disparate trends between Doñana and Gorbea for the two models rebuilt. For both fruit set and the total number of seeds per fruit recorded for the community, we observe the same trend in the effect of the variables for the two models we built (Table 1 and Table 2).
+In examining the reproductive success of the community, as indicated by fruit set and seed number per fruit, our findings revealed the same trend in the effect of the variables for the two models we built (Supplementary Table S3 and Table S4). We had 29 networks with information about reproductive succes in Gorbea and 31 in Doñana. Some reproductive success data were not use due to the absence of network information for that day.
 
-At Doñana, we identified a sampling point that exerted a considerable influence on the outcomes of our models. Consequently, we opted to exclude this data point. Our analysis indicated that plant species richness had a pronounced negative impact on the collective reproductive success of the community across both fruit set and seed number per fruit metrics (Table 1 and Table 2) for both study sites. As the functional complementarity of pollinators demonstrated a high collinearity value with the total number of visits to the sampling point, it was observed that in the model incorporating this variable, functional complementarity had a positive influence on the reproductive success of the plants in the community in the case of Gorbea, but no influence in the case of Doñana. Nevertheless, our findings revealed no discernible impact of the overall number of visits documented on each sampling day or pollinator diversity on the reproductive success of plants in Gorbea and Doñana. It can be observed that the effect of functional complementarity on the reproductive success of plants in Gorbea is dependent on the sampling period, with functional complementarity showing a diminished impact on reproductive success as the sampling season progresses. This indicates that the effect in question exhibits significant variability over time during the same year. Furthermore, the impact of functional complementarity on reproductive success was observed to be less pronounced in 2022 compared to the baseline year of 2021. Moreover, the model that incorporates the functional complementarity variable demonstrates that, in a similar way to functional complementarity, the impact of nestedness on reproductive success during the spring sampling season is diminished as the season progresses. Additionally, it was observed that in the model incorporating the total number of visits recorded on each sampling day, the effect of nestedness was found to be less pronounced in 2022 with respect to the total number of seeds per plant (Table 2).
-
-**Table 1. Results of GLMM showing effects between network structur e metrics and total visits on community level fruit set for Doñana and Gorbea.** **M6 refers to models that include functional complementarity of pollinators and M7 refers to models that include the total number of visits recorded for each sampling day. Bold letters indicate variables with large effects.**
-
-```{r fruitset, echo=FALSE}
-load("fruitset_table.RData")
-table
-```
-
-**Table 2. Results of GLMM showing effects between network structure metrics and total visits on community level seed number per fruit for Doñana and Gorbea.** **M6 refers to models that include functional complementarity of pollinators and M7 refers to models that include the total number of visits recorded for each sampling day. Bold letters indicate variables with large effects.**
-
-```{r seeds, echo=FALSE}
-load("seeds_table.RData")
-table_seeds
-```
-
-```{r plots, echo=FALSE}
-load("RData/rs_comm.RData")
-p.d.rs_final
-```
-
-**Figure X. Partial residual plots for Doñana showing the effect of the single predictor which best explains the variability in community level fruit set. Dots represent average values of fruit set (N=31) and seed number per fruit (N=31) at the level of the community for all plant species considered.**
-
-With regard to the impact of the sampling period on reproductive success, our findings indicate that in Doñana, reproductive success declined as the season advanced. Conversely, in Gorbea, the period exhibited no discernible influence on its own (Figure Boxplot). Nevertheless, a slight trend was identified whereby the highest values of reproductive success were recorded in mid-spring, followed by a decline.
+Our analysis indicated that fruit set in 2022 in Gorbea was significantly lower than in 2021 (m7: estimate =-1.3, z value =-4.3, p\<0.001)(Supplementary Table S3). We also observed that in both study sites plants tend to produce fruits even when all other variables are equal to zero (Doñana: estimate= 1.5, z value=3.1, p=0.002; Gorbea: estimate=1.5, z value=2.4, p=0.015). The effect of total visits on fruit set was significantly influenced by the sampling period (estimate = -0.54, z = -2.1, p = 0.038). Specifically, the positive effect of receiving more visits decreased as the sampling period progressed. Results from seed production in Gorbea are presented from a modified model structure after the random effects structure had to be removed for the above mentioned reasons. Our models indicated a notable difference between Doñana and Gorbea in baseline seed production. In Doñana, plants exhibited a tendency to produce seeds even when all other variables in the model were set to zero (m6: estimate= 1.2, z value= 3.35, p=0.001). In contrast, the model for Gorbea suggested that seed production was negligible when all other variables were zero, although fruit production was still observed. With regard to the impact of the sampling period on community level seed production, our findings indicate that in Doñana, the number of seeds per fruit produced declined as the season advanced (m6: estimate=-0.23, z value= -3.34, p=0.001). Contrary, in Gorbea, sampling period did not influence seed production, but plant species richness had a marginally significant negative effect (m7: estimate=-2.17, z value= -1.93, p=0.05).
 
 ```{r boxplot, echo=FALSE}
-load("boxplot.period_fruitset.RData")
-combined_boxplot
+knitr::include_graphics("Figs/comm.repro.png")
 ```
 
-**Figure X. Figure illustrating the impact of the sampling period on community level plant reproductive success.**
-
-```{r rs.gorbea, echo=FALSE}
-load("RData/rs_comm.RData")
-p.g.rs_final
-
-
-```
-
-**Figure X. Partial residual plots for Gorbea showing the effect of the single predictor which best explains the variability in community level seed number per fruit. Dots represent average values of fruit set (N=31) and seed number per fruit (N=29) at the level of the community for all plant species considered.**
+**Figure 8. Community level reproductive success throughout sampling period in Doñana A and B, and plant richness effect on Gorbea´s community level seed production. Each point represents a network of a sampling day.**
 
 ### Aggregated community level reproductive success (Gorbea)
 
+FALTA POR HACER LOOPS DE REDES DE AÑO, 25 REDES –\> 15 PARA RELACIONAR CON EXITO REPRODUCTIVO.
+
+FRUIT SET DENTRO DE AÑO, MEDIA PARA CADA SAMPLING SITE EN CADA AÑO. (EN SI 10 REDES GORBEA).
+
+SI AGRUPAMOS 2 AÑOS 5 REDES.
+
 ### Stability in plant reproductive success
 
-We found no evidence that variation in network nestedness (estimate=-0.0032, p=0.39) or variation in functional complementarity (estimate=0.0031, p=0.55) of pollinators was related to community level reproductive success. (quitando el dato de hinjos con nestedness altisimo)
+In each sampling site, we calculated fruit set and seed number per fruit stability for the years 2021 and 2022. We found a significant positive effect of network nestedness variability on community-level fruit set stability (estimate = 6.7, z value = 3.00, p = 0.0027). A slight positive trend was also observed between pollinator richness and fruit set stability, though this was not statistically significant (estimate = 0.57, z value = 1.08, p = 0.09). However, no effect was observed for seed production.
 
-In the Doñana study area, we found that the stability of plant reproductive success was influenced by pollinator richness and the total number of visits received. The findings indicated that pollinator richness led to a significant decrease in variability of reproductive success (estimate=-0.41, p\<0.0001), thereby enhancing stability. Concurrently, the number of total visits received resulted in an increase in variability of reproductive success (estimate=0.32, p=0.016), leading to a reduction in stability. In a similar manner, the plant richness (estimate=0.27, p=0.048) and flowering period (estimate=0.13, p\<0.001) positively influenced on the variability of reproductive success, thereby decreasing its stability. However, in Gorbea, none of these variables exerted a significant influence on reproductive success. Nevertheless, we observed discrepancies in the variability of reproductive success between 2021 and 2022, with the latter year demonstrating greater variability (estimate=0.39, p=0.0002).
-
-```{r cv.fs, echo=FALSE} knitr::include_graphics("Figs/plots_cv_doñana.png")}
+```{r cv.fs, echo=FALSE}
+knitr::include_graphics("Figs/year_stability.png")
 ```
-
-### 
 
 ## Discussion
 

@@ -24,22 +24,30 @@ pacman::p_unload(pacman::p_loaded(), character.only = TRUE)
 pacman::p_load(tidyverse,here, patchwork, purrr, dplyr, lme4, carData,effects, easystats, lmertTest, performance,see,gridExtra,car, AICcmodavg, lattice,ggplot2,bipartite, glmmTMB, nlme, performance, cowplot, ggeffects, ggsci)
 
 
-fs<-read.csv(here("data", "rep.suc", "plant_fruitset.csv"))
-
-sitems<-read.csv(here("data","useful", "sitems_meanrepro.csv"))
-pielou <- read.csv(here("data","useful","datos_floracion.csv"))
-
-pielou <- pielou %>%
-  rename(Site_id = Site )
-
-sitems <- sitems %>%
-  left_join(pielou %>% select(Site_id, Year, Periodo, Bosque, H, J), 
-            by = c("Site_id", "Year", "Periodo", "Bosque"))
-
+sitems <- read.csv("./data/useful/sitems_ntwfruits.csv")
+sitems3 <- read.csv("./data/useful/sitems_ntwseeds.csv")
 
 #villa.s <- sitems %>%
  # subset(Site_id == "Doñana" & Bosque == "Villamanrique Chaparral" & Year == "2021" & Periodo=="2")
-  
+
+sitems.fs <- sitems %>%
+  group_by(Year, Bosque, Site, Periodo) %>%
+  summarize(mean_fruitset = mean(fruit_set, na.rm = TRUE),
+            se_fruitset = (sd(fruit_set, na.rm = TRUE))/sqrt(n()))
+
+
+sitems <- sitems %>%
+  group_by(Year, Bosque, Site, Periodo) %>%
+  summarise(Anidamiento = unique(Anidamiento),
+            poll.sp = unique(poll.sp),
+            plant.sp = unique(plant.sp),
+            total.visits = unique(total.visits),
+            comp.fun.pol = unique (comp.fun.pol))
+
+ntw_fruits <- sitems.fs %>%
+  left_join(sitems, by = c("Year","Site","Bosque","Periodo"))
+
+sitems <- ntw_fruits  
 sitems$Year<-as.factor(sitems$Year)
 sitems$Bosque<-as.character(sitems$Bosque)
 
@@ -47,20 +55,20 @@ glimpse(sitems)
 
 sitems_rescaled <- sitems %>%
   mutate(Anidamiento = scale(Anidamiento),
-         comp.fun.pol = scale(comp.fun.pol),
-         comp.fun.pl = scale(comp.fun.pl), 
-         robustness.pol = scale(robustness.pol), 
-         robustness.pl = scale(robustness.pl), 
+         comp.fun.pol = scale(comp.fun.pol), 
          total.visits = scale(total.visits),
          poll.sp = scale(poll.sp),
-         plant.sp = scale(plant.sp),
-         asymmetry = scale(asymmetry),
-         connectance = scale(connectance))
+         plant.sp = scale(plant.sp))
 
 sitems.fs <- sitems_rescaled %>%
-  filter(!is.na(mean.fs)& !is.nan(mean.fs))
+  filter(!is.na(mean_fruitset)& !is.nan(mean_fruitset))
 sitems.fs <- sitems.fs %>%
-  mutate(mean.fs = if_else(mean.fs == 1, 0.9999, mean.fs))
+  mutate(mean_fruitset = if_else(mean_fruitset == 1.00, 0.9999, mean_fruitset))
+
+sitems.fs <- sitems.fs %>%
+  mutate(mean_fruitset = if_else(mean_fruitset == 0, 0.000001, mean_fruitset))
+
+
 
 ##PCA
 #datos_pca <- sitems.fs %>% 
@@ -118,16 +126,10 @@ sitems.fs <- sitems.fs %>%
 #| warning: false
 #| message: false
 
-sitems.fs <- sitems.fs %>%
-  group_by(Bosque, Year, Site_id) %>% 
-  mutate(cv_nestedness = (sd(Anidamiento, na.rm = TRUE) / mean(Anidamiento, na.rm = TRUE)),
-         cv_comp = (sd(comp.fun.pol, na.rm = TRUE) / mean (comp.fun.pol, na.rem = TRUE))) %>%
-  ungroup()
-
 sitems.fs.g <- sitems.fs %>%
-  filter(Site_id=="Gorbea")
+  filter(Site =="Gorbea")
 sitems.fs.d <- sitems.fs %>%
-  filter(Site_id=="Doñana")
+  filter(Site =="Doñana")
 
 sitems.fs.g$Bosque <- as.factor(sitems.fs.g$Bosque)
 sitems.fs.d$Bosque <- as.factor(sitems.fs.d$Bosque)
@@ -138,7 +140,7 @@ library(glmmTMB)
 library(performance)
 library(nlme)
 m5_lme <- lme(
-  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits + cv_nestedness,  # Sin Periodo
+  fruit_set ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits + Periodo,  
   random = list( ~ 1 | Bosque, ~ 1 | Year),
   correlation = corAR1(form = ~ Periodo | Bosque),  # Correlación AR(1) por Bosque
   method = "ML",
@@ -148,7 +150,7 @@ check_collinearity(m5_lme)
 
 
 model_glmmTMB.g <- glmmTMB(
-  mean.fs ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits  + Periodo + (1 | Bosque) + (1 | Year),
+  mean_fruitset ~ poll.sp + plant.sp + Anidamiento + comp.fun.pol + total.visits  + Periodo + (1 | Bosque) + (1 | Year),
   family = "beta_family",
   data = sitems.fs.g
 )
@@ -171,7 +173,7 @@ model_glmmTMB.d <- glmmTMB(
 
 
 model_glmmTMB.int <- glmmTMB(
-  mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *  Periodo * Year + (1 | Bosque),
+  mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *  Periodo + Year + (1 | Bosque),
   family = "beta_family",
   data = sitems.fs.g
 )
@@ -243,15 +245,16 @@ hist(resid(model_glmmTMB.int), main = "Histograma de residuos glmmTMB", xlab = "
 
 # List of model formulas for fruit set
 formulas <- list(
-  m6 = mean.fs ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo * Year + (1 | Bosque),
-  m7 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  total.visits) *  Periodo * Year + (1 | Bosque)
-)
+  m6 = mean_fruitset ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo + Year + (1 | Bosque),
+  m7 = mean_fruitset ~ (poll.sp + plant.sp + Anidamiento +  total.visits) *  Periodo + Year + (1 | Bosque))
+
 
 models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.g))
+check_collinearity(models.g$m6)
 
 formulas.d <- list(
-  m6 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  comp.fun.pol) *  Periodo + (1 | Bosque),
-  m7 = mean.fs ~ (poll.sp + plant.sp + Anidamiento +  total.visits) * Periodo  + (1 | Bosque)
+  m6 = mean_fruitset ~ (poll.sp + plant.sp + Anidamiento +  comp.fun.pol) *  Periodo + (1 | Bosque),
+  m7 = mean_fruitset ~ (poll.sp + plant.sp + Anidamiento +  total.visits) * Periodo  + (1 | Bosque)
 )
 
 models.d <- map(formulas.d, ~ glmmTMB(.x, family = "beta_family", data = sitems.fs.d))
@@ -289,25 +292,24 @@ resultados_d <- map_dfr(models.d, ~ {
 resultados_d.sub <- map_dfr(models.d.sub, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
-    mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+    mutate(modelo = deparse(substitute(.x)), Region = "Doñana", Measure = "Fruit set")
 }, .id = "modelo.d.sub")
 
 
 resultados_g <- map_dfr(models.g, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
-    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
+    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea", Measure = "Fruit set")
 }, .id = "modelo_g")
 
 resultados_d <- resultados_d %>%
   select( Region,model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
 
 resultados_d.sub<- resultados_d.sub %>%
-  select( Region,model= modelo.d.sub, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+  select( Region, Measure, model= modelo.d.sub, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
 
 resultados_g <- resultados_g %>%
-  select(Region, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
-
+  select(Region, Measure, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
 
 library(kableExtra)
 # Combinar los resultados en una sola tabla
@@ -331,6 +333,28 @@ for (i in which(tabla_final_df$negrita)) {
 
 # Mostrar la tabla
 tabla_kable
+
+
+library(gt)
+tabla_gt <- tabla_final %>%
+  gt() %>%
+  tab_header(title = "Model results") %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `Z value`, `p value`),
+    decimals = 3
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = `p value` < 0.05)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#D3D3D3"),  # Gris oscuro
+    locations = cells_body(rows = (`p value` >= 0.05 & `p value` <= 0.07))
+  )
+n_m6 <- nobs(models.g$m7)
+# Guardar como PNG
+gtsave(tabla_gt, filename = "Figs/tabla_final_ntwfs.png", expand = 20)
+
 ```
 
 Mismos modelos para seed number
@@ -340,21 +364,72 @@ Mismos modelos para seed number
 #| message: false
 
 ###models for seed number
+sitems.sn <- sitems3 %>%
+  group_by(Year, Bosque, Site, Periodo) %>%
+  summarise(mean_sn = mean(Semillas_viables, na.rm = TRUE),
+            se_sn = (sd(Semillas_viables, na.rm = TRUE))/sqrt(n()))
+
+sitems.sn <- sitems.sn %>%
+  mutate(scaled_mean.sn = scale(mean_sn),
+         scaled_se.en = scale(se_sn))
+
+sitems3 <- sitems3 %>%
+  group_by(Year, Bosque, Site, Periodo) %>%
+  summarise(Anidamiento = unique(Anidamiento),
+            poll.sp = unique(poll.sp),
+            plant.sp = unique(plant.sp),
+            total.visits = unique(total.visits),
+            comp.fun.pol = unique (comp.fun.pol))
+
+
+
+ntw_sn <- sitems.sn %>%
+  left_join(sitems3, by = c("Year","Site","Bosque","Periodo"))
+
+sitems3 <- ntw_sn 
+
+
+sitems3_rescaled <- sitems3 %>%
+  mutate(Anidamiento = scale(Anidamiento),
+         comp.fun.pol = scale(comp.fun.pol), 
+         total.visits = scale(total.visits),
+         poll.sp = scale(poll.sp),
+         plant.sp = scale(plant.sp))
+
+sitems3_rescaled <- sitems3_rescaled %>%
+  filter(!is.na(mean_sn)& !is.nan(mean_sn))
+
+sitems.sn.g <- sitems3_rescaled %>%
+  filter(Site =="Gorbea")
+sitems.sn.d <- sitems3_rescaled %>%
+  filter(Site =="Doñana")
+
+sitems.sn.g$Bosque <- as.factor(sitems.sn.g$Bosque)
+sitems.sn.d$Bosque <- as.factor(sitems.sn.d$Bosque)
+
 formulas.sn <- list(
-  m6 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *  Periodo * Year + (1 | Bosque),
-  m7 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits) *  Periodo * Year + (1 | Bosque)
+  m6 = scaled_mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol) *  Periodo + Year,
+  m7 = scaled_mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits) *  Periodo + Year 
 )
 
-models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.g))
+####HAY SMEILLAS QUE NO TIENNE INFO DE LA RED DEL MOMENTO PORQUE EN ESE MOMENTO NO INTERACCIONARIA ESA PLANTA.
+colSums(is.na(sitems.sn.g))
+
+models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.sn.g))
+
+summary(models.g.sn$m7)
 
 formulas.d.sn <- list(
-  m6 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo + (1 | Bosque),
-  m7 = mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits ) * Periodo  + (1 | Bosque)
+  m6 = scaled_mean.sn ~ (poll.sp + plant.sp + Anidamiento + comp.fun.pol ) *  Periodo + (1 | Bosque),
+  m7 = scaled_mean.sn ~ (poll.sp + plant.sp + Anidamiento + total.visits ) * Periodo  + (1 | Bosque)
 )
 
-models.d.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.d))
+models.d.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.sn.d))
 
-models.d.sub.sn <- map(formulas.d.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems.fs.d.sub))
+
+n_m6 <- nobs(models.d.sub.sn$m6)
+summary(models.d.sub.sn$m7)
+
 
 aic_results <- map(models.g.sn, AIC)
 print(aic_results)
@@ -373,24 +448,24 @@ resultados_dsn <- map_dfr(models.d.sn, ~ {
 resultados_d.sub.sn <- map_dfr(models.d.sub.sn, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
-    mutate(modelo = deparse(substitute(.x)), Region = "Doñana")
+    mutate(modelo = deparse(substitute(.x)), Region = "Doñana", Measure = "Seed number")
 }, .id = "modelo.d.sub")
 
 # Extraer estimates, std.error y z value para modelos de Gorbea (modelos 2 y 3)
 resultados_gsn <- map_dfr(models.g.sn, ~ {
   coef_summary <- summary(.x)$coefficients$cond
   tibble::as_tibble(coef_summary, rownames = "term") %>%
-    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea")
-}, .id = "modelo_g")
+    mutate(modelo = deparse(substitute(.x)), Region = "Gorbea", Measure = "Seed number")
+}, .id = "modelo.g")
 
 resultados_dsn <- resultados_dsn %>%
-  select( Region,model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+  select( Region, model= modelo_d, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
 
 resultados_d.sub.sn<- resultados_d.sub.sn %>%
-  select( Region,model= modelo.d.sub, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
+  select( Region, Measure, model= modelo.d.sub, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`, `p value`= `Pr(>|z|)`)
 
 resultados_gsn <- resultados_gsn %>%
-  select(Region, model= modelo_g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
+  select(Region, ,Measure, model= modelo.g, term, Estimate = Estimate, `Std. Error` = `Std. Error`, `Z value` = `z value`,  `p value`= `Pr(>|z|)`)
 
 
 library(kableExtra)
@@ -415,550 +490,229 @@ for (i in which(tabla_final_df$negrita)) {
 
 # Mostrar la tabla
 tabla_kable
-```
-
-**Gorbea**
-
-```{r anidamiento.plot}
-#| warning: false
-#| message: false
 
 
-check_and_plot.g <- function(formula) {
-  model <- glmmTMB(formula, data = sitems.fs.g, family = "beta_family")
-  performance:: check_model(model)               
-  effects <- allEffects(model)     
-  plot.effects <- plot(effects)                   
-  summary(model)  
-  return(plot.effects)
-}
 
-check_and_plot.d <- function(formula) {
-model <- glmmTMB(formula, data = sitems.fs.d, family = "beta_family")
-performance:: check_model(model)               
-  effects <- allEffects(model)     
-  plot.effects <- plot(effects)                   
-  summary(model)  
-  return(plot.effects)
-}
-
-plots.g <- map(formulas, check_and_plot.g)
-plots.g<- map(formulas.d, check_and_plot.d)
-
-
-```
-
-**Doñana,** con punto que cambia modelo quitado
-
-```{r doñana.fs}
-#| warning: false
-#| message: false
-
-check_and_plot.d.sub <- function(formula) {
-model <- glmmTMB(formula, data = sitems.fs.d.sub, family = "beta_family")
-performance:: check_model(model)               
-  effects <- allEffects(model)     
-  plot.effects <- plot(effects)                   
-  summary(model)  
-  return(plot.effects)
-}
-plots.dsub<- map(formulas.d, check_and_plot.d.sub)
-```
-
-Graficos seleccionando variables:
-
-```{r var}
-#| warning: false
-#| message: false
-
-sitems.fs.d <- sitems.fs.d %>%
-  mutate(efecto_parcial = predict(models.d$m6, type = "response", re.form = NA),
-         efecto_m7 =predict(models.d$m7, type = "response", re.form = NA ),
-         efecto_sn =predict(models.d.sn$m6, type = "response", re.form = NA),
-         efecto_sn.m7=predict(models.d.sn$m7, type = "response", re.form = NA))
-
-sitems.fs.d.sub <- sitems.fs.d.sub %>%
-  mutate(efecto_parcial = predict(models.d.sub$m6, type = "response", re.form = NA),
-         efecto_m7 =predict(models.d.sub$m7, type = "response", re.form = NA ),
-          efecto_sn =predict(models.d.sub.sn$m6, type = "response", re.form = NA),
-         efecto_sn.m7=predict(models.d.sub.sn$m7, type = "response", re.form = NA))
-
-sitems.fs.g<- sitems.fs.g%>%
-  mutate(efecto_parcial = predict(models.g$m6, type = "response", re.form = NA),
-         efecto_m7 =predict(models.g$m7, type = "response", re.form = NA ), 
-          efecto_sn = ifelse(
-      is.na(mean.sn), 
-      NA, 
-      predict(models.g.sn$m6, newdata = ., type = "response", re.form = NA)
-    ),
-    efecto_sn.m7 = ifelse(
-      is.na(mean.sn), 
-      NA, 
-      predict(models.g.sn$m7, newdata = ., type = "response", re.form = NA)
-    )
+library(gt)
+tabla_gt <- tabla_finalsn %>%
+  gt() %>%
+  tab_header(title = "Model results") %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `Z value`, `p value`),
+    decimals = 3
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = `p value` < 0.05)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#D3D3D3"),  # Gris oscuro
+    locations = cells_body(rows = (`p value` >= 0.05 & `p value` <= 0.08))
   )
+n_m6 <- nobs(models.d.sn$m7)
+# Guardar como PNG
+gtsave(tabla_gt, filename = "Figs/tabla_final_ntwsn.png", expand = 20)
+```
 
+p.sn
 
-library(ggeffects)
-# Función para crear un gráfico con predicciones
-create_plot_with_predictions <- function(data, x_variable, model) {
-  # Obtener predicciones del modelo
-  predicciones <- ggpredict(model, terms = x_variable)
-  x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
-                       c("plant.sp", "comp.fun.pol"))
-  
-  # Crear el gráfico
-  ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
-    geom_point(alpha = 0.6, color = "#069") +
+```{r interaction_plots}
+#| warning: false
+#| message: false
+
+##VARIABLE significativa gorbea
+predicciones <- ggpredict(models.g.sn$m7, terms = c("plant.sp"))
+predicciones
+
+plot <-  ggplot(sitems.sn.g, aes(x = plant.sp, y = scaled_mean.sn)) +
+    geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
     geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
-                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
-    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
+                fill = "#E07A5F", alpha = 0.1, inherit.aes = FALSE) +
+    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#E07A5F", linewidth = 1.2) +
     labs(
-      x = x_labels[[x_variable]],
-      y = "Fruit set"
+      x = "Plant richness",
+      y = "Seed number",
+      title = "Gorbea"
     ) +
     theme_bw()+
-     theme(
-      axis.title = element_text(face = "bold", size=10),
-    
-    )
-}
-
-# Variables para graficar
-variables <- c("plant.sp", "comp.fun.pol")
-
-# Crear gráficos para `sitems.fs.g` y `models.g`
-plots_g <- map(variables, ~ create_plot_with_predictions(sitems.fs.g, .x, models.g$m6))
-
-# Crear gráficos para `sitems.fs.d` y `models.d`
-plots_d <- map(variables, ~ create_plot_with_predictions(sitems.fs.d.sub, .x, models.d.sub$m6))
-
-# Mostrar los gráficos
-p.g.plant <- plots_g[[1]]
-p.g.fc <- plots_g[[2]]
-p.d.plant <- plots_d[[1]]
-
-##seed number
-create_plot_with_predictions.sn <- function(data, x_variable, model) {
-  # Obtener predicciones del modelo
-  predicciones <- ggpredict(model, terms = x_variable)
-  x_labels <- setNames(c("Plant richness",  "Pollinator func. complementarity"), 
-                       c("plant.sp", "comp.fun.pol"))
-  
-  # Crear el gráfico
-  ggplot(data, aes_string(x = x_variable, y = "efecto_sn")) +
-    geom_point(alpha = 0.6, color = "#069") +
-    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
-                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
-    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
-    labs(
-      x = x_labels[[x_variable]],
-      y = "Seed number"
-    ) +
-    theme_bw()+
-     theme(
-      axis.title = element_text(face = "bold", size=10),
-    
-    )
-}
-
-# Variables para las que se generarán los gráficos
-variables <- c("plant.sp", "comp.fun.pol")
-
-plots_gsn <- map(variables, ~ create_plot_with_predictions.sn(sitems.fs.g, .x, models.g.sn$m7))
-
-# Crear gráficos para `sitems.fs.d` y `models.d`
-plots_dsn <- map(variables, ~ create_plot_with_predictions.sn(sitems.fs.d.sub, .x, models.d.sub.sn$m6))
-
-p.dsn <- plots_dsn [[1]]
-
-p.d.sn <- p.dsn + 
-  annotate("text", 
-           x = -1.5,  
-           y = 0.5,             
-           label = "Estimate: -0.14\np-value: 0.01", 
-           hjust = 0, size = 4, color = "black")
-
-p.d.plant <- p.d.plant + 
-  annotate("text", 
-           x = -1.5,  
-           y = 0.5,             
-           label = "Estimate: -0.89\np-value: 0.01", 
-           hjust = 0, size = 4, color = "black")
-
-p.gsn.plant <- plots_gsn[[1]]
-p.gsn.plant <- p.gsn.plant +
-  annotate("text", 
-           x = 1.3,  
-           y = 0.9,             
-           label = "Estimate: -0.45\np-value: 0.002", 
-           hjust = 0, size = 3.5, color = "black")
-  
-p.gsn.fc <- plots_gsn[[2]]
-
-p.gsn.fc <- p.gsn.fc +
-  annotate("text", 
-           x = 0.85,  
-           y = 0.8,             
-           label = "Estimate: 3.85\np-value: 0.01", 
-           hjust = 0, size = 3.5, color = "black")
-
-p.g.plant <- p.g.plant +
-  annotate("text", 
-           x = 1.4,  
-           y = 0.9,             
-           label = "Estimate: -0.68\np-value: 0.008", 
-           hjust = 0, size = 3.5, color = "black")
-
-p.g.fc <- p.g.fc +
-  annotate("text", 
-           x = 0.85,  
-           y = 0.9,             
-           label = "Estimate: 8.24\np-value: 0.002", 
-           hjust = 0, size = 3.5, color = "black")
+   theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12))
 
 
-
-
-p.d.rs <- plot_grid(
-  p.d.plant,  
-  p.d.sn, 
-  labels = c("A", "B"),
-  label_size = 12,  
-  ncol = 2  
-)
-
-
-p.d.rs_final <- ggdraw() +
-  draw_label("Doñana", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
-  draw_plot(p.d.rs, x = 0, y = 0, width = 1, height = 1)+
-  theme(plot.margin = margin(25, 10, 10, 10)) 
-
-
-
-p.g.rs <- plot_grid(
-  p.g.plant,
-  p.g.fc,
-  NULL,
-  NULL,
-  p.gsn.plant,
-  p.gsn.fc,
-  labels = c("A", "B", "", "", "C","D"),
-  label_size = 12,  
-  ncol = 2, nrow = 3,
-  rel_heights = c(1,0.1,1)
-)
-
-
-p.g.rs_final <- ggdraw() +
-  draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
-  draw_plot(p.g.rs, x = 0, y = 0, width = 1, height = 1)+
-  theme(plot.margin = margin(25, 10, 10, 10)) 
-
-
-save(p.d.rs_final, p.g.rs_final, file="RData/rs_comm.RData")
-ggsave("Figs/p.d.res_final.png", p.d.rs_final, dpi=300, width=10, height = 5, bg= "white") 
-
-ggsave("Figs/p.g.res_final.png", p.g.rs_final, dpi=300, width=10, height = 6, bg= "white") 
-
-
+sitems.sn.d$Periodo <- as.factor(sitems.sn.d$Periodo)
 sitems.fs.d$Periodo <- as.factor(sitems.fs.d$Periodo)
 
-ggplot(sitems.fs.d, aes(x = Periodo, y = efecto_parcial)) +
-  geom_boxplot(fill = "#8491B4FF", color = "#3C5488B2", outlier.colour = "#F39B7FB2", outlier.size = 2) + 
+p.fs <- ggplot(sitems.fs.d, aes(x = Periodo, y = mean_fruitset)) +
+  geom_boxplot(color = "#3C5488B2", outlier.colour = "#F39B7FB2", outlier.size = 2) + 
+  geom_jitter(color = "#8491B4FF",
+              position = position_jitter(width = 0.1, height = 0.1)) +
   labs(
-    title = "Fruit set througout sampling period",
+    title = "Doñana",
     x = "Sampling period",
     y = "Fruit set"
   ) +
-  theme_minimal() +
+  theme_bw() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
     axis.title = element_text(size = 12)
   )
 
+p.sn <- ggplot(sitems.sn.d, aes(x = Periodo, y = scaled_mean.sn)) +
+  geom_boxplot(color = "#3C5488B2", outlier.colour = "#F39B7FB2", outlier.size = 2) + 
+  geom_jitter(color = "#8491B4FF",
+              position = position_jitter(width = 0.1, height = 0.1)) +
+  labs(
+    title = "Doñana",
+    x = "Sampling period",
+    y = "Seed number"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
+
+p.sn
+
+plot.rep <- plot_grid (
+  p.fs, p.sn, labels = c("A", "B"),
+  label_size = 12, ncol=2
+)
+
+comm.rep <- plot_grid (plot.rep, plot, labels = c("", "C"), label_size = 12,
+                       ncol=1)
+
+ggsave("Figs/comm.repro.png", comm.rep, dpi=300, width=10, height = 6, bg= "white") 
 ```
-
-```{r m7}
-create_plot.m7 <- function(data, x_variable) {
-  x_labels <- setNames(c("Pollinator richness", "Plant richness",  "Total visits"), 
-                       c("poll.sp", "plant.sp", "total.visits"))
-  ggplot(data, aes_string(x = x_variable, y = "efecto_m7")) +
-       geom_point(alpha = 0.6, color="#069" ) +        
-    geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE) + 
-    labs(
-       x = x_labels[[x_variable]],
-      y = "Fruit set"
-    ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-      axis.title = element_text(size = 12)
-    )
-}
-
-# Variables para las que se generarán los gráficos
-variables <- c("poll.sp", "plant.sp", "total.visits")
-
-# Crear los gráficos usando map
-plots <- map(variables, ~ create_plot.m7(sitems.fs.d, .x))
-
-for (p in plots) {
-  print(p)
-}
-
-plots.sub <- map(variables, ~ create_plot.m7(sitems.fs.d.sub, .x))
-
-for (p in plots.sub) {
-  print(p)
-}
-
-plots.g <- map(variables, ~ create_plot(sitems.fs.g, .x))
-
-for (p in plots.g) {
-  print(p)
-}
-
-
-##seed number
-create_plot.sn.m7<- function(data, x_variable) {
-  x_labels <- setNames(c("Pollinator richness", "Plant richness",  "Total visits"), 
-                       c("poll.sp", "plant.sp", "total.visits"))
-  ggplot(data, aes_string(x = x_variable, y = "efecto_sn")) +
-       geom_point(alpha = 0.6, color="#069" ) +        
-    geom_smooth(method = "lm", color = "#DB5B06", fill = "#DF8F4499", se = TRUE)  + 
-    labs(
-       x = x_labels[[x_variable]],
-      y = "Seed number"
-    ) +
-    facet_wrap(~Periodo)+
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-      axis.title = element_text(size = 12)
-    )
-}
-
-# Variables para las que se generarán los gráficos
-variables <- c("poll.sp", "plant.sp", "total.visits")
-
-# Crear los gráficos usando map
-plots <- map(variables, ~ create_plot.sn.m7(sitems.fs.d, .x))
-
-for (p in plots) {
-  print(p)
-}
-
-plots.sub <- map(variables, ~ create_plot.sn.m7(sitems.fs.d.sub, .x))
-
-for (p in plots.sub) {
-  print(p)
-}
-
-plots.g <- map(variables, ~ create_plot.sn.m7(sitems.fs.g, .x))
-
-for (p in plots.g) {
-  print(p)
-}
-```
-
-plots
 
 ```{r cv}
-fs <- read.csv(here("data", "total_fs.csv"))
+###
+all_df <- read.csv("./data/useful/all_data.csv")
+fs <- read.csv(here("data", "total_fruits.csv"))
+seeds <- read.csv(here("data", "total_seeds.csv"))
+sitems <- read.csv("data/SITE_network_level_metrics.csv", sep=",")
+
 fs <- fs %>%
-  group_by(Site, Year, Bosque, Periodo) %>%
+  group_by(Site, Year, Bosque) %>%
   summarize(
     Media = mean(fruit_set, na.rm = TRUE),
     Desviacion = sd(fruit_set, na.rm = TRUE),
     CV = (Desviacion / Media)  
   )
 
-fs$Year <- as.factor (fs$Year)
-fs_expanded <- fs %>%
-  left_join(sitems_rescaled %>% 
-              select(Site_id, Year, Bosque, Periodo, total.visits, poll.sp, plant.sp), 
-            by = c("Site" = "Site_id", "Year", "Bosque", "Periodo"))
 
+year_data <- all_df %>%
+  group_by(Site, Year, Bosque)%>%
+  summarise(poll.sp = n_distinct(Pollinator_id),
+            plant.sp = n_distinct(Planta),
+            total.visits = n())
 
-library(lmerTest)
-modelo <- lmer(CV ~ total.visits + poll.sp + plant.sp + Periodo + (1|Site) + (1|Bosque), data = fs_expanded, na.action = na.exclude)
+years_info <- fs %>%
+  left_join(year_data, by=c("Site","Year","Bosque"))
 
-summary(modelo)
-###aumento de diversdiad de polinizadores disminuye la variacion. es decir aumenta la estabilidad dek exito reproductivo.
+sitems_cv <- sitems %>%
+  group_by(Site_id, Year, Bosque) %>%
+  summarise(
+    Media_ani = mean(Anidamiento, na.rm = TRUE),
+    Desviacion_ani = sd(Anidamiento, na.rm = TRUE),
+    CV_nest = (Desviacion_ani / Media_ani)  
+  )
 
-##aumento de diversidad de plantas aumenta la variacion asiqeue disminuye la estabilidad. 
+sitems_cv <- sitems_cv %>%
+  rename(Site = Site_id)
 
-## la cantidad total de visitas registradas no tiene ningun efcto en la estabilidad
-plot(modelo)
-anova(modelo, ddf = "Kenward-Roger")
+years_info <- years_info %>%
+  left_join(sitems_cv, select(c("Site","Year","Bosque","CV_nest")),
+            by=c("Site", "Year", "Bosque"))
 
-modelo_nulo <- lmer(CV ~ 1 + (1|Site) + (1|Bosque), data = fs_expanded, na.action = na.exclude)
-anova(modelo_nulo, modelo)
+years_info <- years_info %>%
+  mutate(total.visits = scale(total.visits),
+         poll.sp = scale(poll.sp),
+         plant.sp = scale (plant.sp))
 
-fs$Year <- as.factor(fs$Year)
-library(ggsci)
-p1 <- ggplot(fs, aes(x = Periodo, y = CV, color = Year)) +
-  geom_point() +
-  geom_smooth()+
-  facet_wrap(~ Site) +
-  labs(title = "",
-       x = "Period",
-       y = "Fruit set CV") +
-  theme_minimal() +
-  scale_color_npg() +
-  scale_x_continuous(breaks = 1:9) 
-  
-library(ggeffects)
+range(years_info$CV)
 
-fs_expanded.g <- fs_expanded %>%
+years.g <- years_info %>%
   filter(Site=="Gorbea")
 
-fs_expanded.d <- fs_expanded %>%
+years.d <- years_info %>%
   filter(Site=="Doñana")
 
-hist(fs_expanded.d$CV)
-hist(1 / fs_expanded.d$CV)
+library(lmerTest)
+modelo <- glmmTMB(1/CV ~ total.visits + poll.sp + plant.sp + CV_nest  +  (1|Bosque), data = years.g, na.action = na.exclude, family = "gaussian" )
+
+summary(modelo)
+
+# Extraer los coeficientes del modelo
+coefs <- fixef(modelo)$cond
+intercept <- coefs["(Intercept)"]  # Intercepto
+slope_CVnest <- coefs["CV_nest"]  
+
+#### VARIABILIDAD EN EL ANIDAMIENTO AUMENTA ESTABILIDAD DE EXITO REPRODUCTIVO.
+min_x <- min(years.g$CV_nest)
+max_x <- max(years.g$CV_nest)
+
+plot <- ggplot(years.g, aes(x = CV_nest, y = 1/CV)) +
+  geom_point(position = position_jitter(width = 0.01, height = 0.01), color = "#069", alpha = 0.6, size = 0.8) +
+  geom_abline(intercept = intercept, slope = slope_CVnest, color = "#E07A5F", linewidth = 1.2) +  # Añadir la línea de regresión
+  labs(
+    x = "CV nestedness",
+    y = "1/CV fruit set",
+    title = "Gorbea"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  ) +
+  xlim(0.2, 0.9) +   # Ajustar los límites del eje x manualmente
+  ylim(0, 7)
+
+p1 <- plot +
+  annotate("text", 
+           x = 0.2,  
+           y = 5.5,             
+           label = "Estimate: 6.7\np-value: 0.0027", 
+           hjust = 0, size = 3.5, color = "black")
+
+ggsave("Figs/year_stability.png", p1, dpi=300, width=5, height = 3, bg= "white") 
+
+###repetimos para seed number
+
+seeds <- seeds %>%
+  group_by(Site, Year, Bosque) %>%
+  summarize(
+    Media = mean(Semillas_viables, na.rm = TRUE),
+    Desviacion = sd(Semillas_viables, na.rm = TRUE),
+    CV = (Desviacion / Media)  
+  )
+
+years_seeds <- seeds %>%
+  left_join(year_data, by=c("Site","Year","Bosque"))
+
+
+years_seeds <- years_seeds %>%
+  left_join(sitems_cv, select(c("Site","Year","Bosque","CV_nest")),
+            by=c("Site", "Year", "Bosque"))
+
+
+years_seeds <- years_seeds %>%
+  mutate(total.visits = scale(total.visits),
+         poll.sp = scale(poll.sp),
+         plant.sp = scale (plant.sp))
+
+range(years_seeds$CV)
+
+years.g.sn <- years_seeds %>%
+  filter(Site=="Gorbea")
 
 library(lmerTest)
-fs_expanded.g$CV[fs_expanded.g$CV == 0] <- 0.000001
+modelo <- glmmTMB(1/CV ~ total.visits + poll.sp + plant.sp + CV_nest  +  (1|Bosque), data = years.g.sn, na.action = na.exclude, family = "gaussian" )
 
-##A NIVEL DE AÑO AGREGADO
-### CV DE ANIDAMIENTO Y COMPL. INTERANUAL
-
-modelo.g.cuad <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + Year + (1|Bosque), 
-                     data = fs_expanded.g, 
-                     family = Gamma(link = "log"),
-                     na.action = na.exclude)
-
-library(broom.mixed)
-modelo_summary.cuad <- tidy(modelo.g.cuad, effects = "fixed")
-###nada significativo. AÑo 2022 datos de fruit set mas variables.
+summary(modelo)
 
 
-fs_expanded.d$CV[fs_expanded.d$CV == 0] <- 0.000001
-modelo.d <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + (1|Bosque), 
-                     data = fs_expanded.d, 
-                     family = Gamma(link = "log"),
-                     na.action = na.omit)
-
-# Modelo con interacción
-modelo_con_inter <- glmmTMB((1/CV) ~ total.visits + poll.sp + plant.sp + Periodo + poll.sp * Periodo + (1|Bosque),
-                      data = fs_expanded.d,
-                      family = Gamma(link = "log"),
-                      na.action = na.omit)
-
-# Prueba de razón de verosimilitud
-anova(modelo.d, modelo_con_inter)
-
-
-
-modelo_summary <- tidy(modelo.d, effects = "fixed")
-##verificar modelo
-library(DHARMa)
-library(performance)
-library(insight)
-
-simulationOutput <- simulateResiduals(fittedModel = modelo.d, n = 250)
-plot(simulationOutput)
-testDispersion(simulationOutput)
-residuals <- residuals(modelo.d, type = "pearson")  # Residuos de Pearson
-plot(fitted(modelo.d), residuals,
-     xlab = "Valores Ajustados", ylab = "Residuos de Pearson",
-     main = "Residuos vs. Valores Ajustados")
-abline(h = 0, col = "red") 
-
-
-##doñana plot
-create_plot_with_predictions.cv<- function(data, x_variable, model) {
-  # Obtener predicciones del modelo
-  predicciones <- ggpredict(model, terms = x_variable, bias_correction = TRUE)
-  x_labels <- setNames(c("Pollinator richness",  "Total visits", "Plant richness", "Periodo"), 
-                       c("poll.sp", "total.visits", "plant.sp", "Periodo"))
-  
-  # Crear el gráfico
-  ggplot(data, aes_string(x = x_variable, y = "CV")) +
-    geom_point(alpha = 0.6, color = "#069") +
-    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
-                fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE) +
-    geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth = 1.2) +
-    labs(
-      x = x_labels[[x_variable]],
-      y = "Fruit set CV"
-    ) +
-    theme_bw()+
-    theme(
-      axis.title = element_text(face = "bold", size=10),
-    
-    )
-}
-
-
-# Variables para las que se generarán los gráficos
-variables <- c("poll.sp", "total.visits", "plant.sp", "Periodo")
-
-plots_dcv<- map(variables, ~ create_plot_with_predictions.cv(fs_expanded.g, .x, modelo.g))
-
-cv_poll <- plots_dcv[[1]]
-cv_visits <- plots_dcv[[2]]
-cv_plant <- plots_dcv[[3]]
-cv_period <- plots_dcv[[4]]
-
-p.cv_poll<- cv_poll + 
-  annotate("text", 
-           x = 2,  
-           y = 0.9,             
-           label = "Estimate: -0.41\np-value < 0.0001", 
-           hjust = 0, size = 3.5, color = "black")+
-  coord_cartesian(ylim = c(-1, 2), xlim = c(-1, 3.2))
-
-p.cv_visits <- cv_visits  + 
-  annotate("text", 
-           x = 0.5,  
-           y = 1.5,             
-           label = "Estimate: 0.32\np-value: 0.016", 
-           hjust = 0, size = 3.5, color = "black")+
-    coord_cartesian(ylim = c(-0.5, 1.8), xlim = c(-1, 2))
-
-
-p.cv_plant <- cv_plant + 
-  annotate("text", 
-           x = 0,  
-           y = 1.5,             
-           label = "Estimate: 0.27\np-value: 0.048", 
-           hjust = 0, size = 3.5, color = "black")
-
-
-p.cv_period <- cv_period + 
-  annotate("text", 
-           x = 1,  
-           y = 1.2,             
-           label = "Estimate: 0.13\np-value< 0.001", 
-           hjust = 0, size = 3.5, color = "black")
-
-
-plots_cv_doñana <- plot_grid(
-  p.cv_poll,
-  p.cv_visits,
-  NULL,
-  NULL,
-  p.cv_plant,
-  p.cv_period,
-  labels = c("A", "B","","","C","D"),
-  label_size = 12,
-  ncol=2,
-  rel_heights = c(1,0.1,1)
-)
-
-plots_cv_doñana <- ggdraw() +
-  draw_label("Doñana", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
-  draw_plot(plots_cv_doñana, x = 0, y = 0, width = 1, height = 1)+
-    theme(plot.margin = margin(25, 10, 10, 10)) 
-
-ggsave("Figs/plots_cv_doñana.png", plots_cv_doñana, dpi=300, width=10, height = 6, bg= "white") 
-
-ggsave("Figs/cv_period.png", p1, dpi=300, width=10, height = 6, bg= "white") 
-save(plots_cv_doñana, p1, file = "Rdata/cv_fs_doñana.RData" )
 
 ```
 
@@ -1008,25 +762,6 @@ anova(modelo_nulo, modelo)
 ###NO PODEMOS RECHAZAR HIPOTESIS NULA, DE QUE NO HAY RELACION ENTRE CV DEL NESTEDNESS Y MEAN FRUITSET. 
 ##pendiente de la linea: 0.0031, p value 0.59
 
-# Obtener las predicciones del modelo
-predicciones <- ggpredict(modelo, terms = "CV")
-
-
-# Crear el gráfico
-p.cv_comp <- ggplot(comp_final, aes(x = CV, y = mean_fs)) +
-  geom_point(alpha = 0.6, color="#069") +  
- geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high), 
-              fill = "#DF8F4499", alpha = 0.2, inherit.aes = FALSE)+ 
-  geom_line(data = predicciones, aes(x = x, y = predicted), color = "#DB5B06", linewidth=1.2) + 
-  labs(x = "CV of Poll.complementarity", y = "Mean Fruit Set"
-       ) +
-  annotate("text", 
-           x = min(comp_final$CV, na.rm = TRUE) + 2,  
-           y = max(comp_final$mean_fs, na.rm = TRUE) - 0.1,             label = "Estimate: 0.0031\np-value: 0.59", 
-           hjust = 0, size = 4, color = "black") + 
-  theme_minimal()
-
-print(p.cv_comp)
 ```
 
 ```{r cv_nest}

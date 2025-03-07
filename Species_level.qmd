@@ -204,6 +204,7 @@ check_collinearity(mod_glmm)
 
 # Ver más detalles de los modelos candidatos
 #sw(model_set) 
+library(dplyr)
 sitems2.fs <- sitems2.fs %>%
   rename(poll.sp.scaled = `poll.sp.scaled <- scale(poll.sp)`,
          plant.sp.scaled = `plant.sp.scaled <- scale(plant.sp)` )
@@ -219,19 +220,41 @@ sitems2.fs.d$Periodo <- as.numeric(sitems2.fs.d$Periodo)
 sitems2.fs.g$Bosque <- as.factor(sitems2.fs.g$Bosque)
 sitems2.fs.d$Bosque <- as.factor(sitems2.fs.d$Bosque)
 
+
+
+modelo_nulo <- glmmTMB(fruit_set ~ 1,  
+                      data = sitems2.fs.g,
+                      family = "beta_family")
+
+
+modelo_planta_aleatorio <- glmmTMB(fruit_set ~ 1 + (1|Planta),
+                                 data = sitems2.fs.g,
+                                 family = "beta_family")
+
+
+modelo_planta_fijo <- glmmTMB(fruit_set ~ Planta,
+                             data =sitems2.fs.g,
+                             family = "beta_family")
+
+anova(modelo_nulo, modelo_planta_aleatorio)
+anova(modelo_nulo, modelo_planta_fijo)
+##diferencias en el exitro reproductivo entre las sp de plantas
+
 # List of model formulas for fruit set
 formulas <- list(
   m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) + (1 | Bosque),
   m7 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo + Year + (1|Planta) + (1 | Bosque),
-   m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1 | Bosque)
+   m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1 | Bosque),
+  m9 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness + tot.visits.pl + nestedcontribution) * Periodo + Year + Planta + (1 | Bosque)
   )
 
 formulas.d <- list(
   m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo  + (1|Planta) + (1 | Bosque),
   m7 = fruit_set~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo  + (1|Planta) + (1 | Bosque),
-   m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + tot.visits.pl + nestedcontribution) *  Periodo  + (1 | Bosque)
+   m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + tot.visits.pl + nestedcontribution) *  Periodo  + (1 | Bosque),
+  m9 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness + tot.visits.pl + nestedcontribution) * Periodo + Planta + (1 | Bosque)
+  
   )
-
 
 
 models.g <- map(formulas, ~ glmmTMB(.x, family = "beta_family", data = sitems2.fs.g, na.action = na.exclude))
@@ -398,8 +421,6 @@ save(table, file="RData/splevel.fruitset_table.RData")
 #| warning: false
 #| message: false
 
-#####MODELOS DAN NAs PARA SEED NUMBER. 
-
 
 resultados_dsn <- {
   coef_summary <- summary(models.d.sn$m8)$coefficients$cond
@@ -465,8 +486,6 @@ tabla_gt <- tabla_final %>%
 gtsave(tabla_gt, filename = "Figs/tabla_final_popseed.png", expand = 20)
 ```
 
-p
-
 ```{r repro plots}
 #| warning: false
 #| message: false
@@ -490,7 +509,7 @@ create_plot_with_predictions <- function(data, x_variable, model) {
                        c("plant.sp.scaled", "Closeness", "tot.visits.pl", "nestedcontribution"))
   
   # Crear el gráfico
-  ggplot(data, aes_string(x = x_variable, y = "efecto_parcial")) +
+  ggplot(data, aes_string(x = x_variable, y = "fruit_set")) +
     geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
     geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
                 fill = "#E07A5F", alpha = 0.1, inherit.aes = FALSE) +
@@ -516,29 +535,29 @@ p.g.nest<- plots_g[[4]]
 
 p.g.pl <- p.g.pl +
   annotate("text", 
-           x = -1.5,  
-           y = 0.3,             
+           x = -1,  
+           y = 0.25,             
            label = "Estimate: -1.24\np-value: 0.02", 
            hjust = 0, size = 3.2, color = "black")
 
 p.g.clos <- p.g.clos +
   annotate("text", 
            x = -1.5,  
-           y = 0.35,             
+           y = 0.2,             
            label = "Estimate: 1.18\np-value: 0.012", 
            hjust = 0, size = 3.2, color = "black")
 
 p.g.vis <- p.g.vis +
   annotate("text", 
-           x = 0,  
-           y = 0.45,             
+           x = 0.25,  
+           y = 0.3,             
            label = "Estimate: -1.94\np-value: 0.008", 
            hjust = 0, size = 3.2, color = "black")
 
 p.g.nest <- p.g.nest +
   annotate("text", 
-           x = 0.4,  
-           y = 0.35,             
+           x = 0.5,  
+           y = 0.6,             
            label = "Estimate: 2.08\np-value: < 0.0001", 
            hjust = 0, size = 3.2, color = "black")
 
@@ -563,6 +582,93 @@ p.g.sp_final <- ggdraw() +
 save(p.g.sp_final, file="RData/splevel_repro.RData")
 
 ggsave("Figs/p.g_sp_final1.png", p.g.sp_final, dpi=300, width=10, height = 6, bg= "white") 
+
+##VARIABLES CON INTERACCIONES
+create_plot_with_predictions <- function(data, x_variable, model) {
+   # Obtener predicciones del modelo
+   prediction <- ggpredict(model, terms = c(x_variable, "Periodo"))
+   x_labels <- setNames(c("Contribution to nestedness", "Plant richness", "Total visits"), 
+                        c("nestedcontribution",  "plant.sp.scaled", "tot.visits.pl"))
+   
+   # Crear el gráfico
+   ggplot(data, aes_string(x = x_variable, y = "fruit_set")) +
+     geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
+     geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
+                 alpha = 0.1, inherit.aes = FALSE) +
+     geom_line(data = prediction, aes(x = x, y = predicted, color= group), linewidth = 1.2) +
+     labs(
+       x = x_labels[[x_variable]],
+       y = "Fruit set"
+     ) +  
+     scale_color_manual(values = colors, name="Period")+
+     scale_fill_manual(values = colors, name="Period")+
+     theme(legend.position = "bottom")+ 
+     theme_bw()
+ }
+
+# Variables para graficar
+variables <- c("nestedcontribution",  "plant.sp.scaled", "tot.visits.pl")
+
+
+plots_g<- map(variables, ~ create_plot_with_predictions(sitems2.fs.g, .x, models.g$m8))
+
+p1 <- plots_g[[1]]
+p2 <- plots_g[[2]]
+p3 <- plots_g[[3]]
+
+
+p1<- p1 +
+  annotate("text", 
+           x = 0.5,  
+           y = 0.25,             
+           label = "Estimate: -0.41\np-value: 0.005", 
+           hjust = 0, size = 2.8, color = "black")+
+  theme(legend.position = "none")
+
+p2 <- p2 +
+  annotate("text", 
+           x = 1.7,  
+           y = 0.9,             
+           label = "Estimate: 0.2\np-value: 0.078", 
+           hjust = 0, size = 2.8, color = "black")+
+  theme(legend.position = "none")
+
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend <- get_only_legend(p3 + theme(legend.direction = "horizontal", legend.position = "bottom"))
+
+p3 <- p3 +
+  annotate("text", 
+           x = -0.25,  
+           y = 0.25,             
+           label = "Estimate: 0.54\np-value: 0.01", 
+           hjust = 0, size = 2.8, color = "black")+
+  theme(legend.position = "none")
+
+p.g.fs<- plot_grid(
+  p1, 
+  p2,
+  p3,
+  legend,
+  labels = c("A", "B", "C"),
+  label_size = 12,  
+  ncol = 2,
+  rel_heights = c(1,1,1,0.1)
+)
+
+
+p.g.fs.final <- ggdraw() +
+  draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
+  draw_plot(p.g.fs, x = 0, y = 0, width = 1, height = 1)+
+  theme(plot.margin = margin(20, 10, 10, 10)) 
+
+ggsave("Figs/gorb.fs_int.png", p.g.fs.final, dpi=300, width=7, height = 4, bg= "white") 
 
 
 sitems2.fs.g$Periodo <- as.factor(sitems2.fs.g$Periodo)
@@ -677,8 +783,15 @@ plantas_seleccionadas<- plantas_seleccionadas%>%
 plantas_seleccionadas <- plantas_seleccionadas%>%
   mutate(poll.sp.scaled=scale(poll.sp),
          plant.sp.scaled=scale(plant.sp))
+library(glmmTMB)
+mplanta <- glmmTMB(fruit_set ~ Periodo + Planta + Periodo:Planta,
+                 na.action = na.exclude,
+                 family = "beta_family",
+                 data = plantas_seleccionadas)
 
-
+summary(mplanta)
+Anova(mplanta, type = "III")
+drop1(mplanta, test = "Chisq")
 
 predicciones <- ggpredict(models.g$m8, terms = c("plant.sp.scaled", "Periodo"))
 
@@ -702,59 +815,200 @@ ggsave("Figs/plantsp_fruitset.png", fs_plant.p, dpi=300, width=7, height = 4, bg
 
 
 
-###deaqui abajo no sirve ahora
-# Crear los gráficos usando map
-plots <- map(variables, ~ create_plot(sitems2.fs.d, .x))
-names(plots) <- c("plot_1a", "plot_1b", "plot_1c")  
-for (p in plots) {
-  print(p)
+```
+
+```{r sn}
+####PLOTS PARA SEED NUMBER CON INTERACCION PERIODO
+
+sitems3_rescaled.g <- sitems3_rescaled.g %>%
+  mutate(
+    efecto_parcial = predict(models.g.sn$m8, type = "response", re.form = NA)
+  )
+
+sitems3_rescaled.d <- sitems3_rescaled.d %>%
+  mutate(
+    efecto_parcial = predict(models.d.sn$m8, type = "response", re.form = NA)
+  )
+
+pred <- ggpredict(models.d.sn$m8, terms="nestedcontribution")
+print(head(pred))
+summary(models.d.sn$m8)
+
+
+
+create_plot_with_predictions <- function(data, x_variable, model) {
+  # Obtener predicciones del modelo
+  prediction <- ggpredict(model, terms = x_variable)
+  x_labels <- setNames(c("Plant richness", "Specialization"), 
+                       c("plant.sp.scaled",  "Specialization"))
+  
+  # Crear el gráfico
+  ggplot(data, aes_string(x = x_variable, y = "scaled_seeds")) +
+    geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
+    geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high),
+                fill = "#E07A5F", alpha = 0.1, inherit.aes = FALSE) +
+    geom_line(data = prediction, aes(x = x, y = predicted), color = "#E07A5F", linewidth = 1.2) +
+    labs(
+      x = x_labels[[x_variable]],
+      y = "Seed number"
+    ) +
+    theme_bw()
 }
 
-plots$plot_1a
-plots$plot_1b
-plots$plot_1c
+# Variables para graficar
+variables <- c("plant.sp.scaled", "Specialization")
 
-library(patchwork)
-
-combined_plot_1  <- plot_grid(
-  plots$plot_1a, 
-  plots$plot_1b, 
-  plots$plot_1c, 
-  ncol = 3,   
-  labels = c("A", "B", "C")) 
-combined_plot_1 
+# Crear gráficos para `sitems.fs.g` y `models.g`
+plots_d <- map(variables, ~ create_plot_with_predictions(sitems3_rescaled.d, .x, models.d.sn$m8))
 
 
-plots_2$plot_2a
-plots_2$plot_2b
-plots_2$plot_2c
+p1 <- plots_d[[1]]
+p2 <- plots_d [[2]]
 
-combined_plot_2  <- plot_grid(
-  plots_2$plot_2a, 
-  plots_2$plot_2b, 
-  plots_2$plot_2c, 
-  ncol = 3,   
-  labels = c("D", "E", "F"))
-combined_plot_2
+p1<- p1 +
+  annotate("text", 
+           x = -1,  
+           y = 2.5,             
+           label = "Estimate: 0.48\np-value: 0.02", 
+           hjust = 0, size = 3.2, color = "black")
 
-library(cowplot)
-title_doñana <- ggdraw() + 
-  draw_label("Doñana", fontface = 'bold', size = 12, hjust = 0.5)
+p2 <- p2 +
+  annotate("text", 
+           x = 1.5,  
+           y = 2.5,             
+           label = "Estimate: -0.28\np-value: 0.004", 
+           hjust = 0, size = 3.2, color = "black")
 
-title_gorbea <- ggdraw() + 
-  draw_label("Gorbea", fontface = 'bold', size = 12, hjust = 0.5)
-
-
-doñana_combined <- plot_grid(title_doñana, combined_plot_1, ncol = 1, rel_heights = c(0.1, 1))
-gorbea_combined <- plot_grid(title_gorbea, combined_plot_2, ncol = 1, rel_heights = c(0.1, 1))
-
-
-final_combined_plot <- plot_grid(
-  doñana_combined, gorbea_combined, 
-  ncol = 1, rel_heights = c(1, 1),  label_size = 12
+p.d.sn<- plot_grid(
+  p1, 
+  p2,
+  labels = c("A", "B"),
+  label_size = 12,  
+  ncol = 2
 )
 
-save(final_combined_plot, file="RData/sp.level_fs")
+
+p.d.sn.final <- ggdraw() +
+  draw_label("Doñana", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
+  draw_plot(p.d.sn, x = 0, y = 0, width = 1, height = 1)+
+  theme(plot.margin = margin(20, 10, 10, 10)) 
+
+ggsave("Figs/dooñana_sn.png", p.d.sn.final, dpi=300, width=7, height = 4, bg= "white") 
+
+
+##VARIABLES CON INTERACCIONES
+create_plot_with_predictions <- function(data, x_variable, model) {
+   # Obtener predicciones del modelo
+   prediction <- ggpredict(model, terms = c(x_variable, "Periodo"))
+   x_labels <- setNames(c("Contribution to nestedness", "Weighted closeness", "Total visits", "Pollinator richness"), 
+                        c("nestedcontribution",  "Closeness", "tot.visits.pl", "poll.sp.scaled"))
+   
+   # Crear el gráfico
+   ggplot(data, aes_string(x = x_variable, y = "scaled_seeds")) +
+     geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
+     geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
+                 alpha = 0.1, inherit.aes = FALSE) +
+     geom_line(data = prediction, aes(x = x, y = predicted, color= group), linewidth = 1.2) +
+     labs(
+       x = x_labels[[x_variable]],
+       y = "Seed number"
+     ) +  
+     scale_color_manual(values = colors, name="Period")+
+     scale_fill_manual(values = colors, name="Period")+
+     theme(legend.position = "bottom")+ 
+     theme_bw()
+ }
+
+# Variables para graficar
+variables <- c("nestedcontribution",  "Closeness", "tot.visits.pl", "poll.sp.scaled")
+
+# Crear gráficos para `sitems.fs.g` y `models.g`
+plots_d <- map(variables, ~ create_plot_with_predictions(sitems3_rescaled.d, .x, models.d.sn$m8))
+
+plots_g<- map(variables, ~ create_plot_with_predictions(sitems3_rescaled.g, .x, models.g.sn$m8))
+
+p1 <- plots_d[[1]]
+p2 <- plots_d[[2]]
+p3 <- plots_d[[3]]
+
+p4 <- plots_g[[4]]
+
+p1<- p1 +
+  annotate("text", 
+           x = 1,  
+           y = 2.5,             
+           label = "Estimate: 0.11\np-value: 0.001", 
+           hjust = 0, size = 2.8, color = "black")+
+  theme(legend.position = "none")+
+  labs(title = "Doñana")+
+ theme(plot.title = element_text(hjust = 0.1))
+
+p2 <- p2 +
+  annotate("text", 
+           x = 0,  
+           y = -3,             
+           label = "Estimate: 0.15\np-value: 0.002", 
+           hjust = 0, size = 2.8, color = "black")+
+        theme(legend.position = "none")+
+   labs(title = "Doñana")+
+ theme(plot.title = element_text(hjust = 0.1))
+
+
+
+get_only_legend <- function(plot) { 
+  plot_table <- ggplot_gtable(ggplot_build(plot)) 
+  legend_plot <- which(sapply(plot_table$grobs, function(x) x$name) == "guide-box") 
+  legend <- plot_table$grobs[[legend_plot]] 
+  return(legend) 
+} 
+
+# extract legend from plot1 using above function 
+legend <- get_only_legend(p3 + theme(legend.direction = "horizontal", legend.position = "bottom"))
+
+
+
+p3 <- p3 +
+  annotate("text", 
+           x = 1.5,  
+           y = 2.5,             
+           label = "Estimate: -0.05\np-value: 0.042", 
+           hjust = 0, size = 2.8, color = "black")+
+    theme(legend.position = "none")+
+   labs(title = "Doñana")+
+ theme(plot.title = element_text(hjust = 0.1))
+
+
+p4 <- p4 + labs(title = "Gorbea")+
+   annotate("text", 
+           x = 0.5,  
+           y = 3.5,             
+           label = "Estimate: 0.24\np-value: 0.047", 
+           hjust = 0, size = 2.8, color = "black")+
+  theme(plot.title = element_text(hjust = 0.1))+
+  theme(legend.position = "none")
+
+
+p.d.sn_int<- plot_grid(
+  p1, 
+  p2,
+  p3,
+  p4,
+  labels = c("A", "B", "C", "D"),
+  label_size = 12,  
+  ncol = 2,
+  rel_heights = c(1,1,1,1))
+
+p.d.sn_int <- plot_grid(
+  p.d.sn_int,
+  legend,
+  ncol=1,
+  rel_heights = c(1,0.1))
+
+
+
+ggsave("Figs/doñana_sn.int.png", p.d.sn_int , dpi=300, width=7, height = 4, bg= "white") 
+
+
 ```
 
 ### Indices de cada especie de planta
@@ -1008,13 +1262,4 @@ ggsave2("Figs/indices/m.bosque.png", m.bosque, width = 8, height = 7)
 # Mostrar gráficos
 plots<-walk(plots, ~ walk(.x, print))
 save(plots,file = "Rdata/indicesplanta_bosque.RData")
-```
-
-**Indices \~ funcion**
-
-```{r funcion}
-#| warning: false
-#| message: false
-
-
 ```
