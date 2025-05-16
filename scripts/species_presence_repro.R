@@ -5,6 +5,7 @@ pacman::p_load(tidyverse,here, ggpubr, dplyr,ggplot2,ggsci,Polychrome, RColorBre
 
 all_df<-read.csv(here("data","useful", "all_data.csv"))
 
+
 plantas_visitas <- all_df %>%
   group_by(Planta, Site) %>%
   summarise(visitas = n(), .groups = "drop") %>%
@@ -19,13 +20,68 @@ especies_seleccionadas <- c("Lotus corniculatus", "Helleborus viridis subsp. occ
                             "Ranunculus repens", "Halimium halimifolium", "Leontodon longirostris", "Echium plantagineum",
                             "Halimium calycinum", "Medicago lupulina", "Trifolium repens", "Erica cinerea",
                             "Thymus praecox subsp. polytrichus", "Veronica officinalis", "Andryala arenaria","Scorzonera humilis",
-                            "Andryala integrifolia", "Trifolium pratense")
+                            "Andryala integrifolia", "Trifolium pratense", "Thymus praecox")
 
 
 datos_rangos <- all_df %>%
   filter(Planta %in% especies_seleccionadas) %>%
   group_by(Planta, Site) %>%
   summarise(inicio = min(Periodo), fin = max(Periodo))
+
+
+all_df$Fecha2 <- as.Date(all_df$Fecha2, format = "%Y-%m-%d")
+rosmarinus_df <- all_df %>%
+  filter(Planta == "Rosmarinus officinalis" & Site == "Doñana" & year(Fecha2) == 2020)
+fecha_inicio <- min(rosmarinus_df$Fecha2)
+fecha_fin <- max(rosmarinus_df$Fecha2)
+fecha_inicio
+fecha_fin
+dias_diferencia <- as.numeric(fecha_fin - fecha_inicio)
+
+all_df <- all_df %>%
+  mutate(
+    Fecha2 = case_when(
+      Site == "Doñana" & Year == 2020 & year(Fecha2) > 2020 ~ update(Fecha2, year = 2020), 
+      TRUE ~ Fecha2  
+    )
+  )
+
+
+datos_floracion <- all_df %>%
+  group_by(Site, Year) %>%
+  mutate(inicio = min(Fecha2),
+            fin = max(Fecha2),
+            floracion = as.numeric((fin - inicio)+1)) %>%
+  ungroup()
+
+datos_floracion <- datos_floracion %>%
+  group_by(Planta, Site, Year) %>%
+  mutate(inicio = min(Fecha2),
+            fin = max(Fecha2),
+            duracion_floracion = as.numeric((fin - inicio)+1))
+
+datos_floracion <- datos_floracion %>%
+  mutate(Planta = ifelse(Planta == " Thymus praecox subsp. polytrichus", "Thymus praecox subsp. polytrichus", Planta))
+
+
+
+
+datos_pielou <- datos_floracion %>%
+  group_by(Site, Year, Planta) %>%
+  mutate(prop_floracion = duracion_floracion / floracion)
+
+datos_pielou <- datos_pielou %>%
+  group_by(Site, Year, Planta) %>%   
+  mutate(H = -sum(prop_floracion * log(prop_floracion), na.rm = TRUE)) %>%
+  ungroup()
+
+datos_pielou <- datos_pielou%>%
+  group_by(Site, Year) %>%
+  mutate(S = n_distinct(Planta))
+
+datos_pielou<- datos_pielou %>%
+  mutate(J = H / log(S))
+write.csv(datos_pielou, "data/useful/datos_floracion.csv")
 
 
 

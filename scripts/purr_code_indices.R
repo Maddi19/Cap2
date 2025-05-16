@@ -1,7 +1,7 @@
 ##preparar consola
 rm(list = ls(all.names = TRUE)) 
 pacman::p_unload(pacman::p_loaded(), character.only = TRUE) 
-pacman::p_load(tidyverse,dplyr,purrr,iNEXT,wesandersom,ggplot2,bipartite)
+pacman::p_load(tidyverse,dplyr,purrr,iNEXT,wesanderson,ggplot2,bipartite)
 install.packages("devtools") 
 library(devtools)
 pkgbuild::check_build_tools(debug = TRUE)
@@ -230,3 +230,146 @@ gorde.ntw<- map_df(df_list_filtered.ntw,bind_rows)
 write.table(gorde.ntw, file = "data/SITE_network_level_metrics.csv", row.names = FALSE, sep = ",")
 
 results
+
+
+
+sites <- unique(all_df$Site_id)
+
+
+out.site <- data.frame(Site_id = NA, Recorrido=NA, Periodo=NA, Anidamiento=NA, Uniformidad=NA, H2=NA,
+                       species.poll=NA, Especies_plantas=NA, 
+                       compl_fun_polinizadores=NA, compl_fun_plantas=NA, Robustez=NA)
+
+outsp.site <- data.frame(Site_id = NA, Recorrido=NA, Periodo=NA, Especies=NA,  Grado = NA,
+                         Centralidad=NA, Especializacion=NA)
+
+
+outsp.pl.site <- data.frame(Site_id = NA, Recorrido=NA, Periodo=NA, Especies=NA,  Grado = NA,
+                            Centralidad=NA, Especializacion=NA, contribution=NA)
+
+
+
+webs <- list()
+
+# Inicializar data frames para resultados
+out.site <- data.frame()
+outsp.site <- data.frame()
+outsp.pl.site <- data.frame()
+
+# Obtener valores únicos de Site, Year, Bosque, y Periodo
+sites <- unique(all_df$Site)
+years <- unique(all_df$Year)
+
+for (i in 1:length(sites)) {
+  print(paste("Procesando Sitio:", sites[i]))
+  
+  # Filtrar por Sitio
+  temp_site <- subset(all_df, Site == sites[i])
+  
+  for (j in 1:length(years)) {
+    print(paste("  Procesando Año:", years[j]))
+    
+    # Filtrar por Año
+    temp_year <- subset(temp_site, Year == years[j])
+    
+    bosques <- unique(temp_year$Bosque)
+    for (k in 1:length(bosques)) {
+      print(paste("    Procesando Bosque:", bosques[k]))
+      
+      # Filtrar por Bosque
+      temp_bosque <- subset(temp_year, Bosque == bosques[k])
+      
+      periodos <- unique(temp_bosque$Periodo)
+      for (l in 1:length(periodos)) {
+        print(paste("      Procesando Periodo:", periodos[l]))
+        
+        # Filtrar por Periodo
+        temp_periodo <- subset(temp_bosque, Periodo == periodos[l])
+        
+        # Crear matriz de interacción
+        web <- table(temp_periodo$Planta, temp_periodo$Pollinator_id)
+        
+        # Verificar si la red está vacía
+        if (nrow(web) == 0 || ncol(web) == 0) {
+          print("      Red vacía. Saltando...")
+          next
+        }
+        
+        # Graficar la red
+        plotweb(web, col.interaction = "grey", col.high = "black", col.low = "black", text.rot = 90)
+        
+        # Calcular métricas de nivel de red y especie
+        spntw <- try(specieslevel(web), silent = TRUE)
+        if (class(spntw) == "try-error") {
+          print("      Error al calcular species-level. Saltando...")
+          next
+        }
+        ntw <- networklevel(web)
+        
+        nest_contribution <- try(nestedcontribution(web), silent = TRUE)
+        
+        # Calcular extinción secundaria y robustez
+        ex <- second.extinct(web, participant = "lower", method = "random", nrep = 100, details = FALSE)
+        r <- robustness(ex)
+        
+        # Almacenar la red en la lista
+        webs[[length(webs) + 1]] <- web
+        
+        # Guardar resultados en out.site
+        out.site <- rbind(out.site, data.frame(
+          Site = sites[i],
+          Year = years[j],
+          Bosque = bosques[k],
+          Periodo = periodos[l],
+          NicheOverlap = ntw[10],
+          Nestedness = ntw[17],
+          Modularity = ntw[19],
+          Connectance = ntw[20],
+          InteractionStrength = ntw[21],
+          ShannonDiversity = ntw[42],
+          Evenness = ntw[43],
+          Robustness = r
+        ))
+        
+        # Guardar species-level para polinizadores (higher level)
+        outsp.site <- rbind(outsp.site, data.frame(
+          Site = rep(sites[i], nrow(spntw$`higher level`)),
+          Year = rep(years[j], nrow(spntw$`higher level`)),
+          Bosque = rep(bosques[k], nrow(spntw$`higher level`)),
+          Periodo = rep(periodos[l], nrow(spntw$`higher level`)),
+          Species = rownames(spntw$`higher level`),
+          Degree = spntw$`higher level`[, 2],
+          Specialization = spntw$`higher level`[, 14],
+          Closeness = spntw$`higher level`[, 20]
+        ))
+        
+        # Guardar species-level para plantas (lower level)
+        outsp.pl.site <- rbind(outsp.pl.site, data.frame(
+          Site = rep(sites[i], nrow(spntw$`lower level`)),
+          Year = rep(years[j], nrow(spntw$`lower level`)),
+          Bosque = rep(bosques[k], nrow(spntw$`lower level`)),
+          Periodo = rep(periodos[l], nrow(spntw$`lower level`)),
+          Species = rownames(spntw$`lower level`),
+          Degree = spntw$`lower level`[, 2],
+          Specialization = spntw$`lower level`[, 14],
+          Closeness = spntw$`lower level`[, 20],
+          Contribution = nest_contribution$`lower level`
+        ))
+      }
+    }
+  }
+}
+
+str(out.site)
+head(out.site)
+out.site
+
+
+head(outsp.site)
+str(outsp.site)
+
+head(outsp.pl.site)
+str(outsp.pl.site)
+
+write.table(outsp.pl.site, file= "SITE_plant_species_level_metrics_sinout.csv", row.names= FALSE, sep= ",")
+

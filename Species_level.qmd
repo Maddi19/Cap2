@@ -29,6 +29,44 @@ sitems2$Year<-as.factor(sitems2$Year)
 #filter <- d.21.gorb %>%
  # filter((Bosque == 3 & Periodo == 2) | (Bosque == 4 & Periodo == 1))
 
+sitems2$match <-
+  paste(sitems2$Site,
+        sitems2$Year,
+        sitems2$Bosque,
+        sitems2$Periodo,
+        sep = "_")
+
+sitems3$match <-
+  paste(sitems3$Site,
+        sitems3$Year,
+        sitems3$Bosque,
+        sitems3$Periodo,
+        sep = "_")
+
+sitems2 <- sitems2 %>%
+  group_by(match)  %>%
+  mutate(
+    poll.sp = ifelse(is.na(poll.sp), 
+                           first(na.omit(poll.sp)), 
+                           poll.sp),
+    plant.sp= ifelse(is.na(plant.sp),
+                     first(na.omit(plant.sp)),
+                     plant.sp)) %>%
+
+  ungroup()
+
+sitems3 <- sitems3 %>%
+  group_by(match)  %>%
+  mutate(
+    poll.sp = ifelse(is.na(poll.sp), 
+                           first(na.omit(poll.sp)), 
+                           poll.sp),
+    plant.sp= ifelse(is.na(plant.sp),
+                     first(na.omit(plant.sp)),
+                     plant.sp)) %>%
+
+  ungroup()
+
 ##para 3-2
 riqueza_pollinizadores_1 <- 3 
 riqueza_plantas_1 <- 2
@@ -64,11 +102,72 @@ sitems3 <- sitems3%>%
       TRUE ~ plant.sp
     ))
 
-morisita<-read.csv(here("data","plant_species_morisita.csv"))
-morisita <- morisita %>%
-  rename(Planta = Especies,
-         Site = Site_id)
-morisita$Year <- as.factor(morisita$Year)
+
+
+  
+all_df <- read.csv("./data/useful/all_data.csv")
+
+info <- all_df %>%
+  filter(Site=="Gorbea")%>%
+  filter((Year == 2021 & Bosque == 5 & Periodo == 1) | (Year == 2021 & Bosque == 2 & Periodo == 3)|(Year == 2022 & Bosque == 5 & Periodo == 1)| (Year == 2022 & Bosque == 5 & Periodo == 2) | (Year == 2022 & Bosque == 4 & Periodo == 1) )
+
+# Rellenar manualmente las columnas seleccionadas
+sitems2<- sitems2%>%
+  mutate(
+    poll.sp = case_when(
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 3 ~ 8,
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 4 ~ 8,
+    
+      Site == "Gorbea" & Year == 2021 & Bosque == 5 & Periodo == 1 ~ 2,
+     
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 1 ~ 1,
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 2 ~ 0,
+      Site == "Gorbea" & Year == 2022 & Bosque == 4 & Periodo == 1 ~ 1,
+      TRUE ~ poll.sp
+    ),
+    plant.sp = case_when(
+       Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 3 ~ 2,
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 4 ~ 4,
+    
+      Site == "Gorbea" & Year == 2021 & Bosque == 5 & Periodo == 1 ~ 1,
+     
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 1 ~ 1,
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 2 ~ 0,
+      Site == "Gorbea" & Year == 2022 & Bosque == 4 & Periodo == 1 ~ 2,
+      TRUE ~ plant.sp
+    ))
+
+sitems3<- sitems3%>%
+  mutate(
+   poll.sp = case_when(
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 3 ~ 8,
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 4 ~ 8,
+    
+      Site == "Gorbea" & Year == 2021 & Bosque == 5 & Periodo == 1 ~ 2,
+     
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 1 ~ 1,
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 2 ~ 0,
+      Site == "Gorbea" & Year == 2022 & Bosque == 4 & Periodo == 1 ~ 1,
+      TRUE ~ poll.sp
+    ),
+    plant.sp = case_when(
+       Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 3 ~ 2,
+      Site == "Gorbea" & Year == 2021 & Bosque == 2 & Periodo == 4 ~ 4,
+    
+      Site == "Gorbea" & Year == 2021 & Bosque == 5 & Periodo == 1 ~ 1,
+     
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 1 ~ 1,
+      Site == "Gorbea" & Year == 2022 & Bosque == 5 & Periodo == 2 ~ 0,
+      Site == "Gorbea" & Year == 2022 & Bosque == 4 & Periodo == 1 ~ 2,
+      TRUE ~ plant.sp
+    ))
+
+info.d <- all_df %>%
+  filter(Site=="Doñana" & Year==2021)%>%
+  filter((Bosque == "Pinar Hinojos" & Periodo == 1) | (Bosque == "Pinar Hinojos" & Periodo == 3)| (Bosque == "Pinar Puebla" & Periodo == 8)| (Bosque == "Villamanrique Sur" & Periodo == 3) | (Bosque == "Villamanrique Sur" & Periodo == 7) | (Bosque == "Villamanrique Sur" & Periodo == 8) | (Bosque == "Villamanrique Sur" & Periodo == 9)) %>%
+  group_by(Bosque,Periodo)%>%
+  summarise(n=n_distinct(Pollinator_id))
+
 
 
 
@@ -89,8 +188,7 @@ sitems2_rescaled <- sitems2 %>%
          tot.visits.pl = scale(tot.visits.pl),
          nestedcontribution = scale(nestedcontribution),
          poll.sp.scaled <- scale(poll.sp),
-         plant.sp.scaled <- scale(plant.sp),
-         morisita <- scale(morisita)
+         plant.sp.scaled <- scale(plant.sp)
   )
 
 sitems2.fs <- sitems2_rescaled %>%
@@ -115,7 +213,7 @@ PLOTS DE COMO CAMBIA RIQUEZA CON PERIODO.
 #| warning: false
 #| message: false
 sitems_riqueza <- sitems2 %>%
-  group_by(Site_id, Bosque, Year, Periodo) %>%
+  group_by(Site, Bosque, Year, Periodo) %>%
   summarise(
     mean_richness_plants = mean(plant.sp, na.rm = TRUE),
     mean_richness_pollinators = mean(poll.sp, na.rm = TRUE)
@@ -187,8 +285,8 @@ ggsave("Figs/richness_plots.png", combined_plot, width = 7, height = 8, dpi = 30
 mod_glmm <- glmmTMB(
   fruit_set ~ Specialization + Degree + Closeness + tot.visits.pl + poll.sp.scaled + plant.sp.scaled  + nestedcontribution + Periodo + Year + (1 | Bosque) + (1|Site), 
   family = "beta_family", 
-  data = sitems2.fs.g
-)
+  data = sitems2.fs.g)
+
 
 check_collinearity(mod_glmm)
 
@@ -242,14 +340,14 @@ anova(modelo_nulo, modelo_planta_fijo)
 
 # List of model formulas for fruit set
 formulas <- list(
-  m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) + (1 | Bosque),
+  m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) + (1 | Bosque),
   m7 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo + Year + (1|Planta) + (1 | Bosque),
    m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1 | Bosque),
   m9 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness + tot.visits.pl + nestedcontribution) * Periodo + Year + Planta + (1 | Bosque)
   )
 
 formulas.d <- list(
-  m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo  + (1|Planta) + (1 | Bosque),
+  m6 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo  + (1|Planta) + (1 | Bosque),
   m7 = fruit_set~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo  + (1|Planta) + (1 | Bosque),
    m8 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + tot.visits.pl + nestedcontribution) *  Periodo  + (1 | Bosque),
   m9 = fruit_set ~ (poll.sp.scaled + plant.sp.scaled + Specialization + Closeness + tot.visits.pl + nestedcontribution) * Periodo + Planta + (1 | Bosque)
@@ -281,8 +379,7 @@ sitems3_rescaled <- sitems3 %>%
          tot.visits.pl = scale(tot.visits.pl),
          nestedcontribution = scale(nestedcontribution),
          poll.sp.scaled <- scale(poll.sp),
-         plant.sp.scaled <- scale(plant.sp),
-         morisita <- scale(morisita)
+         plant.sp.scaled <- scale(plant.sp)
   )
 ####SEED NUMBER 
 ###models para cada site
@@ -297,18 +394,24 @@ sitems3_rescaled.d <- sitems3_rescaled %>%
   filter(Site=="Doñana")
 
 formulas.sn <- list(
-   m6 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) + (1 | Bosque),
+   m6 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) + (1 | Bosque),
   m7 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled  + Specialization  + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo + Year + (1|Planta) + (1 | Bosque),
    m8 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1 | Bosque)
   )
 
+formulas.sn.1 <- list(
+   m6 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year + (1|Planta) ,
+  m7 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled  + Specialization  + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo + Year + (1|Planta),
+   m8 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness  + tot.visits.pl + nestedcontribution) *  Periodo + Year 
+  )
+
 formulas.d.sn <- list(
-   m6 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + morisita + tot.visits.pl + nestedcontribution) *  Periodo  + (1|Planta) + (1 | Bosque),
+   m6 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + tot.visits.pl + nestedcontribution) *  Periodo  + (1|Planta) + (1 | Bosque),
   m7 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled  + Specialization + Closeness  + tot.visits.pl + nestedcontribution ) *  Periodo  + (1|Planta) + (1 | Bosque),
    m8 = scaled_seeds ~ (poll.sp.scaled + plant.sp.scaled + Specialization  + Closeness + tot.visits.pl + nestedcontribution) *  Periodo  + (1 | Bosque)
   )
 
-models.g.sn <- map(formulas.sn, ~ glmmTMB(.x, family = "gaussian", data = sitems3_rescaled.g, na.action = na.exclude))
+models.g.sn <- map(formulas.sn.1, ~ glmmTMB(.x, family = "gaussian", data = sitems3_rescaled.g, na.action = na.exclude))
 aic_results <- map(models.g.sn, AIC)
 print(aic_results)
 
@@ -392,7 +495,7 @@ table
 library(gt) ##guardar la tabla coomo imagen
 
 # Combinar los resultados
-tabla_final <- bind_rows(resultados_g, resultados_d)
+tabla_final <- bind_rows(resultados_d, resultados_g)
 # Crear la tabla con gt
 tabla_gt <- tabla_final %>%
   gt() %>%
@@ -464,7 +567,7 @@ for (i in which(tabla_final_df$negrita)) {
 table<-tabla_kable
 table
 
-tabla_final <- bind_rows(resultados_gsn, resultados_dsn)
+tabla_final <- bind_rows(resultados_dsn, resultados_gsn)
 # Crear la tabla con gt
 tabla_gt <- tabla_final %>%
   gt() %>%
@@ -479,7 +582,7 @@ tabla_gt <- tabla_final %>%
   ) %>%
   tab_style(
     style = cell_fill(color = "#D3D3D3"),  # Gris oscuro
-    locations = cells_body(rows = (`p value` >= 0.05 & `p value` <= 0.07))
+    locations = cells_body(rows = (`p value` >= 0.05 & `p value` <= 0.075))
   )
 
 # Guardar como PNG
@@ -510,9 +613,9 @@ create_plot_with_predictions <- function(data, x_variable, model) {
   
   # Crear el gráfico
   ggplot(data, aes_string(x = x_variable, y = "fruit_set")) +
-    geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
-    geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
-                fill = "#E07A5F", alpha = 0.1, inherit.aes = FALSE) +
+    geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#4A6FA5", alpha=0.6, size=1.2)+
+    #geom_ribbon(data = predicciones, aes(x = x, ymin = conf.low, ymax = conf.high),
+               # fill = "#E07A5F", alpha = 0.1, inherit.aes = FALSE) +
     geom_line(data = predicciones, aes(x = x, y = predicted), color = "#E07A5F", linewidth = 1.2) +
     labs(
       x = x_labels[[x_variable]],
@@ -584,6 +687,12 @@ save(p.g.sp_final, file="RData/splevel_repro.RData")
 ggsave("Figs/p.g_sp_final1.png", p.g.sp_final, dpi=300, width=10, height = 6, bg= "white") 
 
 ##VARIABLES CON INTERACCIONES
+library(Polychrome)
+library(RColorBrewer)
+library(ggpubr)
+library(ggeffects)
+colors<-get_palette("npg",16)
+
 create_plot_with_predictions <- function(data, x_variable, model) {
    # Obtener predicciones del modelo
    prediction <- ggpredict(model, terms = c(x_variable, "Periodo"))
@@ -592,9 +701,9 @@ create_plot_with_predictions <- function(data, x_variable, model) {
    
    # Crear el gráfico
    ggplot(data, aes_string(x = x_variable, y = "fruit_set")) +
-     geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
-     geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
-                 alpha = 0.1, inherit.aes = FALSE) +
+     geom_point(aes(color = Periodo), position = position_jitter(width = 0.1, height = 0.1), alpha=0.7, size= 1.2)+
+     #geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
+                # alpha = 0.1, inherit.aes = FALSE) +
      geom_line(data = prediction, aes(x = x, y = predicted, color= group), linewidth = 1.2) +
      labs(
        x = x_labels[[x_variable]],
@@ -602,13 +711,14 @@ create_plot_with_predictions <- function(data, x_variable, model) {
      ) +  
      scale_color_manual(values = colors, name="Period")+
      scale_fill_manual(values = colors, name="Period")+
-     theme(legend.position = "bottom")+ 
+     theme(legend.position = "none")+ 
      theme_bw()
  }
 
 # Variables para graficar
 variables <- c("nestedcontribution",  "plant.sp.scaled", "tot.visits.pl")
 
+sitems2.fs.g$Periodo <- as.factor(sitems2.fs.g$Periodo)
 
 plots_g<- map(variables, ~ create_plot_with_predictions(sitems2.fs.g, .x, models.g$m8))
 
@@ -618,19 +728,19 @@ p3 <- plots_g[[3]]
 
 
 p1<- p1 +
-  annotate("text", 
-           x = 0.5,  
-           y = 0.25,             
-           label = "Estimate: -0.41\np-value: 0.005", 
-           hjust = 0, size = 2.8, color = "black")+
+  #annotate("text", 
+  #         x = 0.5,  
+  #         y = 0.25,             
+  #         label = "Estimate: -0.41\np-value: 0.005", 
+  #         hjust = 0, size = 2.8, color = "black")+
   theme(legend.position = "none")
 
 p2 <- p2 +
-  annotate("text", 
-           x = 1.7,  
-           y = 0.9,             
-           label = "Estimate: 0.2\np-value: 0.078", 
-           hjust = 0, size = 2.8, color = "black")+
+ # annotate("text", 
+ #          x = 1.7,  
+ #          y = 0.9,             
+ #          label = "Estimate: 0.2\np-value: 0.078", 
+ #          hjust = 0, size = 2.8, color = "black")+
   theme(legend.position = "none")
 
 get_only_legend <- function(plot) { 
@@ -644,21 +754,20 @@ get_only_legend <- function(plot) {
 legend <- get_only_legend(p3 + theme(legend.direction = "horizontal", legend.position = "bottom"))
 
 p3 <- p3 +
-  annotate("text", 
-           x = -0.25,  
-           y = 0.25,             
-           label = "Estimate: 0.54\np-value: 0.01", 
-           hjust = 0, size = 2.8, color = "black")+
+ # annotate("text", 
+  #         x = -0.25,  
+  #         y = 0.25,             
+  #         label = "Estimate: 0.54\np-value: 0.01", 
+  #         hjust = 0, size = 2.8, color = "black")+
   theme(legend.position = "none")
 
-p.g.fs<- plot_grid(
+p.g.fs <- plot_grid(
   p1, 
   p2,
   p3,
-  legend,
   labels = c("A", "B", "C"),
   label_size = 12,  
-  ncol = 2,
+  ncol = 3,
   rel_heights = c(1,1,1,0.1)
 )
 
@@ -667,6 +776,9 @@ p.g.fs.final <- ggdraw() +
   draw_label("Gorbea", fontface = "bold", size = 14, x = 0.5, y = 1.05, hjust = 0.5) +
   draw_plot(p.g.fs, x = 0, y = 0, width = 1, height = 1)+
   theme(plot.margin = margin(20, 10, 10, 10)) 
+
+
+p.g.fs.final
 
 ggsave("Figs/gorb.fs_int.png", p.g.fs.final, dpi=300, width=7, height = 4, bg= "white") 
 
@@ -783,6 +895,7 @@ plantas_seleccionadas<- plantas_seleccionadas%>%
 plantas_seleccionadas <- plantas_seleccionadas%>%
   mutate(poll.sp.scaled=scale(poll.sp),
          plant.sp.scaled=scale(plant.sp))
+
 library(glmmTMB)
 mplanta <- glmmTMB(fruit_set ~ Periodo + Planta + Periodo:Planta,
                  na.action = na.exclude,
@@ -790,18 +903,22 @@ mplanta <- glmmTMB(fruit_set ~ Periodo + Planta + Periodo:Planta,
                  data = plantas_seleccionadas)
 
 summary(mplanta)
+
 Anova(mplanta, type = "III")
 drop1(mplanta, test = "Chisq")
 
-predicciones <- ggpredict(models.g$m8, terms = c("plant.sp.scaled", "Periodo"))
-
+mplanta.sp <- glmmTMB(fruit_set ~ Periodo + plant.sp.scaled + poll.sp.scaled + Periodo:plant.sp.scaled + Periodo:poll.sp.scaled + (1|Planta),
+                 na.action = na.exclude,
+                 family = "beta_family",
+                 data = plantas_seleccionadas)
+summary(mplanta.sp)
 # Crear el gráfico
 library(Polychrome)
 library(RColorBrewer)
 library(ggpubr)
 colors<-get_palette("npg",16)
 
-fs_plant.p<- ggplot(plantas_seleccionadas, aes(x = plant.sp.scaled, y = fruit_set, color = Planta)) +
+fs_plant.p <- ggplot(plantas_seleccionadas, aes(x = plant.sp.scaled, y = fruit_set, color = Planta)) +
   geom_point(position = position_jitter(width = 0.1, height = 0.1), alpha=0.6, size=0.8) +
  geom_smooth(method = "lm", se = FALSE, linewidth = 1.2) +
   labs(
@@ -905,13 +1022,13 @@ create_plot_with_predictions <- function(data, x_variable, model) {
    
    # Crear el gráfico
    ggplot(data, aes_string(x = x_variable, y = "scaled_seeds")) +
-     geom_point(position = position_jitter(width = 0.1, height = 0.1), color= "#069", alpha=0.6, size=0.8)+
-     geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
-                 alpha = 0.1, inherit.aes = FALSE) +
+     geom_point(aes(color = Periodo), position = position_jitter(width = 0.1, height = 0.1), alpha=0.7, size= 1.2)+
+     #geom_ribbon(data = prediction, aes(x = x, ymin = conf.low, ymax = conf.high, fill = group), #Added Fill = group
+       #          alpha = 0.1, inherit.aes = FALSE) +
      geom_line(data = prediction, aes(x = x, y = predicted, color= group), linewidth = 1.2) +
      labs(
        x = x_labels[[x_variable]],
-       y = "Seed number"
+       y = "Seed set"
      ) +  
      scale_color_manual(values = colors, name="Period")+
      scale_fill_manual(values = colors, name="Period")+
@@ -923,8 +1040,11 @@ create_plot_with_predictions <- function(data, x_variable, model) {
 variables <- c("nestedcontribution",  "Closeness", "tot.visits.pl", "poll.sp.scaled")
 
 # Crear gráficos para `sitems.fs.g` y `models.g`
+sitems3_rescaled.d$Periodo <- as.factor(sitems3_rescaled.d$Periodo)
 plots_d <- map(variables, ~ create_plot_with_predictions(sitems3_rescaled.d, .x, models.d.sn$m8))
 
+
+sitems3_rescaled.g$Periodo <- as.factor(sitems3_rescaled.g$Periodo)
 plots_g<- map(variables, ~ create_plot_with_predictions(sitems3_rescaled.g, .x, models.g.sn$m8))
 
 p1 <- plots_d[[1]]
@@ -934,21 +1054,21 @@ p3 <- plots_d[[3]]
 p4 <- plots_g[[4]]
 
 p1<- p1 +
-  annotate("text", 
-           x = 1,  
-           y = 2.5,             
-           label = "Estimate: 0.11\np-value: 0.001", 
-           hjust = 0, size = 2.8, color = "black")+
+ # annotate("text", 
+  #         x = 1,  
+  #         y = 2.5,             
+  #         label = "Estimate: 0.11\np-value: 0.001", 
+  #         hjust = 0, size = 2.8, color = "black")+
   theme(legend.position = "none")+
   labs(title = "Doñana")+
  theme(plot.title = element_text(hjust = 0.1))
 
 p2 <- p2 +
-  annotate("text", 
-           x = 0,  
-           y = -3,             
-           label = "Estimate: 0.15\np-value: 0.002", 
-           hjust = 0, size = 2.8, color = "black")+
+  #annotate("text", 
+  #         x = 0,  
+  #         y = -3,             
+  #         label = "Estimate: 0.15\np-value: 0.002", 
+  #         hjust = 0, size = 2.8, color = "black")+
         theme(legend.position = "none")+
    labs(title = "Doñana")+
  theme(plot.title = element_text(hjust = 0.1))
@@ -963,27 +1083,36 @@ get_only_legend <- function(plot) {
 } 
 
 # extract legend from plot1 using above function 
-legend <- get_only_legend(p3 + theme(legend.direction = "horizontal", legend.position = "bottom"))
-
+legend <- get_only_legend(p3 + 
+    theme(
+      legend.direction = "horizontal", 
+      legend.position = "bottom",
+      legend.justification = "center",
+      legend.box.just = "center",
+      legend.text = element_text(size = 7),  # Tamaño de texto de leyenda
+      legend.title = element_text(size = 8), # Tamaño del título ("Period")
+      legend.key.size = unit(0.4, "cm")       # Tamaño de los símbolos de leyenda
+  )
+)
 
 
 p3 <- p3 +
-  annotate("text", 
-           x = 1.5,  
-           y = 2.5,             
-           label = "Estimate: -0.05\np-value: 0.042", 
-           hjust = 0, size = 2.8, color = "black")+
+ # annotate("text", 
+ #          x = 1.5,  
+ #          y = 2.5,             
+ #          label = "Estimate: -0.05\np-value: 0.042", 
+ #          hjust = 0, size = 2.8, color = "black")+
     theme(legend.position = "none")+
    labs(title = "Doñana")+
  theme(plot.title = element_text(hjust = 0.1))
 
 
 p4 <- p4 + labs(title = "Gorbea")+
-   annotate("text", 
-           x = 0.5,  
-           y = 3.5,             
-           label = "Estimate: 0.24\np-value: 0.047", 
-           hjust = 0, size = 2.8, color = "black")+
+ #  annotate("text", 
+ #         x = 0.5,  
+  #         y = 3.5,             
+  #         label = "Estimate: 0.24\np-value: 0.047", 
+  #         hjust = 0, size = 2.8, color = "black")+
   theme(plot.title = element_text(hjust = 0.1))+
   theme(legend.position = "none")
 
@@ -993,20 +1122,28 @@ p.d.sn_int<- plot_grid(
   p2,
   p3,
   p4,
-  labels = c("A", "B", "C", "D"),
+  labels = c("D", "E", "F", "G"),
   label_size = 12,  
   ncol = 2,
-  rel_heights = c(1,1,1,1))
+  rel_heights = c(1,1,1,1),
+   align = "v",  # Alinear verticalmente
+  axis = "tb" )
 
-p.d.sn_int <- plot_grid(
+
+
+p.d.sn_int
+
+
+F4 <- plot_grid(
+  p.g.fs.final,
   p.d.sn_int,
   legend,
   ncol=1,
-  rel_heights = c(1,0.1))
+  rel_heights = c(1,2.2,0.2))
 
+F4 
 
-
-ggsave("Figs/doñana_sn.int.png", p.d.sn_int , dpi=300, width=7, height = 4, bg= "white") 
+ggsave("Figs/F4_en.png", F4 , dpi=300, width=7, height = 7, bg= "white") 
 
 
 ```
@@ -1017,16 +1154,31 @@ ggsave("Figs/doñana_sn.int.png", p.d.sn_int , dpi=300, width=7, height = 4, bg=
 #| warning: false
 #| message: false
 library(ggsci)
+
+sitems2 <- read.csv("./data/sitems3.pl_totvisits.csv")
+str(sitems2)
+sitems2_rescaled<- sitems2 %>%
+  mutate(
+    poll.sp.scaled = scale(poll.sp),
+    plant.sp.scaled = scale(plant.sp),
+    Specialization = scale(Specialization),
+    nestedcontribution = scale(nestedcontribution),
+    Degree = scale(Degree),  # Escalar Degree
+    Closeness = scale(Closeness) # Escalar Closeness
+  )
+
 sitems2_rescaled$Periodo <- as.numeric(sitems2_rescaled$Periodo)
 sitems2_rescaled$Year <- as.factor(sitems2_rescaled$Year)
-sitems.g <- sitems2_rescaled %>% filter(Site_id == "Gorbea")
-sitems.d <- sitems2_rescaled %>% filter(Site_id == "Doñana")
-
+sitems.g <- sitems2_rescaled %>% filter(Site == "Gorbea")
+sitems.d <- sitems2_rescaled %>% filter(Site == "Doñana")
 
 sitems.g <- sitems2_rescaled %>% 
-  filter(Site_id == "Gorbea") %>% 
+  filter(Site == "Gorbea") %>% 
   filter(!is.na(Specialization) & !is.na(Periodo))
 str(sitems.g)
+
+
+
 
 
 ggplot(sitems.g, aes(x = Periodo, y = Specialization, color= Year)) + 
@@ -1042,14 +1194,16 @@ ggplot(sitems.g, aes(x = Periodo, y = Specialization, color= Year)) +
   scale_color_npg() + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
-
-datasets <- list(Gorbea = sitems.g, Doñana = sitems.d)
+datasets <- list(
+  Gorbea = sitems2_rescaled %>% filter(Site == "Gorbea", !is.na(Specialization), !is.na(Periodo)),
+  Doñana = sitems2_rescaled %>% filter(Site == "Doñana")
+)
 
 models <- list(
-  Specialization = Specialization ~  (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
-  Degree = Degree ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
-  Closeness = Closeness ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque),
-   morisita = morisita ~ (poll.sp + plant.sp) * Periodo + Year + (1|Bosque)
+  Specialization = Specialization ~  (poll.sp.scaled + plant.sp.scaled) * Periodo + Year + (1|Bosque),
+  Degree = Degree ~ (poll.sp.scaled + plant.sp.scaled) * Periodo + Year + (1|Bosque),
+  Closeness = Closeness ~ (poll.sp.scaled + plant.sp.scaled) * Periodo + Year + (1|Bosque),
+  nestedcontribution = nestedcontribution ~ (poll.sp.scaled + plant.sp.scaled) * Periodo + Year + (1|Bosque)
 )
 
 results <- function(data, formula) {
@@ -1058,35 +1212,81 @@ results <- function(data, formula) {
   # Resumen del modelo
   model_summary <- summary(model)
   
-  
-  return(model_summary)
+  coef_table <- as.data.frame(model_summary$coefficients$cond)
+  coef_table <- tibble::rownames_to_column(coef_table, var = "Term")
+
+  return(coef_table)
 }
 
 # Usar map para calcular resultados
 results_all <- map(models, ~ map(datasets, results, formula = .x))
 
-# Visualización de los resultados
-results_all
+# Función para extraer la información relevante de la lista
+extract_data <- function(results_list) {
+  extracted_data <- list()
+  for (model_name in names(results_list)) {
+    for (dataset_name in names(results_list[[model_name]])) {
+      data <- results_list[[model_name]][[dataset_name]]
+      data$Model <- model_name
+      data$Dataset <- dataset_name
+      extracted_data[[paste(model_name, dataset_name, sep = "_")]] <- data
+    }
+  }
+  return(bind_rows(extracted_data))
+}
+
+# Usar la función para transformar la lista en un data frame
+df_results <- extract_data(results_all)
+
+library(gt)
+tabla_gt <- df_results %>%
+  gt() %>%
+  tab_header(title = "Model results") %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `z value`, `Pr(>|z|)`) ,
+    decimals = 3
+  ) %>%
+   cols_label(   # Cambiar nombres de columnas si es necesario
+    Estimate = "Estimate",
+    `Std. Error` = "Std. Error",
+    `z value` = "z value",
+     `Pr(>|z|)` = "p value"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = `Pr(>|z|)` < 0.05)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#D3D3D3"),  # Gris claro
+    locations = cells_body(rows = (`Pr(>|z|)` >= 0.05 & `Pr(>|z|)` <= 0.07))
+  )
+
+tabla_gt 
+gtsave(tabla_gt, filename = "Figs/tabla_popu_time.png", expand = 20)
+
 
 
 # Función para ajustar modelos y generar predicciones
 predict_and_summarise <- function(data, formula) {
-   data_filtered <- data %>%
-    filter(complete.cases(select(data, all.vars(formula)))) 
- model <- glmmTMB(formula, data = data_filtered, family = "gaussian")
- pred_results <- predict(model, type = "response", se.fit = TRUE, re.form = NA)
+  data_filtered <- data %>%
+    filter(complete.cases(dplyr::select(., all.vars(formula))))
+  
+  model <- glmmTMB(formula, data = data_filtered, family = "gaussian")
+  pred_results <- predict(model, type = "response", se.fit = TRUE, re.form = NA)
   
   data_filtered$predicted <- pred_results$fit
   data_filtered$se <- pred_results$se.fit
   
   mean_predictions <- data_filtered %>%
     group_by(Year, Periodo) %>%
-    summarise(mean_predicted = mean(predicted, na.rm = TRUE), 
+    summarise(mean_predicted = mean(predicted, na.rm = TRUE),
               se_predicted = sd(predicted, na.rm = TRUE) / sqrt(n()),
               .groups = 'drop')
-
+  
   return(list(data = data_filtered, mean_predictions = mean_predictions))
 }
+
+
 
 create_plot <- function(data, mean_predictions, y_variable) {
   ggplot(data, aes(x = Periodo, y = !!sym(y_variable))) +
@@ -1102,12 +1302,12 @@ create_plot <- function(data, mean_predictions, y_variable) {
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank()) +
     labs(
-      x = "Periodo",
+      x = "Sampling period",
       y = case_when(
         y_variable == "Degree" ~ "Normalised degree",
         y_variable == "Specialization" ~ "Specialization",
         y_variable == "Closeness" ~ "Weighted closeness",
-        y_variable == "morisita" ~ "Niche complementarity"
+        y_variable == "nestedcontribution" ~ "Contribution to nestedness"
       ),
       color = "Year"
     ) 
@@ -1132,8 +1332,8 @@ d.g <- plots[[2]][[1]] + theme(legend.position = "none")
 d.d <- plots[[2]][[2]]+ theme(legend.position = "none")
 wc.g <- plots[[3]][[1]] + theme(legend.position = "none")
 wc.d <- plots[[3]][[2]] + theme(legend.position = "none")
-m.g <- plots[[4]][[1]] + theme(legend.position = "bottom")
-m.d <- plots[[4]][[2]] + theme(legend.position = "none")
+nc.g <- plots[[4]][[1]] + theme(legend.position = "bottom")
+nc.d <- plots[[4]][[2]] + theme(legend.position = "none")
 
 get_only_legend <- function(plot) { 
   plot_table <- ggplot_gtable(ggplot_build(plot)) 
@@ -1143,16 +1343,16 @@ get_only_legend <- function(plot) {
 } 
 
 # extract legend from plot1 using above function 
-legend.years <- get_only_legend(m.g)  
+legend.years <- get_only_legend(nc.g)  
 
-m.g <- plots[[4]][[1]] + theme(legend.position = "none")
+nc.g <- plots[[4]][[1]] + theme(legend.position = "none")
 
 sp <- plot_grid(sp.d, sp.g, labels = c("A", "B"), label_size = 13)
 d <- plot_grid(d.d, d.g, labels = c("C", "D"), label_size = 13)
 wc <- plot_grid(wc.d, wc.g, labels = c("E", "F"), label_size = 13)
-m <- plot_grid(m.d, m.g, labels = c("G", "H"), label_size = 13)
+nc <- plot_grid(nc.d, nc.g, labels = c("G", "H"), label_size = 13)
 
-sp_level <- plot_grid (sp, d, wc, m, legend.years, ncol=1, nrow=5, rel_heights = c(1,1,1,1, 0.2))
+sp_level <- plot_grid (sp, d, wc, nc, legend.years, ncol=1, nrow=5, rel_heights = c(1,1,1,1, 0.2))
 
 titulo_donana <- ggdraw() + draw_label("Doñana", fontface = "bold", size = 13)
 titulo_gorbea <- ggdraw() + draw_label("Gorbea", fontface = "bold", size = 13)
@@ -1220,7 +1420,7 @@ sortu_plot <- function(data, mean_predictions, y_variable, plot_title) {
         y_variable == "Degree" ~ "Normalised degree",
         y_variable == "Specialization" ~ "Specialization",
         y_variable == "Closeness" ~ "Closeness",
-        y_variable == "morisita" ~ "Niche complementarity"
+        y_variable == "nestedcontribution" ~ "Contribution to nestedness"
       ), 
          color = "Year") +
     ggtitle(plot_title)+
@@ -1255,8 +1455,8 @@ d.bosque <- plot_grid( d.d, d.g, labels = c("A", "B"), label_size = 13, nrow=2)
 ggsave2("Figs/indices/d.bosque.png", d.bosque, width = 8, height = 7)
 wc.bosque <- plot_grid( wc.d, wc.g, labels = c("A", "B"), label_size = 13, nrow=2)
 ggsave2("Figs/indices/wc.bosque.png", wc.bosque, width = 8, height = 7)
-m.bosque <- plot_grid( m.d, m.g, labels = c("A", "B"), label_size = 13, nrow=2)
-ggsave2("Figs/indices/m.bosque.png", m.bosque, width = 8, height = 7)
+nc.bosque <- plot_grid( m.d, m.g, labels = c("A", "B"), label_size = 13, nrow=2)
+ggsave2("Figs/indices/nc.bosque.png", nc.bosque, width = 8, height = 7)
 
 
 # Mostrar gráficos

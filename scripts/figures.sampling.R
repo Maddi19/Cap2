@@ -1,79 +1,73 @@
 
 
 source("./scripts/sampling_completness.R")
+load("./scripts/plots_full.gorbea.RData")
 
-##doñana 2020 
+##doñana 
 poll.d20
 plant.d20
 link.d20
-
-poll.sites.d20
-plant.sites.d20
-link.sites.d20
-
-poll.period.d20
-plant.period.d20
-link.period.d20
-
-##doñana 2021
 poll.d21
 plant.d21
 link.d21
 
+poll.sites.d20
+plant.sites.d20
+link.sites.d20
 poll.sites.d21
 plant.sites.d21
 link.sites.d21
 
+poll.period.d20
+plant.period.d20
+link.period.d20
 poll.period.d21
 plant.period.d21
 link.period.d21
 
 
-##gorbea 2020
-poll.gorb.20
+
+
+##gorbea 
+poll.gorb20
 plant.gorb.20
-link.gorb.20
-
-poll.sites.gorb20
-plant.sites.gorb20
-link.sites.gorb20
-
-poll.period.gorb20
-plant.period.gorb20
-link.period.gorb20
-
-##gorbea 2021
+link.gorb20
 poll.gorb21
 plant.gorb21
 link.gorb21
-
-poll.sites.gorb21
-plant.sites.gorb21
-link.sites.gorb21
-
-poll.period.gorb21
-plant.period.gorb21
-link.period.gorb21
-
-## gorbea 2022
 poll.gorb22
 plant.gorb22
 link.gorb22
 
+poll.sites.gorb20
+plant.sites.gorb20
+link.sites.gorb20
+poll.sites.gorb21
+plant.sites.gorb21
+link.sites.gorb21
 poll.sites.gorb22
 plant.sites.gorb22
 link.sites.gorb22
 
+poll.period.gorb20
+plant.period.gorb20
+link.period.gorb20
+poll.period.gorb21
+plant.period.gorb21
+link.period.gorb21
 poll.period.gorb22
 plant.period.gorb22
 link.period.gorb22
 
-p1 <- poll.gorb.20 + formato
+
+
+
+
 
 library(cowplot)
 title <- ggdraw() +
   draw_label(
-    "Sampling completeness for pollinator and plant species and plant-pollinator links in Gorbea",
+    "Gorbea",
     fontface = 'bold',
     x = 0,
     hjust = 0
@@ -82,16 +76,18 @@ title <- ggdraw() +
 
 
 fig <- plot_grid(
-  poll.gorb.20 + formato,
-  poll.gorb21 + formato,
-  poll.gorb22 + formato,
+  poll.gorb20, 
+  poll.gorb21, 
+  poll.gorb22,
   labels = c("2020", "2021", "2022"),
   nrow = 1,
   ncol = 3,
   hjust = -4.5,
   vjust = 0.45,
-  label_size = 12
-) +
+  label_size = 12,
+  rel_heights = c(0.6),  
+  rel_widths = c(1.5, 1.5, 1.5)  
+) + 
   draw_label(
     "Pollinator sp. richness",
     x = 0,
@@ -101,10 +97,11 @@ fig <- plot_grid(
     size = 10
   )
 
+
 fig2 <- plot_grid(
-  plant.gorb.20 + formato,
-  plant.gorb21 + formato,
-  plant.gorb22 + formato,
+  plant.gorb.20 ,
+  plant.gorb21 ,
+  plant.gorb22 ,
   nrow = 1,
   ncol = 3
 ) +
@@ -119,9 +116,9 @@ fig2 <- plot_grid(
 
 
 fig3 <- plot_grid(
-  link.gorb.20 + formato,
-  link.gorb21 + formato,
-  link.gorb22 + formato,
+  link.gorb20 ,
+  link.gorb21 ,
+  link.gorb22 ,
   nrow = 1,
   ncol = 3
 ) +
@@ -147,6 +144,8 @@ fig.t <- plot_grid(title, fig.t, ncol = 1, # rel_heights values control vertical
   ) +
   theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
+save(fig.t, file = "full_sampling.RData")
+
 ggsave("Figs/sampl.comp/samplfull.png",
        fig.t,
        width = 7,
@@ -155,9 +154,9 @@ ggsave("Figs/sampl.comp/samplfull.png",
 
 
 fig.site <- plot_grid(
-  poll.sites.gorb20 + formato,
-  poll.sites.gorb21 + formato,
-  poll.sites.gorb22 + formato,
+  poll.sites.gorb20 ,
+  poll.sites.gorb21 ,
+  poll.sites.gorb22 ,
   labels = c("2020", "2021", "2022"),
   nrow = 1,
   ncol = 3,
@@ -175,9 +174,9 @@ fig.site <- plot_grid(
   )
 
 fig2.site <- plot_grid(
-  plant.sites.gorb20 + formato,
-  plant.sites.gorb21 + formato,
-  plant.sites.gorb22 + formato,
+  plant.sites.gorb20 ,
+  plant.sites.gorb21 ,
+  plant.sites.gorb22 ,
   nrow = 1,
   ncol = 3
 ) +
@@ -192,9 +191,9 @@ fig2.site <- plot_grid(
 
 
 fig3.site <- plot_grid(
-  link.sites.gorb20 + formato,
-  link.sites.gorb21 + formato,
-  link.sites.gorb22 + formato,
+  link.sites.gorb20 ,
+  link.sites.gorb21 ,
+  link.sites.gorb22 ,
   nrow = 1,
   ncol = 3
 ) +
@@ -247,9 +246,9 @@ ggsave("Figs/sampl.comp/sampl.site.png",
 
 
 fig.period <- plot_grid(
-  poll.period.gorb20 + formato,
-  poll.period.gorb21 + formato,
-  poll.period.gorb22 + formato,
+  poll.period.gorb20,
+  poll.period.gorb21 ,
+  poll.period.gorb22,
   labels = c("2020", "2021", "2022"),
   nrow = 1,
   ncol = 3,
@@ -262,14 +261,15 @@ fig.period <- plot_grid(
     x = 0,
     y = 0.5,
     vjust = 0.1,
-    angle = 90
+    angle = 90,
+    size = 8
   )
 
 
 fig2.period <- plot_grid(
-  plant.period.gorb20 + formato,
-  plant.period.gorb21 + formato,
-  plant.period.gorb22 + formato,
+  plant.period.gorb20,
+  plant.period.gorb21,
+  plant.period.gorb22,
   nrow = 1,
   ncol = 3
 ) +
@@ -278,13 +278,14 @@ fig2.period <- plot_grid(
     x = 0,
     y = 0.5,
     vjust = 0.1,
-    angle = 90
+    angle = 90,
+    size = 8
   )
 
 fig3.period <- plot_grid(
-  link.period.gorb20 + formato,
-  link.period.gorb21 + formato,
-  link.period.gorb22 + formato,
+  link.period.gorb20 ,
+  link.period.gorb21,
+  link.period.gorb22 ,
   nrow = 1,
   ncol = 3
 ) +
@@ -293,12 +294,17 @@ fig3.period <- plot_grid(
     x = 0,
     y = 0.5,
     vjust = 0.1,
-    angle = 90
+    angle = 90,
+    size = 8
   )
 
+
+legend.period.g 
 legend <- cowplot::get_plot_component(poll.period.gorb20, 'guide-box')
-legend.s <- ggdraw(legend)
-fig.t.p <- plot_grid(fig.period, fig2.period, fig3.period, ncol = 1)
+legend.s <- ggdraw(legend.period.g )
+legend.d <- ggdraw(legend.period.d21 )
+
+fig.t.p <- plot_grid(fig.period, fig2.period, fig3.period, ncol = 1, rel_heights = c(1.4,1.4,1.4))
 
 title.p <- ggdraw() +
   draw_label(
@@ -310,24 +316,35 @@ title.p <- ggdraw() +
   theme(plot.margin = margin(0, 0, 0, 7))
 
 
+
 fig.t.period <- plot_grid(title.p,
                           fig.t.p,
                           ncol = 1,
-                          # rel_heights values control vertical title margins
-                          rel_heights = c(0.15, 1)) + #perhaps reduce this for a bit more space
+                          rel_heights = c(0.15, 1)) +
   draw_label(
     "number of observations",
     x = 0.5,
     y = 0,
     vjust = 0.4,
     angle = 0
-  ) +
-  draw_plot(legend, x = .85, width = .2) +
-  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+  )
+
+# Paso 6: Combinar todo en una columna, con la leyenda al final
+final_plot <- plot_grid(fig.t.period, legend.s, ncol = 1, rel_heights = c(1, 0.2))+
+  theme(plot.margin = unit(c(1, 1, 1, 1), "cm"))
+
+
+
+ggsave("Figs/sampl.comp/sampl.period.png",
+       final_plot,
+       width = 7,
+       height = 6)
+
 
 ##purrr
 #doñana
 load("plots_doñana.RData")
+library(cowplot)
 create_fig <- function(plots, title) {
   plot_grid(
     plotlist = plots,  # Combina los gráficos sin etiquetas
@@ -340,7 +357,7 @@ create_fig <- function(plots, title) {
       y = 0.5,
       vjust = 0.1,
       angle = 90,
-      size = 10
+      size = 8
     )
 }
 
@@ -349,13 +366,27 @@ fig.poll.d <- create_fig(list(poll.d20, poll.d21), "Pollinator sp. richness")
 fig.plant.d <- create_fig(list(plant.d20, plant.d21), "Plant sp. richness")
 fig.link.d <- create_fig(list(link.d20, link.d21), "Link richness")
 
+
+
+fig.poll.d.site <- create_fig(list(poll.sites.d20, poll.sites.d21), "Pollinator sp. richness")
+fig.plant.d.site <- create_fig(list(plant.sites.d20, plant.sites.d21), "Plant sp. richness")
+fig.link.d.site <- create_fig(list(link.sites.d20, link.sites.d21), "Link richness")
+
+
+fig.poll.d.period <- create_fig(list(poll.period.d20, poll.period.d21), "Pollinator sp. richness")
+fig.plant.d.period <- create_fig(list(plant.period.d20, plant.period.d21), "Plant sp. richness")
+fig.link.d.period <- create_fig(list(link.period.d20, link.period.d21), "Link richness")
+
+
 # Crear los títulos de los años
 year_titles <- ggdraw() +
   draw_label("2020", x = 0.25, y = 7.7) + 
   draw_label("2021", x = 0.75, y = 7.7) + 
   theme(plot.margin = margin(0, 0, 0, 0))
 
-fig.t.d <- plot_grid(fig.poll.d, fig.plant.d, fig.link.d, ncol = 1)
+fig.t.d <- plot_grid(fig.poll.d.site, fig.plant.d.site, fig.link.d.site, ncol = 1)
+fig.per.d <- plot_grid(fig.poll.d.period, fig.plant.d.period, fig.link.d.period, ncol = 1, rel_heights = c(1.5,1.5,1.5))
+
 # Título de la figura final
 title.p <- ggdraw() +
   draw_label(
@@ -369,7 +400,7 @@ title.p <- ggdraw() +
 # Combinar todo en un solo gráfico con título del eje X
 final_fig <- plot_grid(
   title.p, 
-  fig.t.d, 
+  fig.per.d, 
   year_titles,
   ncol = 1, 
   rel_heights = c(0.15, 1)
@@ -377,11 +408,30 @@ final_fig <- plot_grid(
   draw_label("number of observations", x = 0.5, y = 0.05, vjust = 0.4, angle = 0) +
   theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
 
+
+
 # Guardar el gráfico final
 ggsave("Figs/sampl.comp/samplfull.png", fig.t, width = 7, height = 6)
+ggsave("Figs/sampl.comp/samplfulldon.png", final_fig, width = 7, height = 6)
+
+ggsave("Figs/sampl.comp/sampl.sites.don.png", final_fig, width = 7, height = 6)
+
+
+
+final_plot.d <- plot_grid(final_fig, legend.d, ncol = 1, rel_heights = c(1, 0.1))+
+  theme(plot.margin = unit(c(1, 1, 1, 1), "cm"))
+
+ggsave("Figs/sampl.comp/sampl.period.don.png", final_plot.d, width = 7, height = 6)
+
+
 
 save(final_fig,
      file = "scripts/plots_full_doñ.RData")
+
+
+
+
+
 
 ##gorbea
 create_fig <- function(plots, title) {

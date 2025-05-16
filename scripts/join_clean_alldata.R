@@ -12,6 +12,7 @@ d<-read.csv("./data/clean/trans_donana_20_clean.csv")
 d.21<-read.csv("./data/clean/trans_doñana_21_clean.csv")
 d.gorb<-read.csv("./data/clean/trans_gorbea_20_clean.csv")
 d.21.gorb<-read.csv("./data/clean/trans_G21_clean.csv")
+
 d.22.gorb<-read.csv("./data/clean/trans_gorbea_22_clean.csv")
 glimpse(d)
 glimpse(d.21)

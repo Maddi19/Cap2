@@ -1,17 +1,110 @@
 ####AEMET DATA
 install.packages("climaemet")
 library(climaemet)
+install.packages("geosphere")
+library(geosphere)
 
 browseURL("https://opendata.aemet.es/centrodedescargas/obtencionAPIKey")
-aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWRkaS5hcnRhbWVuZGlAZWh1LmV1cyIsImp0aSI6ImI4Njk4MGYwLTM2OGYtNDE5Yy1iYWRjLWFiMWYzZTNiZjIyMiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNzM0Njg0NTUzLCJ1c2VySWQiOiJiODY5ODBmMC0zNjhmLTQxOWMtYmFkYy1hYjFmM2UzYmYyMjIiLCJyb2xlIjoiIn0.blE0VrZLLimhnr-F54c7J7eOy0DHNLn_IA02Jqxs0mA",
+aemet_api_key("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWRkaS5hcnRhbWVuZGlAZWh1LmV1cyIsImp0aSI6IjUwZWE3MDlkLTg3YjMtNGE2Zi04MzY0LTU2OTk3OGQ0OWM1MyIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNzQ3MTI0ODIzLCJ1c2VySWQiOiI1MGVhNzA5ZC04N2IzLTRhNmYtODM2NC01Njk5NzhkNDljNTMiLCJyb2xlIjoiIn0.mIaWkb8xsoG6WvAbSdTadFmZ1psuZtm6JykmOkWbBuE",
               install=TRUE, overwrite = TRUE)
 
 
 stations <- aemet_stations()
 knitr::kable(head(stations))
+# 2. Coordenadas aproximadas de Doñana
+ref_donana <- c(lon = -6.487, lat = 36.986)
 
-orozko<- subset(stations, nombre %in% c("OROZKO, IBARRA"))
+# 3. Calcular distancia de cada estación al punto de Doñana
+stations_dist <- stations %>%
+  filter(!is.na(latitud) & !is.na(longitud)) %>%
+  mutate(dist_m = distHaversine(
+    p1 = cbind(longitud, latitud),
+    p2 = matrix(ref_donana, nrow = n(), ncol = 2, byrow = TRUE)
+  ))
+
+est_donana <- stations_dist %>%
+  arrange(dist_m) %>%
+  slice(1)
+
+# 5. Seleccionar la estación de Orozko
+orozko <- stations %>%
+  filter(nombre == "OROZKO, IBARRA")
+
+# 6. Extraer códigos indicativos
+id_donana <- est_donana$indicativo
 id_orozko <- orozko$indicativo
+
+message("Estación elegida para Doñana: ", est_donana$nombre,
+        " (a ", round(est_donana$dist_m), " m del punto)")
+
+library(lubridate)
+resumir_periodo <- function(station_id, year, start_month, end_month) {
+  start_date <- as.Date(sprintf("%d-%02d-01", year, start_month))
+  end_date   <- as.Date(sprintf("%d-%02d-01", year, end_month)) %m+% months(1) - days(1)
+  
+  datos <- aemet_daily_clim(
+    station = station_id,
+    start   = as.character(start_date),
+    end     = as.character(end_date)
+  )
+  
+  datos %>%
+    summarise(
+      precipitacion_total = sum(prec,    na.rm = TRUE),
+      temperatura_media   = mean(tmed,   na.rm = TRUE),
+      tmed_min            = min(tmed,    na.rm = TRUE),
+      tmed_max            = max(tmed,    na.rm = TRUE),
+      tmin_min            = min(tmin,    na.rm = TRUE),
+      tmax_max            = max(tmax,    na.rm = TRUE)
+    ) %>%
+    mutate(
+      rango_temperatura  = tmax_max - tmin_min,
+      rango_tmed         = tmed_max - tmed_min,
+      estacion           = station_id,
+      año                = year,
+      inicio_extraccion  = start_date,
+      fin_extraccion     = end_date
+    )
+}
+
+# 8. Preparar combinaciones para 2020–2022
+años <- 2020:2022
+parametros <- bind_rows(
+  tibble(estacion   = id_donana, año = años, start_month = 2, end_month = 5),
+  tibble(estacion   = id_orozko, año = años, start_month = 3, end_month = 6)
+)
+
+# 9. Ejecutar descarga y resumen
+resultados <- parametros %>%
+  rowwise() %>%
+  do(resumir_periodo(.$estacion, .$año, .$start_month, .$end_month)) %>%
+  ungroup()
+
+# 10. Añadir nombre legible y ordenar columnas
+resultados <- resultados %>%
+  left_join(select(stations, indicativo, nombre),
+            by = c("estacion" = "indicativo")) %>%
+  select(
+    nombre, año, inicio_extraccion, fin_extraccion,
+    precipitacion_total, temperatura_media,
+    tmed_min, tmed_max, rango_tmed,
+    tmin_min, tmax_max, rango_temperatura
+  )
+
+# 11. Imprimir tabla completa en consola con kable (formato pandoc)
+options(width = 200)  # ampliar ancho de consola
+cat(knitr::kable(
+  resultados,
+  format    = "pandoc",
+  col.names = c(
+    "Estación", "Año", "Inicio ext.", "Fin ext.",
+    "Prec. total", "Tmed media",
+    "Tmed mín", "Tmed máx", "Rango Tmed",
+    "Tmin mín", "Tmax máx", "Rango Tmin/Tmax"
+  ),
+  digits = c(NA, 0, NA, NA, 1, 1, 1, 1, 1, 1, 1, 1)
+), sep = "\n")
+#####INFO SACADA DE TEMPERATURA  Y PRECIPITACION MEDIA
 
 #####2022
 data_daily <- aemet_daily_clim(station=id_orozko,
@@ -62,7 +155,7 @@ donana <- data.frame(
 )
 
 # Combinar los datos de las dos estaciones
-estaciones <- bind_rows(data_daily, donana)
+estaciones <- bind_rows(est_orozko, donana)
 
 # Convertir a formato espacial
 estaciones_sf <- st_as_sf(estaciones, coords = c("longitud", "latitud"), crs = 4326)
@@ -118,7 +211,7 @@ mapa_sites <- ggplot() +
   geom_sf(data = estaciones_sf, color = "#275982", size = 5) +
   theme_minimal() +
   labs(
-    title = "Study sites: Gorbea (N) and Doñana (S)",
+    title = "Study areas: Gorbea (N) and Doñana (S)",
     x = "Longitud", y = "Latitud"
   ) +
   coord_sf(
@@ -133,6 +226,7 @@ mapa_sites <- ggplot() +
   )
 ggsave("Figs/mapa_sites.png", mapa_sites, dpi=300, width=10, height = 6, bg= "white") 
 
+###MAPA ELEVACIÓN
 
 install.packages("ggspatial")
 library(ggspatial)
@@ -171,7 +265,7 @@ print(st_coordinates(tr.sf))
 
 install.packages("cols4all")
 library(cols4all)
-
+cols4all::c4a_palettes()
 
 bbox_gorbea_zoom <- st_as_sf(st_as_sfc(st_bbox(c(xmin = -3.02, ymin = 43.0, xmax = -2.7, ymax = 43.13), crs = 4326)))
 d <- get_elev_raster(locations = bbox_gorbea_zoom, z = 11, clip = "locations")
@@ -179,23 +273,30 @@ rast_d <- terra::rast(d)
 
 
 zoom_nivel <- 2 
+library(tmap)
 
 map <- tm_shape(rast_d) +
-  tm_raster(col.scale = tm_scale(values = "carto.earth",
-                                 breaks = breaks_personalizados,
-                                 midpoint = NA),
-            col.legend = tm_legend(title = "Elevation (m)")) +  # Mostrar el DEM
+  # 1) Raster con paleta y cortes fijos
+  tm_raster(
+    palette  = "carto.earth",
+    style    = "fixed",
+    breaks   = breaks_personalizados,
+    midpoint = NA,
+    title    = "Elevation (m)"
+  ) +
+  # 2) Puntos de muestreo
   tm_shape(tr.sf) +
-  tm_symbols(size = 0.8, col = "darkred", fill.legend = tm_legend(title = "Sampling points")) +  # Añadir los puntos
+  tm_symbols(size = 0.7, col = "darkred", fill.legend = tm_legend(title = "Sampling points")) +  # Añadir los puntos
   tm_compass(type = "8star", position = c("right", "bottom"), size=2) +             # Añadir una brújula
   tm_scalebar(position = c("left", "bottom"))+
-  tm_layout(scalebar.position = c("left", "bottom"), # Ajuste de la escala
-            compass.position = c("right", "bottom"),  # Ajuste de la brújula
-            inner.margins = c(0.1, 0.1, 0.05, 0.05))
+  tm_layout(inner.margins = c(0.05, 0.02, 0.01, 0.02),
+            frame = FALSE)
+
+print(map)
 
 map <- map + tm_view(zoom = zoom_nivel)
 
-cols4all::c4a_palettes()
+
 
 do <- get_elev_raster(locations = bbox_donana, z = 9, clip = "locations")
 rast_do <- terra::rast(do)
@@ -235,9 +336,11 @@ map.do <- tm_shape(rast_do) +
                                  midpoint = NA),
             col.legend = tm_legend(title = "Elevation (m)"))+
   tm_shape(gpx_sitios_unicos) +
-  tm_symbols(size = 0.9, col = "darkred", fill.legend = tm_legend(title = "Sampling points")) +  # Añadir los puntos
+  tm_symbols(size = 0.7, col = "darkred", fill.legend = tm_legend(title = "Sampling points")) +  # Añadir los puntos
   tm_compass(type = "8star", position = c("right", "bottom"), size=2) +             # Añadir una brújula
-  tm_scalebar(position = c("left", "bottom")) 
+  tm_scalebar(position = c("left", "bottom")) +
+  tm_layout(inner.margins = c(0.05, 0.02, 0.01, 0.02),
+            frame = FALSE)
 
 library(cowplot)
 map_go.leyenda <- map 
@@ -253,8 +356,8 @@ map_go_ggplot <- tmap_grob(map_go_sin_leyenda )
 
 
 columna_elevacion <- plot_grid(map_go_ggplot, map_do_ggplot, ncol = 1)
-elev <- plot_grid(columna_elevacion, NULL, leyenda.g, ncol=3, nrow=1,rel_widths = c(1.4, 1.25, 1.2) )
-diseno <- plot_grid(mapa_sites,NULL, elev, nrow = 1, rel_widths = c(1,0.3, 1), rel_heights = c(1,1,1))
+elev <- plot_grid(columna_elevacion, NULL, leyenda.g, ncol=3, nrow=1,rel_widths = c(1.4, 1.5, 1.2) )
+diseno <- plot_grid(mapa_sites,NULL, elev, nrow = 1, rel_widths = c(1,0.25, 1), rel_heights = c(1,1,1))
 
 
 ggsave2("Figs/Map.png", diseno, width=10, height = 4, bg= "white", dpi=300)

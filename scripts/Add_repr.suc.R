@@ -21,6 +21,145 @@ sitems3 <- sitems3 %>%
 ##cargar all data
 all_df <- read.csv("./data/useful/all_data.csv")
 
+horas <- all_df %>%
+  group_by(Site,Year,Bosque,Periodo)%>%
+  summarise(horas_dia = n_distinct(Transecto))%>%
+  ungroup()%>%
+  group_by(Site)%>%
+  summarise(horas=sum(horas_dia))
+
+#### BETA DIVERSITY DE ESPECIES DE PLANTAS
+flor_reso<- read.csv("./data/useful/all_floral_resources.csv")
+flor_reso <- flor_reso %>%
+  mutate(
+    Site = ifelse(str_detect(Bosque, "^[0-9]"), "Gorbea", "Doñana"),
+    Fecha = ymd(Fecha),
+    Year = year(Fecha)
+  )
+
+flor_reso <- flor_reso %>%
+  mutate(
+    Bosque = case_when(
+      Bosque == "Pinar Villamanrique Este (Chaparral)" ~ "Villamanrique Chaparral",
+      Bosque =="Pinar Villamanrique Sur" ~ "Villamanrique Sur",
+      Bosque == "Pinares Hinojos" ~ "Pinar Hinojos",
+      Bosque == "Pinares aznalcazar" ~ "Pinar Aznalcazar",
+      Bosque == "Pinares Puebla" ~ "Pinar Puebla",
+      Bosque == "Pinares de Hinojos" ~ "Pinar Hinojos",
+      Bosque == "Villamanrique Chaparrral" ~ "Villamanrique Chaparral",
+      Bosque == "Villamanrique chaparral" ~ "Villamanrique Chaparral",
+      TRUE ~ Bosque  # Keep all other values as they are
+    )
+  )
+unique(flor_reso$Bosque)
+write.csv(flor_reso,"./data/useful/all_floral_resources.csv")
+
+glimpse(flor_reso)
+
+f.r.g <- flor_reso %>%
+  filter(Site =="Gorbea")
+f.r.d <- flor_reso %>%
+  filter(Site =="Doñana")
+
+
+div <- f.r.g%>%
+  group_by(Bosque, Especie.planta) %>%
+  summarise(interacciones = sum(Numero.flores, na.rm = TRUE)) %>%  
+  ungroup()
+
+div <- div %>%
+  filter(!Especie.planta=="")
+
+
+div.d <- f.r.d %>%
+  filter(!Especie.planta=="")
+
+div.d <- div.d%>%
+  group_by(Bosque, Especie.planta) %>%
+  summarise(interacciones = sum(Numero.flores, na.rm = TRUE)) %>%  
+  ungroup()
+
+div.d <- div.d %>%
+  group_by(Bosque) %>%
+  mutate(
+    Bosque_Numerico = cur_group_id()
+  ) %>%
+  ungroup() %>%
+  mutate(
+    Bosque = as.character(Bosque_Numerico) # Convertimos a string para mantener la consistencia con la columna original
+  ) %>%
+  select(-Bosque_Numerico)
+
+unique(div.d$Bosque)
+
+matriz_interacciones <- div %>%
+  pivot_wider(names_from = Especie.planta,    
+              values_from = interacciones,      
+              values_fill = 0) %>%           
+  as.data.frame()   
+
+
+matriz_d <- div.d %>%
+  pivot_wider(names_from = Especie.planta,    
+              values_from = interacciones,      
+              values_fill = 0) %>%           
+  as.data.frame()
+
+
+# Paso 4: Elimina la columna "Bosque" (si es necesario) y convierte a matriz
+row.names(matriz_interacciones) <- matriz_interacciones$Bosque  # Los nombres de las filas son los bosques
+matriz_interacciones <- matriz_interacciones %>% select(-Bosque) # Elimina la columna "Bosque"
+matriz_interacciones <- as.matrix(matriz_interacciones)          # Convierte a matriz
+
+row.names(matriz_d) <- matriz_d$Bosque  # Los nombres de las filas son los bosques
+matriz_d <- matriz_d %>% select(-Bosque) # Elimina la columna "Bosque"
+matriz_d <- as.matrix(matriz_d)          # Convierte a matriz
+
+
+
+# Paso 5 (opcional): Convierte a matriz de presencia/ausencia (1/0)
+matriz_presencia_ausencia <- ifelse(matriz_interacciones > 0, 1, 0)
+
+matriz_presencia_ausencia.d <- ifelse(matriz_d > 0, 1, 0)
+
+# Imprime las matrices resultantes para ver cómo quedaron
+print("Matriz de Interacciones:")
+print(matriz_interacciones)
+
+print("Matriz de Presencia/Ausencia:")
+print(matriz_presencia_ausencia.d)
+
+
+install.packages("betapart")
+library(betapart)
+install.packages(c("vegan", "ade4", "sp"))
+beta_sorensen_abund <- beta.pair.abund(matriz_interacciones, index.family = "sorensen")
+
+# Imprimir los resultados para la matriz de interacciones
+print("Resultados de beta-diversidad de Sørensen (con matriz de interacciones):")
+print(beta_sorensen_abund)
+
+# Calcular la diversidad beta de Sørensen con la matriz de presencia/ausencia
+beta_sorensen_presencia <- beta.pair(matriz_presencia_ausencia, index.family = "sorensen")
+
+
+beta_sorensen_presencia.d <- beta.pair(matriz_presencia_ausencia.d, index.family = "sorensen")
+
+# Imprimir los resultados para la matriz de presencia/ausencia
+print("Resultados de beta-diversidad de Sørensen (con matriz de presencia/ausencia):")
+print(beta_sorensen_presencia)
+
+print(beta_sorensen_presencia.d)
+
+g <- (0.2200000 + 0.2978723 + 0.4117647 + 0.3846154 + 0.3191489 + 0.4411765 + 0.3589744 + 0.2941176 + 0.4871795 + 0.2352941)/10
+d <- (0.5 + 0.29 + 0.26 + 0.24 + 0.54 + 0.53 + 0.381 + 0.13 + 0.09 + 0.2)/10
+
+
+# 4. Imprimir los resultados
+cat("Gorbea: Media =", media_gorbea, ", Error estándar =", ee_gorbea, "\n")
+cat("Doñana: Media =", media_donana, ", Error estándar =", ee_donana, "\n")
+
+######
 pl.vis <- all_df %>%
   dplyr::group_by(Site, Year, Bosque, Periodo, Planta) %>%
   dplyr::summarize(tot.visits.pl = n(), .groups = 'drop')
@@ -46,7 +185,7 @@ print(plants)
 
 
 
-###add to plant species network data
+
 sitems2$match <-
   paste(sitems2$Site,
         sitems2$Year,
@@ -220,8 +359,10 @@ g21.fs$Planta <- dplyr::recode(g21.fs$Planta, "Vicia Pyrenaica" = "Vicia pyrenai
                                "Helleborus viridis"= "Helleborus viridis subsp. occidentalis")
 
 
-embols<- g21.fs %>%
+embols.21<- g21.fs %>%
   filter(Trat == "Embolsada") 
+
+
 embols <- embols %>%
   filter(fruit_set > 0)
 
@@ -322,8 +463,33 @@ g22.fs <- g22.fs %>%
 g22.fs$Planta <- dplyr::recode(g22.fs$Planta, "Helleborus viridis"= "Helleborus viridis subsp. occidentalis")
 
 
-embols<- g22.fs %>%
+embols.22<- g22.fs %>%
   filter(Embolsada =="si" ) 
+embols.22 <- embols.22 %>%
+  rename("Trat"="Embolsada",
+         "Flores_yemas_totales"="Flores",
+         "Fecha_recogida_ultimo.dato"="Fecha_recogida_ultimo dato",
+         "Peso.Fruto.g"="Peso Fruto g",
+         "Num_semillas.totales"="Num_semillas totales")
+
+embols.22 <- embols.22 %>%
+  select(Site, Year, Bosque, Periodo, Planta, Trat, num, Flores_yemas_totales, Fecha_flores, Frutos_cuajados, frutos, Fecha_recogida_ultimo.dato,
+         Peso.Fruto.g, Num_semillas.totales, Semillas_viables, scaled_seeds, fruit_set )
+
+
+embols.21$Fecha_flores <- as.Date(embols.21$Fecha_flores)
+embols.21$Periodo <- as.character(embols.21$Periodo)
+embols.21 <- embols.21 %>%
+  select(Site, Year, Bosque, Periodo, Planta, Trat, num, Flores_yemas_totales, Fecha_flores, Frutos_cuajados, frutos, Fecha_recogida_ultimo.dato,
+         Peso.Fruto.g, Num_semillas.totales, Semillas_viables, scaled_seeds, fruit_set )
+
+embols.21$Num_semillas.totales <- as.numeric(embols.21$Num_semillas.totales)
+embols.22$Num_semillas.totales <- as.numeric(embols.22$Num_semillas.totales)
+embolsadas <- bind_rows(embols.21, embols.22)
+
+write.csv(embolsadas, "./embolsadas_recogidas21-22.csv")
+
+
 embols <- embols %>%
   filter(fruit_set > 0)
 
@@ -438,6 +604,13 @@ tot.visits<- pl.vis %>%
   dplyr::group_by(Site,Year,Bosque, Periodo) %>%
   dplyr::summarise(tot.vis = sum(tot.visits.pl))
 
+sitems$match <-
+  paste(sitems$Site,
+        sitems$Year,
+        sitems$Bosque,
+        sitems$Periodo,
+        sep="_")
+
 tot.visits$match <-
   paste(tot.visits$Site,
         tot.visits$Year,
@@ -462,10 +635,10 @@ ntw_seeds$match <-
 ntw_fruits$total.visits<-tot.visits$tot.vis[match(ntw_fruits$match, tot.visits$match )]
 ntw_seeds$total.visits<-tot.visits$tot.vis[match(ntw_seeds$match, tot.visits$match )]
 
+sitems$total.visits<-tot.visits$tot.vis[match(sitems$match, tot.visits$match )]
 write.csv(ntw_fruits, "data/useful/sitems_ntwfruits.csv")
 write.csv(ntw_seeds, "data/useful/sitems_ntwseeds.csv")
-
-##add richness data to sitems3.
+write.csv(sitems, "data/useful/sitems_visits.csv")
 
 
 

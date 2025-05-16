@@ -31,8 +31,7 @@ d.t5<-as.list(d.t4)
 
 rar <- iNEXT(d.t5, q=0, datatype="abundance", endpoint = 2000)
 poll.d20<-ggiNEXT(rar, color.var="Assemblage", se=FALSE) 
-poll.d20 <- poll.d20 + 
-  scale_color_manual(values = c("#6A6599FF")) +  
+poll.d20 <- poll.d20 +  
   theme_bw() +  # Tema blanco y negro
   theme(
     legend.position = "none",        
@@ -161,7 +160,7 @@ plant.sites.d20<-plant.sites.d20 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+plant.sites.d20
 
 #calculate sampling completeness as observed/estimated species richness
 est2<-rar2$AsyEst
@@ -190,7 +189,7 @@ link.sites.d20<-link.sites.d20 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+link.sites.d20
 
 #calculate sampling completeness as observed/estimated species richness
 est3<-rar3$AsyEst
@@ -223,7 +222,7 @@ poll.period.d20<-poll.period.d20 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+poll.period.d20
 
 #calculate sampling completeness as observed/estimated species richness
 
@@ -277,6 +276,8 @@ link.period.d20<-link.period.d20 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
+link.period.d20
+
 ##extract legend
 link.period.d21_legend<-link.period.d21 + theme_set(
   theme_bw() + theme(
@@ -402,7 +403,7 @@ poll.sites.d21<-poll.sites.d21 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+poll.sites.d21
 #calculate sampling completeness as observed/estimated species richness
 
 est.21<-rar$AsyEst
@@ -449,7 +450,7 @@ link.sites.d21<-link.sites.d21 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+link.sites.d21
 
 
 #calculate sampling completeness as observed/estimated species richness
@@ -485,7 +486,7 @@ poll.period.d21<-poll.period.d21 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+poll.period.d21
 
 #calculate sampling completeness as observed/estimated species richness
 
@@ -538,7 +539,7 @@ link.period.d21<-link.period.d21 + theme_set(
     axis.title = element_blank() 
   ))
 
-
+link.period.d21
 
 #calculate sampling completeness as observed/estimated species richness
 est3_period.21<-rar3$AsyEst
@@ -592,6 +593,7 @@ plant.sites.d21<-plant.sites.d21 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
+plant.sites.d21
 
 #calculate sampling completeness as observed/estimated species richness
 est2.21 <- rar2$AsyEst
@@ -626,7 +628,7 @@ plant.period.d21<-plant.period.d21 + theme_set(
     legend.text = element_blank(),
     axis.title = element_blank() 
   ))
-
+plant.period.d21
 #calculate sampling completeness as observed/estimated species richness
 est2_period.21 <- rar2$AsyEst
 
@@ -1204,7 +1206,7 @@ link.sites.gorb21<-link.sites.gorb21+ theme_set(
     legend.text = element_blank(),
     axis.title = element_blank()
   ))
-
+link.sites.gorb21
 #calculate sampling completeness as observed/estimated species richness
 
 #calculate sampling completeness as observed/estimated species richness
