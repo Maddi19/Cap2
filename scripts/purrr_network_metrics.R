@@ -27,7 +27,7 @@ all_df <- all_df %>%
   select(Site, Year, Bosque, Periodo, Planta, Pollinator_id)
 str(all_df)
 
-#######PURR########
+#######PURRR OPTION FOR NETWORK METRICS########
 ###################
 library(purrr)
 library(Matrix)  # Para matrices dispersas
@@ -231,7 +231,7 @@ write.table(gorde.ntw, file = "data/SITE_network_level_metrics.csv", row.names =
 
 results
 
-
+####OPTION WITH NORMAL LOOP
 
 sites <- unique(all_df$Site_id)
 
